@@ -1,5 +1,6 @@
 import Link from "next/link";
 import QRCodeSection from "@/components/QRCodeSection";
+import Timeline from "@/components/Timeline";
 
 const infoCards = [
   {
@@ -370,6 +371,24 @@ export default function Home() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section className="py-16 sm:py-20 section-dark relative z-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold gradient-text">
+              Your Journey
+            </h2>
+            <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
+              From first spark of curiosity to presenting at the fair — here&apos;s
+              every step along the way.
+            </p>
+          </div>
+          <div className="max-w-3xl mx-auto">
+            <Timeline compact />
           </div>
         </div>
       </section>

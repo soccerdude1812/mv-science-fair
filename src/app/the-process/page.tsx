@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import CollapsibleSection from "@/components/CollapsibleSection";
+import Timeline from "@/components/Timeline";
 
 export const metadata: Metadata = {
   title: "The Process",
@@ -37,6 +38,19 @@ export default function TheProcessPage() {
         title="The Process"
         subtitle="Your step-by-step guide from curiosity to science fair presentation. Follow these stages to build an amazing project!"
       />
+
+      {/* Timeline Roadmap */}
+      <section className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-8 relative z-10">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl sm:text-3xl font-display font-bold gradient-text">
+            Science Fair Roadmap
+          </h2>
+          <p className="mt-3 text-text-secondary max-w-xl mx-auto">
+            Follow these milestones from start to finish. Click any step for details.
+          </p>
+        </div>
+        <Timeline />
+      </section>
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-6 relative z-10">
         {/* Before Starting */}
