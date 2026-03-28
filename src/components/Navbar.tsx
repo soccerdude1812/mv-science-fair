@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -17,10 +17,25 @@ const navLinks = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-indigo-100 shadow-sm">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-bg-deep/90 backdrop-blur-xl border-b border-neon-cyan/10 shadow-lg shadow-black/20"
+          : "bg-transparent backdrop-blur-sm border-b border-white/5"
+      }`}
+    >
       <nav
         className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
         aria-label="Main navigation"
@@ -29,63 +44,71 @@ export default function Navbar() {
           {/* Logo / Site Name */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-primary font-bold text-lg shrink-0"
+            className="flex items-center gap-2.5 text-text-bright font-bold text-lg shrink-0 group"
             aria-label="MVWSD Science Fair home"
           >
-            {/* Atom icon */}
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              className="text-accent"
-              aria-hidden="true"
-            >
-              <circle cx="16" cy="16" r="3" fill="currentColor" />
-              <ellipse
-                cx="16"
-                cy="16"
-                rx="12"
-                ry="5"
-                stroke="currentColor"
-                strokeWidth="1.5"
+            {/* Atom icon with orbital animation */}
+            <div className="relative w-8 h-8" aria-hidden="true">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
                 fill="none"
-              />
-              <ellipse
-                cx="16"
-                cy="16"
-                rx="12"
-                ry="5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                fill="none"
-                transform="rotate(60 16 16)"
-              />
-              <ellipse
-                cx="16"
-                cy="16"
-                rx="12"
-                ry="5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                fill="none"
-                transform="rotate(120 16 16)"
-              />
-            </svg>
-            <span className="hidden sm:inline">MVWSD Science Fair</span>
-            <span className="sm:hidden">MVWSD</span>
+                className="text-neon-cyan animate-spin-slow"
+              >
+                <circle cx="16" cy="16" r="3" fill="currentColor" />
+                <ellipse
+                  cx="16"
+                  cy="16"
+                  rx="12"
+                  ry="5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                  opacity="0.6"
+                />
+                <ellipse
+                  cx="16"
+                  cy="16"
+                  rx="12"
+                  ry="5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                  transform="rotate(60 16 16)"
+                  opacity="0.6"
+                />
+                <ellipse
+                  cx="16"
+                  cy="16"
+                  rx="12"
+                  ry="5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                  transform="rotate(120 16 16)"
+                  opacity="0.6"
+                />
+              </svg>
+            </div>
+            <span className="hidden sm:inline font-display group-hover:text-neon-cyan transition-colors">
+              MVWSD Science Fair
+            </span>
+            <span className="sm:hidden font-display group-hover:text-neon-cyan transition-colors">
+              MVWSD
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex lg:items-center lg:gap-1">
+          <div className="hidden lg:flex lg:items-center lg:gap-0.5">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`nav-link-glow px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   pathname === link.href
-                    ? "bg-indigo-50 text-primary"
-                    : "text-slate-600 hover:text-primary hover:bg-indigo-50/50"
+                    ? "text-neon-cyan bg-neon-cyan/10"
+                    : "text-text-secondary hover:text-neon-cyan"
                 }`}
                 aria-current={pathname === link.href ? "page" : undefined}
               >
@@ -98,7 +121,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-slate-600 hover:text-primary hover:bg-indigo-50 transition-colors"
+            className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-text-secondary hover:text-neon-cyan hover:bg-neon-cyan/10 transition-colors"
             aria-expanded={isOpen}
             aria-controls="mobile-nav"
             aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -136,24 +159,24 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation - Full screen overlay */}
         {isOpen && (
           <div
             id="mobile-nav"
-            className="lg:hidden pb-4 border-t border-indigo-50 mt-2"
+            className="lg:hidden fixed inset-0 top-16 z-50 bg-bg-deep/95 backdrop-blur-xl"
             role="navigation"
             aria-label="Mobile navigation"
           >
-            <div className="flex flex-col gap-1 pt-3">
+            <div className="flex flex-col gap-1 p-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-4 py-3.5 rounded-xl text-base font-medium transition-colors ${
                     pathname === link.href
-                      ? "bg-indigo-50 text-primary"
-                      : "text-slate-600 hover:text-primary hover:bg-indigo-50/50"
+                      ? "bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/20"
+                      : "text-text-secondary hover:text-neon-cyan hover:bg-neon-cyan/5"
                   }`}
                   aria-current={pathname === link.href ? "page" : undefined}
                 >

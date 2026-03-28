@@ -9,57 +9,56 @@ export default function PageHero({ title, subtitle, children }: PageHeroProps) {
     <section className="hero-gradient text-white relative overflow-hidden">
       {/* Decorative science elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        {/* Atom */}
+        {/* Large orbital atom */}
         <svg
-          width="120"
-          height="120"
-          viewBox="0 0 120 120"
+          width="160"
+          height="160"
+          viewBox="0 0 160 160"
           fill="none"
-          className="absolute -top-4 -right-4 opacity-10 animate-spin-slow"
+          className="absolute -top-8 -right-8 opacity-[0.08] animate-spin-slow"
         >
-          <circle cx="60" cy="60" r="8" fill="white" />
-          <ellipse cx="60" cy="60" rx="50" ry="18" stroke="white" strokeWidth="1.5" fill="none" />
-          <ellipse cx="60" cy="60" rx="50" ry="18" stroke="white" strokeWidth="1.5" fill="none" transform="rotate(60 60 60)" />
-          <ellipse cx="60" cy="60" rx="50" ry="18" stroke="white" strokeWidth="1.5" fill="none" transform="rotate(120 60 60)" />
+          <circle cx="80" cy="80" r="8" fill="var(--neon-cyan)" />
+          <ellipse cx="80" cy="80" rx="65" ry="22" stroke="var(--neon-cyan)" strokeWidth="1" fill="none" />
+          <ellipse cx="80" cy="80" rx="65" ry="22" stroke="var(--neon-purple)" strokeWidth="1" fill="none" transform="rotate(60 80 80)" />
+          <ellipse cx="80" cy="80" rx="65" ry="22" stroke="var(--neon-cyan)" strokeWidth="1" fill="none" transform="rotate(120 80 80)" />
         </svg>
-        {/* Stars */}
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="white"
-          className="absolute top-12 left-[15%] opacity-20 animate-pulse-glow"
-        >
-          <path d="M12 2l2.09 6.26L20.18 9.27l-5.09 3.9L17.18 20 12 16.27 6.82 20l2.09-6.83L3.82 9.27l6.09-1.01z" />
-        </svg>
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="white"
-          className="absolute bottom-8 left-[25%] opacity-15 animate-pulse-glow delay-300"
-        >
-          <path d="M12 2l2.09 6.26L20.18 9.27l-5.09 3.9L17.18 20 12 16.27 6.82 20l2.09-6.83L3.82 9.27l6.09-1.01z" />
-        </svg>
-        {/* Beaker */}
+
+        {/* Glowing dots */}
+        <div className="absolute top-12 left-[15%] w-2 h-2 rounded-full bg-neon-cyan/30 animate-pulse-glow" />
+        <div className="absolute top-20 left-[35%] w-1.5 h-1.5 rounded-full bg-neon-purple/40 animate-pulse-glow delay-300" />
+        <div className="absolute bottom-16 left-[25%] w-1 h-1 rounded-full bg-neon-green/30 animate-pulse-glow delay-500" />
+        <div className="absolute bottom-10 right-[20%] w-2 h-2 rounded-full bg-neon-amber/20 animate-pulse-glow delay-200" />
+        <div className="absolute top-8 right-[30%] w-1.5 h-1.5 rounded-full bg-neon-pink/25 animate-pulse-glow delay-700" />
+
+        {/* Floating beaker */}
         <svg
           width="60"
           height="60"
           viewBox="0 0 60 60"
           fill="none"
-          className="absolute bottom-4 right-[20%] opacity-10 animate-float"
+          className="absolute bottom-6 right-[18%] opacity-[0.06] animate-float"
         >
-          <path d="M22 8h16M24 8v18l-10 22h32L36 26V8" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M18 42c0 0 6-4 12-4s12 4 12 4" stroke="white" strokeWidth="1.5" fill="none" />
+          <path d="M22 8h16M24 8v18l-10 22h32L36 26V8" stroke="var(--neon-cyan)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+
+        {/* Orbital ring decoration */}
+        <svg
+          width="80"
+          height="40"
+          viewBox="0 0 80 40"
+          fill="none"
+          className="absolute top-1/2 left-[5%] opacity-[0.05] animate-float-reverse"
+        >
+          <ellipse cx="40" cy="20" rx="38" ry="18" stroke="var(--neon-purple)" strokeWidth="1" fill="none" />
         </svg>
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 relative">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight animate-fade-in-up">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 relative z-10">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight animate-fade-in-up gradient-text">
           {title}
         </h1>
         {subtitle && (
-          <p className="mt-4 text-lg sm:text-xl text-indigo-100 max-w-2xl animate-fade-in-up delay-200">
+          <p className="mt-4 text-lg sm:text-xl text-text-secondary max-w-2xl animate-fade-in-up delay-200">
             {subtitle}
           </p>
         )}

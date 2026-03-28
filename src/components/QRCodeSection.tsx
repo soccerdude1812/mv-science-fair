@@ -7,13 +7,13 @@ const INTEREST_FORM_URL =
 
 export default function QRCodeSection() {
   return (
-    <section className="py-16 sm:py-20 bg-white" id="interest">
+    <section className="py-16 sm:py-20 section-dark relative z-10" id="interest">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-br from-indigo-50 to-cyan-50 rounded-2xl p-8 sm:p-12 border border-indigo-100">
+        <div className="glass-card p-8 sm:p-12 border-neon-cyan/20 animate-glow-pulse">
           <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
             {/* Text side */}
             <div className="flex-1 text-center lg:text-left">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-highlight/20 text-sm font-medium text-amber-800 mb-4">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-amber/10 border border-neon-amber/20 text-sm font-medium text-neon-amber mb-4">
                 <svg
                   width="16"
                   height="16"
@@ -25,10 +25,10 @@ export default function QRCodeSection() {
                 </svg>
                 First Step
               </span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-primary">
+              <h2 className="text-3xl sm:text-4xl font-display font-bold gradient-text">
                 Show Your Interest!
               </h2>
-              <p className="mt-4 text-lg text-muted max-w-md mx-auto lg:mx-0">
+              <p className="mt-4 text-lg text-text-secondary max-w-md mx-auto lg:mx-0">
                 Scan the QR code or click the button below to fill out the
                 interest form and take the first step toward the 2026 MVWSD
                 Science Fair.
@@ -38,7 +38,7 @@ export default function QRCodeSection() {
                   href={INTEREST_FORM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white font-semibold rounded-xl hover:bg-cyan-700 transition-colors shadow-lg shadow-accent/20"
+                  className="btn-glow inline-flex items-center gap-2 px-6 py-3 bg-neon-cyan text-bg-deep font-bold rounded-xl shadow-lg shadow-neon-cyan/20"
                 >
                   Fill Out Interest Form
                   <svg
@@ -62,17 +62,19 @@ export default function QRCodeSection() {
 
             {/* QR Code side */}
             <div className="shrink-0">
-              <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100">
-                <QRCodeSVG
-                  value={INTEREST_FORM_URL}
-                  size={200}
-                  level="H"
-                  bgColor="#ffffff"
-                  fgColor="#1e1b4b"
-                  aria-label="QR code linking to the Science Fair interest form"
-                />
-                <p className="mt-3 text-center text-xs text-muted font-medium">
-                  Scan to show interest
+              <div className="relative">
+                <div className="bg-white rounded-2xl p-6 shadow-lg shadow-black/20">
+                  <QRCodeSVG
+                    value={INTEREST_FORM_URL}
+                    size={200}
+                    level="H"
+                    bgColor="#ffffff"
+                    fgColor="#070b1a"
+                    aria-label="QR code linking to the Science Fair interest form"
+                  />
+                </div>
+                <p className="mt-3 text-center text-sm text-neon-cyan font-semibold animate-scan-pulse">
+                  Scan Me!
                 </p>
               </div>
             </div>

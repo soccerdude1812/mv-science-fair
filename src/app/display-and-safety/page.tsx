@@ -18,8 +18,8 @@ const rules = [
         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
       </svg>
     ),
-    color: "border-amber-300 bg-amber-50",
-    iconBg: "bg-amber-100 text-amber-700",
+    accentColor: "neon-amber",
+    dimensions: false,
   },
   {
     number: 2,
@@ -32,8 +32,8 @@ const rules = [
         <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
       </svg>
     ),
-    color: "border-red-300 bg-red-50",
-    iconBg: "bg-red-100 text-red-700",
+    accentColor: "neon-pink",
+    dimensions: false,
   },
   {
     number: 3,
@@ -47,8 +47,7 @@ const rules = [
         <line x1="12" y1="17" x2="12" y2="21" />
       </svg>
     ),
-    color: "border-blue-300 bg-blue-50",
-    iconBg: "bg-blue-100 text-blue-700",
+    accentColor: "neon-cyan",
     dimensions: true,
   },
   {
@@ -61,14 +60,14 @@ const rules = [
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
       </svg>
     ),
-    color: "border-green-300 bg-green-50",
-    iconBg: "bg-green-100 text-green-700",
+    accentColor: "neon-green",
+    dimensions: false,
   },
   {
     number: 5,
     title: "Acknowledgments: Text Only, No Logos",
     description:
-      "Acknowledgments must be in one section of your poster or board. They must be text-only — no company logos, brand images, or other graphics in the acknowledgments section.",
+      "Acknowledgments must be in one section of your poster or board. They must be text-only -- no company logos, brand images, or other graphics in the acknowledgments section.",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
@@ -77,8 +76,8 @@ const rules = [
         <line x1="16" y1="17" x2="8" y2="17" />
       </svg>
     ),
-    color: "border-purple-300 bg-purple-50",
-    iconBg: "bg-purple-100 text-purple-700",
+    accentColor: "neon-purple",
+    dimensions: false,
   },
   {
     number: 6,
@@ -93,8 +92,8 @@ const rules = [
         <line x1="12" y1="16" x2="12.01" y2="16" />
       </svg>
     ),
-    color: "border-indigo-300 bg-indigo-50",
-    iconBg: "bg-indigo-100 text-indigo-700",
+    accentColor: "neon-cyan",
+    dimensions: false,
   },
 ];
 
@@ -106,10 +105,10 @@ export default function DisplayAndSafetyPage() {
         subtitle="Important guidelines to ensure your project display is safe, organized, and meets all requirements."
       />
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10">
         {/* Intro */}
-        <div className="bg-white rounded-xl border border-slate-200 p-6 mb-8">
-          <p className="text-lg text-slate-700 leading-relaxed">
+        <div className="glass-card p-6 mb-8">
+          <p className="text-lg text-text-primary leading-relaxed">
             Your display board is the first impression judges will have of your
             project. Follow these guidelines to make sure it&apos;s safe,
             within the required dimensions, and presents your work in the best
@@ -122,48 +121,49 @@ export default function DisplayAndSafetyPage() {
           {rules.map((rule) => (
             <div
               key={rule.number}
-              className={`rounded-xl border-l-4 p-6 ${rule.color}`}
+              className="glass-card p-6"
+              style={{ borderLeftWidth: '4px', borderLeftColor: `var(--${rule.accentColor})` }}
             >
               <div className="flex items-start gap-4">
                 <div
-                  className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${rule.iconBg}`}
+                  className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-${rule.accentColor}/10 text-${rule.accentColor}`}
                   aria-hidden="true"
                 >
                   {rule.icon}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-bold text-primary text-lg flex items-center gap-2">
-                    <span className="text-accent">#{rule.number}</span>
+                  <h3 className="font-display font-bold text-text-bright text-lg flex items-center gap-2">
+                    <span className={`text-${rule.accentColor}`}>#{rule.number}</span>
                     {rule.title}
                   </h3>
-                  <p className="mt-2 text-slate-700 leading-relaxed">
+                  <p className="mt-2 text-text-primary leading-relaxed">
                     {rule.description}
                   </p>
 
                   {rule.dimensions && (
                     <div className="mt-4 grid grid-cols-3 gap-3">
-                      <div className="text-center p-4 bg-white rounded-lg border border-blue-200">
-                        <p className="text-3xl font-bold text-primary">
+                      <div className="text-center p-4 rounded-lg bg-neon-cyan/5 border border-neon-cyan/10">
+                        <p className="text-3xl font-display font-bold text-neon-cyan">
                           66&quot;
                         </p>
-                        <p className="text-sm text-muted mt-1">
+                        <p className="text-sm text-text-secondary mt-1">
                           Max Height
                         </p>
-                        <p className="text-xs text-slate-400">
+                        <p className="text-xs text-text-secondary/60">
                           (from table)
                         </p>
                       </div>
-                      <div className="text-center p-4 bg-white rounded-lg border border-blue-200">
-                        <p className="text-3xl font-bold text-primary">
+                      <div className="text-center p-4 rounded-lg bg-neon-purple/5 border border-neon-purple/10">
+                        <p className="text-3xl font-display font-bold text-neon-purple">
                           30&quot;
                         </p>
-                        <p className="text-sm text-muted mt-1">Max Depth</p>
+                        <p className="text-sm text-text-secondary mt-1">Max Depth</p>
                       </div>
-                      <div className="text-center p-4 bg-white rounded-lg border border-blue-200">
-                        <p className="text-3xl font-bold text-primary">
+                      <div className="text-center p-4 rounded-lg bg-neon-amber/5 border border-neon-amber/10">
+                        <p className="text-3xl font-display font-bold text-neon-amber">
                           48&quot;
                         </p>
-                        <p className="text-sm text-muted mt-1">Max Width</p>
+                        <p className="text-sm text-text-secondary mt-1">Max Width</p>
                       </div>
                     </div>
                   )}
@@ -174,8 +174,8 @@ export default function DisplayAndSafetyPage() {
         </div>
 
         {/* Quick Reference */}
-        <div className="mt-12 bg-primary rounded-2xl p-8 text-white">
-          <h2 className="text-2xl font-bold mb-6">Quick Reference Checklist</h2>
+        <div className="mt-12 glass-card p-8 border-t-2 border-t-neon-cyan">
+          <h2 className="text-2xl font-display font-bold text-text-bright mb-6">Quick Reference Checklist</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               "Display fits on a table (no floor displays)",
@@ -198,12 +198,12 @@ export default function DisplayAndSafetyPage() {
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="text-accent-light shrink-0"
+                  className="text-neon-green shrink-0"
                   aria-hidden="true"
                 >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                <span className="text-indigo-100">{item}</span>
+                <span className="text-text-primary">{item}</span>
               </div>
             ))}
           </div>
