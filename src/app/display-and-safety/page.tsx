@@ -12,7 +12,7 @@ const rules = [
     number: 1,
     title: "No Electricity Available",
     description:
-      "No electrical outlets will be provided at the venue. Your project must function without external power. If you need to demonstrate something electronic, consider using batteries or providing a video/photos instead.",
+      "No electricity is available at the venue. Only battery-operated demonstrations are permitted at the fair.",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
@@ -81,6 +81,21 @@ const rules = [
   },
   {
     number: 6,
+    title: "No Hazardous Materials at the Venue",
+    description:
+      "Hazardous substances, biological agents, live organisms, and biohazardous materials may NOT be brought to the fair venue. Use photographs, diagrams, or video demonstrations to showcase these aspects of your project. Only battery-operated demonstrations are permitted.",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+        <line x1="12" y1="9" x2="12" y2="13" />
+        <line x1="12" y1="17" x2="12.01" y2="17" />
+      </svg>
+    ),
+    accentColor: "neon-pink",
+    dimensions: false,
+  },
+  {
+    number: 7,
     title: "Complete Citations Required",
     description:
       "Complete citations must be present for all photographs, images, charts, tables, and graphs used in your display. Give proper credit to your sources.",
@@ -173,8 +188,44 @@ export default function DisplayAndSafetyPage() {
           ))}
         </div>
 
+        {/* Required Board Content */}
+        <div className="mt-12 glass-card p-8 border-t-2 border-t-neon-purple">
+          <h2 className="text-2xl font-display font-bold text-text-bright mb-4">Required Board Content</h2>
+          <p className="text-text-primary mb-4">Your display board must include:</p>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {[
+              "Abstract",
+              "Research Question/Problem",
+              "Hypothesis",
+              "Materials",
+              "Procedure",
+              "Data & Results",
+              "Conclusion",
+              "Bibliography",
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-neon-purple shrink-0"
+                  aria-hidden="true"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span className="text-text-primary">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Quick Reference */}
-        <div className="mt-12 glass-card p-8 border-t-2 border-t-neon-cyan">
+        <div className="mt-8 glass-card p-8 border-t-2 border-t-neon-cyan">
           <h2 className="text-2xl font-display font-bold text-text-bright mb-6">Quick Reference Checklist</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {[

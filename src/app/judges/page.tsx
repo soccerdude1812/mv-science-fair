@@ -101,8 +101,8 @@ export default function JudgesPage() {
               </h3>
               <p className="text-text-secondary leading-relaxed">
                 Standardized rubrics ensure consistent evaluation across all
-                projects and categories. You&apos;ll evaluate research quality,
-                methodology, presentation, and creativity.
+                projects and categories. You&apos;ll evaluate scientific thought,
+                creativity, thoroughness, skill, clarity, and presentation.
               </p>
             </div>
 

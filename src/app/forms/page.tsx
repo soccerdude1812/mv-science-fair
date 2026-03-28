@@ -151,6 +151,12 @@ export default function FormsPage() {
                   </svg>
                 }
               />
+              <div className="mt-4 bg-neon-amber/5 border border-neon-amber/15 rounded-lg p-4 border-l-4 border-l-neon-amber">
+                <p className="font-display font-semibold text-neon-amber text-sm">Important:</p>
+                <p className="text-sm text-text-secondary mt-1">
+                  Only projects involving minimal risk to participants are permitted. Minimal risk means harm or discomfort is no greater than what is ordinarily encountered in daily life. Projects involving vulnerable populations (e.g., children, individuals with disabilities) require additional approval.
+                </p>
+              </div>
               <RequirementBox
                 title="When is this form needed?"
                 required="Surveying, interviewing, testing people, or observing behavior"
@@ -246,6 +252,47 @@ export default function FormsPage() {
                 </svg>
               }
             />
+          </div>
+        </section>
+        {/* Additional Forms Coming Soon */}
+        <section>
+          <h2 className="text-2xl font-display font-bold text-text-bright mb-2 flex items-center gap-3">
+            <span className="w-10 h-10 rounded-xl bg-white/10 text-text-secondary flex items-center justify-center shrink-0" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </span>
+            Additional Forms
+          </h2>
+          <p className="text-text-secondary mb-6 ml-[52px]">
+            The following forms will be available soon. Check back later for updates.
+          </p>
+
+          <div className="space-y-3">
+            {[
+              "Photo Release Form",
+              "Liability Waiver / \"We Are Not Liable\" Form",
+              "Project Idea/Proposal Form",
+              "Parental Permission/Consent Form",
+              "High School Mentor Request Form",
+            ].map((form) => (
+              <div
+                key={form}
+                className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.02] border border-white/5 opacity-60"
+              >
+                <div className="w-10 h-10 rounded-xl bg-white/5 text-text-secondary flex items-center justify-center shrink-0" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="font-display font-semibold text-text-secondary">{form}</p>
+                  <p className="text-sm text-text-secondary/60">Coming soon</p>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
       </div>

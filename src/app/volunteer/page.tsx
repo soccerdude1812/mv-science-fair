@@ -58,7 +58,7 @@ export default function VolunteerPage() {
               </div>
               <h3 className="text-xl font-display font-bold text-text-bright">Event-Day Volunteering</h3>
               <p className="text-neon-cyan/80 text-sm mt-1">
-                Open to High School Students
+                Open to High School Students &amp; Community Members
               </p>
             </div>
             <div className="p-6 flex-1 flex flex-col">
@@ -145,11 +145,30 @@ export default function VolunteerPage() {
                   Build student confidence
                 </div>
               </div>
+              <div className="mt-6 mb-4 p-4 rounded-lg bg-neon-purple/5 border border-neon-purple/10">
+                <h4 className="font-display font-semibold text-text-bright text-sm mb-3">Mentor Responsibilities</h4>
+                <div className="space-y-2">
+                  {[
+                    "Act as an advisor — guide and support, but the project must remain the student's own work",
+                    "Never present ideas or content as if it were the student's own",
+                    "Cannot attend or interfere during project judging",
+                    "Must report any concerns about plagiarism, data fabrication, or unsafe conduct to the committee",
+                    "Maintain professional boundaries and follow all school policies regarding contact with minors",
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-2 text-sm text-text-secondary">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-neon-purple shrink-0 mt-0.5" aria-hidden="true">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
               <a
                 href="https://docs.google.com/forms/d/1Go59zVliqQohI9kTUKptz8PFpYWdTSJbQ5qzyY6b2yY/viewform"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-glow mt-6 inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-neon-purple text-bg-deep font-semibold rounded-xl"
+                className="btn-glow mt-2 inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-neon-purple text-bg-deep font-semibold rounded-xl"
                 style={{ boxShadow: undefined }}
               >
                 Sign Up as Mentor

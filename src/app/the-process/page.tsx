@@ -139,9 +139,18 @@ export default function TheProcessPage() {
                 before settling on a topic.
               </p>
 
-              <div className="bg-neon-pink/5 border border-neon-pink/15 rounded-lg p-4 border-l-4 border-l-neon-pink">
+              <div className="bg-neon-pink/5 border border-neon-pink/15 rounded-lg p-4 border-l-4 border-l-neon-pink mb-4">
                 <p className="font-semibold text-neon-pink">
                   IMPORTANT: Individual or team participation is allowed (maximum 2 members per team).
+                </p>
+              </div>
+
+              <div className="bg-neon-amber/5 border border-neon-amber/15 rounded-lg p-4 border-l-4 border-l-neon-amber">
+                <p className="font-display font-semibold text-neon-amber">
+                  Continuation Projects:
+                </p>
+                <p className="text-text-secondary">
+                  Continuation projects (projects that build on work from a previous year) must show clear evidence of significant new development and difference from the previous work.
                 </p>
               </div>
             </CollapsibleSection>
@@ -344,9 +353,9 @@ export default function TheProcessPage() {
               </svg>
             }
           >
-            <div className="bg-neon-cyan/5 border border-neon-cyan/10 rounded-lg p-4 mb-4 border-l-4 border-l-neon-cyan">
-              <p className="font-medium text-neon-cyan">
-                Recommended but not required
+            <div className="bg-neon-pink/5 border border-neon-pink/15 rounded-lg p-4 mb-4 border-l-4 border-l-neon-pink">
+              <p className="font-semibold text-neon-pink">
+                REQUIRED — Students MUST maintain a project logbook documenting planning, execution, results, and sources.
               </p>
             </div>
             <p className="mb-4">
@@ -493,6 +502,33 @@ export default function TheProcessPage() {
               Your display board is the first thing judges see &mdash; make it
               clear, organized, and engaging!
             </p>
+
+            <div className="mb-6">
+              <h4 className="font-display font-semibold text-text-bright mb-3">
+                Your final presentation must include all of the following:
+              </h4>
+              <div className="grid sm:grid-cols-2 gap-2">
+                {[
+                  "Abstract",
+                  "Question/Problem",
+                  "Hypothesis",
+                  "Materials",
+                  "Procedure",
+                  "Data",
+                  "Conclusion",
+                  "Bibliography",
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-2 p-2.5 rounded-lg bg-white/[0.03] border border-white/5">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-neon-pink shrink-0" aria-hidden="true">
+                      <polyline points="9 11 12 14 22 4" />
+                      <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+                    </svg>
+                    <span className="text-sm text-text-primary">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <Link
               href="/display-and-safety"
               className="btn-glow-pink inline-flex items-center gap-2 px-5 py-2.5 bg-neon-pink text-bg-deep font-semibold rounded-lg"
@@ -566,15 +602,16 @@ export default function TheProcessPage() {
               }
             >
               <p className="mb-4">
-                Judges will evaluate your project based on these criteria:
+                Judges will evaluate your project based on these six official criteria:
               </p>
               <div className="grid gap-3">
                 {[
-                  { area: "Research Question & Hypothesis", desc: "Is the question clear and testable? Is the hypothesis reasonable?" },
-                  { area: "Experimental Design", desc: "Is the procedure well-planned? Are variables properly identified and controlled?" },
-                  { area: "Data Collection & Analysis", desc: "Is data organized and accurately recorded? Are conclusions supported by data?" },
-                  { area: "Display & Presentation", desc: "Is the board clear, organized, and visually appealing? Can the student explain their work?" },
-                  { area: "Creativity & Effort", desc: "Does the project show original thinking? Is there evidence of significant effort?" },
+                  { area: "Scientific Thought", desc: "Is the problem clearly stated? Is the hypothesis reasonable and testable? Are conclusions based on evidence?" },
+                  { area: "Creativity", desc: "Does the project show original thinking and a unique approach to the problem?" },
+                  { area: "Thoroughness", desc: "Is the research comprehensive? Were enough trials conducted and variables considered?" },
+                  { area: "Skill", desc: "Does the project demonstrate appropriate use of scientific methods, equipment, and analysis techniques?" },
+                  { area: "Clarity", desc: "Is the project clearly explained? Are the data, charts, and conclusions easy to understand?" },
+                  { area: "Presentation", desc: "Is the display board well-organized and visually appealing? Can the student explain their work effectively?" },
                 ].map((item) => (
                   <div
                     key={item.area}

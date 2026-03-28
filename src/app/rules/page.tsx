@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const ruleCards = [
   {
-    title: "MVLA Science Fair Rules",
+    title: "MVWSD Science Fair Rules",
     description:
       "The comprehensive rulebook covering all aspects of the science fair including eligibility, project categories, timelines, and general guidelines.",
     href: "https://docs.google.com/document/d/15SAahb5817DqSySY_MRZs1WQ0aFv-XnKye_OrsofJPc/edit",
