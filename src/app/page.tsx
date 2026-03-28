@@ -245,6 +245,84 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Project Categories */}
+      <section className="py-16 sm:py-20 bg-surface-alt">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-primary">
+              Project Categories
+            </h2>
+            <p className="mt-4 text-lg text-muted max-w-2xl mx-auto">
+              Choose a category that matches your interests and curiosity.
+              Every great experiment starts with a question you care about!
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {/* Life & Health Sciences */}
+            <div className="flex flex-col p-6 bg-white rounded-xl border border-slate-200 card-hover border-l-4 border-l-emerald-500">
+              <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  <path d="M17 8a2 2 0 00-2 2" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-primary text-lg">Life &amp; Health Sciences</h3>
+              <p className="mt-2 text-sm text-muted leading-relaxed">
+                Projects related to people, animals, plants, nutrition, psychology, or the environment.
+              </p>
+            </div>
+
+            {/* Physical Science & Engineering */}
+            <div className="flex flex-col p-6 bg-white rounded-xl border border-slate-200 card-hover border-l-4 border-l-blue-500">
+              <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" />
+                  <path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" />
+                  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-primary text-lg">Physical Science &amp; Engineering</h3>
+              <p className="mt-2 text-sm text-muted leading-relaxed">
+                Projects involving forces, motion, energy, machines, astronomy, or inventions.
+              </p>
+            </div>
+
+            {/* Chemistry & Materials */}
+            <div className="flex flex-col p-6 bg-white rounded-xl border border-slate-200 card-hover border-l-4 border-l-purple-500">
+              <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M9 3h6v7l4 8H5l4-8V3z" />
+                  <line x1="9" y1="3" x2="15" y2="3" />
+                  <path d="M7 18c0 0 2 3 5 3s5-3 5-3" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-primary text-lg">Chemistry &amp; Materials</h3>
+              <p className="mt-2 text-sm text-muted leading-relaxed">
+                Projects about reactions, mixtures, states of matter, or testing different materials.
+              </p>
+            </div>
+
+            {/* Technology & Innovation */}
+            <div className="flex flex-col p-6 bg-white rounded-xl border border-slate-200 card-hover border-l-4 border-l-amber-500">
+              <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <line x1="9" y1="18" x2="15" y2="18" />
+                  <line x1="10" y1="22" x2="14" y2="22" />
+                  <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0018 8 6 6 0 006 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 018.91 14" />
+                  <circle cx="12" cy="5" r="1" fill="currentColor" stroke="none" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-primary text-lg">Technology &amp; Innovation</h3>
+              <p className="mt-2 text-sm text-muted leading-relaxed">
+                Projects involving computers, coding, robotics, apps, or problem-solving inventions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* QR Code / Interest Form */}
       <QRCodeSection />
 

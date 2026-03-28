@@ -95,6 +95,42 @@ export default function TheProcessPage() {
                 </p>
               </div>
 
+              <div className="mb-4">
+                <h4 className="font-semibold text-primary mb-3">
+                  Projects should fit into one of these four categories:
+                </h4>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-emerald-50 border border-emerald-100">
+                    <span className="mt-0.5 w-2 h-2 rounded-full bg-emerald-500 shrink-0" aria-hidden="true" />
+                    <div>
+                      <span className="font-semibold text-primary">Life &amp; Health Sciences</span>
+                      <span className="text-sm text-muted"> &mdash; people, animals, plants, nutrition, psychology, environment</span>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-50 border border-blue-100">
+                    <span className="mt-0.5 w-2 h-2 rounded-full bg-blue-500 shrink-0" aria-hidden="true" />
+                    <div>
+                      <span className="font-semibold text-primary">Physical Science &amp; Engineering</span>
+                      <span className="text-sm text-muted"> &mdash; forces, motion, energy, machines, astronomy, inventions</span>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-purple-50 border border-purple-100">
+                    <span className="mt-0.5 w-2 h-2 rounded-full bg-purple-500 shrink-0" aria-hidden="true" />
+                    <div>
+                      <span className="font-semibold text-primary">Chemistry &amp; Materials</span>
+                      <span className="text-sm text-muted"> &mdash; reactions, mixtures, states of matter, testing materials</span>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-amber-50 border border-amber-100">
+                    <span className="mt-0.5 w-2 h-2 rounded-full bg-amber-500 shrink-0" aria-hidden="true" />
+                    <div>
+                      <span className="font-semibold text-primary">Technology &amp; Innovation</span>
+                      <span className="text-sm text-muted"> &mdash; computers, coding, robotics, apps, problem-solving inventions</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <p className="mb-2">
                 Be sure to{" "}
                 <Link href="/rules" className="text-accent font-medium hover:underline">
@@ -105,7 +141,7 @@ export default function TheProcessPage() {
 
               <div className="bg-red-50 rounded-lg p-4 border-l-4 border-red-400">
                 <p className="font-semibold text-red-800">
-                  IMPORTANT: Maximum of FOUR students per team.
+                  IMPORTANT: Individual or team participation is allowed (maximum 2 members per team).
                 </p>
               </div>
             </CollapsibleSection>
