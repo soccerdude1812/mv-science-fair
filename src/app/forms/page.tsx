@@ -49,34 +49,34 @@ function RequirementBox({
   examplesNotRequired: string;
 }) {
   return (
-    <div className="mt-4 bg-slate-50 rounded-lg p-4 space-y-3">
-      <h4 className="font-semibold text-primary text-sm">{title}</h4>
+    <div className="mt-4 bg-white/[0.03] border border-white/5 rounded-lg p-4 space-y-3">
+      <h4 className="font-display font-semibold text-text-bright text-sm">{title}</h4>
       <div className="grid sm:grid-cols-2 gap-3">
-        <div className="p-3 bg-red-50 rounded-lg border border-red-100">
-          <p className="text-xs font-semibold text-red-700 uppercase tracking-wider mb-1">
+        <div className="p-3 bg-neon-pink/5 rounded-lg border border-neon-pink/10">
+          <p className="text-xs font-semibold text-neon-pink uppercase tracking-wider mb-1">
             Required when:
           </p>
-          <p className="text-sm text-red-900">{required}</p>
+          <p className="text-sm text-text-primary">{required}</p>
         </div>
-        <div className="p-3 bg-green-50 rounded-lg border border-green-100">
-          <p className="text-xs font-semibold text-green-700 uppercase tracking-wider mb-1">
+        <div className="p-3 bg-neon-green/5 rounded-lg border border-neon-green/10">
+          <p className="text-xs font-semibold text-neon-green uppercase tracking-wider mb-1">
             Not required when:
           </p>
-          <p className="text-sm text-green-900">{notRequired}</p>
+          <p className="text-sm text-text-primary">{notRequired}</p>
         </div>
       </div>
       <div className="grid sm:grid-cols-2 gap-3">
-        <div className="p-3 bg-white rounded-lg border border-slate-200">
-          <p className="text-xs font-semibold text-muted uppercase tracking-wider mb-1">
+        <div className="p-3 bg-white/[0.03] rounded-lg border border-white/5">
+          <p className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-1">
             Examples (Required):
           </p>
-          <p className="text-sm text-slate-700">{examplesRequired}</p>
+          <p className="text-sm text-text-primary">{examplesRequired}</p>
         </div>
-        <div className="p-3 bg-white rounded-lg border border-slate-200">
-          <p className="text-xs font-semibold text-muted uppercase tracking-wider mb-1">
+        <div className="p-3 bg-white/[0.03] rounded-lg border border-white/5">
+          <p className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-1">
             Examples (Not Required):
           </p>
-          <p className="text-sm text-slate-700">{examplesNotRequired}</p>
+          <p className="text-sm text-text-primary">{examplesNotRequired}</p>
         </div>
       </div>
     </div>
@@ -91,11 +91,11 @@ export default function FormsPage() {
         subtitle="All the forms you need, organized and easy to find. Start with the Interest Form to get started!"
       />
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12 relative z-10">
         {/* Main Forms */}
         <section>
-          <h2 className="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
-            <span className="w-10 h-10 rounded-xl bg-indigo-50 text-accent flex items-center justify-center shrink-0" aria-hidden="true">
+          <h2 className="text-2xl font-display font-bold text-text-bright mb-6 flex items-center gap-3">
+            <span className="w-10 h-10 rounded-xl bg-neon-cyan/10 text-neon-cyan flex items-center justify-center shrink-0" aria-hidden="true">
               <FormIcon />
             </span>
             Main Forms
@@ -123,13 +123,13 @@ export default function FormsPage() {
 
         {/* Risk/Approval Forms */}
         <section>
-          <h2 className="text-2xl font-bold text-primary mb-2 flex items-center gap-3">
-            <span className="w-10 h-10 rounded-xl bg-indigo-50 text-accent flex items-center justify-center shrink-0" aria-hidden="true">
+          <h2 className="text-2xl font-display font-bold text-text-bright mb-2 flex items-center gap-3">
+            <span className="w-10 h-10 rounded-xl bg-neon-amber/10 text-neon-amber flex items-center justify-center shrink-0" aria-hidden="true">
               <ShieldIcon />
             </span>
             Risk/Approval Forms
           </h2>
-          <p className="text-muted mb-6 ml-[52px]">
+          <p className="text-text-secondary mb-6 ml-[52px]">
             These forms are only required if your project involves specific
             materials or participants. Read the descriptions carefully to
             determine which apply to your project.
@@ -137,7 +137,7 @@ export default function FormsPage() {
 
           <div className="space-y-6">
             {/* Human Participation */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
+            <div className="glass-card p-6">
               <FormCard
                 title="Human Participation Approval Form"
                 description="Required if your project involves interaction with human participants."
@@ -161,7 +161,7 @@ export default function FormsPage() {
             </div>
 
             {/* Hazardous Materials */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
+            <div className="glass-card p-6">
               <FormCard
                 title="Hazardous Materials & Safety Approval Form"
                 description="Required if your project uses potentially dangerous materials or equipment."
@@ -184,7 +184,7 @@ export default function FormsPage() {
             </div>
 
             {/* Biological/Live Organism */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
+            <div className="glass-card p-6">
               <FormCard
                 title="Biological/Live Organism Use Approval Form"
                 description="Required if your project involves living organisms or biological samples."
@@ -210,8 +210,8 @@ export default function FormsPage() {
 
         {/* Volunteer/Judge Forms */}
         <section>
-          <h2 className="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
-            <span className="w-10 h-10 rounded-xl bg-indigo-50 text-accent flex items-center justify-center shrink-0" aria-hidden="true">
+          <h2 className="text-2xl font-display font-bold text-text-bright mb-6 flex items-center gap-3">
+            <span className="w-10 h-10 rounded-xl bg-neon-pink/10 text-neon-pink flex items-center justify-center shrink-0" aria-hidden="true">
               <HeartIcon />
             </span>
             Volunteer & Judge Forms

@@ -18,19 +18,22 @@ export default function CollapsibleSection({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="border border-slate-200 rounded-xl overflow-hidden bg-white card-hover">
+    <div className="glass-card overflow-hidden card-hover">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center gap-3 p-5 text-left hover:bg-slate-50 transition-colors"
+        className="w-full flex items-center gap-3 p-5 text-left hover:bg-white/[0.03] transition-colors"
         aria-expanded={isOpen}
       >
         {icon && (
-          <span className="shrink-0 w-8 h-8 rounded-lg bg-indigo-50 text-primary flex items-center justify-center" aria-hidden="true">
+          <span
+            className="shrink-0 w-8 h-8 rounded-lg bg-neon-cyan/10 text-neon-cyan flex items-center justify-center"
+            aria-hidden="true"
+          >
             {icon}
           </span>
         )}
-        <span className="flex-1 font-semibold text-primary text-lg">
+        <span className="flex-1 font-display font-semibold text-text-bright text-lg">
           {title}
         </span>
         <svg
@@ -42,7 +45,7 @@ export default function CollapsibleSection({
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className={`shrink-0 text-muted transition-transform duration-200 ${
+          className={`shrink-0 text-neon-cyan transition-transform duration-300 ${
             isOpen ? "rotate-180" : ""
           }`}
           aria-hidden="true"
@@ -51,8 +54,8 @@ export default function CollapsibleSection({
         </svg>
       </button>
       {isOpen && (
-        <div className="px-5 pb-5 pt-0 border-t border-slate-100">
-          <div className="pt-4 text-slate-700 leading-relaxed">
+        <div className="px-5 pb-5 pt-0 border-t border-white/5">
+          <div className="pt-4 text-text-primary leading-relaxed">
             {children}
           </div>
         </div>

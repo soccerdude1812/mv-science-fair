@@ -14,7 +14,7 @@ function BulletList({ items }: { items: string[] }) {
     <ul className="space-y-2 mt-3">
       {items.map((item, i) => (
         <li key={i} className="flex items-start gap-2">
-          <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true" />
+          <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-neon-cyan shrink-0" aria-hidden="true" />
           <span>{item}</span>
         </li>
       ))}
@@ -24,7 +24,7 @@ function BulletList({ items }: { items: string[] }) {
 
 function StepBadge({ step }: { step: number }) {
   return (
-    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent text-white text-sm font-bold shrink-0">
+    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-neon-cyan text-bg-deep text-sm font-bold shrink-0 shadow-lg shadow-neon-cyan/20">
       {step}
     </span>
   );
@@ -38,11 +38,11 @@ export default function TheProcessPage() {
         subtitle="Your step-by-step guide from curiosity to science fair presentation. Follow these stages to build an amazing project!"
       />
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-6">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-6 relative z-10">
         {/* Before Starting */}
         <div>
-          <h2 className="text-2xl font-bold text-primary mb-4 flex items-center gap-3">
-            <span className="w-10 h-10 rounded-xl bg-indigo-50 text-accent flex items-center justify-center shrink-0" aria-hidden="true">
+          <h2 className="text-2xl font-display font-bold text-text-bright mb-4 flex items-center gap-3">
+            <span className="w-10 h-10 rounded-xl bg-neon-cyan/10 text-neon-cyan flex items-center justify-center shrink-0" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
                 <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3" />
@@ -63,15 +63,15 @@ export default function TheProcessPage() {
                 </svg>
               }
             >
-              <p className="font-medium text-primary text-lg mb-3">
+              <p className="font-display font-medium text-text-bright text-lg mb-3">
                 The best projects come from YOUR curiosity!
               </p>
               <p className="mb-4">
                 Ask yourself: What do I wonder about? What would I love to explore?
               </p>
 
-              <div className="bg-indigo-50 rounded-lg p-5 mb-4">
-                <h4 className="font-semibold text-primary mb-2">
+              <div className="bg-neon-cyan/5 border border-neon-cyan/10 rounded-lg p-5 mb-4">
+                <h4 className="font-display font-semibold text-neon-cyan mb-2">
                   Start Here: What Excites You?
                 </h4>
                 <BulletList
@@ -85,47 +85,47 @@ export default function TheProcessPage() {
                 />
               </div>
 
-              <div className="bg-highlight/10 rounded-lg p-5 mb-4 border-l-4 border-highlight">
-                <p className="font-semibold text-amber-800">
+              <div className="bg-neon-amber/5 border border-neon-amber/15 rounded-lg p-5 mb-4 border-l-4 border-l-neon-amber">
+                <p className="font-display font-semibold text-neon-amber">
                   Pro Tip:
                 </p>
-                <p className="text-amber-900">
+                <p className="text-text-secondary">
                   Pick 2 or 3 ideas at first. That way, if one doesn&apos;t work
                   out, you&apos;ve got backups!
                 </p>
               </div>
 
               <div className="mb-4">
-                <h4 className="font-semibold text-primary mb-3">
+                <h4 className="font-display font-semibold text-text-bright mb-3">
                   Projects should fit into one of these four categories:
                 </h4>
                 <div className="grid sm:grid-cols-2 gap-3">
-                  <div className="flex items-start gap-3 p-3 rounded-lg bg-emerald-50 border border-emerald-100">
-                    <span className="mt-0.5 w-2 h-2 rounded-full bg-emerald-500 shrink-0" aria-hidden="true" />
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-neon-green/5 border border-neon-green/10">
+                    <span className="mt-0.5 w-2 h-2 rounded-full bg-neon-green shrink-0" aria-hidden="true" />
                     <div>
-                      <span className="font-semibold text-primary">Life &amp; Health Sciences</span>
-                      <span className="text-sm text-muted"> &mdash; people, animals, plants, nutrition, psychology, environment</span>
+                      <span className="font-semibold text-text-bright">Life &amp; Health Sciences</span>
+                      <span className="text-sm text-text-secondary"> &mdash; people, animals, plants, nutrition, psychology, environment</span>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-50 border border-blue-100">
-                    <span className="mt-0.5 w-2 h-2 rounded-full bg-blue-500 shrink-0" aria-hidden="true" />
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-neon-cyan/5 border border-neon-cyan/10">
+                    <span className="mt-0.5 w-2 h-2 rounded-full bg-neon-cyan shrink-0" aria-hidden="true" />
                     <div>
-                      <span className="font-semibold text-primary">Physical Science &amp; Engineering</span>
-                      <span className="text-sm text-muted"> &mdash; forces, motion, energy, machines, astronomy, inventions</span>
+                      <span className="font-semibold text-text-bright">Physical Science &amp; Engineering</span>
+                      <span className="text-sm text-text-secondary"> &mdash; forces, motion, energy, machines, astronomy, inventions</span>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3 p-3 rounded-lg bg-purple-50 border border-purple-100">
-                    <span className="mt-0.5 w-2 h-2 rounded-full bg-purple-500 shrink-0" aria-hidden="true" />
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-neon-purple/5 border border-neon-purple/10">
+                    <span className="mt-0.5 w-2 h-2 rounded-full bg-neon-purple shrink-0" aria-hidden="true" />
                     <div>
-                      <span className="font-semibold text-primary">Chemistry &amp; Materials</span>
-                      <span className="text-sm text-muted"> &mdash; reactions, mixtures, states of matter, testing materials</span>
+                      <span className="font-semibold text-text-bright">Chemistry &amp; Materials</span>
+                      <span className="text-sm text-text-secondary"> &mdash; reactions, mixtures, states of matter, testing materials</span>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3 p-3 rounded-lg bg-amber-50 border border-amber-100">
-                    <span className="mt-0.5 w-2 h-2 rounded-full bg-amber-500 shrink-0" aria-hidden="true" />
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-neon-amber/5 border border-neon-amber/10">
+                    <span className="mt-0.5 w-2 h-2 rounded-full bg-neon-amber shrink-0" aria-hidden="true" />
                     <div>
-                      <span className="font-semibold text-primary">Technology &amp; Innovation</span>
-                      <span className="text-sm text-muted"> &mdash; computers, coding, robotics, apps, problem-solving inventions</span>
+                      <span className="font-semibold text-text-bright">Technology &amp; Innovation</span>
+                      <span className="text-sm text-text-secondary"> &mdash; computers, coding, robotics, apps, problem-solving inventions</span>
                     </div>
                   </div>
                 </div>
@@ -133,14 +133,14 @@ export default function TheProcessPage() {
 
               <p className="mb-2">
                 Be sure to{" "}
-                <Link href="/rules" className="text-accent font-medium hover:underline">
+                <Link href="/rules" className="text-neon-cyan font-medium hover:underline">
                   check the rules
                 </Link>{" "}
                 before settling on a topic.
               </p>
 
-              <div className="bg-red-50 rounded-lg p-4 border-l-4 border-red-400">
-                <p className="font-semibold text-red-800">
+              <div className="bg-neon-pink/5 border border-neon-pink/15 rounded-lg p-4 border-l-4 border-l-neon-pink">
+                <p className="font-semibold text-neon-pink">
                   IMPORTANT: Individual or team participation is allowed (maximum 2 members per team).
                 </p>
               </div>
@@ -161,38 +161,17 @@ export default function TheProcessPage() {
               </p>
               <div className="grid gap-3">
                 {[
-                  {
-                    title: "Research Question",
-                    desc: "What specific question are you trying to answer?",
-                  },
-                  {
-                    title: "Hypothesis",
-                    desc: 'Your educated guess about the answer. Use "If... then... because..." format.',
-                  },
-                  {
-                    title: "Materials",
-                    desc: "List everything you'll need for your experiment.",
-                  },
-                  {
-                    title: "Procedure",
-                    desc: "Step-by-step instructions someone else could follow to repeat your experiment.",
-                  },
-                  {
-                    title: "Variables",
-                    desc: "Identify what you're changing (independent), measuring (dependent), and keeping the same (controlled).",
-                  },
-                  {
-                    title: "Data Collection",
-                    desc: "How will you record and organize your results?",
-                  },
-                  {
-                    title: "Safety",
-                    desc: "Are there any safety concerns? Do you need approval forms?",
-                  },
+                  { title: "Research Question", desc: "What specific question are you trying to answer?" },
+                  { title: "Hypothesis", desc: 'Your educated guess about the answer. Use "If... then... because..." format.' },
+                  { title: "Materials", desc: "List everything you'll need for your experiment." },
+                  { title: "Procedure", desc: "Step-by-step instructions someone else could follow to repeat your experiment." },
+                  { title: "Variables", desc: "Identify what you're changing (independent), measuring (dependent), and keeping the same (controlled)." },
+                  { title: "Data Collection", desc: "How will you record and organize your results?" },
+                  { title: "Safety", desc: "Are there any safety concerns? Do you need approval forms?" },
                 ].map((item) => (
                   <div
                     key={item.title}
-                    className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg"
+                    className="flex items-start gap-3 p-3 bg-white/[0.03] rounded-lg border border-white/5"
                   >
                     <svg
                       width="18"
@@ -203,17 +182,17 @@ export default function TheProcessPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="text-accent mt-0.5 shrink-0"
+                      className="text-neon-cyan mt-0.5 shrink-0"
                       aria-hidden="true"
                     >
                       <polyline points="9 11 12 14 22 4" />
                       <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
                     </svg>
                     <div>
-                      <span className="font-semibold text-primary">
+                      <span className="font-semibold text-text-bright">
                         {item.title}:
                       </span>{" "}
-                      <span className="text-muted">{item.desc}</span>
+                      <span className="text-text-secondary">{item.desc}</span>
                     </div>
                   </div>
                 ))}
@@ -237,27 +216,18 @@ export default function TheProcessPage() {
               </p>
               <div className="grid sm:grid-cols-3 gap-4">
                 {[
-                  {
-                    type: "Parent Mentor",
-                    desc: "A parent or guardian who helps you stay organized and supports your project at home.",
-                  },
-                  {
-                    type: "Professional Mentor",
-                    desc: "A scientist, engineer, or professional who can provide expert guidance in your topic area.",
-                  },
-                  {
-                    type: "Other Volunteer Mentors",
-                    desc: "Other community volunteers, such as high school students or college students, who can help you with your project.",
-                  },
+                  { type: "Parent Mentor", desc: "A parent or guardian who helps you stay organized and supports your project at home.", color: "neon-cyan" },
+                  { type: "Professional Mentor", desc: "A scientist, engineer, or professional who can provide expert guidance in your topic area.", color: "neon-purple" },
+                  { type: "Other Volunteer Mentors", desc: "Other community volunteers, such as high school students or college students, who can help you with your project.", color: "neon-green" },
                 ].map((mentor) => (
                   <div
                     key={mentor.type}
-                    className="p-4 bg-cyan-50 rounded-lg border border-cyan-100"
+                    className={`p-4 rounded-lg bg-${mentor.color}/5 border border-${mentor.color}/10`}
                   >
-                    <h4 className="font-semibold text-primary mb-2">
+                    <h4 className="font-display font-semibold text-text-bright mb-2">
                       {mentor.type}
                     </h4>
-                    <p className="text-sm text-muted">{mentor.desc}</p>
+                    <p className="text-sm text-text-secondary">{mentor.desc}</p>
                   </div>
                 ))}
               </div>
@@ -267,8 +237,8 @@ export default function TheProcessPage() {
 
         {/* Apply to the Fair */}
         <div>
-          <h2 className="text-2xl font-bold text-primary mb-4 flex items-center gap-3">
-            <span className="w-10 h-10 rounded-xl bg-indigo-50 text-accent flex items-center justify-center shrink-0" aria-hidden="true">
+          <h2 className="text-2xl font-display font-bold text-text-bright mb-4 flex items-center gap-3">
+            <span className="w-10 h-10 rounded-xl bg-neon-purple/10 text-neon-purple flex items-center justify-center shrink-0" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
                 <polyline points="14 2 14 8 20 8" />
@@ -293,7 +263,7 @@ export default function TheProcessPage() {
                 href="https://docs.google.com/forms/d/1Uys9ePwF965Nn722dpa3eSypNVK9tLp-J4PnvOGN4xg/viewform"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-white font-semibold rounded-lg hover:bg-cyan-700 transition-colors"
+                className="btn-glow inline-flex items-center gap-2 px-5 py-2.5 bg-neon-cyan text-bg-deep font-semibold rounded-lg"
               >
                 Open Application Form
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -314,14 +284,14 @@ export default function TheProcessPage() {
               </p>
               <BulletList
                 items={[
-                  "Human Participants Form — if your project involves surveying, interviewing, or testing people",
-                  "Bioagent Safety Form — if your project involves living organisms or biological samples",
-                  "Hazardous Materials Form — if your project uses chemicals, electrical equipment, sharp tools, or heat sources",
+                  "Human Participants Form -- if your project involves surveying, interviewing, or testing people",
+                  "Bioagent Safety Form -- if your project involves living organisms or biological samples",
+                  "Hazardous Materials Form -- if your project uses chemicals, electrical equipment, sharp tools, or heat sources",
                 ]}
               />
               <p className="mt-4">
                 Visit the{" "}
-                <Link href="/forms" className="text-accent font-medium hover:underline">
+                <Link href="/forms" className="text-neon-cyan font-medium hover:underline">
                   Forms page
                 </Link>{" "}
                 for all required forms and details on when each is needed.
@@ -341,9 +311,9 @@ export default function TheProcessPage() {
                 After you submit your application, the Science Fair Committee
                 will review your project proposal.
               </p>
-              <div className="bg-highlight/10 rounded-lg p-4 border-l-4 border-highlight">
-                <p className="font-semibold text-amber-800">Important:</p>
-                <p className="text-amber-900">
+              <div className="bg-neon-amber/5 border border-neon-amber/15 rounded-lg p-4 border-l-4 border-l-neon-amber">
+                <p className="font-display font-semibold text-neon-amber">Important:</p>
+                <p className="text-text-secondary">
                   You must wait for a confirmation email before starting your
                   experiment. The committee needs to verify that your project
                   meets all safety and ethical guidelines.
@@ -355,8 +325,8 @@ export default function TheProcessPage() {
 
         {/* During Your Project */}
         <div>
-          <h2 className="text-2xl font-bold text-primary mb-4 flex items-center gap-3">
-            <span className="w-10 h-10 rounded-xl bg-indigo-50 text-accent flex items-center justify-center shrink-0" aria-hidden="true">
+          <h2 className="text-2xl font-display font-bold text-text-bright mb-4 flex items-center gap-3">
+            <span className="w-10 h-10 rounded-xl bg-neon-green/10 text-neon-green flex items-center justify-center shrink-0" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" />
                 <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" />
@@ -374,8 +344,8 @@ export default function TheProcessPage() {
               </svg>
             }
           >
-            <div className="bg-cyan-50 rounded-lg p-4 mb-4 border-l-4 border-accent">
-              <p className="font-medium text-primary">
+            <div className="bg-neon-cyan/5 border border-neon-cyan/10 rounded-lg p-4 mb-4 border-l-4 border-l-neon-cyan">
+              <p className="font-medium text-neon-cyan">
                 Recommended but not required
               </p>
             </div>
@@ -395,7 +365,7 @@ export default function TheProcessPage() {
               ].map((item) => (
                 <div
                   key={item}
-                  className="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-slate-100"
+                  className="flex items-center gap-2 p-2.5 rounded-lg bg-white/[0.03] border border-white/5"
                 >
                   <svg
                     width="16"
@@ -406,7 +376,7 @@ export default function TheProcessPage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-accent shrink-0"
+                    className="text-neon-cyan shrink-0"
                     aria-hidden="true"
                   >
                     <polyline points="9 11 12 14 22 4" />
@@ -421,8 +391,8 @@ export default function TheProcessPage() {
 
         {/* After Data Collection */}
         <div>
-          <h2 className="text-2xl font-bold text-primary mb-4 flex items-center gap-3">
-            <span className="w-10 h-10 rounded-xl bg-indigo-50 text-accent flex items-center justify-center shrink-0" aria-hidden="true">
+          <h2 className="text-2xl font-display font-bold text-text-bright mb-4 flex items-center gap-3">
+            <span className="w-10 h-10 rounded-xl bg-neon-amber/10 text-neon-amber flex items-center justify-center shrink-0" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="20" x2="18" y2="10" />
                 <line x1="12" y1="20" x2="12" y2="4" />
@@ -448,23 +418,23 @@ export default function TheProcessPage() {
                 to be complicated! Here are some things to look at:
               </p>
               <div className="grid sm:grid-cols-3 gap-4">
-                <div className="p-4 bg-indigo-50 rounded-lg text-center">
-                  <p className="font-bold text-primary text-lg mb-1">Average</p>
-                  <p className="text-sm text-muted">
+                <div className="p-4 rounded-lg bg-neon-cyan/5 border border-neon-cyan/10 text-center">
+                  <p className="font-display font-bold text-neon-cyan text-lg mb-1">Average</p>
+                  <p className="text-sm text-text-secondary">
                     Add up your results and divide by the number of trials to
                     find the average.
                   </p>
                 </div>
-                <div className="p-4 bg-cyan-50 rounded-lg text-center">
-                  <p className="font-bold text-primary text-lg mb-1">Compare</p>
-                  <p className="text-sm text-muted">
+                <div className="p-4 rounded-lg bg-neon-purple/5 border border-neon-purple/10 text-center">
+                  <p className="font-display font-bold text-neon-purple text-lg mb-1">Compare</p>
+                  <p className="text-sm text-text-secondary">
                     Compare groups or conditions to see if there are differences
                     between them.
                   </p>
                 </div>
-                <div className="p-4 bg-amber-50 rounded-lg text-center">
-                  <p className="font-bold text-primary text-lg mb-1">Patterns</p>
-                  <p className="text-sm text-muted">
+                <div className="p-4 rounded-lg bg-neon-amber/5 border border-neon-amber/10 text-center">
+                  <p className="font-display font-bold text-neon-amber text-lg mb-1">Patterns</p>
+                  <p className="text-sm text-text-secondary">
                     Look for patterns: Are results increasing, decreasing, or
                     staying the same?
                   </p>
@@ -489,14 +459,14 @@ export default function TheProcessPage() {
               </p>
               <BulletList
                 items={[
-                  "Why it matters — What problem or question inspired your project?",
-                  "What you did — Briefly describe your experiment and methods.",
-                  "What you found — Summarize your key results.",
-                  "Why results matter — Explain what your findings mean and why they are important.",
+                  "Why it matters -- What problem or question inspired your project?",
+                  "What you did -- Briefly describe your experiment and methods.",
+                  "What you found -- Summarize your key results.",
+                  "Why results matter -- Explain what your findings mean and why they are important.",
                 ]}
               />
-              <div className="mt-4 bg-cyan-50 rounded-lg p-4 border-l-4 border-accent">
-                <p className="font-medium text-primary">
+              <div className="mt-4 bg-neon-cyan/5 border border-neon-cyan/10 rounded-lg p-4 border-l-4 border-l-neon-cyan">
+                <p className="font-medium text-neon-cyan">
                   Tip: Write your abstract in past tense, since your experiment
                   is already complete.
                 </p>
@@ -507,8 +477,8 @@ export default function TheProcessPage() {
 
         {/* Display */}
         <div>
-          <h2 className="text-2xl font-bold text-primary mb-4 flex items-center gap-3">
-            <span className="w-10 h-10 rounded-xl bg-indigo-50 text-accent flex items-center justify-center shrink-0" aria-hidden="true">
+          <h2 className="text-2xl font-display font-bold text-text-bright mb-4 flex items-center gap-3">
+            <span className="w-10 h-10 rounded-xl bg-neon-pink/10 text-neon-pink flex items-center justify-center shrink-0" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="3" width="20" height="14" rx="2" />
                 <line x1="8" y1="21" x2="16" y2="21" />
@@ -518,14 +488,14 @@ export default function TheProcessPage() {
             Display
           </h2>
 
-          <div className="p-6 bg-white rounded-xl border border-slate-200">
-            <p className="text-lg mb-4">
+          <div className="p-6 glass-card">
+            <p className="text-lg mb-4 text-text-primary">
               Your display board is the first thing judges see &mdash; make it
               clear, organized, and engaging!
             </p>
             <Link
               href="/display-and-safety"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white font-semibold rounded-lg hover:bg-primary-light transition-colors"
+              className="btn-glow-pink inline-flex items-center gap-2 px-5 py-2.5 bg-neon-pink text-bg-deep font-semibold rounded-lg"
             >
               View Display & Safety Guidelines
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -538,8 +508,8 @@ export default function TheProcessPage() {
 
         {/* Preparing for Judging */}
         <div>
-          <h2 className="text-2xl font-bold text-primary mb-4 flex items-center gap-3">
-            <span className="w-10 h-10 rounded-xl bg-indigo-50 text-accent flex items-center justify-center shrink-0" aria-hidden="true">
+          <h2 className="text-2xl font-display font-bold text-text-bright mb-4 flex items-center gap-3">
+            <span className="w-10 h-10 rounded-xl bg-neon-amber/10 text-neon-amber flex items-center justify-center shrink-0" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
               </svg>
@@ -573,9 +543,9 @@ export default function TheProcessPage() {
                 ].map((q, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg"
+                    className="flex items-start gap-3 p-3 bg-white/[0.03] rounded-lg border border-white/5"
                   >
-                    <span className="text-accent font-bold shrink-0">
+                    <span className="text-neon-cyan font-bold shrink-0">
                       Q{i + 1}.
                     </span>
                     <span>{q}</span>
@@ -600,33 +570,18 @@ export default function TheProcessPage() {
               </p>
               <div className="grid gap-3">
                 {[
-                  {
-                    area: "Research Question & Hypothesis",
-                    desc: "Is the question clear and testable? Is the hypothesis reasonable?",
-                  },
-                  {
-                    area: "Experimental Design",
-                    desc: "Is the procedure well-planned? Are variables properly identified and controlled?",
-                  },
-                  {
-                    area: "Data Collection & Analysis",
-                    desc: "Is data organized and accurately recorded? Are conclusions supported by data?",
-                  },
-                  {
-                    area: "Display & Presentation",
-                    desc: "Is the board clear, organized, and visually appealing? Can the student explain their work?",
-                  },
-                  {
-                    area: "Creativity & Effort",
-                    desc: "Does the project show original thinking? Is there evidence of significant effort?",
-                  },
+                  { area: "Research Question & Hypothesis", desc: "Is the question clear and testable? Is the hypothesis reasonable?" },
+                  { area: "Experimental Design", desc: "Is the procedure well-planned? Are variables properly identified and controlled?" },
+                  { area: "Data Collection & Analysis", desc: "Is data organized and accurately recorded? Are conclusions supported by data?" },
+                  { area: "Display & Presentation", desc: "Is the board clear, organized, and visually appealing? Can the student explain their work?" },
+                  { area: "Creativity & Effort", desc: "Does the project show original thinking? Is there evidence of significant effort?" },
                 ].map((item) => (
                   <div
                     key={item.area}
-                    className="p-4 bg-indigo-50 rounded-lg"
+                    className="p-4 rounded-lg bg-neon-purple/5 border border-neon-purple/10"
                   >
-                    <p className="font-semibold text-primary">{item.area}</p>
-                    <p className="text-sm text-muted mt-1">{item.desc}</p>
+                    <p className="font-display font-semibold text-text-bright">{item.area}</p>
+                    <p className="text-sm text-text-secondary mt-1">{item.desc}</p>
                   </div>
                 ))}
               </div>
