@@ -6,7 +6,6 @@ const infoCards = [
   {
     label: "Date",
     value: "TBD",
-    color: "neon-cyan",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -19,7 +18,6 @@ const infoCards = [
   {
     label: "Location",
     value: "TBD",
-    color: "neon-purple",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
@@ -30,7 +28,6 @@ const infoCards = [
   {
     label: "Eligible Grades",
     value: "3-5 Elementary",
-    color: "neon-green",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
@@ -46,7 +43,6 @@ const categoryCards = [
   {
     title: "Life & Health Sciences",
     desc: "Projects related to people, animals, plants, nutrition, psychology, or the environment.",
-    color: "neon-green",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
@@ -57,7 +53,6 @@ const categoryCards = [
   {
     title: "Physical Science & Engineering",
     desc: "Projects involving forces, motion, energy, machines, astronomy, or inventions.",
-    color: "neon-cyan",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" />
@@ -70,7 +65,6 @@ const categoryCards = [
   {
     title: "Chemistry & Materials",
     desc: "Projects about reactions, mixtures, states of matter, or testing different materials.",
-    color: "neon-purple",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M9 3h6v7l4 8H5l4-8V3z" />
@@ -82,7 +76,6 @@ const categoryCards = [
   {
     title: "Technology & Innovation",
     desc: "Projects involving computers, coding, robotics, apps, or problem-solving inventions.",
-    color: "neon-amber",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <line x1="9" y1="18" x2="15" y2="18" />
@@ -99,7 +92,6 @@ const navCards = [
     href: "/forms",
     title: "Forms",
     desc: "Access all application and approval forms",
-    color: "neon-cyan",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
@@ -114,7 +106,6 @@ const navCards = [
     href: "/the-process",
     title: "The Process",
     desc: "Step-by-step guide from idea to presentation",
-    color: "neon-purple",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <line x1="8" y1="6" x2="21" y2="6" />
@@ -130,7 +121,6 @@ const navCards = [
     href: "/rules",
     title: "Rules",
     desc: "Review all science fair rules and guidelines",
-    color: "neon-amber",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
@@ -142,7 +132,6 @@ const navCards = [
     href: "/display-and-safety",
     title: "Display & Safety",
     desc: "Board dimensions, safety rules, and display tips",
-    color: "neon-green",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -155,7 +144,6 @@ const navCards = [
     href: "/judges",
     title: "Judges",
     desc: "Learn about judging criteria and sign up to judge",
-    color: "neon-pink",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -166,7 +154,6 @@ const navCards = [
     href: "/volunteer",
     title: "Volunteer",
     desc: "Help make the science fair a success",
-    color: "neon-cyan",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
@@ -177,7 +164,6 @@ const navCards = [
     href: "/students-families",
     title: "Students & Families",
     desc: "Resources and guides for participants",
-    color: "neon-purple",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
@@ -187,85 +173,27 @@ const navCards = [
   },
 ];
 
-function getColorClasses(color: string) {
-  const map: Record<string, { bg: string; text: string; border: string; hoverBorder: string; glow: string }> = {
-    "neon-cyan": { bg: "bg-neon-cyan/10", text: "text-neon-cyan", border: "border-neon-cyan/20", hoverBorder: "hover:border-neon-cyan/40", glow: "hover:shadow-neon-cyan/10" },
-    "neon-green": { bg: "bg-neon-green/10", text: "text-neon-green", border: "border-neon-green/20", hoverBorder: "hover:border-neon-green/40", glow: "hover:shadow-neon-green/10" },
-    "neon-amber": { bg: "bg-neon-amber/10", text: "text-neon-amber", border: "border-neon-amber/20", hoverBorder: "hover:border-neon-amber/40", glow: "hover:shadow-neon-amber/10" },
-    "neon-pink": { bg: "bg-neon-pink/10", text: "text-neon-pink", border: "border-neon-pink/20", hoverBorder: "hover:border-neon-pink/40", glow: "hover:shadow-neon-pink/10" },
-    "neon-purple": { bg: "bg-neon-purple/10", text: "text-neon-purple", border: "border-neon-purple/20", hoverBorder: "hover:border-neon-purple/40", glow: "hover:shadow-neon-purple/10" },
-  };
-  return map[color] || map["neon-cyan"];
-}
-
 export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="hero-gradient text-white relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          {/* Large atom */}
-          <svg
-            width="240"
-            height="240"
-            viewBox="0 0 240 240"
-            fill="none"
-            className="absolute -top-12 -right-12 opacity-[0.06] animate-spin-slow"
-          >
-            <circle cx="120" cy="120" r="12" fill="var(--neon-cyan)" />
-            <ellipse cx="120" cy="120" rx="100" ry="35" stroke="var(--neon-cyan)" strokeWidth="1.5" fill="none" />
-            <ellipse cx="120" cy="120" rx="100" ry="35" stroke="var(--neon-purple)" strokeWidth="1.5" fill="none" transform="rotate(60 120 120)" />
-            <ellipse cx="120" cy="120" rx="100" ry="35" stroke="var(--neon-cyan)" strokeWidth="1.5" fill="none" transform="rotate(120 120 120)" />
-          </svg>
-
-          {/* Glowing dots scattered */}
-          <div className="absolute top-20 left-[10%] w-2 h-2 rounded-full bg-neon-cyan/30 animate-pulse-glow" />
-          <div className="absolute top-32 left-[30%] w-1.5 h-1.5 rounded-full bg-neon-purple/40 animate-pulse-glow delay-500" />
-          <div className="absolute bottom-20 right-[15%] w-2 h-2 rounded-full bg-neon-green/25 animate-pulse-glow delay-300" />
-          <div className="absolute top-16 right-[35%] w-1 h-1 rounded-full bg-neon-pink/30 animate-pulse-glow delay-700" />
-          <div className="absolute bottom-32 left-[20%] w-1.5 h-1.5 rounded-full bg-neon-amber/25 animate-pulse-glow delay-200" />
-          <div className="absolute top-48 left-[50%] w-1 h-1 rounded-full bg-white/20 animate-pulse-glow delay-400" />
-
-          {/* Beaker */}
-          <svg width="80" height="80" viewBox="0 0 60 60" fill="none" className="absolute bottom-10 left-[8%] opacity-[0.06] animate-float">
-            <path d="M22 8h16M24 8v18l-10 22h32L36 26V8" stroke="var(--neon-cyan)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-
-          {/* DNA helix */}
-          <svg width="40" height="120" viewBox="0 0 40 120" fill="none" className="absolute top-0 right-[40%] opacity-[0.04]">
-            <path d="M10 0c0 20 20 20 20 40s-20 20-20 40 20 20 20 40" stroke="var(--neon-purple)" strokeWidth="2" fill="none" />
-            <path d="M30 0c0 20-20 20-20 40s20 20 20 40-20 20-20 40" stroke="var(--neon-cyan)" strokeWidth="2" fill="none" />
-            <line x1="10" y1="10" x2="30" y2="10" stroke="white" strokeWidth="1" opacity="0.3" />
-            <line x1="15" y1="30" x2="25" y2="30" stroke="white" strokeWidth="1" opacity="0.3" />
-            <line x1="10" y1="50" x2="30" y2="50" stroke="white" strokeWidth="1" opacity="0.3" />
-            <line x1="15" y1="70" x2="25" y2="70" stroke="white" strokeWidth="1" opacity="0.3" />
-            <line x1="10" y1="90" x2="30" y2="90" stroke="white" strokeWidth="1" opacity="0.3" />
-            <line x1="15" y1="110" x2="25" y2="110" stroke="white" strokeWidth="1" opacity="0.3" />
-          </svg>
-
-          {/* Floating orbital ring */}
-          <svg width="100" height="50" viewBox="0 0 100 50" fill="none" className="absolute bottom-24 right-[8%] opacity-[0.04] animate-float-reverse">
-            <ellipse cx="50" cy="25" rx="48" ry="23" stroke="var(--neon-green)" strokeWidth="1" fill="none" />
-          </svg>
-        </div>
-
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 relative z-10">
+      <section className="bg-bg-light border-b border-border-default">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10 lg:gap-16">
             {/* Left: text content */}
             <div className="max-w-3xl">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-cyan/10 border border-neon-cyan/20 backdrop-blur-sm text-sm font-medium text-neon-cyan mb-6 animate-fade-in-up">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-primary-light text-sm font-medium text-accent-primary mb-6 animate-fade-in-up">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <circle cx="12" cy="12" r="3" />
                   <ellipse cx="12" cy="12" rx="10" ry="4" stroke="currentColor" strokeWidth="1.5" fill="none" />
                 </svg>
                 Grades 3-5 Elementary School
               </span>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-tight animate-fade-in-up delay-100">
-                <span className="gradient-text">MVWSD Science Fair</span>{" "}
-                <span className="text-neon-amber neon-glow-sm">2026</span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-tight text-text-heading animate-fade-in-up delay-100">
+                MVWSD Science Fair{" "}
+                <span className="text-accent-primary">2026</span>
               </h1>
-              <p className="mt-6 text-xl sm:text-2xl text-text-secondary leading-relaxed max-w-2xl animate-fade-in-up delay-200">
+              <p className="mt-6 text-xl sm:text-2xl text-text-body leading-relaxed max-w-2xl animate-fade-in-up delay-200">
                 Inspiring Young Scientists in Mountain View
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-300">
@@ -273,7 +201,7 @@ export default function Home() {
                   href="https://docs.google.com/forms/d/1O1DXH_eq0GQIcTJcLQlrcusY5I7xKejzBw_p3WHIVao/viewform"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-glow-amber inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-neon-amber text-bg-deep font-bold rounded-xl shadow-lg shadow-neon-amber/20"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-accent-primary text-white font-bold rounded-xl shadow-sm hover:bg-accent-primary-hover transition-colors"
                 >
                   Show Your Interest
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -283,7 +211,7 @@ export default function Home() {
                 </a>
                 <Link
                   href="/the-process"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/5 backdrop-blur-sm text-text-bright font-semibold rounded-xl hover:bg-white/10 transition-colors border border-white/10 hover:border-neon-cyan/30"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-text-heading font-semibold rounded-xl hover:bg-bg-muted transition-colors border border-border-default"
                 >
                   Learn How It Works
                 </Link>
@@ -299,13 +227,13 @@ export default function Home() {
       </section>
 
       {/* Welcome */}
-      <section className="py-16 sm:py-20 section-dark section-nebula relative z-10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+      <section className="py-16 sm:py-20 section-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold gradient-text">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading">
               Welcome to the 2026 MVWSD Science Fair!
             </h2>
-            <p className="mt-6 text-lg text-text-secondary leading-relaxed">
+            <p className="mt-6 text-lg text-text-body leading-relaxed">
               We&apos;re excited to inspire young scientists across the Mountain
               View Whisman School District. Grades 3-5 are eligible to
               participate. Whether you&apos;re curious about the natural world,
@@ -316,73 +244,66 @@ export default function Home() {
 
           {/* Info Cards */}
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {infoCards.map((card) => {
-              const colors = getColorClasses(card.color);
-              return (
-                <div
-                  key={card.label}
-                  className={`flex flex-col items-center text-center p-6 glass-card-hover`}
-                >
-                  <div className={`w-12 h-12 rounded-xl ${colors.bg} ${colors.text} flex items-center justify-center mb-4`}>
-                    {card.icon}
-                  </div>
-                  <span className="text-sm font-medium text-text-secondary uppercase tracking-wider">
-                    {card.label}
-                  </span>
-                  <span className={`mt-1 text-xl font-display font-bold ${colors.text}`}>
-                    {card.value}
-                  </span>
+            {infoCards.map((card) => (
+              <div
+                key={card.label}
+                className="flex flex-col items-center text-center p-6 clean-card-hover"
+              >
+                <div className="w-12 h-12 rounded-xl bg-accent-primary-light text-accent-primary flex items-center justify-center mb-4">
+                  {card.icon}
                 </div>
-              );
-            })}
+                <span className="text-sm font-medium text-text-muted uppercase tracking-wider">
+                  {card.label}
+                </span>
+                <span className="mt-1 text-xl font-display font-bold text-text-heading">
+                  {card.value}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Project Categories */}
-      <section className="py-16 sm:py-20 section-deep relative z-10">
+      <section className="py-16 sm:py-20 section-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold gradient-text">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading">
               Project Categories
             </h2>
-            <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-text-body max-w-2xl mx-auto">
               Choose a category that matches your interests and curiosity.
               Every great experiment starts with a question you care about!
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {categoryCards.map((card) => {
-              const colors = getColorClasses(card.color);
-              return (
-                <div
-                  key={card.title}
-                  className={`flex flex-col p-6 glass-card-hover border-l-4 ${colors.border.replace('/20', '/40')}`}
-                  style={{ borderLeftColor: `var(--${card.color})` }}
-                >
-                  <div className={`w-12 h-12 rounded-xl ${colors.bg} ${colors.text} flex items-center justify-center mb-4`}>
-                    {card.icon}
-                  </div>
-                  <h3 className={`font-display font-bold text-text-bright text-lg`}>{card.title}</h3>
-                  <p className="mt-2 text-sm text-text-secondary leading-relaxed">
-                    {card.desc}
-                  </p>
+            {categoryCards.map((card) => (
+              <div
+                key={card.title}
+                className="flex flex-col p-6 clean-card-hover border-l-4 border-l-accent-primary"
+              >
+                <div className="w-12 h-12 rounded-xl bg-accent-primary-light text-accent-primary flex items-center justify-center mb-4">
+                  {card.icon}
                 </div>
-              );
-            })}
+                <h3 className="font-display font-bold text-text-heading text-lg">{card.title}</h3>
+                <p className="mt-2 text-sm text-text-body leading-relaxed">
+                  {card.desc}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Timeline */}
-      <section className="py-16 sm:py-20 section-dark relative z-10">
+      <section className="py-16 sm:py-20 section-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold gradient-text">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading">
               Your Journey
             </h2>
-            <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-text-body max-w-2xl mx-auto">
               From first spark of curiosity to presenting at the fair — here&apos;s
               every step along the way.
             </p>
@@ -394,46 +315,43 @@ export default function Home() {
       </section>
 
       {/* Quick Navigation */}
-      <section className="py-16 sm:py-20 section-deep section-nebula relative z-10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+      <section className="py-16 sm:py-20 section-light">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold gradient-text">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading">
               Explore the Science Fair
             </h2>
-            <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-text-body max-w-2xl mx-auto">
               Everything you need to know about participating, volunteering, or
               judging at the MVWSD Science Fair.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {navCards.map((card) => {
-              const colors = getColorClasses(card.color);
-              return (
-                <Link
-                  key={card.href}
-                  href={card.href}
-                  className="group flex flex-col p-6 glass-card-hover"
-                >
-                  <div className={`w-10 h-10 rounded-lg ${colors.bg} ${colors.text} flex items-center justify-center mb-4 transition-all group-hover:shadow-lg`}>
-                    {card.icon}
-                  </div>
-                  <h3 className="font-display font-semibold text-text-bright text-lg">
-                    {card.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-text-secondary leading-relaxed flex-1">
-                    {card.desc}
-                  </p>
-                  <span className={`mt-4 inline-flex items-center gap-1.5 text-sm font-medium ${colors.text} group-hover:gap-2.5 transition-all`}>
-                    Learn more
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
-                  </span>
-                </Link>
-              );
-            })}
+            {navCards.map((card) => (
+              <Link
+                key={card.href}
+                href={card.href}
+                className="group flex flex-col p-6 clean-card-hover"
+              >
+                <div className="w-10 h-10 rounded-lg bg-accent-primary-light text-accent-primary flex items-center justify-center mb-4 transition-all">
+                  {card.icon}
+                </div>
+                <h3 className="font-display font-semibold text-text-heading text-lg">
+                  {card.title}
+                </h3>
+                <p className="mt-2 text-sm text-text-body leading-relaxed flex-1">
+                  {card.desc}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent-primary group-hover:gap-2.5 transition-all">
+                  Learn more
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

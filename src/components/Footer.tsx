@@ -15,11 +15,8 @@ const communityLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative z-10" role="contentinfo">
-      {/* Top gradient border */}
-      <div className="h-px bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink" aria-hidden="true" />
-
-      <div className="bg-bg-dark/80 backdrop-blur-md">
+    <footer className="border-t border-border-default" role="contentinfo">
+      <div className="bg-bg-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Brand */}
@@ -30,7 +27,7 @@ export default function Footer() {
                   height="28"
                   viewBox="0 0 32 32"
                   fill="none"
-                  className="text-neon-cyan"
+                  className="text-accent-primary"
                   aria-hidden="true"
                 >
                   <circle cx="16" cy="16" r="3" fill="currentColor" />
@@ -42,7 +39,7 @@ export default function Footer() {
                     stroke="currentColor"
                     strokeWidth="1.5"
                     fill="none"
-                    opacity="0.6"
+                    opacity="0.5"
                   />
                   <ellipse
                     cx="16"
@@ -53,7 +50,7 @@ export default function Footer() {
                     strokeWidth="1.5"
                     fill="none"
                     transform="rotate(60 16 16)"
-                    opacity="0.6"
+                    opacity="0.5"
                   />
                   <ellipse
                     cx="16"
@@ -64,14 +61,14 @@ export default function Footer() {
                     strokeWidth="1.5"
                     fill="none"
                     transform="rotate(120 16 16)"
-                    opacity="0.6"
+                    opacity="0.5"
                   />
                 </svg>
-                <span className="font-display font-bold text-lg text-text-bright">
+                <span className="font-display font-bold text-lg text-text-heading">
                   MVWSD Science Fair
                 </span>
               </div>
-              <p className="text-text-secondary text-sm leading-relaxed">
+              <p className="text-text-muted text-sm leading-relaxed">
                 Inspiring young scientists across the Mountain View Whisman School
                 District. Grades 3-5 elementary school students are eligible to
                 participate.
@@ -80,7 +77,7 @@ export default function Footer() {
 
             {/* Quick Links */}
             <div>
-              <h3 className="font-display font-semibold text-sm uppercase tracking-wider text-neon-cyan mb-4">
+              <h3 className="font-display font-semibold text-sm uppercase tracking-wider text-text-heading mb-4">
                 Quick Links
               </h3>
               <ul className="space-y-2.5" role="list">
@@ -88,7 +85,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-text-secondary hover:text-neon-cyan text-sm transition-colors"
+                      className="text-text-muted hover:text-accent-primary text-sm transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -99,7 +96,7 @@ export default function Footer() {
 
             {/* Community */}
             <div>
-              <h3 className="font-display font-semibold text-sm uppercase tracking-wider text-neon-purple mb-4">
+              <h3 className="font-display font-semibold text-sm uppercase tracking-wider text-text-heading mb-4">
                 Get Involved
               </h3>
               <ul className="space-y-2.5" role="list">
@@ -107,7 +104,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-text-secondary hover:text-neon-purple text-sm transition-colors"
+                      className="text-text-muted hover:text-accent-primary text-sm transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -118,14 +115,14 @@ export default function Footer() {
 
             {/* Contact */}
             <div>
-              <h3 className="font-display font-semibold text-sm uppercase tracking-wider text-neon-green mb-4">
+              <h3 className="font-display font-semibold text-sm uppercase tracking-wider text-text-heading mb-4">
                 Contact
               </h3>
               <ul className="space-y-2.5" role="list">
                 <li>
                   <a
                     href="mailto:sciencefair@mvwsd.org"
-                    className="text-text-secondary hover:text-neon-green text-sm transition-colors flex items-center gap-2"
+                    className="text-text-muted hover:text-accent-primary text-sm transition-colors flex items-center gap-2"
                   >
                     <svg
                       width="16"
@@ -149,7 +146,7 @@ export default function Footer() {
               <div className="flex gap-3 mt-4">
                 <a
                   href="#"
-                  className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-text-secondary hover:text-neon-cyan hover:border-neon-cyan/40 hover:bg-neon-cyan/10 transition-all"
+                  className="w-9 h-9 rounded-full border border-border-default flex items-center justify-center text-text-muted hover:text-accent-primary hover:border-accent-primary transition-all"
                   aria-label="Facebook"
                 >
                   <svg
@@ -164,7 +161,7 @@ export default function Footer() {
                 </a>
                 <a
                   href="#"
-                  className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-text-secondary hover:text-neon-purple hover:border-neon-purple/40 hover:bg-neon-purple/10 transition-all"
+                  className="w-9 h-9 rounded-full border border-border-default flex items-center justify-center text-text-muted hover:text-accent-primary hover:border-accent-primary transition-all"
                   aria-label="Twitter"
                 >
                   <svg
@@ -179,7 +176,7 @@ export default function Footer() {
                 </a>
                 <a
                   href="#"
-                  className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-text-secondary hover:text-neon-pink hover:border-neon-pink/40 hover:bg-neon-pink/10 transition-all"
+                  className="w-9 h-9 rounded-full border border-border-default flex items-center justify-center text-text-muted hover:text-accent-primary hover:border-accent-primary transition-all"
                   aria-label="Instagram"
                 >
                   <svg
@@ -203,12 +200,12 @@ export default function Footer() {
           </div>
 
           {/* Bottom bar */}
-          <div className="mt-10 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-text-secondary text-sm">
+          <div className="mt-10 pt-6 border-t border-border-default flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-text-muted text-sm">
               &copy; {new Date().getFullYear()} MVWSD Science Fair. All rights
               reserved.
             </p>
-            <p className="text-text-secondary/60 text-xs">
+            <p className="text-text-muted/60 text-xs">
               Mountain View Whisman School District
             </p>
           </div>
