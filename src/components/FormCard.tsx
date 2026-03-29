@@ -20,8 +20,8 @@ export default function FormCard({
       rel="noopener noreferrer"
       className={`block rounded-xl p-6 card-hover transition-all ${
         highlighted
-          ? "glass-card border-neon-pink/30 ring-1 ring-neon-pink/20 hover:border-neon-pink/50 hover:shadow-neon-pink/10 hover:shadow-lg"
-          : "glass-card hover:border-neon-cyan/30 hover:shadow-neon-cyan/10 hover:shadow-lg"
+          ? "clean-card border-accent-primary ring-1 ring-accent-primary/20 hover:shadow-md"
+          : "clean-card hover:border-accent-primary hover:shadow-md"
       }`}
     >
       <div className="flex items-start gap-4">
@@ -29,8 +29,8 @@ export default function FormCard({
           <div
             className={`shrink-0 w-10 h-10 rounded-lg flex items-center justify-center ${
               highlighted
-                ? "bg-neon-pink/20 text-neon-pink"
-                : "bg-neon-cyan/10 text-neon-cyan"
+                ? "bg-accent-primary-light text-accent-primary"
+                : "bg-bg-light text-text-body"
             }`}
             aria-hidden="true"
           >
@@ -40,22 +40,22 @@ export default function FormCard({
         <div className="min-w-0">
           <h3
             className={`font-display font-semibold text-lg ${
-              highlighted ? "text-neon-pink" : "text-text-bright"
+              highlighted ? "text-accent-primary" : "text-text-heading"
             }`}
           >
             {title}
             {highlighted && (
-              <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-neon-pink/20 text-neon-pink border border-neon-pink/30 animate-pulse-glow">
+              <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-accent-primary-light text-accent-primary">
                 Current Priority
               </span>
             )}
           </h3>
-          <p className="mt-1 text-sm text-text-secondary leading-relaxed">
+          <p className="mt-1 text-sm text-text-body leading-relaxed">
             {description}
           </p>
           <span
             className={`inline-flex items-center gap-1.5 mt-3 text-sm font-medium transition-all group ${
-              highlighted ? "text-neon-pink" : "text-neon-cyan"
+              highlighted ? "text-accent-primary" : "text-accent-primary"
             }`}
           >
             Open Form

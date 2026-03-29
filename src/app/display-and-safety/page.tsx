@@ -18,7 +18,6 @@ const rules = [
         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
       </svg>
     ),
-    accentColor: "neon-amber",
     dimensions: false,
   },
   {
@@ -32,7 +31,6 @@ const rules = [
         <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
       </svg>
     ),
-    accentColor: "neon-pink",
     dimensions: false,
   },
   {
@@ -47,7 +45,6 @@ const rules = [
         <line x1="12" y1="17" x2="12" y2="21" />
       </svg>
     ),
-    accentColor: "neon-cyan",
     dimensions: true,
   },
   {
@@ -60,7 +57,6 @@ const rules = [
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
       </svg>
     ),
-    accentColor: "neon-green",
     dimensions: false,
   },
   {
@@ -76,7 +72,6 @@ const rules = [
         <line x1="16" y1="17" x2="8" y2="17" />
       </svg>
     ),
-    accentColor: "neon-purple",
     dimensions: false,
   },
   {
@@ -91,7 +86,6 @@ const rules = [
         <line x1="12" y1="17" x2="12.01" y2="17" />
       </svg>
     ),
-    accentColor: "neon-pink",
     dimensions: false,
   },
   {
@@ -107,7 +101,6 @@ const rules = [
         <line x1="12" y1="16" x2="12.01" y2="16" />
       </svg>
     ),
-    accentColor: "neon-cyan",
     dimensions: false,
   },
 ];
@@ -120,10 +113,10 @@ export default function DisplayAndSafetyPage() {
         subtitle="Important guidelines to ensure your project display is safe, organized, and meets all requirements."
       />
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         {/* Intro */}
-        <div className="glass-card p-6 mb-8">
-          <p className="text-lg text-text-primary leading-relaxed">
+        <div className="clean-card p-6 mb-8">
+          <p className="text-lg text-text-body leading-relaxed">
             Your display board is the first impression judges will have of your
             project. Follow these guidelines to make sure it&apos;s safe,
             within the required dimensions, and presents your work in the best
@@ -136,49 +129,48 @@ export default function DisplayAndSafetyPage() {
           {rules.map((rule) => (
             <div
               key={rule.number}
-              className="glass-card p-6"
-              style={{ borderLeftWidth: '4px', borderLeftColor: `var(--${rule.accentColor})` }}
+              className="clean-card p-6 border-l-4 border-l-accent-primary"
             >
               <div className="flex items-start gap-4">
                 <div
-                  className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-${rule.accentColor}/10 text-${rule.accentColor}`}
+                  className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-accent-primary-light text-accent-primary"
                   aria-hidden="true"
                 >
                   {rule.icon}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-display font-bold text-text-bright text-lg flex items-center gap-2">
-                    <span className={`text-${rule.accentColor}`}>#{rule.number}</span>
+                  <h3 className="font-display font-bold text-text-heading text-lg flex items-center gap-2">
+                    <span className="text-accent-primary">#{rule.number}</span>
                     {rule.title}
                   </h3>
-                  <p className="mt-2 text-text-primary leading-relaxed">
+                  <p className="mt-2 text-text-body leading-relaxed">
                     {rule.description}
                   </p>
 
                   {rule.dimensions && (
                     <div className="mt-4 grid grid-cols-3 gap-3">
-                      <div className="text-center p-4 rounded-lg bg-neon-cyan/5 border border-neon-cyan/10">
-                        <p className="text-3xl font-display font-bold text-neon-cyan">
+                      <div className="text-center p-4 rounded-lg bg-accent-primary-light/50 border border-accent-primary/10">
+                        <p className="text-3xl font-display font-bold text-accent-primary">
                           66&quot;
                         </p>
-                        <p className="text-sm text-text-secondary mt-1">
+                        <p className="text-sm text-text-body mt-1">
                           Max Height
                         </p>
-                        <p className="text-xs text-text-secondary/60">
+                        <p className="text-xs text-text-muted">
                           (from table)
                         </p>
                       </div>
-                      <div className="text-center p-4 rounded-lg bg-neon-purple/5 border border-neon-purple/10">
-                        <p className="text-3xl font-display font-bold text-neon-purple">
+                      <div className="text-center p-4 rounded-lg bg-accent-secondary-light/50 border border-accent-secondary/10">
+                        <p className="text-3xl font-display font-bold text-accent-secondary">
                           30&quot;
                         </p>
-                        <p className="text-sm text-text-secondary mt-1">Max Depth</p>
+                        <p className="text-sm text-text-body mt-1">Max Depth</p>
                       </div>
-                      <div className="text-center p-4 rounded-lg bg-neon-amber/5 border border-neon-amber/10">
-                        <p className="text-3xl font-display font-bold text-neon-amber">
+                      <div className="text-center p-4 rounded-lg bg-accent-warm-light/50 border border-accent-warm/10">
+                        <p className="text-3xl font-display font-bold text-accent-warm">
                           48&quot;
                         </p>
-                        <p className="text-sm text-text-secondary mt-1">Max Width</p>
+                        <p className="text-sm text-text-body mt-1">Max Width</p>
                       </div>
                     </div>
                   )}
@@ -189,9 +181,9 @@ export default function DisplayAndSafetyPage() {
         </div>
 
         {/* Required Board Content */}
-        <div className="mt-12 glass-card p-8 border-t-2 border-t-neon-purple">
-          <h2 className="text-2xl font-display font-bold text-text-bright mb-4">Required Board Content</h2>
-          <p className="text-text-primary mb-4">Your display board must include:</p>
+        <div className="mt-12 clean-card p-8 border-t-2 border-t-accent-primary">
+          <h2 className="text-2xl font-display font-bold text-text-heading mb-4">Required Board Content</h2>
+          <p className="text-text-body mb-4">Your display board must include:</p>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               "Abstract",
@@ -213,20 +205,20 @@ export default function DisplayAndSafetyPage() {
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="text-neon-purple shrink-0"
+                  className="text-accent-primary shrink-0"
                   aria-hidden="true"
                 >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                <span className="text-text-primary">{item}</span>
+                <span className="text-text-body">{item}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Quick Reference */}
-        <div className="mt-8 glass-card p-8 border-t-2 border-t-neon-cyan">
-          <h2 className="text-2xl font-display font-bold text-text-bright mb-6">Quick Reference Checklist</h2>
+        <div className="mt-8 clean-card p-8 border-t-2 border-t-accent-secondary">
+          <h2 className="text-2xl font-display font-bold text-text-heading mb-6">Quick Reference Checklist</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               "Display fits on a table (no floor displays)",
@@ -249,12 +241,12 @@ export default function DisplayAndSafetyPage() {
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="text-neon-green shrink-0"
+                  className="text-accent-secondary shrink-0"
                   aria-hidden="true"
                 >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                <span className="text-text-primary">{item}</span>
+                <span className="text-text-body">{item}</span>
               </div>
             ))}
           </div>
