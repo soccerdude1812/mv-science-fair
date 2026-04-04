@@ -59,7 +59,7 @@ export default function ScienceBackground() {
             top: icon.y,
             width: icon.size,
             height: icon.size,
-            color: "#333345",
+            color: "#4a4a65",
             transform: `rotate(${icon.rotate}deg)`,
           }}
         >

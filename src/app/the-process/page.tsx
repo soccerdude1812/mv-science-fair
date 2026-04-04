@@ -36,7 +36,7 @@ export default function TheProcessPage() {
       />
 
       {/* Timeline Roadmap */}
-      <section className="bg-bg-primary/90 py-16 sm:py-20">
+      <section className="bg-bg-primary/80 py-16 sm:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 reveal">
             <Badge variant="secondary" className="mb-4">Roadmap</Badge>
@@ -54,7 +54,7 @@ export default function TheProcessPage() {
       {/* Main content */}
       <div>
         {/* ── Section 1: Before Starting ── */}
-        <section className="bg-bg-surface/90 py-16 sm:py-20">
+        <section className="bg-bg-surface/80 py-16 sm:py-20">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3 mb-8 reveal">
               <SectionNumber num="01" color="bg-accent-indigo/10 text-accent-indigo" />
@@ -278,7 +278,7 @@ export default function TheProcessPage() {
         <Separator className="my-0 bg-border-subtle" />
 
         {/* ── Section 2: Apply to the Fair ── */}
-        <section className="bg-bg-primary/90 py-16 sm:py-20">
+        <section className="bg-bg-primary/80 py-16 sm:py-20">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3 mb-8 reveal">
               <SectionNumber num="02" color="bg-accent-cyan/10 text-accent-cyan" />
@@ -380,7 +380,7 @@ export default function TheProcessPage() {
         <Separator className="my-0 bg-border-subtle" />
 
         {/* ── Section 3: During Your Project ── */}
-        <section className="bg-bg-surface/90 py-16 sm:py-20">
+        <section className="bg-bg-surface/80 py-16 sm:py-20">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3 mb-8 reveal">
               <SectionNumber num="03" color="bg-accent-purple/10 text-accent-purple" />
@@ -454,7 +454,7 @@ export default function TheProcessPage() {
         <Separator className="my-0 bg-border-subtle" />
 
         {/* ── Section 4: After Data Collection ── */}
-        <section className="bg-bg-primary/90 py-16 sm:py-20">
+        <section className="bg-bg-primary/80 py-16 sm:py-20">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3 mb-8 reveal">
               <SectionNumber num="04" color="bg-accent-amber/10 text-accent-amber" />
@@ -552,7 +552,7 @@ export default function TheProcessPage() {
         <Separator className="my-0 bg-border-subtle" />
 
         {/* ── Section 5: Display ── */}
-        <section className="bg-bg-surface/90 py-16 sm:py-20">
+        <section className="bg-bg-surface/80 py-16 sm:py-20">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3 mb-8 reveal">
               <SectionNumber num="05" color="bg-accent-rose/10 text-accent-rose" />
@@ -612,7 +612,7 @@ export default function TheProcessPage() {
         <Separator className="my-0 bg-border-subtle" />
 
         {/* ── Section 6: Preparing for Judging ── */}
-        <section className="bg-bg-primary/90 py-16 sm:py-20">
+        <section className="bg-bg-primary/80 py-16 sm:py-20">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3 mb-8 reveal">
               <SectionNumber num="06" color="bg-accent-emerald/10 text-accent-emerald" />

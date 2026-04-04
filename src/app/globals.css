@@ -212,13 +212,13 @@ h1, h2, h3, h4, h5, h6 {
 /* ===== SURFACE CARD ===== */
 
 .surface-card {
-  background: rgba(18, 18, 26, 0.9);
+  background: rgba(18, 18, 26, 0.8);
   border: 1px solid var(--border-subtle);
   border-radius: 1rem;
 }
 
 .surface-card-hover {
-  background: rgba(18, 18, 26, 0.9);
+  background: rgba(18, 18, 26, 0.8);
   border: 1px solid var(--border-subtle);
   border-radius: 1rem;
   transition: border-color var(--duration-normal) var(--ease-smooth),
@@ -422,15 +422,15 @@ h1, h2, h3, h4, h5, h6 {
 /* ===== SECTION STYLES ===== */
 
 .section-dark {
-  background: rgba(10, 10, 15, 0.85);
+  background: rgba(10, 10, 15, 0.75);
 }
 
 .section-surface {
-  background: rgba(18, 18, 26, 0.85);
+  background: rgba(18, 18, 26, 0.75);
 }
 
 .section-deep {
-  background: rgba(5, 5, 7, 0.85);
+  background: rgba(5, 5, 7, 0.75);
 }
 
 /* ===== DIVIDER ===== */

@@ -193,7 +193,7 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="min-h-[90vh] flex items-center bg-bg-primary/90 relative">
+      <section className="min-h-[90vh] flex items-center bg-bg-primary/80 relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             {/* Left: text content */}
@@ -242,7 +242,7 @@ export default function Home() {
       <Separator className="my-0 bg-border-subtle" />
 
       {/* Info Strip */}
-      <section className="reveal py-12 sm:py-16 bg-bg-primary/90 border-t border-border-subtle">
+      <section className="reveal py-12 sm:py-16 bg-bg-primary/80 border-t border-border-subtle">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Card className="bg-bg-surface border-border-subtle">
             <CardContent className="p-6 sm:p-8">
@@ -272,7 +272,7 @@ export default function Home() {
       <Separator className="my-0 bg-border-subtle" />
 
       {/* Welcome */}
-      <section className="reveal py-16 sm:py-20 bg-bg-primary/90">
+      <section className="reveal py-16 sm:py-20 bg-bg-primary/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-[-0.03em]">
@@ -292,7 +292,7 @@ export default function Home() {
       <Separator className="my-0 bg-border-subtle" />
 
       {/* Project Categories */}
-      <section className="reveal py-16 sm:py-20 bg-bg-surface/90">
+      <section className="reveal py-16 sm:py-20 bg-bg-surface/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-[-0.03em]">
@@ -330,7 +330,7 @@ export default function Home() {
       <Separator className="my-0 bg-border-subtle" />
 
       {/* Timeline */}
-      <section className="reveal py-16 sm:py-20 bg-bg-primary/90">
+      <section className="reveal py-16 sm:py-20 bg-bg-primary/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-[-0.03em]">
@@ -350,7 +350,7 @@ export default function Home() {
       <Separator className="my-0 bg-border-subtle" />
 
       {/* Quick Navigation */}
-      <section className="reveal py-16 sm:py-20 bg-bg-surface/90">
+      <section className="reveal py-16 sm:py-20 bg-bg-surface/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-[-0.03em]">
