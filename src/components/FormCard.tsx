@@ -18,64 +18,50 @@ export default function FormCard({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`block rounded-xl p-6 card-hover transition-all ${
+      className={`group relative block glass-card-hover p-6 transition-all duration-300 ${
         highlighted
-          ? "clean-card border-accent-primary ring-1 ring-accent-primary/20 hover:shadow-md"
-          : "clean-card hover:border-accent-primary hover:shadow-md"
+          ? "gradient-border shadow-[0_0_20px_rgba(129,140,248,0.15)]"
+          : ""
       }`}
     >
-      <div className="flex items-start gap-4">
+      {/* Arrow icon top-right */}
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="absolute top-4 right-4 text-text-muted group-hover:text-accent-indigo transition-colors duration-300"
+        aria-hidden="true"
+      >
+        <line x1="7" y1="17" x2="17" y2="7" />
+        <polyline points="7 7 17 7 17 17" />
+      </svg>
+
+      <div className="flex items-start gap-4 pr-6">
         {icon && (
           <div
-            className={`shrink-0 w-10 h-10 rounded-lg flex items-center justify-center ${
-              highlighted
-                ? "bg-accent-primary-light text-accent-primary"
-                : "bg-bg-light text-text-body"
-            }`}
+            className="shrink-0 w-10 h-10 rounded-lg flex items-center justify-center bg-bg-elevated text-text-secondary"
             aria-hidden="true"
           >
             {icon}
           </div>
         )}
         <div className="min-w-0">
-          <h3
-            className={`font-display font-semibold text-lg ${
-              highlighted ? "text-accent-primary" : "text-text-heading"
-            }`}
-          >
+          <h3 className="font-semibold text-lg text-text-primary">
             {title}
             {highlighted && (
-              <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-accent-primary-light text-accent-primary">
+              <span className="ml-2 badge badge-accent text-[0.65rem]">
                 Current Priority
               </span>
             )}
           </h3>
-          <p className="mt-1 text-sm text-text-body leading-relaxed">
+          <p className="mt-1 text-sm text-text-secondary leading-relaxed">
             {description}
           </p>
-          <span
-            className={`inline-flex items-center gap-1.5 mt-3 text-sm font-medium transition-all group ${
-              highlighted ? "text-accent-primary" : "text-accent-primary"
-            }`}
-          >
-            Open Form
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="transition-transform group-hover:translate-x-1"
-              aria-hidden="true"
-            >
-              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
-              <polyline points="15 3 21 3 21 9" />
-              <line x1="10" y1="14" x2="21" y2="3" />
-            </svg>
-          </span>
         </div>
       </div>
     </a>

@@ -1,11 +1,4 @@
-import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
-
-export const metadata: Metadata = {
-  title: "Display & Safety",
-  description:
-    "Display requirements and safety guidelines for MVWSD Science Fair projects including board dimensions and presentation rules.",
-};
 
 const rules = [
   {
@@ -92,7 +85,7 @@ const rules = [
     number: 7,
     title: "Complete Citations Required",
     description:
-      "Complete citations must be present for all photographs, images, charts, tables, and graphs used in your display. A citation should include: the author or creator, the title of the source, the date it was published or accessed, and the URL or publication name. For example: \"Smith, J. (2025). Plant Growth Rates. Science for Kids Magazine, p. 12.\" or \"NASA. (2024). Solar System Overview. Retrieved from nasa.gov/solarsystem.\" Give proper credit to all your sources.",
+      'Complete citations must be present for all photographs, images, charts, tables, and graphs used in your display. A citation should include: the author or creator, the title of the source, the date it was published or accessed, and the URL or publication name. For example: "Smith, J. (2025). Plant Growth Rates. Science for Kids Magazine, p. 12." or "NASA. (2024). Solar System Overview. Retrieved from nasa.gov/solarsystem." Give proper credit to all your sources.',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
@@ -105,6 +98,16 @@ const rules = [
   },
 ];
 
+const accentColors = [
+  "text-accent-indigo",
+  "text-accent-cyan",
+  "text-accent-purple",
+  "text-accent-amber",
+  "text-accent-emerald",
+  "text-accent-rose",
+  "text-accent-indigo",
+];
+
 export default function DisplayAndSafetyPage() {
   return (
     <>
@@ -113,77 +116,77 @@ export default function DisplayAndSafetyPage() {
         subtitle="Important guidelines to ensure your project display is safe, organized, and meets all requirements."
       />
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         {/* Intro */}
-        <div className="clean-card p-6 mb-8">
-          <p className="text-lg text-text-body leading-relaxed">
+        <section className="reveal glass-card p-8 mb-10">
+          <p className="text-lg text-text-secondary leading-relaxed">
             Your display board is the first impression judges will have of your
             project. Follow these guidelines to make sure it&apos;s safe,
             within the required dimensions, and presents your work in the best
             possible way.
           </p>
-        </div>
+        </section>
 
         {/* Rules */}
         <div className="space-y-5">
-          {rules.map((rule) => (
-            <div
+          {rules.map((rule, i) => (
+            <section
               key={rule.number}
-              className="clean-card p-6 border-l-4 border-l-accent-primary"
+              className="reveal glass-card p-6 border-l-4 border-l-accent-indigo"
             >
               <div className="flex items-start gap-4">
                 <div
-                  className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-accent-primary-light text-accent-primary"
+                  className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-bg-surface ${accentColors[i]}`}
                   aria-hidden="true"
                 >
                   {rule.icon}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-display font-bold text-text-heading text-lg flex items-center gap-2">
-                    <span className="text-accent-primary">#{rule.number}</span>
+                  <h3 className="font-display font-bold text-text-primary text-lg flex items-center gap-2">
+                    <span className={accentColors[i]}>#{rule.number}</span>
                     {rule.title}
                   </h3>
-                  <p className="mt-2 text-text-body leading-relaxed">
+                  <p className="mt-2 text-text-secondary leading-relaxed">
                     {rule.description}
                   </p>
 
                   {rule.dimensions && (
                     <div className="mt-4 grid grid-cols-3 gap-3">
-                      <div className="text-center p-4 rounded-lg bg-accent-primary-light/50 border border-accent-primary/10">
-                        <p className="text-3xl font-display font-bold text-accent-primary">
+                      <div className="text-center p-4 rounded-xl bg-accent-indigo/10 border border-accent-indigo/20">
+                        <p className="text-3xl font-display font-bold text-accent-indigo">
                           66&quot;
                         </p>
-                        <p className="text-sm text-text-body mt-1">
+                        <p className="text-sm text-text-secondary mt-1">
                           Max Height
                         </p>
                         <p className="text-xs text-text-muted">
                           (from table)
                         </p>
                       </div>
-                      <div className="text-center p-4 rounded-lg bg-accent-secondary-light/50 border border-accent-secondary/10">
-                        <p className="text-3xl font-display font-bold text-accent-secondary">
+                      <div className="text-center p-4 rounded-xl bg-accent-cyan/10 border border-accent-cyan/20">
+                        <p className="text-3xl font-display font-bold text-accent-cyan">
                           30&quot;
                         </p>
-                        <p className="text-sm text-text-body mt-1">Max Depth</p>
+                        <p className="text-sm text-text-secondary mt-1">Max Depth</p>
                       </div>
-                      <div className="text-center p-4 rounded-lg bg-accent-warm-light/50 border border-accent-warm/10">
-                        <p className="text-3xl font-display font-bold text-accent-warm">
+                      <div className="text-center p-4 rounded-xl bg-accent-amber/10 border border-accent-amber/20">
+                        <p className="text-3xl font-display font-bold text-accent-amber">
                           48&quot;
                         </p>
-                        <p className="text-sm text-text-body mt-1">Max Width</p>
+                        <p className="text-sm text-text-secondary mt-1">Max Width</p>
                       </div>
                     </div>
                   )}
                 </div>
               </div>
-            </div>
+            </section>
           ))}
         </div>
 
         {/* Required Board Content */}
-        <div className="mt-12 clean-card p-8 border-t-2 border-t-accent-primary">
-          <h2 className="text-2xl font-display font-bold text-text-heading mb-4">Required Board Content</h2>
-          <p className="text-text-body mb-4">Your display board must include:</p>
+        <section className="reveal mt-12 glass-card p-8 border-t-2 border-t-accent-indigo">
+          <h2 className="text-2xl font-display font-bold text-text-primary mb-4">Required Board Content</h2>
+          <p className="text-text-secondary mb-5">Your display board must include:</p>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               "Abstract",
@@ -205,26 +208,26 @@ export default function DisplayAndSafetyPage() {
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="text-accent-primary shrink-0"
+                  className="text-accent-indigo shrink-0"
                   aria-hidden="true"
                 >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                <span className="text-text-body">{item}</span>
+                <span className="text-text-secondary">{item}</span>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Quick Reference */}
-        <div className="mt-8 clean-card p-8 border-t-2 border-t-accent-secondary">
-          <h2 className="text-2xl font-display font-bold text-text-heading mb-6">Quick Reference Checklist</h2>
+        <section className="reveal mt-8 glass-card p-8 border-t-2 border-t-accent-cyan">
+          <h2 className="text-2xl font-display font-bold text-text-primary mb-6">Quick Reference Checklist</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               "Display fits on a table (no floor displays)",
-              "Height: 66\" or less from table surface",
-              "Depth: 30\" or less",
-              "Width: 48\" or less",
+              'Height: 66" or less from table surface',
+              'Depth: 30" or less',
+              'Width: 48" or less',
               "Display stands upright on its own",
               "No electrical connections needed",
               "No materials to hand out to judges",
@@ -241,16 +244,16 @@ export default function DisplayAndSafetyPage() {
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="text-accent-secondary shrink-0"
+                  className="text-accent-cyan shrink-0"
                   aria-hidden="true"
                 >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                <span className="text-text-body">{item}</span>
+                <span className="text-text-secondary">{item}</span>
               </div>
             ))}
           </div>
-        </div>
+        </section>
       </div>
     </>
   );

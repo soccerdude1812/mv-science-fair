@@ -43,6 +43,9 @@ const categoryCards = [
   {
     title: "Life & Health Sciences",
     desc: "Projects related to people, plants, psychology, or the environment.",
+    color: "text-accent-emerald",
+    bgColor: "bg-accent-emerald/10",
+    borderColor: "border-l-accent-emerald",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
@@ -53,6 +56,9 @@ const categoryCards = [
   {
     title: "Physical Science & Engineering",
     desc: "Projects involving forces, motion, energy, machines, astronomy, or inventions.",
+    color: "text-accent-indigo",
+    bgColor: "bg-accent-indigo/10",
+    borderColor: "border-l-accent-indigo",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" />
@@ -65,6 +71,9 @@ const categoryCards = [
   {
     title: "Chemistry & Materials",
     desc: "Projects about reactions, mixtures, states of matter, or testing different materials.",
+    color: "text-accent-purple",
+    bgColor: "bg-accent-purple/10",
+    borderColor: "border-l-accent-purple",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M9 3h6v7l4 8H5l4-8V3z" />
@@ -76,6 +85,9 @@ const categoryCards = [
   {
     title: "Technology & Innovation",
     desc: "Projects involving computers, coding, robotics, apps, or problem-solving inventions. These projects must demonstrate a STEM method such as the engineering design process.",
+    color: "text-accent-cyan",
+    bgColor: "bg-accent-cyan/10",
+    borderColor: "border-l-accent-cyan",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <line x1="9" y1="18" x2="15" y2="18" />
@@ -175,33 +187,51 @@ const navCards = [
 
 export default function Home() {
   return (
-    <>
+    <div>
       {/* Hero */}
-      <section className="bg-bg-light border-b border-border-default">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10 lg:gap-16">
+      <section className="min-h-[90vh] flex items-center bg-bg-primary relative overflow-hidden">
+        {/* Ambient glow */}
+        <div
+          className="absolute top-0 left-1/4 w-[600px] h-[400px] rounded-full opacity-30 blur-3xl pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(129,140,248,0.08) 0%, transparent 70%)",
+          }}
+          aria-hidden="true"
+        />
+        <div
+          className="absolute bottom-0 right-1/4 w-[500px] h-[300px] rounded-full opacity-20 blur-3xl pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(34,211,238,0.06) 0%, transparent 70%)",
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             {/* Left: text content */}
             <div className="max-w-3xl">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-primary-light text-sm font-medium text-accent-primary mb-6 animate-fade-in-up">
+              <span className="badge badge-accent mb-6 animate-fade-in-up">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <circle cx="12" cy="12" r="3" />
                   <ellipse cx="12" cy="12" rx="10" ry="4" stroke="currentColor" strokeWidth="1.5" fill="none" />
                 </svg>
                 Grades 3-5 Elementary School
               </span>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-tight text-text-heading animate-fade-in-up delay-100">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary tracking-[-0.03em] leading-tight animate-fade-in-up [animation-delay:100ms]">
                 MVWSD Science Fair{" "}
-                <span className="text-accent-primary">2026</span>
+                <span className="gradient-text">2026</span>
               </h1>
-              <p className="mt-6 text-xl sm:text-2xl text-text-body leading-relaxed max-w-2xl animate-fade-in-up delay-200">
+              <p className="mt-6 text-xl text-text-secondary leading-relaxed max-w-2xl animate-fade-in-up [animation-delay:200ms]">
                 Inspiring Young Scientists in Mountain View
               </p>
-              <div className="mt-8 flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-300">
+              <div className="mt-8 flex flex-col sm:flex-row gap-4 animate-fade-in-up [animation-delay:300ms]">
                 <a
                   href="https://docs.google.com/forms/d/1O1DXH_eq0GQIcTJcLQlrcusY5I7xKejzBw_p3WHIVao/viewform"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-accent-primary text-white font-bold rounded-xl shadow-sm hover:bg-accent-primary-hover transition-colors"
+                  className="btn-glow justify-center"
                 >
                   Show Your Interest
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -211,7 +241,7 @@ export default function Home() {
                 </a>
                 <Link
                   href="/the-process"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-text-heading font-semibold rounded-xl hover:bg-bg-muted transition-colors border border-border-default"
+                  className="btn-ghost justify-center"
                 >
                   Learn How It Works
                 </Link>
@@ -219,21 +249,47 @@ export default function Home() {
             </div>
 
             {/* Right: QR code */}
-            <div className="shrink-0 animate-fade-in-up delay-200">
+            <div className="shrink-0 flex justify-center lg:justify-end animate-fade-in-up [animation-delay:200ms]">
               <QRCodeSection />
             </div>
           </div>
         </div>
       </section>
 
+      {/* Info Strip */}
+      <section className="reveal py-12 sm:py-16 bg-bg-primary border-t border-border-subtle">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="glass-card p-6 sm:p-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {infoCards.map((card) => (
+                <div
+                  key={card.label}
+                  className="flex flex-col items-center text-center"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-accent-indigo/10 text-accent-indigo flex items-center justify-center mb-4">
+                    {card.icon}
+                  </div>
+                  <span className="text-sm font-medium text-text-muted uppercase tracking-wider">
+                    {card.label}
+                  </span>
+                  <span className="mt-1 text-xl font-bold text-text-primary">
+                    {card.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Welcome */}
-      <section className="py-16 sm:py-20 section-white">
+      <section className="reveal py-16 sm:py-20 bg-bg-primary">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading">
+            <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-[-0.03em]">
               Welcome to the 2026 MVWSD Science Fair!
             </h2>
-            <p className="mt-6 text-lg text-text-body leading-relaxed">
+            <p className="mt-6 text-lg text-text-secondary leading-relaxed">
               We&apos;re excited to inspire young scientists across the Mountain
               View Whisman School District. Grades 3-5 are eligible to
               participate. Whether you&apos;re curious about the natural world,
@@ -241,53 +297,33 @@ export default function Home() {
               at the science fair!
             </p>
           </div>
-
-          {/* Info Cards */}
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {infoCards.map((card) => (
-              <div
-                key={card.label}
-                className="flex flex-col items-center text-center p-6 clean-card-hover"
-              >
-                <div className="w-12 h-12 rounded-xl bg-accent-primary-light text-accent-primary flex items-center justify-center mb-4">
-                  {card.icon}
-                </div>
-                <span className="text-sm font-medium text-text-muted uppercase tracking-wider">
-                  {card.label}
-                </span>
-                <span className="mt-1 text-xl font-display font-bold text-text-heading">
-                  {card.value}
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
       {/* Project Categories */}
-      <section className="py-16 sm:py-20 section-light">
+      <section className="reveal py-16 sm:py-20 bg-bg-surface">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading">
+            <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-[-0.03em]">
               Project Categories
             </h2>
-            <p className="mt-4 text-lg text-text-body max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
               Choose a category that matches your interests and curiosity.
               Every great experiment starts with a question you care about!
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {categoryCards.map((card) => (
+            {categoryCards.map((card, i) => (
               <div
                 key={card.title}
-                className="flex flex-col p-6 clean-card-hover border-l-4 border-l-accent-primary"
+                className={`reveal stagger-${i + 1} glass-card-hover p-6 border-l-4 ${card.borderColor}`}
               >
-                <div className="w-12 h-12 rounded-xl bg-accent-primary-light text-accent-primary flex items-center justify-center mb-4">
+                <div className={`w-12 h-12 rounded-xl ${card.bgColor} ${card.color} flex items-center justify-center mb-4`}>
                   {card.icon}
                 </div>
-                <h3 className="font-display font-bold text-text-heading text-lg">{card.title}</h3>
-                <p className="mt-2 text-sm text-text-body leading-relaxed">
+                <h3 className="font-bold text-text-primary text-lg">{card.title}</h3>
+                <p className="mt-2 text-sm text-text-secondary leading-relaxed">
                   {card.desc}
                 </p>
               </div>
@@ -297,13 +333,13 @@ export default function Home() {
       </section>
 
       {/* Timeline */}
-      <section className="py-16 sm:py-20 section-white">
+      <section className="reveal py-16 sm:py-20 bg-bg-primary">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading">
+            <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-[-0.03em]">
               Your Journey
             </h2>
-            <p className="mt-4 text-lg text-text-body max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
               From first spark of curiosity to presenting at the fair — here&apos;s
               every step along the way.
             </p>
@@ -315,35 +351,35 @@ export default function Home() {
       </section>
 
       {/* Quick Navigation */}
-      <section className="py-16 sm:py-20 section-light">
+      <section className="reveal py-16 sm:py-20 bg-bg-surface">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading">
+            <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-[-0.03em]">
               Explore the Science Fair
             </h2>
-            <p className="mt-4 text-lg text-text-body max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
               Everything you need to know about participating, volunteering, or
               judging at the MVWSD Science Fair.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {navCards.map((card) => (
+            {navCards.map((card, i) => (
               <Link
                 key={card.href}
                 href={card.href}
-                className="group flex flex-col p-6 clean-card-hover"
+                className={`reveal stagger-${(i % 6) + 1} group surface-card-hover p-6 flex flex-col`}
               >
-                <div className="w-10 h-10 rounded-lg bg-accent-primary-light text-accent-primary flex items-center justify-center mb-4 transition-all">
+                <div className="w-10 h-10 rounded-lg bg-accent-indigo/10 text-accent-indigo flex items-center justify-center mb-4 transition-all group-hover:bg-accent-indigo/20">
                   {card.icon}
                 </div>
-                <h3 className="font-display font-semibold text-text-heading text-lg">
+                <h3 className="font-semibold text-text-primary text-lg">
                   {card.title}
                 </h3>
-                <p className="mt-2 text-sm text-text-body leading-relaxed flex-1">
+                <p className="mt-2 text-sm text-text-secondary leading-relaxed flex-1">
                   {card.desc}
                 </p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent-primary group-hover:gap-2.5 transition-all">
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent-indigo group-hover:gap-2.5 transition-all">
                   Learn more
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <line x1="5" y1="12" x2="19" y2="12" />
@@ -355,6 +391,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

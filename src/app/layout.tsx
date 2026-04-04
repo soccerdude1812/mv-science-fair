@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ScrollReveal from "@/components/ScrollReveal";
 import "./globals.css";
 
 const inter = Inter({
@@ -51,6 +52,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
+        <ScrollReveal />
         <Navbar />
         <main id="main-content" className="flex-1 relative z-10">
           {children}

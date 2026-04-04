@@ -28,11 +28,23 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-200 bg-white ${
+      className={`sticky top-0 z-50 transition-all duration-300 bg-bg-primary/80 backdrop-blur-xl ${
         scrolled
-          ? "border-b border-border-default shadow-sm"
+          ? "border-b border-border-subtle shadow-[0_1px_12px_rgba(0,0,0,0.4)]"
           : "border-b border-transparent"
       }`}
     >
@@ -44,71 +56,25 @@ export default function Navbar() {
           {/* Logo / Site Name */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 text-text-heading font-bold text-lg shrink-0 group"
+            className="flex items-center gap-2.5 shrink-0 group"
             aria-label="MVWSD Science Fair home"
           >
-            {/* Simple atom icon */}
-            <div className="relative w-8 h-8" aria-hidden="true">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                className="text-accent-primary"
-              >
-                <circle cx="16" cy="16" r="3" fill="currentColor" />
-                <ellipse
-                  cx="16"
-                  cy="16"
-                  rx="12"
-                  ry="5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="none"
-                  opacity="0.5"
-                />
-                <ellipse
-                  cx="16"
-                  cy="16"
-                  rx="12"
-                  ry="5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="none"
-                  transform="rotate(60 16 16)"
-                  opacity="0.5"
-                />
-                <ellipse
-                  cx="16"
-                  cy="16"
-                  rx="12"
-                  ry="5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="none"
-                  transform="rotate(120 16 16)"
-                  opacity="0.5"
-                />
-              </svg>
-            </div>
-            <span className="hidden sm:inline font-display group-hover:text-accent-primary transition-colors">
-              MVWSD Science Fair
-            </span>
-            <span className="sm:hidden font-display group-hover:text-accent-primary transition-colors">
+            <span className="gradient-text font-display font-bold text-lg tracking-[-0.02em]">
               MVWSD
+            </span>
+            <span className="hidden sm:inline text-text-muted text-sm font-medium">
+              Science Fair
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex lg:items-center lg:gap-0.5">
+          <div className="hidden lg:flex lg:items-center lg:gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`nav-link-underline px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  pathname === link.href
-                    ? "text-accent-primary bg-accent-primary-light"
-                    : "text-text-body hover:text-accent-primary hover:bg-bg-light"
+                className={`nav-link px-3 py-2 ${
+                  pathname === link.href ? "active" : ""
                 }`}
                 aria-current={pathname === link.href ? "page" : undefined}
               >
@@ -121,15 +87,15 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-text-body hover:text-accent-primary hover:bg-bg-light transition-colors"
+            className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg text-text-secondary hover:text-text-primary hover:bg-bg-surface transition-colors"
             aria-expanded={isOpen}
             aria-controls="mobile-nav"
             aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
           >
             {isOpen ? (
               <svg
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -142,8 +108,8 @@ export default function Navbar() {
               </svg>
             ) : (
               <svg
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -151,9 +117,9 @@ export default function Navbar() {
                 strokeLinecap="round"
                 aria-hidden="true"
               >
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="18" x2="21" y2="18" />
+                <line x1="4" y1="7" x2="20" y2="7" />
+                <line x1="4" y1="12" x2="20" y2="12" />
+                <line x1="4" y1="17" x2="20" y2="17" />
               </svg>
             )}
           </button>
@@ -163,20 +129,20 @@ export default function Navbar() {
         {isOpen && (
           <div
             id="mobile-nav"
-            className="lg:hidden fixed inset-0 top-16 z-50 bg-white"
+            className="lg:hidden fixed inset-0 top-16 z-50 bg-bg-primary/95 backdrop-blur-xl"
             role="navigation"
             aria-label="Mobile navigation"
           >
-            <div className="flex flex-col gap-1 p-6">
+            <div className="flex flex-col gap-1 p-6 border-t border-border-subtle">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className={`px-4 py-3.5 rounded-xl text-base font-medium transition-colors ${
+                  className={`px-4 py-3 rounded-xl text-[0.925rem] font-medium transition-colors ${
                     pathname === link.href
-                      ? "bg-accent-primary-light text-accent-primary"
-                      : "text-text-body hover:text-accent-primary hover:bg-bg-light"
+                      ? "text-accent-indigo bg-accent-indigo/10"
+                      : "text-text-secondary hover:text-text-primary hover:bg-bg-surface"
                   }`}
                   aria-current={pathname === link.href ? "page" : undefined}
                 >
