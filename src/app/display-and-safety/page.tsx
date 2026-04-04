@@ -78,7 +78,7 @@ const rules = [
     number: 6,
     title: "No Hazardous Materials at the Venue",
     description:
-      "Hazardous substances, biological agents, live organisms, and biohazardous materials may NOT be brought to the fair venue. Use photographs, diagrams, or video demonstrations to showcase these aspects of your project. Only battery-operated demonstrations are permitted.",
+      "Hazardous substances may NOT be brought to the fair venue. Note: Live organisms and biohazardous materials are not permitted in any science fair projects. Use photographs, diagrams, or video demonstrations to showcase your work. Only battery-operated demonstrations are permitted.",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
@@ -92,7 +92,7 @@ const rules = [
     number: 7,
     title: "Complete Citations Required",
     description:
-      "Complete citations must be present for all photographs, images, charts, tables, and graphs used in your display. Give proper credit to your sources.",
+      "Complete citations must be present for all photographs, images, charts, tables, and graphs used in your display. A citation should include: the author or creator, the title of the source, the date it was published or accessed, and the URL or publication name. For example: \"Smith, J. (2025). Plant Growth Rates. Science for Kids Magazine, p. 12.\" or \"NASA. (2024). Solar System Overview. Retrieved from nasa.gov/solarsystem.\" Give proper credit to all your sources.",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
@@ -193,7 +193,7 @@ export default function DisplayAndSafetyPage() {
               "Procedure",
               "Data & Results",
               "Conclusion",
-              "Bibliography",
+              "Bibliography (if applicable)",
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3">
                 <svg

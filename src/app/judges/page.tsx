@@ -4,7 +4,7 @@ import PageHero from "@/components/PageHero";
 export const metadata: Metadata = {
   title: "Judges",
   description:
-    "Become a judge at the MVWSD Science Fair. Looking for high school graduates with interest in science and mentorship.",
+    "Become a judge at the MVWSD Science Fair. Looking for teachers, professionals, and community members with interest in STEM.",
 };
 
 export default function JudgesPage() {
@@ -29,12 +29,11 @@ export default function JudgesPage() {
                 Who Can Judge?
               </h2>
               <p className="text-lg text-text-body leading-relaxed">
-                We&apos;re looking for <strong className="text-text-heading">high school graduates</strong>{" "}
+                We&apos;re looking for <strong className="text-text-heading">teachers, professionals, and community members</strong>{" "}
                 with an interest in science, technology, engineering, or
                 mathematics and a passion for mentorship. Whether you&apos;re a
-                professional scientist, an engineer, a teacher, a college
-                student, or simply someone who loves science, we&apos;d love to
-                have you join us!
+                professional scientist, an engineer, a teacher, or simply someone
+                who loves science, we&apos;d love to have you join us!
               </p>
             </div>
           </div>
