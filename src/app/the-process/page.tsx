@@ -269,8 +269,8 @@ export default function TheProcessPage() {
               icon={<StepBadge step={1} />}
             >
               <p className="mb-4">
-                Complete the Science Fair Application Form with your project
-                details, team members, and project description.
+                Complete the Application &amp; Registration Form with your project
+                details, team members, consent, and project description. This is the only form you need to register and apply.
               </p>
               <a
                 href="https://docs.google.com/forms/d/1Uys9ePwF965Nn722dpa3eSypNVK9tLp-J4PnvOGN4xg/viewform"
@@ -278,7 +278,7 @@ export default function TheProcessPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent-primary text-white font-semibold rounded-lg hover:bg-accent-primary-hover transition-colors"
               >
-                Open Application Form
+                Open Application &amp; Registration Form
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
                   <polyline points="15 3 21 3 21 9" />

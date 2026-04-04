@@ -113,8 +113,8 @@ export default function FormsPage() {
               }
             />
             <FormCard
-              title="Application Form"
-              description="Submit your official Science Fair application with your project details, team members, and project description."
+              title="Application & Registration Form"
+              description="Your all-in-one form to register and apply for the 2026 MVWSD Science Fair. Includes project details, parental consent, photo release, and liability waiver — everything in one place."
               href="https://docs.google.com/forms/d/1Uys9ePwF965Nn722dpa3eSypNVK9tLp-J4PnvOGN4xg/viewform"
               icon={<FormIcon />}
             />
@@ -230,41 +230,9 @@ export default function FormsPage() {
                 </svg>
               }
             />
-          </div>
-        </section>
-        {/* Consent & Permission Forms */}
-        <section>
-          <h2 className="text-2xl font-display font-bold text-text-heading mb-2 flex items-center gap-3">
-            <span className="w-10 h-10 rounded-xl bg-accent-secondary-light text-accent-secondary flex items-center justify-center shrink-0" aria-hidden="true">
-              <ShieldIcon />
-            </span>
-            Consent & Permission Forms
-          </h2>
-          <p className="text-text-body mb-6 ml-[52px]">
-            These forms are required for all participants. Please complete them before the science fair.
-          </p>
-          <div className="space-y-4">
             <FormCard
-              title="Photo Release Form"
-              description="Parent/guardian consent for photos and videos of your child taken during the Science Fair for educational and promotional purposes."
-              href="https://docs.google.com/forms/d/1KpnIdFCv_tD2K02kjbFm3yK65McM7awcUj01eNlhjbU/viewform"
-              icon={<FormIcon />}
-            />
-            <FormCard
-              title="Liability Waiver"
-              description="Acknowledgment of participation risks and waiver of liability for the MVWSD Science Fair organizing team, Mountain View High School, and the school district."
-              href="https://docs.google.com/forms/d/1HDebP6LrjgJ---ANsXmdTGibAzy-zO1LPYA7JkNAoJQ/viewform"
-              icon={<ShieldIcon />}
-            />
-            <FormCard
-              title="Parental Permission/Consent Form"
-              description="General parental consent for your child to participate in the 2026 MVWSD Science Fair, including acknowledgment of safety guidelines and project requirements."
-              href="https://docs.google.com/forms/d/1Q-q-lb6Sa-ksrdTVXbkBoB2fWvFoja25pavEnzzpjHM/viewform"
-              icon={<FormIcon />}
-            />
-            <FormCard
-              title="High School Mentor Request Form"
-              description="Request a high school student mentor to guide your child through their science fair project. Mentors help with the scientific method, experiment design, and presentation preparation."
+              title="High School Mentor Request"
+              description="Parents: request a high school student mentor to guide your child through their science fair project."
               href="https://docs.google.com/forms/d/1KctjqLpK1bSmvTULL0OjStBtLDaBQhSY_xb-NmvyxOg/viewform"
               icon={
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -275,6 +243,42 @@ export default function FormsPage() {
                 </svg>
               }
             />
+          </div>
+        </section>
+        {/* Form Timeline */}
+        <section className="clean-card p-6 sm:p-8 border-t-2 border-t-accent-primary">
+          <h2 className="text-xl font-display font-bold text-text-heading mb-4">When to Submit Each Form</h2>
+          <div className="space-y-3">
+            <div className="flex items-start gap-3 p-3 bg-bg-light rounded-lg border border-border-default">
+              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent-primary text-white text-sm font-bold shrink-0">1</span>
+              <div>
+                <span className="font-semibold text-text-heading">Interest Form</span>
+                <span className="text-text-body"> &mdash; Fill out first to let us know you want to participate.</span>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 p-3 bg-bg-light rounded-lg border border-border-default">
+              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent-primary text-white text-sm font-bold shrink-0">2</span>
+              <div>
+                <span className="font-semibold text-text-heading">Application &amp; Registration Form</span>
+                <span className="text-text-body"> &mdash; Submit your project details, consent, and registration when applications open. This is the only form you need to register.</span>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 p-3 bg-bg-light rounded-lg border border-border-default">
+              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent-warm text-white text-sm font-bold shrink-0">3</span>
+              <div>
+                <span className="font-semibold text-text-heading">Safety Forms (if needed)</span>
+                <span className="text-text-body"> &mdash; Submit the Human Participation or Hazardous Materials form only if your project requires them.</span>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 p-3 bg-bg-light rounded-lg border border-border-default">
+              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent-secondary text-white text-sm font-bold shrink-0">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
+              </span>
+              <div>
+                <span className="font-semibold text-text-heading">Mentor Request (optional)</span>
+                <span className="text-text-body"> &mdash; Request a high school mentor anytime during the process.</span>
+              </div>
+            </div>
           </div>
         </section>
       </div>
