@@ -118,7 +118,7 @@ export default function TheProcessPage() {
                     <span className="mt-0.5 w-2 h-2 rounded-full bg-accent-secondary shrink-0" aria-hidden="true" />
                     <div>
                       <span className="font-semibold text-text-heading">Life &amp; Health Sciences</span>
-                      <span className="text-sm text-text-body"> &mdash; people, animals, plants, nutrition, psychology, environment</span>
+                      <span className="text-sm text-text-body"> &mdash; people, plants, psychology, environment</span>
                     </div>
                   </div>
                   <div className="flex items-start gap-3 p-3 rounded-lg bg-bg-light border border-border-default">
@@ -139,7 +139,7 @@ export default function TheProcessPage() {
                     <span className="mt-0.5 w-2 h-2 rounded-full bg-accent-rose shrink-0" aria-hidden="true" />
                     <div>
                       <span className="font-semibold text-text-heading">Technology &amp; Innovation</span>
-                      <span className="text-sm text-text-body"> &mdash; computers, coding, robotics, apps, problem-solving inventions</span>
+                      <span className="text-sm text-text-body"> &mdash; computers, coding, robotics, apps, problem-solving inventions (must demonstrate a STEM method such as the engineering design process)</span>
                     </div>
                   </div>
                 </div>
@@ -155,16 +155,13 @@ export default function TheProcessPage() {
 
               <div className="bg-accent-rose-light/50 border border-accent-rose/15 rounded-lg p-4 border-l-4 border-l-accent-rose mb-4">
                 <p className="font-semibold text-accent-rose">
-                  IMPORTANT: Individual or team participation is allowed (maximum 2 members per team).
+                  IMPORTANT: Individual or team participation is allowed (maximum 3 members per team).
                 </p>
               </div>
 
-              <div className="bg-accent-warm-light/50 border border-accent-warm/15 rounded-lg p-4 border-l-4 border-l-accent-warm">
-                <p className="font-display font-semibold text-accent-warm">
-                  Continuation Projects:
-                </p>
-                <p className="text-text-body">
-                  Continuation projects (projects that build on work from a previous year) must show clear evidence of significant new development and difference from the previous work.
+              <div className="bg-accent-rose-light/50 border border-accent-rose/15 rounded-lg p-4 border-l-4 border-l-accent-rose">
+                <p className="font-semibold text-accent-rose">
+                  No continuation projects are allowed. All projects must be new and original work for this year&apos;s science fair.
                 </p>
               </div>
             </CollapsibleSection>
@@ -184,13 +181,13 @@ export default function TheProcessPage() {
               </p>
               <div className="grid gap-3">
                 {[
+                  { title: "Safety", desc: "Are there any safety concerns? Do you need approval forms? Address this first before starting any work." },
                   { title: "Research Question", desc: "What specific question are you trying to answer?" },
                   { title: "Hypothesis", desc: 'Your educated guess about the answer. Use "If... then... because..." format.' },
                   { title: "Materials", desc: "List everything you'll need for your experiment." },
-                  { title: "Procedure", desc: "Step-by-step instructions someone else could follow to repeat your experiment." },
+                  { title: "Procedure", desc: "Step-by-step instructions someone else could follow to repeat your experiment. Your experiment should include repetition (multiple trials) so results can be verified." },
                   { title: "Variables", desc: "Identify what you're changing (independent), measuring (dependent), and keeping the same (controlled)." },
                   { title: "Data Collection", desc: "How will you record and organize your results?" },
-                  { title: "Safety", desc: "Are there any safety concerns? Do you need approval forms?" },
                 ].map((item) => (
                   <div
                     key={item.title}
@@ -234,25 +231,18 @@ export default function TheProcessPage() {
               }
             >
               <p className="mb-4">
-                Mentors can help guide you through the scientific process. There
-                are several types of mentors:
+                Mentors can help guide you through the scientific process. Mentors are volunteers who provide support and encouragement throughout your project.
               </p>
-              <div className="grid sm:grid-cols-3 gap-4">
-                {[
-                  { type: "Parent Mentor", desc: "A parent or guardian who helps you stay organized and supports your project at home." },
-                  { type: "Professional Mentor", desc: "A scientist, engineer, or professional who can provide expert guidance in your topic area." },
-                  { type: "Other Volunteer Mentors", desc: "Other community volunteers, such as high school students or college students, who can help you with your project." },
-                ].map((mentor) => (
-                  <div
-                    key={mentor.type}
-                    className="p-4 rounded-lg bg-bg-light border border-border-default"
-                  >
-                    <h4 className="font-display font-semibold text-text-heading mb-2">
-                      {mentor.type}
-                    </h4>
-                    <p className="text-sm text-text-body">{mentor.desc}</p>
-                  </div>
-                ))}
+              <div className="p-4 rounded-lg bg-bg-light border border-border-default">
+                <h4 className="font-display font-semibold text-text-heading mb-2">
+                  Mentors
+                </h4>
+                <p className="text-sm text-text-body mb-2">
+                  Volunteer mentors can help you with your project by guiding you through the scientific method, helping you stay organized, and offering encouragement along the way.
+                </p>
+                <p className="text-sm text-text-muted">
+                  Mentors are high school student volunteers from the community.
+                </p>
               </div>
             </CollapsibleSection>
           </div>
@@ -308,7 +298,6 @@ export default function TheProcessPage() {
               <BulletList
                 items={[
                   "Human Participants Form -- if your project involves surveying, interviewing, or testing people",
-                  "Bioagent Safety Form -- if your project involves living organisms or biological samples",
                   "Hazardous Materials Form -- if your project uses chemicals, electrical equipment, sharp tools, or heat sources",
                 ]}
               />
@@ -466,7 +455,7 @@ export default function TheProcessPage() {
             </CollapsibleSection>
 
             <CollapsibleSection
-              title="Submit an Abstract"
+              title="Write Your Abstract"
               icon={
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
@@ -477,7 +466,7 @@ export default function TheProcessPage() {
               }
             >
               <p className="mb-4">
-                An abstract is a one-paragraph summary of your entire project.
+                An abstract is a one-paragraph summary of your entire project that will go on your display board.
                 It should include:
               </p>
               <BulletList
@@ -530,7 +519,7 @@ export default function TheProcessPage() {
                   "Procedure",
                   "Data",
                   "Conclusion",
-                  "Bibliography",
+                  "Bibliography (if applicable)",
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-2 p-2.5 rounded-lg bg-bg-light border border-border-default">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent-primary shrink-0" aria-hidden="true">
@@ -569,7 +558,7 @@ export default function TheProcessPage() {
 
           <div className="space-y-4">
             <CollapsibleSection
-              title="Common Judging Interview Questions"
+              title="Common Judging Questions"
               icon={
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
@@ -577,8 +566,7 @@ export default function TheProcessPage() {
               }
             >
               <p className="mb-4">
-                Practice answering these questions to be ready for your judging
-                interview:
+                Practice answering these questions to prepare for judging:
               </p>
               <div className="space-y-3">
                 {[

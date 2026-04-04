@@ -62,10 +62,13 @@ export default function StudentsFamiliesPage() {
                 After Registration
               </h2>
               <p className="text-text-body leading-relaxed">
-                Once you&apos;ve registered, check your email for setup details
-                and important information about next steps. The Science Fair
-                Committee will send you confirmation and any additional
-                instructions you need to get started on your project.
+                Once you&apos;ve registered, check your email for a confirmation
+                message from <strong className="text-text-heading">sciencefair@mvwsd.org</strong>.
+                This email will include setup details and important information
+                about next steps. Be sure to check your spam/junk folder if you
+                don&apos;t see it in your inbox. The Science Fair Committee will
+                send you any additional instructions you need to get started on
+                your project.
               </p>
             </div>
           </div>
@@ -75,7 +78,7 @@ export default function StudentsFamiliesPage() {
         <div>
           <h2 className="text-2xl font-display font-bold text-text-heading mb-6">Resources</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <div className="p-6 clean-card-hover">
+            <Link href="/display-and-safety" className="p-6 clean-card-hover block">
               <div className="w-10 h-10 rounded-lg bg-accent-primary-light text-accent-primary flex items-center justify-center mb-4" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -90,30 +93,30 @@ export default function StudentsFamiliesPage() {
                 Tips on creating an effective display board and preparing for
                 your presentation to judges.
               </p>
-              <p className="mt-3 text-xs text-accent-primary font-medium">
-                Available closer to the fair date
-              </p>
-            </div>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs text-accent-primary font-medium">
+                View Display &amp; Safety Guidelines
+              </span>
+            </Link>
 
-            <div className="p-6 clean-card-hover">
+            <Link href="/the-process#judging" className="p-6 clean-card-hover block">
               <div className="w-10 h-10 rounded-lg bg-accent-secondary-light text-accent-secondary flex items-center justify-center mb-4" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
                 </svg>
               </div>
               <h3 className="font-display font-semibold text-text-heading mb-2">
-                Judging Interview Questions
+                Judging Questions
               </h3>
               <p className="text-sm text-text-body leading-relaxed">
                 Practice questions that judges commonly ask so you can prepare
-                confident, thoughtful answers.
+                confident answers.
               </p>
-              <p className="mt-3 text-xs text-accent-secondary font-medium">
-                Available closer to the fair date
-              </p>
-            </div>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs text-accent-secondary font-medium">
+                View on The Process page
+              </span>
+            </Link>
 
-            <div className="p-6 clean-card-hover">
+            <Link href="/the-process#judging" className="p-6 clean-card-hover block">
               <div className="w-10 h-10 rounded-lg bg-accent-warm-light text-accent-warm flex items-center justify-center mb-4" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -129,10 +132,10 @@ export default function StudentsFamiliesPage() {
                 See exactly how judges will evaluate your project so you know
                 what to focus on.
               </p>
-              <p className="mt-3 text-xs text-accent-warm font-medium">
-                Available closer to the fair date
-              </p>
-            </div>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs text-accent-warm font-medium">
+                View on The Process page
+              </span>
+            </Link>
           </div>
         </div>
 

@@ -151,10 +151,10 @@ export default function FormsPage() {
                   </svg>
                 }
               />
-              <div className="mt-4 bg-accent-warm-light/50 border border-accent-warm/15 rounded-lg p-4 border-l-4 border-l-accent-warm">
-                <p className="font-display font-semibold text-accent-warm text-sm">Important:</p>
+              <div className="mt-4 bg-accent-rose-light/50 border border-accent-rose/15 rounded-lg p-4 border-l-4 border-l-accent-rose">
+                <p className="font-display font-semibold text-accent-rose text-sm">Important:</p>
                 <p className="text-sm text-text-body mt-1">
-                  Only projects involving minimal risk to participants are permitted. Minimal risk means harm or discomfort is no greater than what is ordinarily encountered in daily life. Projects involving vulnerable populations (e.g., children, individuals with disabilities) require additional approval.
+                  No projects involving any risk to human participants are permitted. All projects involving human participants must be limited to simple, safe interactions such as surveys or taste tests. Participants&apos; wellbeing and comfort must be the top priority at all times.
                 </p>
               </div>
               <RequirementBox
@@ -189,28 +189,6 @@ export default function FormsPage() {
               />
             </div>
 
-            {/* Biological/Live Organism */}
-            <div className="clean-card p-6">
-              <FormCard
-                title="Biological/Live Organism Use Approval Form"
-                description="Required if your project involves living organisms or biological samples."
-                href="https://docs.google.com/forms/d/1cMl9ZAtJKsH8Gut1INVtiHBeJmzKB5NVSAkGDVYuvlM/viewform"
-                icon={
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 22c-4.97 0-9-2.69-9-6v-4c0-3.31 4.03-6 9-6s9 2.69 9 6v4c0 3.31-4.03 6-9 6z" />
-                    <path d="M12 6c4.97 0 9 2.69 9 6" />
-                    <line x1="12" y1="6" x2="12" y2="22" />
-                  </svg>
-                }
-              />
-              <RequirementBox
-                title="When is this form needed?"
-                required="Feeding/growing/caring for living organisms, using biological samples"
-                notRequired="Using pre-cooked food, dried plants, pictures/data about organisms"
-                examplesRequired="Testing light on plant growth, observing ant behavior"
-                examplesNotRequired="Using flower petals for pigment extraction, measuring dried bean sizes"
-              />
-            </div>
           </div>
         </section>
 
@@ -241,7 +219,7 @@ export default function FormsPage() {
             />
             <FormCard
               title="Mentor Volunteer Interest"
-              description="Want to mentor a young scientist? Share your knowledge and experience by becoming a mentor."
+              description="Want to mentor a young scientist? High school students can share their knowledge and experience by becoming a mentor."
               href="https://docs.google.com/forms/d/1Go59zVliqQohI9kTUKptz8PFpYWdTSJbQ5qzyY6b2yY/viewform"
               icon={
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -254,45 +232,49 @@ export default function FormsPage() {
             />
           </div>
         </section>
-        {/* Additional Forms Coming Soon */}
+        {/* Consent & Permission Forms */}
         <section>
           <h2 className="text-2xl font-display font-bold text-text-heading mb-2 flex items-center gap-3">
-            <span className="w-10 h-10 rounded-xl bg-bg-muted text-text-muted flex items-center justify-center shrink-0" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <polyline points="12 6 12 12 16 14" />
-              </svg>
+            <span className="w-10 h-10 rounded-xl bg-accent-secondary-light text-accent-secondary flex items-center justify-center shrink-0" aria-hidden="true">
+              <ShieldIcon />
             </span>
-            Additional Forms
+            Consent & Permission Forms
           </h2>
           <p className="text-text-body mb-6 ml-[52px]">
-            The following forms will be available soon. Check back later for updates.
+            These forms are required for all participants. Please complete them before the science fair.
           </p>
-
-          <div className="space-y-3">
-            {[
-              "Photo Release Form",
-              "Liability Waiver / \"We Are Not Liable\" Form",
-              "Project Idea/Proposal Form",
-              "Parental Permission/Consent Form",
-              "High School Mentor Request Form",
-            ].map((form) => (
-              <div
-                key={form}
-                className="flex items-center gap-4 p-4 rounded-lg bg-bg-light border border-border-default opacity-60"
-              >
-                <div className="w-10 h-10 rounded-xl bg-bg-muted text-text-muted flex items-center justify-center shrink-0" aria-hidden="true">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <polyline points="12 6 12 12 16 14" />
-                  </svg>
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="font-display font-semibold text-text-muted">{form}</p>
-                  <p className="text-sm text-text-muted">Coming soon</p>
-                </div>
-              </div>
-            ))}
+          <div className="space-y-4">
+            <FormCard
+              title="Photo Release Form"
+              description="Parent/guardian consent for photos and videos of your child taken during the Science Fair for educational and promotional purposes."
+              href="https://docs.google.com/forms/d/1KpnIdFCv_tD2K02kjbFm3yK65McM7awcUj01eNlhjbU/viewform"
+              icon={<FormIcon />}
+            />
+            <FormCard
+              title="Liability Waiver"
+              description="Acknowledgment of participation risks and waiver of liability for the MVWSD Science Fair organizing team, Mountain View High School, and the school district."
+              href="https://docs.google.com/forms/d/1HDebP6LrjgJ---ANsXmdTGibAzy-zO1LPYA7JkNAoJQ/viewform"
+              icon={<ShieldIcon />}
+            />
+            <FormCard
+              title="Parental Permission/Consent Form"
+              description="General parental consent for your child to participate in the 2026 MVWSD Science Fair, including acknowledgment of safety guidelines and project requirements."
+              href="https://docs.google.com/forms/d/1Q-q-lb6Sa-ksrdTVXbkBoB2fWvFoja25pavEnzzpjHM/viewform"
+              icon={<FormIcon />}
+            />
+            <FormCard
+              title="High School Mentor Request Form"
+              description="Request a high school student mentor to guide your child through their science fair project. Mentors help with the scientific method, experiment design, and presentation preparation."
+              href="https://docs.google.com/forms/d/1KctjqLpK1bSmvTULL0OjStBtLDaBQhSY_xb-NmvyxOg/viewform"
+              icon={
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <line x1="19" y1="8" x2="19" y2="14" />
+                  <line x1="22" y1="11" x2="16" y2="11" />
+                </svg>
+              }
+            />
           </div>
         </section>
       </div>

@@ -59,19 +59,6 @@ const timelineSteps = [
   },
   {
     step: 5,
-    title: "Abstract Submission",
-    date: "TBD",
-    description: "Submit a one-paragraph abstract summarizing your project, methods, and results.",
-    status: "upcoming" as const,
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 20h9" />
-        <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
-      </svg>
-    ),
-  },
-  {
-    step: 6,
     title: "Display Board Preparation",
     date: "TBD",
     description: "Build your display board with all required sections: abstract, hypothesis, data, conclusion, and more.",
@@ -85,7 +72,7 @@ const timelineSteps = [
     ),
   },
   {
-    step: 7,
+    step: 6,
     title: "Science Fair Day",
     date: "TBD",
     description: "Present your project to judges and visitors. Celebrate your hard work and scientific discovery!",

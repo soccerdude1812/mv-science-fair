@@ -49,19 +49,6 @@ const ruleCards = [
     ),
   },
   {
-    title: "Biohazardous Agent / Live Organism Rules",
-    description:
-      "Rules for projects involving living organisms, biological samples, microorganisms, or any biohazardous agents.",
-    href: "https://docs.google.com/document/d/1Pl6SbfWtLmaIyOL7JxtxFqydMQNaRuTO-Z8W0JYkQEk/edit",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22c-4.97 0-9-2.69-9-6v-4c0-3.31 4.03-6 9-6s9 2.69 9 6v4c0 3.31-4.03 6-9 6z" />
-        <path d="M12 6c4.97 0 9 2.69 9 6" />
-        <line x1="12" y1="6" x2="12" y2="22" />
-      </svg>
-    ),
-  },
-  {
     title: "Mentor Rulebook",
     description:
       "Guidelines and expectations for mentors supporting science fair participants, including roles, responsibilities, and boundaries.",
