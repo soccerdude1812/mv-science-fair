@@ -160,11 +160,11 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--bg-deep);
+  background: var(--bg-primary);
 }
 
 body {
-  background: var(--bg-primary);
+  background: transparent;
   color: var(--text-secondary);
   font-family: var(--font-body), system-ui, -apple-system, sans-serif;
   letter-spacing: var(--tracking-normal);
@@ -212,13 +212,13 @@ h1, h2, h3, h4, h5, h6 {
 /* ===== SURFACE CARD ===== */
 
 .surface-card {
-  background: var(--bg-surface);
+  background: rgba(18, 18, 26, 0.9);
   border: 1px solid var(--border-subtle);
   border-radius: 1rem;
 }
 
 .surface-card-hover {
-  background: var(--bg-surface);
+  background: rgba(18, 18, 26, 0.9);
   border: 1px solid var(--border-subtle);
   border-radius: 1rem;
   transition: border-color var(--duration-normal) var(--ease-smooth),
@@ -422,15 +422,15 @@ h1, h2, h3, h4, h5, h6 {
 /* ===== SECTION STYLES ===== */
 
 .section-dark {
-  background: var(--bg-primary);
+  background: rgba(10, 10, 15, 0.85);
 }
 
 .section-surface {
-  background: var(--bg-surface);
+  background: rgba(18, 18, 26, 0.85);
 }
 
 .section-deep {
-  background: var(--bg-deep);
+  background: rgba(5, 5, 7, 0.85);
 }
 
 /* ===== DIVIDER ===== */

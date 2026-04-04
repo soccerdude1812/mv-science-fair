@@ -41,7 +41,7 @@ export default function ScienceBackground() {
   return (
     <div
       className="fixed inset-0 pointer-events-none overflow-hidden"
-      style={{ zIndex: 20 }}
+      style={{ zIndex: 0 }}
       aria-hidden="true"
     >
       {icons.map((icon, i) => (

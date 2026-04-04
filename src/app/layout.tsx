@@ -48,7 +48,7 @@ export default function RootLayout({
       lang="en"
       className={cn("h-full", "antialiased", inter.variable, interBody.variable, "font-sans", geist.variable)}
     >
-      <body className="min-h-full flex flex-col bg-bg-primary text-text-secondary">
+      <body className="min-h-full flex flex-col bg-transparent text-text-secondary">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-accent-indigo focus:text-bg-deep focus:top-0 focus:left-0 focus:font-bold"
