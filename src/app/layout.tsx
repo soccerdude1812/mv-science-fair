@@ -43,15 +43,16 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${interBody.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-bg-white text-text-body">
+      <body className="min-h-full flex flex-col bg-bg-primary text-text-secondary">
+        <div className="ambient-glow inset-0 w-full h-full" />
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-accent-primary focus:text-white focus:top-0 focus:left-0 focus:font-bold"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-accent-indigo focus:text-bg-deep focus:top-0 focus:left-0 focus:font-bold"
         >
           Skip to main content
         </a>
         <Navbar />
-        <main id="main-content" className="flex-1">
+        <main id="main-content" className="flex-1 relative z-10">
           {children}
         </main>
         <Footer />
