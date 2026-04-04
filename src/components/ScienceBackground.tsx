@@ -41,7 +41,7 @@ export default function ScienceBackground() {
   return (
     <div
       className="fixed inset-0 pointer-events-none overflow-hidden"
-      style={{ zIndex: 1 }}
+      style={{ zIndex: 20 }}
       aria-hidden="true"
     >
       {icons.map((icon, i) => (
@@ -59,7 +59,7 @@ export default function ScienceBackground() {
             top: icon.y,
             width: icon.size,
             height: icon.size,
-            color: "#2a2a38",
+            color: "#333345",
             transform: `rotate(${icon.rotate}deg)`,
           }}
         >
