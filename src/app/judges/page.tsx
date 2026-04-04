@@ -1,4 +1,6 @@
 import PageHero from "@/components/PageHero";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 export default function JudgesPage() {
   return (
@@ -10,7 +12,8 @@ export default function JudgesPage() {
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-10">
         {/* Who Can Judge */}
-        <section className="reveal glass-card p-8">
+        <Card className="reveal bg-bg-surface border-border-subtle">
+          <CardContent className="p-8">
           <div className="flex flex-col sm:flex-row items-start gap-6">
             <div className="shrink-0 w-16 h-16 rounded-2xl bg-accent-amber/10 text-accent-amber flex items-center justify-center" aria-hidden="true">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -30,10 +33,14 @@ export default function JudgesPage() {
               </p>
             </div>
           </div>
-        </section>
+          </CardContent>
+        </Card>
+
+        <Separator className="my-0 bg-border-subtle" />
 
         {/* Sign Up CTA */}
-        <section className="reveal glass-card p-8 sm:p-10 text-center">
+        <Card className="reveal bg-bg-surface border-border-subtle">
+          <CardContent className="p-8 sm:p-10 text-center">
           <h2 className="text-2xl sm:text-3xl font-display font-bold text-text-primary mb-4">
             Ready to Make a Difference?
           </h2>
@@ -45,7 +52,7 @@ export default function JudgesPage() {
             href="https://docs.google.com/forms/d/14Yo2IgS-PAsYNIFac4pzJRdTMX6xEnjtGslqGtAx6TQ/viewform"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-glow text-lg px-8 py-4"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-[#0A0A0F] font-semibold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
           >
             Sign Up to Judge
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -54,7 +61,8 @@ export default function JudgesPage() {
               <line x1="10" y1="14" x2="21" y2="3" />
             </svg>
           </a>
-        </section>
+          </CardContent>
+        </Card>
 
         {/* What to Expect */}
         <section className="reveal">
@@ -62,7 +70,8 @@ export default function JudgesPage() {
             What to Expect
           </h2>
           <div className="grid sm:grid-cols-2 gap-5">
-            <div className="glass-card-hover p-6">
+            <Card className="bg-bg-surface border-border-subtle hover:border-border-hover transition-colors">
+              <CardContent className="p-6">
               <div className="w-10 h-10 rounded-lg bg-accent-indigo/10 text-accent-indigo flex items-center justify-center mb-4" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" />
@@ -77,9 +86,11 @@ export default function JudgesPage() {
                 you&apos;ll know exactly how to evaluate projects fairly and
                 constructively.
               </p>
-            </div>
+              </CardContent>
+            </Card>
 
-            <div className="glass-card-hover p-6">
+            <Card className="bg-bg-surface border-border-subtle hover:border-border-hover transition-colors">
+              <CardContent className="p-6">
               <div className="w-10 h-10 rounded-lg bg-accent-cyan/10 text-accent-cyan flex items-center justify-center mb-4" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -96,9 +107,11 @@ export default function JudgesPage() {
                 projects and categories. You&apos;ll evaluate scientific thought,
                 creativity, thoroughness, skill, clarity, and presentation.
               </p>
-            </div>
+              </CardContent>
+            </Card>
 
-            <div className="glass-card-hover p-6">
+            <Card className="bg-bg-surface border-border-subtle hover:border-border-hover transition-colors">
+              <CardContent className="p-6">
               <div className="w-10 h-10 rounded-lg bg-accent-amber/10 text-accent-amber flex items-center justify-center mb-4" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -115,9 +128,11 @@ export default function JudgesPage() {
                 shared closer to the event date. You&apos;ll be assigned to
                 specific categories based on your background.
               </p>
-            </div>
+              </CardContent>
+            </Card>
 
-            <div className="glass-card-hover p-6">
+            <Card className="bg-bg-surface border-border-subtle hover:border-border-hover transition-colors">
+              <CardContent className="p-6">
               <div className="w-10 h-10 rounded-lg bg-accent-rose/10 text-accent-rose flex items-center justify-center mb-4" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="8" r="7" />
@@ -132,7 +147,8 @@ export default function JudgesPage() {
                 These awards recognize outstanding achievement in specific areas
                 like innovation, environmental impact, and more.
               </p>
-            </div>
+              </CardContent>
+            </Card>
           </div>
         </section>
       </div>

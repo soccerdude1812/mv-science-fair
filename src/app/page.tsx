@@ -1,6 +1,10 @@
 import Link from "next/link";
 import QRCodeSection from "@/components/QRCodeSection";
 import Timeline from "@/components/Timeline";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { ArrowRight } from "lucide-react";
 
 const infoCards = [
   {
@@ -194,13 +198,13 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             {/* Left: text content */}
             <div className="max-w-3xl">
-              <span className="badge badge-accent mb-6 animate-fade-in-up">
+              <Badge variant="secondary" className="mb-6 animate-fade-in-up">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <circle cx="12" cy="12" r="3" />
                   <ellipse cx="12" cy="12" rx="10" ry="4" stroke="currentColor" strokeWidth="1.5" fill="none" />
                 </svg>
                 Grades 3-5 Elementary School
-              </span>
+              </Badge>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary tracking-[-0.03em] leading-tight animate-fade-in-up [animation-delay:100ms]">
                 MVWSD Science Fair{" "}
                 <span className="text-accent-indigo">2026</span>
@@ -213,17 +217,14 @@ export default function Home() {
                   href="https://docs.google.com/forms/d/1O1DXH_eq0GQIcTJcLQlrcusY5I7xKejzBw_p3WHIVao/viewform"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-glow justify-center"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-[#0A0A0F] font-semibold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
                 >
                   Show Your Interest
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
                 <Link
                   href="/the-process"
-                  className="btn-ghost justify-center"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-border-subtle bg-transparent text-text-primary font-medium text-sm px-6 py-3 hover:border-border-hover hover:bg-bg-surface transition-colors"
                 >
                   Learn How It Works
                 </Link>
@@ -238,31 +239,37 @@ export default function Home() {
         </div>
       </section>
 
+      <Separator className="my-0 bg-border-subtle" />
+
       {/* Info Strip */}
       <section className="reveal py-12 sm:py-16 bg-bg-primary border-t border-border-subtle">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="glass-card p-6 sm:p-8">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              {infoCards.map((card) => (
-                <div
-                  key={card.label}
-                  className="flex flex-col items-center text-center"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-accent-indigo/10 text-accent-indigo flex items-center justify-center mb-4">
-                    {card.icon}
+          <Card className="bg-bg-surface border-border-subtle">
+            <CardContent className="p-6 sm:p-8">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                {infoCards.map((card) => (
+                  <div
+                    key={card.label}
+                    className="flex flex-col items-center text-center"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-accent-indigo/10 text-accent-indigo flex items-center justify-center mb-4">
+                      {card.icon}
+                    </div>
+                    <span className="text-sm font-medium text-text-muted uppercase tracking-wider">
+                      {card.label}
+                    </span>
+                    <span className="mt-1 text-xl font-bold text-text-primary">
+                      {card.value}
+                    </span>
                   </div>
-                  <span className="text-sm font-medium text-text-muted uppercase tracking-wider">
-                    {card.label}
-                  </span>
-                  <span className="mt-1 text-xl font-bold text-text-primary">
-                    {card.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
+
+      <Separator className="my-0 bg-border-subtle" />
 
       {/* Welcome */}
       <section className="reveal py-16 sm:py-20 bg-bg-primary">
@@ -282,6 +289,8 @@ export default function Home() {
         </div>
       </section>
 
+      <Separator className="my-0 bg-border-subtle" />
+
       {/* Project Categories */}
       <section className="reveal py-16 sm:py-20 bg-bg-surface">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -297,22 +306,28 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {categoryCards.map((card, i) => (
-              <div
+              <Card
                 key={card.title}
-                className={`reveal stagger-${i + 1} glass-card-hover p-6 border-l-4 ${card.borderColor}`}
+                className={`reveal stagger-${i + 1} bg-bg-surface border-border-subtle hover:border-border-hover transition-colors border-l-4 ${card.borderColor}`}
               >
-                <div className={`w-12 h-12 rounded-xl ${card.bgColor} ${card.color} flex items-center justify-center mb-4`}>
-                  {card.icon}
-                </div>
-                <h3 className="font-bold text-text-primary text-lg">{card.title}</h3>
-                <p className="mt-2 text-sm text-text-secondary leading-relaxed">
-                  {card.desc}
-                </p>
-              </div>
+                <CardHeader className="pb-2">
+                  <div className={`w-12 h-12 rounded-xl ${card.bgColor} ${card.color} flex items-center justify-center mb-2`}>
+                    {card.icon}
+                  </div>
+                  <CardTitle className="font-bold text-text-primary text-lg">{card.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-text-secondary leading-relaxed">
+                    {card.desc}
+                  </p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
       </section>
+
+      <Separator className="my-0 bg-border-subtle" />
 
       {/* Timeline */}
       <section className="reveal py-16 sm:py-20 bg-bg-primary">
@@ -332,6 +347,8 @@ export default function Home() {
         </div>
       </section>
 
+      <Separator className="my-0 bg-border-subtle" />
+
       {/* Quick Navigation */}
       <section className="reveal py-16 sm:py-20 bg-bg-surface">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -350,24 +367,25 @@ export default function Home() {
               <Link
                 key={card.href}
                 href={card.href}
-                className={`reveal stagger-${(i % 6) + 1} group surface-card-hover p-6 flex flex-col`}
+                className={`reveal stagger-${(i % 6) + 1} group`}
               >
-                <div className="w-10 h-10 rounded-lg bg-accent-indigo/10 text-accent-indigo flex items-center justify-center mb-4 transition-all group-hover:bg-accent-indigo/20">
-                  {card.icon}
-                </div>
-                <h3 className="font-semibold text-text-primary text-lg">
-                  {card.title}
-                </h3>
-                <p className="mt-2 text-sm text-text-secondary leading-relaxed flex-1">
-                  {card.desc}
-                </p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent-indigo group-hover:gap-2.5 transition-all">
-                  Learn more
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </span>
+                <Card className="bg-bg-surface border-border-subtle hover:border-border-hover transition-colors h-full flex flex-col">
+                  <CardContent className="p-6 flex flex-col flex-1">
+                    <div className="w-10 h-10 rounded-lg bg-accent-indigo/10 text-accent-indigo flex items-center justify-center mb-4 transition-all group-hover:bg-accent-indigo/20">
+                      {card.icon}
+                    </div>
+                    <h3 className="font-semibold text-text-primary text-lg">
+                      {card.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-text-secondary leading-relaxed flex-1">
+                      {card.desc}
+                    </p>
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent-indigo group-hover:gap-2.5 transition-all">
+                      Learn more
+                      <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </CardContent>
+                </Card>
               </Link>
             ))}
           </div>

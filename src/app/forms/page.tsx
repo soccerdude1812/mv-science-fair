@@ -1,5 +1,8 @@
 import PageHero from "@/components/PageHero";
 import FormCard from "@/components/FormCard";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 function FormIcon() {
   return (
@@ -87,12 +90,13 @@ export default function FormsPage() {
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12">
         {/* Main Forms */}
         <section className="reveal">
-          <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-3">
+          <div className="flex items-center gap-3 mb-6">
             <span className="w-10 h-10 rounded-xl bg-accent-indigo/10 text-accent-indigo flex items-center justify-center shrink-0" aria-hidden="true">
               <FormIcon />
             </span>
-            Main Forms
-          </h2>
+            <h2 className="text-2xl font-bold text-text-primary">Main Forms</h2>
+            <Badge variant="secondary" className="ml-2">MAIN FORMS</Badge>
+          </div>
           <div className="space-y-4">
             <FormCard
               title="Interest Form"
@@ -114,14 +118,17 @@ export default function FormsPage() {
           </div>
         </section>
 
+        <Separator className="my-0 bg-border-subtle" />
+
         {/* Risk/Approval Forms */}
         <section className="reveal">
-          <h2 className="text-2xl font-bold text-text-primary mb-2 flex items-center gap-3">
+          <div className="flex items-center gap-3 mb-2">
             <span className="w-10 h-10 rounded-xl bg-accent-amber/10 text-accent-amber flex items-center justify-center shrink-0" aria-hidden="true">
               <ShieldIcon />
             </span>
-            Risk/Approval Forms
-          </h2>
+            <h2 className="text-2xl font-bold text-text-primary">Risk/Approval Forms</h2>
+            <Badge variant="secondary" className="ml-2">RISK/APPROVAL FORMS</Badge>
+          </div>
           <p className="text-text-secondary mb-6 ml-[52px]">
             These forms are only required if your project involves specific
             materials or participants. Read the descriptions carefully to
@@ -130,7 +137,8 @@ export default function FormsPage() {
 
           <div className="space-y-6">
             {/* Human Participation */}
-            <div className="reveal glass-card p-6">
+            <Card className="reveal bg-bg-surface border-border-subtle">
+              <CardContent className="p-6">
               <FormCard
                 title="Human Participation Approval Form"
                 description="Required if your project involves interaction with human participants."
@@ -157,10 +165,12 @@ export default function FormsPage() {
                 examplesRequired="Surveying classmates about screen time, testing how music affects study habits"
                 examplesNotRequired="Analyzing published health data, measuring plant growth"
               />
-            </div>
+            </CardContent>
+            </Card>
 
             {/* Hazardous Materials */}
-            <div className="reveal glass-card p-6">
+            <Card className="reveal bg-bg-surface border-border-subtle">
+              <CardContent className="p-6">
               <FormCard
                 title="Hazardous Materials & Safety Approval Form"
                 description="Required if your project uses potentially dangerous materials or equipment."
@@ -180,19 +190,23 @@ export default function FormsPage() {
                 examplesRequired="Vinegar and steel wool reaction, building motor circuits"
                 examplesNotRequired="Baking soda and vinegar in small amounts, paper airplanes"
               />
-            </div>
+              </CardContent>
+            </Card>
 
           </div>
         </section>
 
+        <Separator className="my-0 bg-border-subtle" />
+
         {/* Volunteer/Judge Forms */}
         <section className="reveal">
-          <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center gap-3">
+          <div className="flex items-center gap-3 mb-6">
             <span className="w-10 h-10 rounded-xl bg-accent-rose/10 text-accent-rose flex items-center justify-center shrink-0" aria-hidden="true">
               <HeartIcon />
             </span>
-            Volunteer & Judge Forms
-          </h2>
+            <h2 className="text-2xl font-bold text-text-primary">Volunteer & Judge Forms</h2>
+            <Badge variant="secondary" className="ml-2">VOLUNTEER/JUDGE</Badge>
+          </div>
           <div className="space-y-4">
             <FormCard
               title="Judge Sign-Up"
@@ -239,8 +253,11 @@ export default function FormsPage() {
           </div>
         </section>
 
+        <Separator className="my-0 bg-border-subtle" />
+
         {/* Form Timeline */}
-        <section className="reveal glass-card p-6 sm:p-8">
+        <Card className="reveal bg-bg-surface border-border-subtle">
+          <CardContent className="p-6 sm:p-8">
           <h2 className="text-xl font-bold text-text-primary mb-4">When to Submit Each Form</h2>
           <div className="space-y-3">
             <div className="flex items-start gap-3 p-3 bg-bg-surface rounded-lg border border-border-subtle">
@@ -274,7 +291,8 @@ export default function FormsPage() {
               </div>
             </div>
           </div>
-        </section>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

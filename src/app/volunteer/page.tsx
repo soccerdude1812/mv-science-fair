@@ -1,4 +1,7 @@
 import PageHero from "@/components/PageHero";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 export default function VolunteerPage() {
   return (
@@ -10,7 +13,8 @@ export default function VolunteerPage() {
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-10">
         {/* Call to Action Banner */}
-        <section className="reveal glass-card p-8 sm:p-10">
+        <Card className="reveal bg-bg-surface border-border-subtle">
+          <CardContent className="p-8 sm:p-10">
           <h2 className="text-2xl sm:text-3xl font-display font-bold text-text-primary mb-4">
             Every Volunteer Makes a Difference
           </h2>
@@ -20,12 +24,15 @@ export default function VolunteerPage() {
             over several weeks, your contribution helps inspire the next
             generation of scientists.
           </p>
-        </section>
+          </CardContent>
+        </Card>
+
+        <Separator className="my-0 bg-border-subtle" />
 
         {/* Volunteer Options */}
         <div className="grid md:grid-cols-2 gap-6">
           {/* Event-Day Volunteering */}
-          <section className="reveal stagger-1 glass-card overflow-hidden flex flex-col">
+          <Card className="reveal stagger-1 bg-bg-surface border-border-subtle overflow-hidden flex flex-col">
             <div className="p-6 border-b border-border-subtle bg-accent-indigo/5">
               <div className="w-12 h-12 rounded-xl bg-accent-indigo/10 text-accent-indigo flex items-center justify-center mb-4" aria-hidden="true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -36,9 +43,9 @@ export default function VolunteerPage() {
                 </svg>
               </div>
               <h3 className="text-xl font-display font-bold text-text-primary">Event-Day Volunteering</h3>
-              <span className="badge badge-accent mt-2 inline-flex">
+              <Badge variant="secondary" className="mt-2">
                 Open to High School Students &amp; Community Members
-              </span>
+              </Badge>
             </div>
             <div className="p-6 flex-1 flex flex-col">
               <p className="text-text-secondary leading-relaxed flex-1">
@@ -64,7 +71,7 @@ export default function VolunteerPage() {
                 href="https://docs.google.com/forms/d/1iuy7stpEJE6Espci9gCiEdNe06Cx0DR8I73fKNuyCbg/viewform"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-glow mt-6 w-full justify-center"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-[#0A0A0F] font-semibold text-sm px-6 py-3 hover:opacity-90 transition-opacity mt-6 w-full justify-center"
               >
                 Sign Up for Event Day
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -74,10 +81,10 @@ export default function VolunteerPage() {
                 </svg>
               </a>
             </div>
-          </section>
+          </Card>
 
           {/* Mentor Volunteering */}
-          <section className="reveal stagger-2 glass-card overflow-hidden flex flex-col">
+          <Card className="reveal stagger-2 bg-bg-surface border-border-subtle overflow-hidden flex flex-col">
             <div className="p-6 border-b border-border-subtle bg-accent-cyan/5">
               <div className="w-12 h-12 rounded-xl bg-accent-cyan/10 text-accent-cyan flex items-center justify-center mb-4" aria-hidden="true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -88,9 +95,9 @@ export default function VolunteerPage() {
                 </svg>
               </div>
               <h3 className="text-xl font-display font-bold text-text-primary">Mentor Volunteering</h3>
-              <span className="badge badge-accent mt-2 inline-flex">
+              <Badge variant="secondary" className="mt-2">
                 Open to High School Students
-              </span>
+              </Badge>
             </div>
             <div className="p-6 flex-1 flex flex-col">
               <p className="text-text-secondary leading-relaxed flex-1">
@@ -135,7 +142,7 @@ export default function VolunteerPage() {
                 href="https://docs.google.com/forms/d/1KctjqLpK1bSmvTULL0OjStBtLDaBQhSY_xb-NmvyxOg/viewform"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-glow mt-2 w-full justify-center"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-[#0A0A0F] font-semibold text-sm px-6 py-3 hover:opacity-90 transition-opacity mt-2 w-full justify-center"
               >
                 Sign Up as Mentor
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -145,11 +152,14 @@ export default function VolunteerPage() {
                 </svg>
               </a>
             </div>
-          </section>
+          </Card>
         </div>
 
+        <Separator className="my-0 bg-border-subtle" />
+
         {/* Why Volunteer */}
-        <section className="reveal glass-card p-8">
+        <Card className="reveal bg-bg-surface border-border-subtle">
+          <CardContent className="p-8">
           <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
             Why Volunteer?
           </h2>
@@ -201,7 +211,8 @@ export default function VolunteerPage() {
               </p>
             </div>
           </div>
-        </section>
+          </CardContent>
+        </Card>
       </div>
     </>
   );

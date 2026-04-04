@@ -1,6 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "@/components/ui/collapsible";
+import { cn } from "@/lib/utils";
 
 interface CollapsibleSectionProps {
   title: string;
@@ -14,50 +21,31 @@ export default function CollapsibleSection({
   children,
   defaultOpen = false,
 }: CollapsibleSectionProps) {
-  // icon prop accepted for API compatibility but not rendered in dark minimal theme
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="border-b border-border-subtle">
-      <button
-        type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between gap-3 py-4 px-1 text-left transition-colors"
-        aria-expanded={isOpen}
-      >
-        <span className="flex-1 font-medium text-text-primary">
-          {title}
-        </span>
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className={`shrink-0 transition-all duration-300 ${
-            isOpen ? "rotate-180 text-accent-indigo" : "text-text-muted"
-          }`}
+    <Collapsible
+      defaultOpen={defaultOpen}
+      onOpenChange={setIsOpen}
+      className="border-b border-border-subtle"
+    >
+      <CollapsibleTrigger className="w-full flex items-center justify-between gap-3 py-4 px-1 text-left transition-colors cursor-pointer">
+        <span className="flex-1 font-medium text-text-primary">{title}</span>
+        <ChevronDown
+          size={20}
+          className={cn(
+            "shrink-0 transition-transform duration-300",
+            isOpen ? "rotate-180 text-text-primary" : "text-text-muted"
+          )}
           aria-hidden="true"
-        >
-          <polyline points="6 9 12 15 18 9" />
-        </svg>
-      </button>
+        />
+      </CollapsibleTrigger>
 
-      {/* Smooth expand/collapse via CSS grid rows */}
-      <div
-        className={`grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.52,0.01,0,1)] ${
-          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-        }`}
-      >
-        <div className="overflow-hidden">
-          <div className="pb-4 px-1 text-text-secondary leading-relaxed">
-            {children}
-          </div>
+      <CollapsibleContent>
+        <div className="pt-4 pb-6 px-1 text-text-secondary leading-relaxed">
+          {children}
         </div>
-      </div>
-    </div>
+      </CollapsibleContent>
+    </Collapsible>
   );
 }

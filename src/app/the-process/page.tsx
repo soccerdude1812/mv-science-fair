@@ -2,6 +2,9 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import CollapsibleSection from "@/components/CollapsibleSection";
 import Timeline from "@/components/Timeline";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 
 function BulletList({ items }: { items: string[] }) {
   return (
@@ -36,7 +39,7 @@ export default function TheProcessPage() {
       <section className="bg-bg-primary py-16 sm:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 reveal">
-            <span className="badge badge-accent mb-4 inline-flex">Roadmap</span>
+            <Badge variant="secondary" className="mb-4">Roadmap</Badge>
             <h2 className="text-2xl sm:text-3xl font-display font-semibold text-text-primary tracking-[-0.03em]">
               Science Fair Roadmap
             </h2>
@@ -80,7 +83,8 @@ export default function TheProcessPage() {
                   </p>
 
                   {/* Start Here box */}
-                  <div className="glass-card border-l-2 border-accent-indigo p-5 mb-5">
+                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-indigo mb-5">
+                    <CardContent className="p-5">
                     <h4 className="font-display font-semibold text-accent-indigo mb-2">
                       Start Here: What Excites You?
                     </h4>
@@ -93,10 +97,12 @@ export default function TheProcessPage() {
                         "What are you passionate about outside of school?",
                       ]}
                     />
-                  </div>
+                    </CardContent>
+                  </Card>
 
                   {/* Pro Tip box */}
-                  <div className="glass-card border-l-2 border-accent-cyan p-4 mb-5">
+                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-cyan mb-5">
+                    <CardContent className="p-4">
                     <p className="font-display font-semibold text-accent-cyan">
                       Pro Tip:
                     </p>
@@ -104,7 +110,8 @@ export default function TheProcessPage() {
                       Pick 2 or 3 ideas at first. That way, if one doesn&apos;t work
                       out, you&apos;ve got backups!
                     </p>
-                  </div>
+                    </CardContent>
+                  </Card>
 
                   {/* Category cards */}
                   <div className="mb-5">
@@ -161,17 +168,21 @@ export default function TheProcessPage() {
                   </p>
 
                   {/* Important notes */}
-                  <div className="glass-card border-l-2 border-accent-rose p-4 mb-3">
+                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-rose mb-3">
+                    <CardContent className="p-4">
                     <p className="font-semibold text-accent-rose">
                       IMPORTANT: Individual or team participation is allowed (maximum 3 members per team).
                     </p>
-                  </div>
+                    </CardContent>
+                  </Card>
 
-                  <div className="glass-card border-l-2 border-accent-rose p-4">
+                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-rose">
+                    <CardContent className="p-4">
                     <p className="font-semibold text-accent-rose">
                       No continuation projects are allowed. All projects must be new and original work for this year&apos;s science fair.
                     </p>
-                  </div>
+                    </CardContent>
+                  </Card>
                 </CollapsibleSection>
               </div>
 
@@ -245,7 +256,8 @@ export default function TheProcessPage() {
                   <p className="mb-4 text-text-secondary">
                     Mentors can help guide you through the scientific process. Mentors are volunteers who provide support and encouragement throughout your project.
                   </p>
-                  <div className="glass-card border-l-2 border-accent-indigo p-4">
+                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-indigo">
+                    <CardContent className="p-4">
                     <h4 className="font-display font-semibold text-text-primary mb-2">
                       Mentors
                     </h4>
@@ -255,12 +267,15 @@ export default function TheProcessPage() {
                     <p className="text-sm text-text-muted">
                       Mentors are high school student volunteers from the community.
                     </p>
-                  </div>
+                    </CardContent>
+                  </Card>
                 </CollapsibleSection>
               </div>
             </div>
           </div>
         </section>
+
+        <Separator className="my-0 bg-border-subtle" />
 
         {/* ── Section 2: Apply to the Fair ── */}
         <section className="bg-bg-primary py-16 sm:py-20">
@@ -291,7 +306,7 @@ export default function TheProcessPage() {
                     href="https://docs.google.com/forms/d/1Uys9ePwF965Nn722dpa3eSypNVK9tLp-J4PnvOGN4xg/viewform"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-glow"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-[#0A0A0F] font-semibold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
                   >
                     Open Application &amp; Registration Form
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -346,19 +361,23 @@ export default function TheProcessPage() {
                     After you submit your application, the Science Fair Committee
                     will review your project proposal.
                   </p>
-                  <div className="glass-card border-l-2 border-accent-amber p-4">
+                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-amber">
+                    <CardContent className="p-4">
                     <p className="font-display font-semibold text-accent-amber">Important:</p>
                     <p className="text-text-secondary">
                       You must wait for a confirmation email before starting your
                       experiment. The committee needs to verify that your project
                       meets all safety and ethical guidelines.
                     </p>
-                  </div>
+                    </CardContent>
+                  </Card>
                 </CollapsibleSection>
               </div>
             </div>
           </div>
         </section>
+
+        <Separator className="my-0 bg-border-subtle" />
 
         {/* ── Section 3: During Your Project ── */}
         <section className="bg-bg-surface py-16 sm:py-20">
@@ -381,11 +400,13 @@ export default function TheProcessPage() {
                 }
               >
                 {/* Required callout */}
-                <div className="glass-card border-l-2 border-accent-rose p-4 mb-5">
+                <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-rose mb-5">
+                  <CardContent className="p-4">
                   <p className="font-semibold text-accent-rose">
                     REQUIRED — Students MUST maintain a project logbook documenting planning, execution, results, and sources.
                   </p>
-                </div>
+                  </CardContent>
+                </Card>
 
                 <p className="mb-5 text-text-secondary">
                   A research logbook is a detailed record of your entire scientific
@@ -430,6 +451,8 @@ export default function TheProcessPage() {
           </div>
         </section>
 
+        <Separator className="my-0 bg-border-subtle" />
+
         {/* ── Section 4: After Data Collection ── */}
         <section className="bg-bg-primary py-16 sm:py-20">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -457,27 +480,33 @@ export default function TheProcessPage() {
                     to be complicated! Here are some things to look at:
                   </p>
                   <div className="grid sm:grid-cols-3 gap-4">
-                    <div className="glass-card p-5 text-center">
+                    <Card className="bg-bg-surface border-border-subtle">
+                      <CardContent className="p-5 text-center">
                       <p className="font-display font-bold text-accent-indigo text-lg mb-2">Average</p>
                       <p className="text-sm text-text-secondary">
                         Add up your results and divide by the number of trials to
                         find the average.
                       </p>
-                    </div>
-                    <div className="glass-card p-5 text-center">
+                      </CardContent>
+                    </Card>
+                    <Card className="bg-bg-surface border-border-subtle">
+                      <CardContent className="p-5 text-center">
                       <p className="font-display font-bold text-accent-cyan text-lg mb-2">Compare</p>
                       <p className="text-sm text-text-secondary">
                         Compare groups or conditions to see if there are differences
                         between them.
                       </p>
-                    </div>
-                    <div className="glass-card p-5 text-center">
+                      </CardContent>
+                    </Card>
+                    <Card className="bg-bg-surface border-border-subtle">
+                      <CardContent className="p-5 text-center">
                       <p className="font-display font-bold text-accent-amber text-lg mb-2">Patterns</p>
                       <p className="text-sm text-text-secondary">
                         Look for patterns: Are results increasing, decreasing, or
                         staying the same?
                       </p>
-                    </div>
+                      </CardContent>
+                    </Card>
                   </div>
                 </CollapsibleSection>
               </div>
@@ -506,17 +535,21 @@ export default function TheProcessPage() {
                       "Why results matter -- Explain what your findings mean and why they are important.",
                     ]}
                   />
-                  <div className="glass-card border-l-2 border-accent-cyan p-4 mt-5">
+                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-cyan mt-5">
+                    <CardContent className="p-4">
                     <p className="font-medium text-accent-cyan">
                       Tip: Write your abstract in past tense, since your experiment
                       is already complete.
                     </p>
-                  </div>
+                    </CardContent>
+                  </Card>
                 </CollapsibleSection>
               </div>
             </div>
           </div>
         </section>
+
+        <Separator className="my-0 bg-border-subtle" />
 
         {/* ── Section 5: Display ── */}
         <section className="bg-bg-surface py-16 sm:py-20">
@@ -528,7 +561,8 @@ export default function TheProcessPage() {
               </h2>
             </div>
 
-            <div className="glass-card p-6 sm:p-8 reveal stagger-1">
+            <Card className="bg-bg-surface border-border-subtle reveal stagger-1">
+              <CardContent className="p-6 sm:p-8">
               <p className="text-lg mb-5 text-text-secondary">
                 Your display board is the first thing judges see &mdash; make it
                 clear, organized, and engaging!
@@ -562,7 +596,7 @@ export default function TheProcessPage() {
 
               <Link
                 href="/display-and-safety"
-                className="btn-ghost"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-border-subtle bg-transparent text-text-primary font-medium text-sm px-6 py-3 hover:border-border-hover hover:bg-bg-surface transition-colors"
               >
                 View Display & Safety Guidelines
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -570,9 +604,12 @@ export default function TheProcessPage() {
                   <polyline points="12 5 19 12 12 19" />
                 </svg>
               </Link>
-            </div>
+              </CardContent>
+            </Card>
           </div>
         </section>
+
+        <Separator className="my-0 bg-border-subtle" />
 
         {/* ── Section 6: Preparing for Judging ── */}
         <section className="bg-bg-primary py-16 sm:py-20">
@@ -646,13 +683,15 @@ export default function TheProcessPage() {
                       { area: "Clarity", desc: "Is the project clearly explained? Are the data, charts, and conclusions easy to understand?" },
                       { area: "Presentation", desc: "Is the display board well-organized and visually appealing? Can the student explain their work effectively?" },
                     ].map((item) => (
-                      <div
+                      <Card
                         key={item.area}
-                        className="glass-card-hover p-5"
+                        className="bg-bg-surface border-border-subtle hover:border-border-hover transition-colors"
                       >
+                        <CardContent className="p-5">
                         <p className="font-display font-semibold text-text-primary">{item.area}</p>
                         <p className="text-sm text-text-muted mt-1.5">{item.desc}</p>
-                      </div>
+                        </CardContent>
+                      </Card>
                     ))}
                   </div>
                 </CollapsibleSection>

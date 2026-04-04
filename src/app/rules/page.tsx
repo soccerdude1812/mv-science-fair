@@ -1,5 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 const ruleCards = [
   {
@@ -85,24 +87,88 @@ export default function RulesPage() {
               href={card.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={`reveal stagger-${i + 1} glass-card-hover p-6 border-l-4 ${card.border} block group`}
+              className={`reveal stagger-${i + 1} block group`}
             >
+              <Card className={`bg-bg-surface border-border-subtle hover:border-border-hover transition-colors border-l-4 ${card.border}`}>
+                <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div
+                    className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${card.bg} ${card.accent}`}
+                    aria-hidden="true"
+                  >
+                    {card.icon}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-display font-bold text-text-primary text-lg flex items-center gap-2">
+                      {card.title}
+                    </h3>
+                    <p className="mt-2 text-text-secondary leading-relaxed">
+                      {card.description}
+                    </p>
+                    <span className={`inline-flex items-center gap-1.5 mt-3 text-sm font-medium ${card.accent} group-hover:gap-2.5 transition-all`}>
+                      View Rules Document
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+                </CardContent>
+              </Card>
+            </a>
+          ))}
+
+          <Separator className="my-0 bg-border-subtle" />
+
+          {/* Display & Safety link */}
+          <Link
+            href="/display-and-safety"
+            className="reveal stagger-5 block group"
+          >
+            <Card className="bg-bg-surface border-border-subtle hover:border-border-hover transition-colors">
+              <CardContent className="p-6">
               <div className="flex items-start gap-4">
                 <div
-                  className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${card.bg} ${card.accent}`}
+                  className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-accent-emerald/10 text-accent-emerald"
                   aria-hidden="true"
                 >
-                  {card.icon}
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <rect x="2" y="3" width="20" height="14" rx="2" />
+                    <line x1="8" y1="21" x2="16" y2="21" />
+                    <line x1="12" y1="17" x2="12" y2="21" />
+                  </svg>
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-display font-bold text-text-primary text-lg flex items-center gap-2">
-                    {card.title}
+                  <h3 className="font-display font-bold text-text-primary text-lg">
+                    Display and Safety Rules
                   </h3>
                   <p className="mt-2 text-text-secondary leading-relaxed">
-                    {card.description}
+                    Requirements for project display boards including dimensions,
+                    safety guidelines, acknowledgments, and citations.
                   </p>
-                  <span className={`inline-flex items-center gap-1.5 mt-3 text-sm font-medium ${card.accent} group-hover:gap-2.5 transition-all`}>
-                    View Rules Document
+                  <span className="inline-flex items-center gap-1.5 mt-3 text-sm font-medium text-accent-emerald group-hover:gap-2.5 transition-all">
+                    View Display & Safety Page
                     <svg
                       width="16"
                       height="16"
@@ -114,68 +180,14 @@ export default function RulesPage() {
                       strokeLinejoin="round"
                       aria-hidden="true"
                     >
-                      <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
-                      <polyline points="15 3 21 3 21 9" />
-                      <line x1="10" y1="14" x2="21" y2="3" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
                     </svg>
                   </span>
                 </div>
               </div>
-            </a>
-          ))}
-
-          {/* Display & Safety link */}
-          <Link
-            href="/display-and-safety"
-            className="reveal stagger-5 glass-card-hover p-6 block group"
-          >
-            <div className="flex items-start gap-4">
-              <div
-                className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-accent-emerald/10 text-accent-emerald"
-                aria-hidden="true"
-              >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect x="2" y="3" width="20" height="14" rx="2" />
-                  <line x1="8" y1="21" x2="16" y2="21" />
-                  <line x1="12" y1="17" x2="12" y2="21" />
-                </svg>
-              </div>
-              <div className="min-w-0 flex-1">
-                <h3 className="font-display font-bold text-text-primary text-lg">
-                  Display and Safety Rules
-                </h3>
-                <p className="mt-2 text-text-secondary leading-relaxed">
-                  Requirements for project display boards including dimensions,
-                  safety guidelines, acknowledgments, and citations.
-                </p>
-                <span className="inline-flex items-center gap-1.5 mt-3 text-sm font-medium text-accent-emerald group-hover:gap-2.5 transition-all">
-                  View Display & Safety Page
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </span>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </Link>
         </div>
       </div>

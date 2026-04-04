@@ -1,5 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 export default function StudentsFamiliesPage() {
   return (
@@ -11,7 +13,8 @@ export default function StudentsFamiliesPage() {
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-10">
         {/* Getting Started */}
-        <section className="reveal glass-card p-8 sm:p-10">
+        <Card className="reveal bg-bg-surface border-border-subtle">
+          <CardContent className="p-8 sm:p-10">
           <div className="flex flex-col sm:flex-row items-start gap-6">
             <div className="shrink-0 w-16 h-16 rounded-2xl bg-accent-indigo/10 text-accent-indigo flex items-center justify-center" aria-hidden="true">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -29,7 +32,7 @@ export default function StudentsFamiliesPage() {
               </p>
               <Link
                 href="/the-process"
-                className="btn-glow"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-[#0A0A0F] font-semibold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
               >
                 View The Process Guide
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -39,10 +42,14 @@ export default function StudentsFamiliesPage() {
               </Link>
             </div>
           </div>
-        </section>
+          </CardContent>
+        </Card>
+
+        <Separator className="my-0 bg-border-subtle" />
 
         {/* After Registration */}
-        <section className="reveal glass-card p-6 sm:p-8 border-l-4 border-l-accent-amber">
+        <Card className="reveal bg-bg-surface border-border-subtle border-l-4 border-l-accent-amber">
+          <CardContent className="p-6 sm:p-8">
           <div className="flex items-start gap-4">
             <div className="shrink-0 w-10 h-10 rounded-lg bg-accent-amber/10 text-accent-amber flex items-center justify-center" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -65,75 +72,93 @@ export default function StudentsFamiliesPage() {
               </p>
             </div>
           </div>
-        </section>
+          </CardContent>
+        </Card>
+
+        <Separator className="my-0 bg-border-subtle" />
 
         {/* Resources */}
         <section className="reveal">
           <h2 className="text-2xl font-display font-bold text-text-primary mb-6">Resources</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <Link href="/display-and-safety" className="glass-card-hover p-6 block group">
-              <div className="w-10 h-10 rounded-lg bg-accent-indigo/10 text-accent-indigo flex items-center justify-center mb-4" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="3" width="20" height="14" rx="2" />
-                  <line x1="8" y1="21" x2="16" y2="21" />
-                  <line x1="12" y1="17" x2="12" y2="21" />
-                </svg>
-              </div>
-              <h3 className="font-display font-semibold text-text-primary mb-2">
-                Planning Your Presentation
-              </h3>
-              <p className="text-sm text-text-secondary leading-relaxed">
-                Tips on creating an effective display board and preparing for
-                your presentation to judges.
-              </p>
-              <span className="mt-3 inline-flex items-center gap-1 text-xs text-accent-indigo font-medium group-hover:gap-2 transition-all">
-                View Display &amp; Safety Guidelines
-              </span>
+            <Link href="/display-and-safety" className="block group">
+              <Card className="bg-bg-surface border-border-subtle hover:border-border-hover transition-colors h-full">
+                <CardContent className="p-6">
+                <div className="w-10 h-10 rounded-lg bg-accent-indigo/10 text-accent-indigo flex items-center justify-center mb-4" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" />
+                    <line x1="8" y1="21" x2="16" y2="21" />
+                    <line x1="12" y1="17" x2="12" y2="21" />
+                  </svg>
+                </div>
+                <h3 className="font-display font-semibold text-text-primary mb-2">
+                  Planning Your Presentation
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  Tips on creating an effective display board and preparing for
+                  your presentation to judges.
+                </p>
+                <span className="mt-3 inline-flex items-center gap-1 text-xs text-accent-indigo font-medium group-hover:gap-2 transition-all">
+                  View Display &amp; Safety Guidelines
+                </span>
+                </CardContent>
+              </Card>
             </Link>
 
-            <Link href="/the-process#judging" className="glass-card-hover p-6 block group">
-              <div className="w-10 h-10 rounded-lg bg-accent-cyan/10 text-accent-cyan flex items-center justify-center mb-4" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                </svg>
-              </div>
-              <h3 className="font-display font-semibold text-text-primary mb-2">
-                Judging Questions
-              </h3>
-              <p className="text-sm text-text-secondary leading-relaxed">
-                Practice questions that judges commonly ask so you can prepare
-                confident answers.
-              </p>
-              <span className="mt-3 inline-flex items-center gap-1 text-xs text-accent-cyan font-medium group-hover:gap-2 transition-all">
-                View on The Process page
-              </span>
+            <Link href="/the-process#judging" className="block group">
+              <Card className="bg-bg-surface border-border-subtle hover:border-border-hover transition-colors h-full">
+                <CardContent className="p-6">
+                <div className="w-10 h-10 rounded-lg bg-accent-cyan/10 text-accent-cyan flex items-center justify-center mb-4" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                  </svg>
+                </div>
+                <h3 className="font-display font-semibold text-text-primary mb-2">
+                  Judging Questions
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  Practice questions that judges commonly ask so you can prepare
+                  confident answers.
+                </p>
+                <span className="mt-3 inline-flex items-center gap-1 text-xs text-accent-cyan font-medium group-hover:gap-2 transition-all">
+                  View on The Process page
+                </span>
+                </CardContent>
+              </Card>
             </Link>
 
-            <Link href="/the-process#judging" className="glass-card-hover p-6 block group">
-              <div className="w-10 h-10 rounded-lg bg-accent-amber/10 text-accent-amber flex items-center justify-center mb-4" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="2" />
-                  <line x1="3" y1="9" x2="21" y2="9" />
-                  <line x1="3" y1="15" x2="21" y2="15" />
-                  <line x1="9" y1="3" x2="9" y2="21" />
-                </svg>
-              </div>
-              <h3 className="font-display font-semibold text-text-primary mb-2">
-                Judging Rubric
-              </h3>
-              <p className="text-sm text-text-secondary leading-relaxed">
-                See exactly how judges will evaluate your project so you know
-                what to focus on.
-              </p>
-              <span className="mt-3 inline-flex items-center gap-1 text-xs text-accent-amber font-medium group-hover:gap-2 transition-all">
-                View on The Process page
-              </span>
+            <Link href="/the-process#judging" className="block group">
+              <Card className="bg-bg-surface border-border-subtle hover:border-border-hover transition-colors h-full">
+                <CardContent className="p-6">
+                <div className="w-10 h-10 rounded-lg bg-accent-amber/10 text-accent-amber flex items-center justify-center mb-4" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <line x1="3" y1="9" x2="21" y2="9" />
+                    <line x1="3" y1="15" x2="21" y2="15" />
+                    <line x1="9" y1="3" x2="9" y2="21" />
+                  </svg>
+                </div>
+                <h3 className="font-display font-semibold text-text-primary mb-2">
+                  Judging Rubric
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  See exactly how judges will evaluate your project so you know
+                  what to focus on.
+                </p>
+                <span className="mt-3 inline-flex items-center gap-1 text-xs text-accent-amber font-medium group-hover:gap-2 transition-all">
+                  View on The Process page
+                </span>
+                </CardContent>
+              </Card>
             </Link>
           </div>
         </section>
 
+        <Separator className="my-0 bg-border-subtle" />
+
         {/* Quick Links */}
-        <section className="reveal glass-card p-6 sm:p-8">
+        <Card className="reveal bg-bg-surface border-border-subtle">
+          <CardContent className="p-6 sm:p-8">
           <h2 className="text-xl font-display font-bold text-text-primary mb-4">Quick Links</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             <Link
@@ -221,10 +246,14 @@ export default function StudentsFamiliesPage() {
               </div>
             </Link>
           </div>
-        </section>
+          </CardContent>
+        </Card>
+
+        <Separator className="my-0 bg-border-subtle" />
 
         {/* Contact */}
-        <section className="reveal glass-card p-8 text-center border-t-2 border-t-accent-indigo">
+        <Card className="reveal bg-bg-surface border-border-subtle border-t-2 border-t-accent-indigo">
+          <CardContent className="p-8 text-center">
           <h2 className="text-2xl font-display font-bold text-text-primary mb-3">Questions?</h2>
           <p className="text-text-secondary mb-6 max-w-lg mx-auto">
             If you have any questions about the science fair, registration, or
@@ -232,7 +261,7 @@ export default function StudentsFamiliesPage() {
           </p>
           <a
             href="mailto:sciencefair@mvwsd.org"
-            className="btn-glow"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-[#0A0A0F] font-semibold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -240,7 +269,8 @@ export default function StudentsFamiliesPage() {
             </svg>
             sciencefair@mvwsd.org
           </a>
-        </section>
+          </CardContent>
+        </Card>
       </div>
     </>
   );

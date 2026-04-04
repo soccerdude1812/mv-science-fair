@@ -1,3 +1,6 @@
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+
 interface PageHeroProps {
   title: string;
   subtitle?: string;
@@ -18,12 +21,8 @@ export default function PageHero({ title, subtitle, children }: PageHeroProps) {
       />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-        {/* Gradient accent line */}
-        <div
-          className="w-12 h-1 rounded-full mb-8"
-          style={{ background: "var(--gradient-accent)" }}
-          aria-hidden="true"
-        />
+        {/* Accent line */}
+        <Separator className="w-12 h-1 bg-accent-indigo mb-8" />
 
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-semibold tracking-[-0.03em] text-text-primary animate-fade-in-up">
           {title}

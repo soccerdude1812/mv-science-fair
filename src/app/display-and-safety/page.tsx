@@ -1,4 +1,6 @@
 import PageHero from "@/components/PageHero";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 const rules = [
   {
@@ -118,22 +120,25 @@ export default function DisplayAndSafetyPage() {
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         {/* Intro */}
-        <section className="reveal glass-card p-8 mb-10">
+        <Card className="reveal bg-bg-surface border-border-subtle mb-10">
+          <CardContent className="p-8">
           <p className="text-lg text-text-secondary leading-relaxed">
             Your display board is the first impression judges will have of your
             project. Follow these guidelines to make sure it&apos;s safe,
             within the required dimensions, and presents your work in the best
             possible way.
           </p>
-        </section>
+          </CardContent>
+        </Card>
 
         {/* Rules */}
         <div className="space-y-5">
           {rules.map((rule, i) => (
-            <section
+            <Card
               key={rule.number}
-              className="reveal glass-card p-6 border-l-4 border-l-accent-indigo"
+              className="reveal bg-bg-surface border-border-subtle border-l-4 border-l-accent-indigo"
             >
+              <CardContent className="p-6">
               <div className="flex items-start gap-4">
                 <div
                   className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-bg-surface ${accentColors[i]}`}
@@ -179,12 +184,16 @@ export default function DisplayAndSafetyPage() {
                   )}
                 </div>
               </div>
-            </section>
+              </CardContent>
+            </Card>
           ))}
         </div>
 
+        <Separator className="my-8 bg-border-subtle" />
+
         {/* Required Board Content */}
-        <section className="reveal mt-12 glass-card p-8 border-t-2 border-t-accent-indigo">
+        <Card className="reveal bg-bg-surface border-border-subtle border-t-2 border-t-accent-indigo">
+          <CardContent className="p-8">
           <h2 className="text-2xl font-display font-bold text-text-primary mb-4">Required Board Content</h2>
           <p className="text-text-secondary mb-5">Your display board must include:</p>
           <div className="grid sm:grid-cols-2 gap-3">
@@ -217,10 +226,12 @@ export default function DisplayAndSafetyPage() {
               </div>
             ))}
           </div>
-        </section>
+          </CardContent>
+        </Card>
 
         {/* Quick Reference */}
-        <section className="reveal mt-8 glass-card p-8 border-t-2 border-t-accent-cyan">
+        <Card className="reveal mt-8 bg-bg-surface border-border-subtle border-t-2 border-t-accent-cyan">
+          <CardContent className="p-8">
           <h2 className="text-2xl font-display font-bold text-text-primary mb-6">Quick Reference Checklist</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
@@ -253,7 +264,8 @@ export default function DisplayAndSafetyPage() {
               </div>
             ))}
           </div>
-        </section>
+          </CardContent>
+        </Card>
       </div>
     </>
   );
