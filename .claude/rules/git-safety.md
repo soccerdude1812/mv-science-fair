@@ -1,0 +1,1 @@
+/Users/eeshan/OS/.claude/rules/git-safety.md
