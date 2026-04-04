@@ -3,6 +3,7 @@ import { Inter, Geist } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
+import ScienceBackground from "@/components/ScienceBackground";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -54,6 +55,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
+        <ScienceBackground />
         <ScrollReveal />
         <Navbar />
         <main id="main-content" className="flex-1 relative z-10">
