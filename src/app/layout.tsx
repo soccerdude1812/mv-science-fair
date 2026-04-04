@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Geist } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ScrollReveal from "@/components/ScrollReveal";
+import ScienceBackground from "@/components/ScienceBackground";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const inter = Inter({
   variable: "--font-display",
@@ -41,17 +46,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${interBody.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", inter.variable, interBody.variable, "font-sans", geist.variable)}
     >
-      <body className="min-h-full flex flex-col bg-bg-white text-text-body">
+      <body className="min-h-full flex flex-col bg-bg-primary text-text-secondary">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-accent-primary focus:text-white focus:top-0 focus:left-0 focus:font-bold"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-accent-indigo focus:text-bg-deep focus:top-0 focus:left-0 focus:font-bold"
         >
           Skip to main content
         </a>
+        <ScienceBackground />
+        <ScrollReveal />
         <Navbar />
-        <main id="main-content" className="flex-1">
+        <main id="main-content" className="flex-1 relative z-10">
           {children}
         </main>
         <Footer />

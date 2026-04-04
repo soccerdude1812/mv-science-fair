@@ -1,12 +1,8 @@
-import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import FormCard from "@/components/FormCard";
-
-export const metadata: Metadata = {
-  title: "Forms",
-  description:
-    "Access all MVWSD Science Fair forms including the interest form, application, risk approval forms, and volunteer sign-ups.",
-};
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 function FormIcon() {
   return (
@@ -49,34 +45,34 @@ function RequirementBox({
   examplesNotRequired: string;
 }) {
   return (
-    <div className="mt-4 bg-bg-light border border-border-default rounded-lg p-4 space-y-3">
-      <h4 className="font-display font-semibold text-text-heading text-sm">{title}</h4>
+    <div className="mt-4 bg-bg-surface border border-border-subtle rounded-lg p-4 space-y-3">
+      <h4 className="font-semibold text-text-primary text-sm">{title}</h4>
       <div className="grid sm:grid-cols-2 gap-3">
-        <div className="p-3 bg-accent-rose-light/50 rounded-lg border border-accent-rose/10">
+        <div className="p-3 bg-accent-rose/10 rounded-lg border border-accent-rose/20">
           <p className="text-xs font-semibold text-accent-rose uppercase tracking-wider mb-1">
             Required when:
           </p>
-          <p className="text-sm text-text-body">{required}</p>
+          <p className="text-sm text-text-secondary">{required}</p>
         </div>
-        <div className="p-3 bg-accent-secondary-light/50 rounded-lg border border-accent-secondary/10">
-          <p className="text-xs font-semibold text-accent-secondary uppercase tracking-wider mb-1">
+        <div className="p-3 bg-accent-emerald/10 rounded-lg border border-accent-emerald/20">
+          <p className="text-xs font-semibold text-accent-emerald uppercase tracking-wider mb-1">
             Not required when:
           </p>
-          <p className="text-sm text-text-body">{notRequired}</p>
+          <p className="text-sm text-text-secondary">{notRequired}</p>
         </div>
       </div>
       <div className="grid sm:grid-cols-2 gap-3">
-        <div className="p-3 bg-bg-muted rounded-lg border border-border-default">
+        <div className="p-3 bg-bg-elevated rounded-lg border border-border-subtle">
           <p className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-1">
             Examples (Required):
           </p>
-          <p className="text-sm text-text-body">{examplesRequired}</p>
+          <p className="text-sm text-text-secondary">{examplesRequired}</p>
         </div>
-        <div className="p-3 bg-bg-muted rounded-lg border border-border-default">
+        <div className="p-3 bg-bg-elevated rounded-lg border border-border-subtle">
           <p className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-1">
             Examples (Not Required):
           </p>
-          <p className="text-sm text-text-body">{examplesNotRequired}</p>
+          <p className="text-sm text-text-secondary">{examplesNotRequired}</p>
         </div>
       </div>
     </div>
@@ -85,7 +81,7 @@ function RequirementBox({
 
 export default function FormsPage() {
   return (
-    <>
+    <div>
       <PageHero
         title="Forms"
         subtitle="All the forms you need, organized and easy to find. Start with the Interest Form to get started!"
@@ -93,13 +89,14 @@ export default function FormsPage() {
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12">
         {/* Main Forms */}
-        <section>
-          <h2 className="text-2xl font-display font-bold text-text-heading mb-6 flex items-center gap-3">
-            <span className="w-10 h-10 rounded-xl bg-accent-primary-light text-accent-primary flex items-center justify-center shrink-0" aria-hidden="true">
+        <section className="reveal">
+          <div className="flex items-center gap-3 mb-6">
+            <span className="w-10 h-10 rounded-xl bg-accent-indigo/10 text-accent-indigo flex items-center justify-center shrink-0" aria-hidden="true">
               <FormIcon />
             </span>
-            Main Forms
-          </h2>
+            <h2 className="text-2xl font-bold text-text-primary">Main Forms</h2>
+            <Badge variant="secondary" className="ml-2">MAIN FORMS</Badge>
+          </div>
           <div className="space-y-4">
             <FormCard
               title="Interest Form"
@@ -121,15 +118,18 @@ export default function FormsPage() {
           </div>
         </section>
 
+        <Separator className="my-0 bg-border-subtle" />
+
         {/* Risk/Approval Forms */}
-        <section>
-          <h2 className="text-2xl font-display font-bold text-text-heading mb-2 flex items-center gap-3">
-            <span className="w-10 h-10 rounded-xl bg-accent-warm-light text-accent-warm flex items-center justify-center shrink-0" aria-hidden="true">
+        <section className="reveal">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="w-10 h-10 rounded-xl bg-accent-amber/10 text-accent-amber flex items-center justify-center shrink-0" aria-hidden="true">
               <ShieldIcon />
             </span>
-            Risk/Approval Forms
-          </h2>
-          <p className="text-text-body mb-6 ml-[52px]">
+            <h2 className="text-2xl font-bold text-text-primary">Risk/Approval Forms</h2>
+            <Badge variant="secondary" className="ml-2">RISK/APPROVAL FORMS</Badge>
+          </div>
+          <p className="text-text-secondary mb-6 ml-[52px]">
             These forms are only required if your project involves specific
             materials or participants. Read the descriptions carefully to
             determine which apply to your project.
@@ -137,7 +137,8 @@ export default function FormsPage() {
 
           <div className="space-y-6">
             {/* Human Participation */}
-            <div className="clean-card p-6">
+            <Card className="reveal bg-bg-surface border-border-subtle">
+              <CardContent className="p-6">
               <FormCard
                 title="Human Participation Approval Form"
                 description="Required if your project involves interaction with human participants."
@@ -151,9 +152,9 @@ export default function FormsPage() {
                   </svg>
                 }
               />
-              <div className="mt-4 bg-accent-rose-light/50 border border-accent-rose/15 rounded-lg p-4 border-l-4 border-l-accent-rose">
-                <p className="font-display font-semibold text-accent-rose text-sm">Important:</p>
-                <p className="text-sm text-text-body mt-1">
+              <div className="mt-4 bg-accent-rose/10 border border-accent-rose/20 rounded-lg p-4 border-l-4 border-l-accent-rose">
+                <p className="font-semibold text-accent-rose text-sm">Important:</p>
+                <p className="text-sm text-text-secondary mt-1">
                   No projects involving any risk to human participants are permitted. All projects involving human participants must be limited to simple, safe interactions such as surveys or taste tests. Participants&apos; wellbeing and comfort must be the top priority at all times.
                 </p>
               </div>
@@ -164,10 +165,12 @@ export default function FormsPage() {
                 examplesRequired="Surveying classmates about screen time, testing how music affects study habits"
                 examplesNotRequired="Analyzing published health data, measuring plant growth"
               />
-            </div>
+            </CardContent>
+            </Card>
 
             {/* Hazardous Materials */}
-            <div className="clean-card p-6">
+            <Card className="reveal bg-bg-surface border-border-subtle">
+              <CardContent className="p-6">
               <FormCard
                 title="Hazardous Materials & Safety Approval Form"
                 description="Required if your project uses potentially dangerous materials or equipment."
@@ -187,19 +190,23 @@ export default function FormsPage() {
                 examplesRequired="Vinegar and steel wool reaction, building motor circuits"
                 examplesNotRequired="Baking soda and vinegar in small amounts, paper airplanes"
               />
-            </div>
+              </CardContent>
+            </Card>
 
           </div>
         </section>
 
+        <Separator className="my-0 bg-border-subtle" />
+
         {/* Volunteer/Judge Forms */}
-        <section>
-          <h2 className="text-2xl font-display font-bold text-text-heading mb-6 flex items-center gap-3">
-            <span className="w-10 h-10 rounded-xl bg-accent-rose-light text-accent-rose flex items-center justify-center shrink-0" aria-hidden="true">
+        <section className="reveal">
+          <div className="flex items-center gap-3 mb-6">
+            <span className="w-10 h-10 rounded-xl bg-accent-rose/10 text-accent-rose flex items-center justify-center shrink-0" aria-hidden="true">
               <HeartIcon />
             </span>
-            Volunteer & Judge Forms
-          </h2>
+            <h2 className="text-2xl font-bold text-text-primary">Volunteer & Judge Forms</h2>
+            <Badge variant="secondary" className="ml-2">VOLUNTEER/JUDGE</Badge>
+          </div>
           <div className="space-y-4">
             <FormCard
               title="Judge Sign-Up"
@@ -245,43 +252,48 @@ export default function FormsPage() {
             />
           </div>
         </section>
+
+        <Separator className="my-0 bg-border-subtle" />
+
         {/* Form Timeline */}
-        <section className="clean-card p-6 sm:p-8 border-t-2 border-t-accent-primary">
-          <h2 className="text-xl font-display font-bold text-text-heading mb-4">When to Submit Each Form</h2>
+        <Card className="reveal bg-bg-surface border-border-subtle">
+          <CardContent className="p-6 sm:p-8">
+          <h2 className="text-xl font-bold text-text-primary mb-4">When to Submit Each Form</h2>
           <div className="space-y-3">
-            <div className="flex items-start gap-3 p-3 bg-bg-light rounded-lg border border-border-default">
-              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent-primary text-white text-sm font-bold shrink-0">1</span>
+            <div className="flex items-start gap-3 p-3 bg-bg-surface rounded-lg border border-border-subtle">
+              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full text-sm font-bold shrink-0 text-[#050507]" style={{ background: "var(--gradient-accent)" }}>1</span>
               <div>
-                <span className="font-semibold text-text-heading">Interest Form</span>
-                <span className="text-text-body"> &mdash; Fill out first to let us know you want to participate.</span>
+                <span className="font-semibold text-text-primary">Interest Form</span>
+                <span className="text-text-secondary"> &mdash; Fill out first to let us know you want to participate.</span>
               </div>
             </div>
-            <div className="flex items-start gap-3 p-3 bg-bg-light rounded-lg border border-border-default">
-              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent-primary text-white text-sm font-bold shrink-0">2</span>
+            <div className="flex items-start gap-3 p-3 bg-bg-surface rounded-lg border border-border-subtle">
+              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full text-sm font-bold shrink-0 text-[#050507]" style={{ background: "var(--gradient-accent)" }}>2</span>
               <div>
-                <span className="font-semibold text-text-heading">Application &amp; Registration Form</span>
-                <span className="text-text-body"> &mdash; Submit your project details, consent, and registration when applications open. This is the only form you need to register.</span>
+                <span className="font-semibold text-text-primary">Application &amp; Registration Form</span>
+                <span className="text-text-secondary"> &mdash; Submit your project details, consent, and registration when applications open. This is the only form you need to register.</span>
               </div>
             </div>
-            <div className="flex items-start gap-3 p-3 bg-bg-light rounded-lg border border-border-default">
-              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent-warm text-white text-sm font-bold shrink-0">3</span>
+            <div className="flex items-start gap-3 p-3 bg-bg-surface rounded-lg border border-border-subtle">
+              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent-amber text-[#050507] text-sm font-bold shrink-0">3</span>
               <div>
-                <span className="font-semibold text-text-heading">Safety Forms (if needed)</span>
-                <span className="text-text-body"> &mdash; Submit the Human Participation or Hazardous Materials form only if your project requires them.</span>
+                <span className="font-semibold text-text-primary">Safety Forms (if needed)</span>
+                <span className="text-text-secondary"> &mdash; Submit the Human Participation or Hazardous Materials form only if your project requires them.</span>
               </div>
             </div>
-            <div className="flex items-start gap-3 p-3 bg-bg-light rounded-lg border border-border-default">
-              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent-secondary text-white text-sm font-bold shrink-0">
+            <div className="flex items-start gap-3 p-3 bg-bg-surface rounded-lg border border-border-subtle">
+              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent-emerald text-[#050507] text-sm font-bold shrink-0">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
               </span>
               <div>
-                <span className="font-semibold text-text-heading">Mentor Request (optional)</span>
-                <span className="text-text-body"> &mdash; Request a high school mentor anytime during the process.</span>
+                <span className="font-semibold text-text-primary">Mentor Request (optional)</span>
+                <span className="text-text-secondary"> &mdash; Request a high school mentor anytime during the process.</span>
               </div>
             </div>
           </div>
-        </section>
+          </CardContent>
+        </Card>
       </div>
-    </>
+    </div>
   );
 }

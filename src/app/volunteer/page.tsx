@@ -1,11 +1,7 @@
-import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
-
-export const metadata: Metadata = {
-  title: "Volunteer",
-  description:
-    "Volunteer at the MVWSD Science Fair! Help with event-day logistics or mentor a young scientist.",
-};
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 export default function VolunteerPage() {
   return (
@@ -15,26 +11,30 @@ export default function VolunteerPage() {
         subtitle="Want to be a superhero? As a nonprofit, we need your help to make the MVWSD Science Fair a success!"
       />
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-10">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-10">
         {/* Call to Action Banner */}
-        <div className="clean-card p-8 sm:p-10 border-t-2 border-t-accent-primary">
-          <h2 className="text-2xl sm:text-3xl font-display font-bold text-text-heading mb-4">
+        <Card className="reveal bg-bg-surface border-border-subtle">
+          <CardContent className="p-8 sm:p-10">
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-text-primary mb-4">
             Every Volunteer Makes a Difference
           </h2>
-          <p className="text-lg text-text-body max-w-2xl leading-relaxed">
+          <p className="text-lg text-text-secondary max-w-2xl leading-relaxed">
             The MVWSD Science Fair is a community-powered event. Whether you
             can spare a few hours on event day or want to mentor a student
             over several weeks, your contribution helps inspire the next
             generation of scientists.
           </p>
-        </div>
+          </CardContent>
+        </Card>
+
+        <Separator className="my-0 bg-border-subtle" />
 
         {/* Volunteer Options */}
         <div className="grid md:grid-cols-2 gap-6">
           {/* Event-Day Volunteering */}
-          <div className="clean-card overflow-hidden card-hover flex flex-col">
-            <div className="bg-accent-primary-light p-6 border-b border-border-default">
-              <div className="w-12 h-12 rounded-xl bg-white text-accent-primary flex items-center justify-center mb-4" aria-hidden="true">
+          <Card className="reveal stagger-1 bg-bg-surface border-border-subtle overflow-hidden flex flex-col">
+            <div className="p-6 border-b border-border-subtle bg-accent-indigo/5">
+              <div className="w-12 h-12 rounded-xl bg-accent-indigo/10 text-accent-indigo flex items-center justify-center mb-4" aria-hidden="true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="4" width="18" height="18" rx="2" />
                   <line x1="16" y1="2" x2="16" y2="6" />
@@ -42,42 +42,36 @@ export default function VolunteerPage() {
                   <line x1="3" y1="10" x2="21" y2="10" />
                 </svg>
               </div>
-              <h3 className="text-xl font-display font-bold text-text-heading">Event-Day Volunteering</h3>
-              <p className="text-accent-primary text-sm mt-1">
+              <h3 className="text-xl font-display font-bold text-text-primary">Event-Day Volunteering</h3>
+              <Badge variant="secondary" className="mt-2">
                 Open to High School Students &amp; Community Members
-              </p>
+              </Badge>
             </div>
             <div className="p-6 flex-1 flex flex-col">
-              <p className="text-text-body leading-relaxed flex-1">
+              <p className="text-text-secondary leading-relaxed flex-1">
                 Help with setup, registration, guiding visitors, managing the
                 event flow, and cleanup. A great way to earn community service
                 hours while supporting young scientists!
               </p>
               <div className="mt-6 space-y-3">
-                <div className="flex items-center gap-2 text-sm text-text-body">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent-primary shrink-0" aria-hidden="true">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  Event setup and cleanup
-                </div>
-                <div className="flex items-center gap-2 text-sm text-text-body">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent-primary shrink-0" aria-hidden="true">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  Registration and check-in
-                </div>
-                <div className="flex items-center gap-2 text-sm text-text-body">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent-primary shrink-0" aria-hidden="true">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  Guiding visitors and families
-                </div>
+                {[
+                  "Event setup and cleanup",
+                  "Registration and check-in",
+                  "Guiding visitors and families",
+                ].map((task, i) => (
+                  <div key={i} className="flex items-center gap-2 text-sm text-text-secondary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent-indigo shrink-0" aria-hidden="true">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    {task}
+                  </div>
+                ))}
               </div>
               <a
                 href="https://docs.google.com/forms/d/1iuy7stpEJE6Espci9gCiEdNe06Cx0DR8I73fKNuyCbg/viewform"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-accent-primary text-white font-semibold rounded-xl hover:bg-accent-primary-hover transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-[#0A0A0F] font-semibold text-sm px-6 py-3 hover:opacity-90 transition-opacity mt-6 w-full justify-center"
               >
                 Sign Up for Event Day
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -87,12 +81,12 @@ export default function VolunteerPage() {
                 </svg>
               </a>
             </div>
-          </div>
+          </Card>
 
           {/* Mentor Volunteering */}
-          <div className="clean-card overflow-hidden card-hover flex flex-col">
-            <div className="bg-accent-secondary-light p-6 border-b border-border-default">
-              <div className="w-12 h-12 rounded-xl bg-white text-accent-secondary flex items-center justify-center mb-4" aria-hidden="true">
+          <Card className="reveal stagger-2 bg-bg-surface border-border-subtle overflow-hidden flex flex-col">
+            <div className="p-6 border-b border-border-subtle bg-accent-cyan/5">
+              <div className="w-12 h-12 rounded-xl bg-accent-cyan/10 text-accent-cyan flex items-center justify-center mb-4" aria-hidden="true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
                   <circle cx="9" cy="7" r="4" />
@@ -100,39 +94,33 @@ export default function VolunteerPage() {
                   <line x1="22" y1="11" x2="16" y2="11" />
                 </svg>
               </div>
-              <h3 className="text-xl font-display font-bold text-text-heading">Mentor Volunteering</h3>
-              <p className="text-accent-secondary text-sm mt-1">
+              <h3 className="text-xl font-display font-bold text-text-primary">Mentor Volunteering</h3>
+              <Badge variant="secondary" className="mt-2">
                 Open to High School Students
-              </p>
+              </Badge>
             </div>
             <div className="p-6 flex-1 flex flex-col">
-              <p className="text-text-body leading-relaxed flex-1">
+              <p className="text-text-secondary leading-relaxed flex-1">
                 Share your knowledge and experience by guiding a young scientist
                 through their project. Help them develop research skills,
                 understand the scientific method, and build confidence.
               </p>
               <div className="mt-6 space-y-3">
-                <div className="flex items-center gap-2 text-sm text-text-body">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent-secondary shrink-0" aria-hidden="true">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  Guide project development
-                </div>
-                <div className="flex items-center gap-2 text-sm text-text-body">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent-secondary shrink-0" aria-hidden="true">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  Help with scientific method
-                </div>
-                <div className="flex items-center gap-2 text-sm text-text-body">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent-secondary shrink-0" aria-hidden="true">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  Build student confidence
-                </div>
+                {[
+                  "Guide project development",
+                  "Help with scientific method",
+                  "Build student confidence",
+                ].map((task, i) => (
+                  <div key={i} className="flex items-center gap-2 text-sm text-text-secondary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent-cyan shrink-0" aria-hidden="true">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    {task}
+                  </div>
+                ))}
               </div>
-              <div className="mt-6 mb-4 p-4 rounded-lg bg-bg-light border border-border-default">
-                <h4 className="font-display font-semibold text-text-heading text-sm mb-3">Mentor Responsibilities</h4>
+              <div className="mt-6 mb-4 p-4 rounded-xl bg-bg-surface border border-border-subtle">
+                <h4 className="font-display font-semibold text-text-primary text-sm mb-3">Mentor Responsibilities</h4>
                 <div className="space-y-2">
                   {[
                     "Act as an advisor — guide and support, but the project must remain the student's own work",
@@ -141,8 +129,8 @@ export default function VolunteerPage() {
                     "Must report any concerns about plagiarism, data fabrication, or unsafe conduct to the committee",
                     "Maintain professional boundaries and follow all school policies regarding contact with minors",
                   ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-2 text-sm text-text-body">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent-secondary shrink-0 mt-0.5" aria-hidden="true">
+                    <div key={i} className="flex items-start gap-2 text-sm text-text-secondary">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent-cyan shrink-0 mt-0.5" aria-hidden="true">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                       <span>{item}</span>
@@ -154,7 +142,7 @@ export default function VolunteerPage() {
                 href="https://docs.google.com/forms/d/1KctjqLpK1bSmvTULL0OjStBtLDaBQhSY_xb-NmvyxOg/viewform"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-accent-secondary text-white font-semibold rounded-xl hover:opacity-90 transition-opacity"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-[#0A0A0F] font-semibold text-sm px-6 py-3 hover:opacity-90 transition-opacity mt-2 w-full justify-center"
               >
                 Sign Up as Mentor
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -164,31 +152,34 @@ export default function VolunteerPage() {
                 </svg>
               </a>
             </div>
-          </div>
+          </Card>
         </div>
 
+        <Separator className="my-0 bg-border-subtle" />
+
         {/* Why Volunteer */}
-        <div className="clean-card p-8 border-t-2 border-t-accent-warm">
-          <h2 className="text-2xl font-display font-bold text-text-heading mb-6">
+        <Card className="reveal bg-bg-surface border-border-subtle">
+          <CardContent className="p-8">
+          <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
             Why Volunteer?
           </h2>
           <div className="grid sm:grid-cols-3 gap-6">
             <div className="text-center">
-              <div className="w-14 h-14 rounded-2xl bg-accent-rose-light text-accent-rose flex items-center justify-center mx-auto mb-3" aria-hidden="true">
+              <div className="w-14 h-14 rounded-2xl bg-accent-rose/10 text-accent-rose flex items-center justify-center mx-auto mb-3" aria-hidden="true">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
                 </svg>
               </div>
-              <h3 className="font-display font-semibold text-text-heading mb-1">
+              <h3 className="font-display font-semibold text-text-primary mb-1">
                 Inspire Young Minds
               </h3>
-              <p className="text-sm text-text-body">
+              <p className="text-sm text-text-secondary">
                 Your encouragement can spark a lifelong love of science in a
                 child.
               </p>
             </div>
             <div className="text-center">
-              <div className="w-14 h-14 rounded-2xl bg-accent-primary-light text-accent-primary flex items-center justify-center mx-auto mb-3" aria-hidden="true">
+              <div className="w-14 h-14 rounded-2xl bg-accent-indigo/10 text-accent-indigo flex items-center justify-center mx-auto mb-3" aria-hidden="true">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
                   <circle cx="9" cy="7" r="4" />
@@ -196,31 +187,32 @@ export default function VolunteerPage() {
                   <path d="M16 3.13a4 4 0 010 7.75" />
                 </svg>
               </div>
-              <h3 className="font-display font-semibold text-text-heading mb-1">
+              <h3 className="font-display font-semibold text-text-primary mb-1">
                 Build Community
               </h3>
-              <p className="text-sm text-text-body">
+              <p className="text-sm text-text-secondary">
                 Connect with families, educators, and fellow science enthusiasts
                 in Mountain View.
               </p>
             </div>
             <div className="text-center">
-              <div className="w-14 h-14 rounded-2xl bg-accent-warm-light text-accent-warm flex items-center justify-center mx-auto mb-3" aria-hidden="true">
+              <div className="w-14 h-14 rounded-2xl bg-accent-amber/10 text-accent-amber flex items-center justify-center mx-auto mb-3" aria-hidden="true">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="8" r="7" />
                   <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
                 </svg>
               </div>
-              <h3 className="font-display font-semibold text-text-heading mb-1">
+              <h3 className="font-display font-semibold text-text-primary mb-1">
                 Earn Service Hours
               </h3>
-              <p className="text-sm text-text-body">
+              <p className="text-sm text-text-secondary">
                 High school students can earn community service hours while
                 making a real impact.
               </p>
             </div>
           </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </>
   );
