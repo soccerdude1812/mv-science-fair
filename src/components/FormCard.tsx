@@ -20,7 +20,7 @@ export default function FormCard({
       rel="noopener noreferrer"
       className={`group relative block glass-card-hover p-6 transition-all duration-300 ${
         highlighted
-          ? "gradient-border shadow-[0_0_20px_rgba(129,140,248,0.15)]"
+          ? "glass-card border-border-hover"
           : ""
       }`}
     >

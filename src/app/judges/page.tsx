@@ -33,7 +33,7 @@ export default function JudgesPage() {
         </section>
 
         {/* Sign Up CTA */}
-        <section className="reveal gradient-border p-8 sm:p-10 text-center">
+        <section className="reveal glass-card p-8 sm:p-10 text-center">
           <h2 className="text-2xl sm:text-3xl font-display font-bold text-text-primary mb-4">
             Ready to Make a Difference?
           </h2>

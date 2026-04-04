@@ -10,7 +10,7 @@ export default function VolunteerPage() {
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-10">
         {/* Call to Action Banner */}
-        <section className="reveal gradient-border p-8 sm:p-10">
+        <section className="reveal glass-card p-8 sm:p-10">
           <h2 className="text-2xl sm:text-3xl font-display font-bold text-text-primary mb-4">
             Every Volunteer Makes a Difference
           </h2>

@@ -8,7 +8,7 @@ const INTEREST_FORM_URL =
 export default function QRCodeSection() {
   return (
     <div className="flex flex-col items-center" id="interest">
-      <div className="glass-card gradient-border p-8">
+      <div className="glass-card p-8">
         {/* Badge */}
         <div className="flex justify-center mb-6">
           <span className="badge badge-accent">GET STARTED</span>

@@ -130,10 +130,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .glass-card-hover:hover {
-  border-color: var(--border-accent);
-  box-shadow: var(--shadow-glow);
-  transform: translateY(-2px);
-  background: rgba(18, 18, 26, 0.8);
+  border-color: var(--border-hover);
 }
 
 /* ===== SURFACE CARD ===== */
@@ -155,8 +152,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .surface-card-hover:hover {
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
 }
 
 /* ===== GRADIENT TEXT ===== */
@@ -168,41 +163,6 @@ h1, h2, h3, h4, h5, h6 {
   background-clip: text;
 }
 
-.gradient-text-reverse {
-  background: var(--gradient-accent-reverse);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ===== GRADIENT BORDER ===== */
-
-.gradient-border {
-  position: relative;
-  border: none;
-  border-radius: 1rem;
-  background: var(--bg-surface);
-}
-
-.gradient-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: var(--gradient-accent);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0.4;
-  transition: opacity var(--duration-normal) var(--ease-smooth);
-}
-
-.gradient-border:hover::before {
-  opacity: 0.8;
-}
-
 /* ===== GLOW BUTTON ===== */
 
 .btn-glow {
@@ -210,25 +170,19 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: var(--gradient-accent);
-  color: #050507;
+  background: #ffffff;
+  color: #0A0A0F;
   font-weight: 600;
   font-size: 0.875rem;
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
   border: none;
   cursor: pointer;
-  transition: box-shadow var(--duration-normal) var(--ease-smooth),
-              transform var(--duration-fast) var(--ease-smooth);
+  transition: opacity var(--duration-normal) var(--ease-smooth);
   letter-spacing: 0.01em;
 }
 
 .btn-glow:hover {
-  box-shadow: var(--shadow-glow-lg);
-  transform: translateY(-1px);
-}
-
-.btn-glow:active {
-  transform: translateY(0);
+  opacity: 0.9;
 }
 
 /* ===== GHOST BUTTON ===== */
@@ -242,7 +196,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
   font-weight: 500;
   font-size: 0.875rem;
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
   border: 1px solid var(--border-subtle);
   cursor: pointer;
   transition: border-color var(--duration-normal) var(--ease-smooth),
@@ -337,11 +291,6 @@ h1, h2, h3, h4, h5, h6 {
   100% { background-position: 0% 50%; }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
 @keyframes line-grow {
   from { height: 0; }
   to { height: 100%; }
@@ -353,10 +302,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
-}
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
 }
 
 .animate-gradient {
@@ -439,9 +384,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .badge-accent {
-  border-color: var(--border-accent);
+  border-color: var(--border-subtle);
   color: var(--accent-indigo);
-  background: var(--glow-indigo);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 /* ===== FOCUS STYLES (accessibility) ===== */
@@ -470,38 +415,6 @@ button:focus-visible {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
-}
-
-/* ===== AMBIENT BACKGROUND ===== */
-
-.ambient-glow {
-  position: fixed;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.ambient-glow::before {
-  content: '';
-  position: absolute;
-  top: -20%;
-  left: -10%;
-  width: 60%;
-  height: 60%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(129, 140, 248, 0.04) 0%, transparent 70%);
-  filter: blur(80px);
-}
-
-.ambient-glow::after {
-  content: '';
-  position: absolute;
-  bottom: -20%;
-  right: -10%;
-  width: 50%;
-  height: 50%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.03) 0%, transparent 70%);
-  filter: blur(80px);
 }
 
 /* ===== TIMELINE SPECIFIC ===== */

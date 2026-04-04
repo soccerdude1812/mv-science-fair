@@ -240,7 +240,7 @@ export default function FormsPage() {
         </section>
 
         {/* Form Timeline */}
-        <section className="reveal glass-card p-6 sm:p-8 gradient-border">
+        <section className="reveal glass-card p-6 sm:p-8">
           <h2 className="text-xl font-bold text-text-primary mb-4">When to Submit Each Form</h2>
           <div className="space-y-3">
             <div className="flex items-start gap-3 p-3 bg-bg-surface rounded-lg border border-border-subtle">

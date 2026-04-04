@@ -11,7 +11,7 @@ export default function StudentsFamiliesPage() {
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-10">
         {/* Getting Started */}
-        <section className="reveal gradient-border p-8 sm:p-10">
+        <section className="reveal glass-card p-8 sm:p-10">
           <div className="flex flex-col sm:flex-row items-start gap-6">
             <div className="shrink-0 w-16 h-16 rounded-2xl bg-accent-indigo/10 text-accent-indigo flex items-center justify-center" aria-hidden="true">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

@@ -189,26 +189,8 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="min-h-[90vh] flex items-center bg-bg-primary relative overflow-hidden">
-        {/* Ambient glow */}
-        <div
-          className="absolute top-0 left-1/4 w-[600px] h-[400px] rounded-full opacity-30 blur-3xl pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(129,140,248,0.08) 0%, transparent 70%)",
-          }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute bottom-0 right-1/4 w-[500px] h-[300px] rounded-full opacity-20 blur-3xl pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(34,211,238,0.06) 0%, transparent 70%)",
-          }}
-          aria-hidden="true"
-        />
-
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 w-full">
+      <section className="min-h-[90vh] flex items-center bg-bg-primary relative">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             {/* Left: text content */}
             <div className="max-w-3xl">
@@ -221,7 +203,7 @@ export default function Home() {
               </span>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary tracking-[-0.03em] leading-tight animate-fade-in-up [animation-delay:100ms]">
                 MVWSD Science Fair{" "}
-                <span className="gradient-text">2026</span>
+                <span className="text-accent-indigo">2026</span>
               </h1>
               <p className="mt-6 text-xl text-text-secondary leading-relaxed max-w-2xl animate-fade-in-up [animation-delay:200ms]">
                 Inspiring Young Scientists in Mountain View
