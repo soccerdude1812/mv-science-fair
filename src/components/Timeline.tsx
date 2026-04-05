@@ -131,7 +131,7 @@ export default function Timeline({ compact = false }: { compact?: boolean }) {
               </div>
 
               {/* Mobile: card always on the right of the line */}
-              <div className="md:hidden pl-12">
+              <div className="md:hidden pl-10 sm:pl-12">
                 <TimelineCard
                   step={step}
                   isActive={isActive}
@@ -169,7 +169,7 @@ function TimelineCard({
   return (
     <button
       onClick={onToggle}
-      className={`w-full max-w-md text-left glass-card-hover p-4 sm:p-5 transition-all duration-300 ${
+      className={`w-full max-w-md text-left glass-card-hover p-3 sm:p-5 transition-all duration-300 ${
         isActive
           ? "border-border-accent shadow-[0_0_20px_rgba(129,140,248,0.15)]"
           : ""

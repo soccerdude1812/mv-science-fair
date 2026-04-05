@@ -118,7 +118,7 @@ export default function DisplayAndSafetyPage() {
         subtitle="Important guidelines to ensure your project display is safe, organized, and meets all requirements."
       />
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20">
         {/* Intro */}
         <Card className="reveal bg-bg-surface border-border-subtle mb-10">
           <CardContent className="p-8">
@@ -156,29 +156,29 @@ export default function DisplayAndSafetyPage() {
                   </p>
 
                   {rule.dimensions && (
-                    <div className="mt-4 grid grid-cols-3 gap-3">
-                      <div className="text-center p-4 rounded-xl bg-accent-indigo/10 border border-accent-indigo/20">
-                        <p className="text-3xl font-display font-bold text-accent-indigo">
+                    <div className="mt-4 grid grid-cols-3 gap-2 sm:gap-3">
+                      <div className="text-center p-2.5 sm:p-4 rounded-xl bg-accent-indigo/10 border border-accent-indigo/20">
+                        <p className="text-xl sm:text-3xl font-display font-bold text-accent-indigo">
                           66&quot;
                         </p>
-                        <p className="text-sm text-text-secondary mt-1">
+                        <p className="text-xs sm:text-sm text-text-secondary mt-1">
                           Max Height
                         </p>
-                        <p className="text-xs text-text-muted">
+                        <p className="text-[10px] sm:text-xs text-text-muted">
                           (from table)
                         </p>
                       </div>
-                      <div className="text-center p-4 rounded-xl bg-accent-cyan/10 border border-accent-cyan/20">
-                        <p className="text-3xl font-display font-bold text-accent-cyan">
+                      <div className="text-center p-2.5 sm:p-4 rounded-xl bg-accent-cyan/10 border border-accent-cyan/20">
+                        <p className="text-xl sm:text-3xl font-display font-bold text-accent-cyan">
                           30&quot;
                         </p>
-                        <p className="text-sm text-text-secondary mt-1">Max Depth</p>
+                        <p className="text-xs sm:text-sm text-text-secondary mt-1">Max Depth</p>
                       </div>
-                      <div className="text-center p-4 rounded-xl bg-accent-amber/10 border border-accent-amber/20">
-                        <p className="text-3xl font-display font-bold text-accent-amber">
+                      <div className="text-center p-2.5 sm:p-4 rounded-xl bg-accent-amber/10 border border-accent-amber/20">
+                        <p className="text-xl sm:text-3xl font-display font-bold text-accent-amber">
                           48&quot;
                         </p>
-                        <p className="text-sm text-text-secondary mt-1">Max Width</p>
+                        <p className="text-xs sm:text-sm text-text-secondary mt-1">Max Width</p>
                       </div>
                     </div>
                   )}
