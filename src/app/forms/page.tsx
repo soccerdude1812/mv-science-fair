@@ -87,15 +87,15 @@ export default function FormsPage() {
         subtitle="All the forms you need, organized and easy to find. Start with the Interest Form to get started!"
       />
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 space-y-8 sm:space-y-12">
         {/* Main Forms */}
         <section className="reveal">
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center gap-3 mb-6 flex-wrap">
             <span className="w-10 h-10 rounded-xl bg-accent-indigo/10 text-accent-indigo flex items-center justify-center shrink-0" aria-hidden="true">
               <FormIcon />
             </span>
-            <h2 className="text-2xl font-bold text-text-primary">Main Forms</h2>
-            <Badge variant="secondary" className="ml-2">MAIN FORMS</Badge>
+            <h2 className="text-xl sm:text-2xl font-bold text-text-primary">Main Forms</h2>
+            <Badge variant="secondary" className="ml-auto sm:ml-2">MAIN FORMS</Badge>
           </div>
           <div className="space-y-4">
             <FormCard
@@ -122,14 +122,14 @@ export default function FormsPage() {
 
         {/* Risk/Approval Forms */}
         <section className="reveal">
-          <div className="flex items-center gap-3 mb-2">
+          <div className="flex items-center gap-3 mb-2 flex-wrap">
             <span className="w-10 h-10 rounded-xl bg-accent-amber/10 text-accent-amber flex items-center justify-center shrink-0" aria-hidden="true">
               <ShieldIcon />
             </span>
-            <h2 className="text-2xl font-bold text-text-primary">Risk/Approval Forms</h2>
-            <Badge variant="secondary" className="ml-2">RISK/APPROVAL FORMS</Badge>
+            <h2 className="text-xl sm:text-2xl font-bold text-text-primary">Risk/Approval Forms</h2>
+            <Badge variant="secondary" className="hidden sm:inline-flex">RISK/APPROVAL FORMS</Badge>
           </div>
-          <p className="text-text-secondary mb-6 ml-[52px]">
+          <p className="text-text-secondary mb-6 sm:ml-[52px]">
             These forms are only required if your project involves specific
             materials or participants. Read the descriptions carefully to
             determine which apply to your project.
@@ -200,12 +200,12 @@ export default function FormsPage() {
 
         {/* Volunteer/Judge Forms */}
         <section className="reveal">
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center gap-3 mb-6 flex-wrap">
             <span className="w-10 h-10 rounded-xl bg-accent-rose/10 text-accent-rose flex items-center justify-center shrink-0" aria-hidden="true">
               <HeartIcon />
             </span>
-            <h2 className="text-2xl font-bold text-text-primary">Volunteer & Judge Forms</h2>
-            <Badge variant="secondary" className="ml-2">VOLUNTEER/JUDGE</Badge>
+            <h2 className="text-xl sm:text-2xl font-bold text-text-primary">Volunteer & Judge Forms</h2>
+            <Badge variant="secondary" className="hidden sm:inline-flex">VOLUNTEER/JUDGE</Badge>
           </div>
           <div className="space-y-4">
             <FormCard

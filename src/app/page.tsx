@@ -193,46 +193,46 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="min-h-[90vh] flex items-center bg-bg-primary/80 relative">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <section className="min-h-[60vh] sm:min-h-[80vh] lg:min-h-[90vh] flex items-center bg-bg-primary/80 relative">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-36 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Left: text content */}
             <div className="max-w-3xl">
-              <Badge variant="secondary" className="mb-6 animate-fade-in-up">
+              <Badge variant="secondary" className="mb-4 sm:mb-6 animate-fade-in-up">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <circle cx="12" cy="12" r="3" />
                   <ellipse cx="12" cy="12" rx="10" ry="4" stroke="currentColor" strokeWidth="1.5" fill="none" />
                 </svg>
                 Grades 3-5 Elementary School
               </Badge>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary tracking-[-0.03em] leading-tight animate-fade-in-up [animation-delay:100ms]">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary tracking-[-0.03em] leading-tight animate-fade-in-up [animation-delay:100ms]">
                 MVWSD Science Fair{" "}
                 <span className="text-accent-indigo">2026</span>
               </h1>
-              <p className="mt-6 text-xl text-text-secondary leading-relaxed max-w-2xl animate-fade-in-up [animation-delay:200ms]">
+              <p className="mt-4 sm:mt-6 text-base sm:text-xl text-text-secondary leading-relaxed max-w-2xl animate-fade-in-up [animation-delay:200ms]">
                 Inspiring Young Scientists in Mountain View
               </p>
-              <div className="mt-8 flex flex-col sm:flex-row gap-4 animate-fade-in-up [animation-delay:300ms]">
+              <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-in-up [animation-delay:300ms]">
                 <a
                   href="https://docs.google.com/forms/d/1O1DXH_eq0GQIcTJcLQlrcusY5I7xKejzBw_p3WHIVao/viewform"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-[#0A0A0F] font-semibold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-[#0A0A0F] font-semibold text-sm px-6 py-3 hover:opacity-90 transition-opacity min-h-[44px]"
                 >
                   Show Your Interest
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
                 <Link
                   href="/the-process"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-border-subtle bg-transparent text-text-primary font-medium text-sm px-6 py-3 hover:border-border-hover hover:bg-bg-surface transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-border-subtle bg-transparent text-text-primary font-medium text-sm px-6 py-3 hover:border-border-hover hover:bg-bg-surface transition-colors min-h-[44px]"
                 >
                   Learn How It Works
                 </Link>
               </div>
             </div>
 
-            {/* Right: QR code */}
-            <div className="shrink-0 flex justify-center lg:justify-end animate-fade-in-up [animation-delay:200ms]">
+            {/* Right: QR code — hidden on small mobile */}
+            <div className="hidden sm:flex shrink-0 justify-center lg:justify-end animate-fade-in-up [animation-delay:200ms]">
               <QRCodeSection />
             </div>
           </div>
@@ -242,7 +242,7 @@ export default function Home() {
       <Separator className="my-0 bg-border-subtle" />
 
       {/* Info Strip */}
-      <section className="reveal py-12 sm:py-16 bg-bg-primary/80 border-t border-border-subtle">
+      <section className="reveal py-8 sm:py-12 md:py-16 bg-bg-primary/80 border-t border-border-subtle">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Card className="bg-bg-surface border-border-subtle">
             <CardContent className="p-6 sm:p-8">
@@ -272,10 +272,10 @@ export default function Home() {
       <Separator className="my-0 bg-border-subtle" />
 
       {/* Welcome */}
-      <section className="reveal py-16 sm:py-20 bg-bg-primary/80">
+      <section className="reveal py-10 sm:py-16 md:py-20 bg-bg-primary/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-[-0.03em]">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary tracking-[-0.03em]">
               Welcome to the 2026 MVWSD Science Fair!
             </h2>
             <p className="mt-6 text-lg text-text-secondary leading-relaxed">
@@ -292,10 +292,10 @@ export default function Home() {
       <Separator className="my-0 bg-border-subtle" />
 
       {/* Project Categories */}
-      <section className="reveal py-16 sm:py-20 bg-bg-surface/80">
+      <section className="reveal py-10 sm:py-16 md:py-20 bg-bg-surface/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-[-0.03em]">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary tracking-[-0.03em]">
               Project Categories
             </h2>
             <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
@@ -330,10 +330,10 @@ export default function Home() {
       <Separator className="my-0 bg-border-subtle" />
 
       {/* Timeline */}
-      <section className="reveal py-16 sm:py-20 bg-bg-primary/80">
+      <section className="reveal py-10 sm:py-16 md:py-20 bg-bg-primary/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-[-0.03em]">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary tracking-[-0.03em]">
               Your Journey
             </h2>
             <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
@@ -350,10 +350,10 @@ export default function Home() {
       <Separator className="my-0 bg-border-subtle" />
 
       {/* Quick Navigation */}
-      <section className="reveal py-16 sm:py-20 bg-bg-surface/80">
+      <section className="reveal py-10 sm:py-16 md:py-20 bg-bg-surface/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-[-0.03em]">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary tracking-[-0.03em]">
               Explore the Science Fair
             </h2>
             <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
@@ -362,7 +362,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
             {navCards.map((card, i) => (
               <Link
                 key={card.href}

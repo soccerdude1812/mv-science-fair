@@ -79,7 +79,7 @@ export default function RulesPage() {
         subtitle="Review these important rules before starting your project. Understanding the guidelines will help you plan a successful science fair experience."
       />
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20">
         <div className="grid gap-5">
           {ruleCards.map((card, i) => (
             <a

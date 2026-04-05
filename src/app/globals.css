@@ -372,6 +372,23 @@ h1, h2, h3, h4, h5, h6 {
   to { height: 100%; }
 }
 
+/* ===== MOBILE MENU ANIMATION ===== */
+
+@keyframes mobile-menu-slide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-menu-enter {
+  animation: mobile-menu-slide 0.2s ease-out forwards;
+}
+
 .animate-fade-in-up {
   animation: fade-in-up 0.6s var(--ease-smooth) forwards;
 }
@@ -546,6 +563,29 @@ button:focus-visible {
 @media (max-width: 768px) {
   .timeline-line {
     left: 24px;
+  }
+
+  /* Ensure minimum touch target sizes on mobile */
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Inline links inside text blocks should not enforce min-height */
+  p a, li a, span a, td a {
+    min-height: auto;
+    min-width: auto;
+  }
+
+  /* Reduce oversized section headings */
+  .section-heading {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-line {
+    left: 20px;
   }
 }
 

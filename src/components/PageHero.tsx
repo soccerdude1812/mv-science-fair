@@ -20,11 +20,11 @@ export default function PageHero({ title, subtitle, children }: PageHeroProps) {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-24 md:py-32">
         {/* Accent line */}
         <Separator className="w-12 h-1 bg-accent-indigo mb-8" />
 
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-semibold tracking-[-0.03em] text-text-primary animate-fade-in-up">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-semibold tracking-[-0.03em] text-text-primary animate-fade-in-up">
           {title}
         </h1>
 

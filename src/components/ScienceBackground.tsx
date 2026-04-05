@@ -40,7 +40,7 @@ const icons = [
 export default function ScienceBackground() {
   return (
     <div
-      className="fixed inset-0 pointer-events-none overflow-hidden"
+      className="fixed inset-0 pointer-events-none overflow-hidden hidden md:block"
       style={{ zIndex: 0 }}
       aria-hidden="true"
     >
