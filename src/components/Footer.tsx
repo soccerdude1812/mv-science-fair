@@ -30,8 +30,7 @@ export default function Footer() {
             </div>
             <p className="text-text-muted text-sm leading-relaxed max-w-xs">
               Inspiring young scientists across the Mountain View Whisman School
-              District. Grades 3-5 elementary school students are eligible to
-              participate.
+              District. Organized by the STEM and Research Club at Mountain View High School.
             </p>
           </div>
 
@@ -80,27 +79,9 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2.5" role="list">
               <li>
-                <a
-                  href="mailto:sciencefair@mvwsd.org"
-                  className="text-text-muted hover:text-accent-indigo text-sm transition-colors inline-flex items-center gap-2"
-                >
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                    className="shrink-0 opacity-60"
-                  >
-                    <rect x="2" y="4" width="20" height="16" rx="2" />
-                    <path d="M22 4L12 13L2 4" />
-                  </svg>
-                  sciencefair@mvwsd.org
-                </a>
+                <span className="text-text-muted text-sm">
+                  Contact email coming soon
+                </span>
               </li>
             </ul>
           </div>

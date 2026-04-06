@@ -113,6 +113,18 @@ export default function TheProcessPage() {
                     </CardContent>
                   </Card>
 
+                  {/* STEM method requirement */}
+                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-indigo mb-5">
+                    <CardContent className="p-4">
+                      <h4 className="font-display font-semibold text-accent-indigo mb-2">
+                        STEM Method Required for All Projects
+                      </h4>
+                      <p className="text-text-secondary">
+                        Every project must follow either the <strong className="text-text-primary">Scientific Method</strong> (question → hypothesis → experiment → data → conclusion) or the <strong className="text-text-primary">Engineering Design Process</strong> (problem → design → build → test → improve). Your project must include at least 3 trials to ensure reliable results.
+                      </p>
+                    </CardContent>
+                  </Card>
+
                   {/* Category cards */}
                   <div className="mb-5">
                     <h4 className="font-display font-semibold text-text-primary mb-4">
@@ -122,7 +134,7 @@ export default function TheProcessPage() {
                       {[
                         {
                           name: "Life & Health Sciences",
-                          desc: "people, plants, psychology, environment",
+                          desc: "people, plants, psychology, environment — no live animals, no nutrition or diet experiments",
                           color: "text-accent-emerald",
                           dot: "bg-accent-emerald",
                         },
@@ -140,7 +152,7 @@ export default function TheProcessPage() {
                         },
                         {
                           name: "Technology & Innovation",
-                          desc: "computers, coding, robotics, apps, problem-solving inventions (must demonstrate a STEM method such as the engineering design process)",
+                          desc: "computers, coding, robotics, apps, problem-solving inventions",
                           color: "text-accent-purple",
                           dot: "bg-accent-purple",
                         },
@@ -183,6 +195,30 @@ export default function TheProcessPage() {
                     </p>
                     </CardContent>
                   </Card>
+
+                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-rose mt-3">
+                    <CardContent className="p-4">
+                      <p className="font-semibold text-accent-rose">
+                        Each student or team may only submit one project.
+                      </p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-rose mt-3">
+                    <CardContent className="p-4">
+                      <p className="font-semibold text-accent-rose">
+                        No live organisms: You may not use live animals, bacteria, mold, or any living creatures in your project.
+                      </p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-amber mt-3">
+                    <CardContent className="p-4">
+                      <p className="font-semibold text-accent-amber">
+                        A parent or guardian must supervise all experiments.
+                      </p>
+                    </CardContent>
+                  </Card>
                 </CollapsibleSection>
               </div>
 
@@ -206,7 +242,7 @@ export default function TheProcessPage() {
                       { title: "Research Question", desc: "What specific question are you trying to answer?" },
                       { title: "Hypothesis", desc: 'Your educated guess about the answer. Use "If... then... because..." format.' },
                       { title: "Materials", desc: "List everything you'll need for your experiment." },
-                      { title: "Procedure", desc: "Step-by-step instructions someone else could follow to repeat your experiment. Your experiment should include repetition (multiple trials) so results can be verified." },
+                      { title: "Procedure", desc: "Step-by-step instructions someone else could follow to repeat your experiment. Your experiment must include at least 3 trials so results can be verified." },
                       { title: "Variables", desc: "Identify what you're changing (independent), measuring (dependent), and keeping the same (controlled)." },
                       { title: "Data Collection", desc: "How will you record and organize your results?" },
                     ].map((item) => (
@@ -265,7 +301,7 @@ export default function TheProcessPage() {
                       Volunteer mentors can help you with your project by guiding you through the scientific method, helping you stay organized, and offering encouragement along the way.
                     </p>
                     <p className="text-sm text-text-muted">
-                      Mentors are high school student volunteers from the community.
+                      Mentors are high school student volunteers from the STEM and Research Club at Mountain View High School. The typical time commitment is approximately 1–2 hours per week.
                     </p>
                     </CardContent>
                   </Card>
@@ -448,6 +484,26 @@ export default function TheProcessPage() {
                 </div>
               </CollapsibleSection>
             </div>
+
+            <Card className="reveal stagger-2 bg-bg-surface border-border-subtle border-l-4 border-l-accent-amber mt-4">
+              <CardContent className="p-6">
+                <h3 className="font-display font-semibold text-text-primary text-lg mb-3">Important Reminders</h3>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent-amber shrink-0 mt-0.5" aria-hidden="true">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <p className="text-text-secondary"><strong className="text-text-primary">All work must be your own.</strong> Parents, mentors, and teachers can help guide you, but YOU must do the work.</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent-amber shrink-0 mt-0.5" aria-hidden="true">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <p className="text-text-secondary"><strong className="text-text-primary">Be honest with your data.</strong> Record what actually happened, even if it was not what you expected.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
@@ -574,14 +630,15 @@ export default function TheProcessPage() {
                 </h4>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {[
+                    "Title",
                     "Abstract",
-                    "Question/Problem",
-                    "Hypothesis",
+                    "Question or Problem",
+                    "Hypothesis or Design Goal",
                     "Materials",
                     "Procedure",
-                    "Data",
+                    "Data and Results",
                     "Conclusion",
-                    "Bibliography (if applicable)",
+                    "Citations / Bibliography",
                   ].map((item) => (
                     <div key={item} className="surface-card p-3 flex items-center gap-3">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent-rose shrink-0" aria-hidden="true">
@@ -593,6 +650,14 @@ export default function TheProcessPage() {
                   ))}
                 </div>
               </div>
+
+              <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-rose mt-4 mb-6">
+                <CardContent className="p-4">
+                  <p className="font-semibold text-accent-rose">
+                    Do NOT put your name on the front of the board. Your name should be on the back only, to ensure fair judging.
+                  </p>
+                </CardContent>
+              </Card>
 
               <Link
                 href="/display-and-safety"
@@ -612,7 +677,7 @@ export default function TheProcessPage() {
         <Separator className="my-0 bg-border-subtle" />
 
         {/* ── Section 6: Preparing for Judging ── */}
-        <section className="bg-bg-primary/80 py-10 sm:py-16 md:py-20">
+        <section id="judging" className="bg-bg-primary/80 py-10 sm:py-16 md:py-20">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3 mb-8 reveal">
               <SectionNumber num="06" color="bg-accent-emerald/10 text-accent-emerald" />

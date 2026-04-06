@@ -165,6 +165,25 @@ export default function FormsPage() {
                 examplesRequired="Surveying classmates about screen time, testing how music affects study habits"
                 examplesNotRequired="Analyzing published health data, measuring plant growth"
               />
+              <div className="mt-4 bg-bg-surface border border-border-subtle rounded-lg p-4 space-y-3">
+                <h4 className="font-semibold text-text-primary text-sm">Participant Consent Requirements</h4>
+                <div className="space-y-2">
+                  {[
+                    "Tell participants what your project is about and what they will be asked to do",
+                    "Get their voluntary permission — no one should be pressured or forced",
+                    "Get written parent/guardian permission if participants are under 18",
+                    "Let them stop at any time, for any reason",
+                    "Keep all data confidential — use codes (e.g., Participant 1), never real names on your data, notes, or display board",
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-2 text-sm text-text-secondary">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent-cyan shrink-0 mt-0.5" aria-hidden="true">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </CardContent>
             </Card>
 
@@ -190,6 +209,26 @@ export default function FormsPage() {
                 examplesRequired="Vinegar and steel wool reaction, building motor circuits"
                 examplesNotRequired="Baking soda and vinegar in small amounts, paper airplanes"
               />
+              <div className="mt-4 bg-accent-rose/10 border border-accent-rose/20 rounded-lg p-4 border-l-4 border-l-accent-rose">
+                <p className="font-semibold text-accent-rose text-sm mb-2">Never Allowed (No Exceptions):</p>
+                <div className="grid sm:grid-cols-2 gap-1.5">
+                  {[
+                    "Open flames (candles, matches, lighters)",
+                    "Industrial or laboratory chemicals",
+                    "High-voltage electricity (wall outlets)",
+                    "Compressed gases or pressurized containers",
+                    "Radioactive materials",
+                    "Toxic substances (pesticides, paint thinner)",
+                    "Weapons, projectiles, or launchers",
+                    "Biological hazards (bacteria, mold, blood)",
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-2 text-sm text-text-secondary">
+                      <span className="text-accent-rose shrink-0 mt-0.5 font-bold" aria-hidden="true">×</span>
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
               </CardContent>
             </Card>
 

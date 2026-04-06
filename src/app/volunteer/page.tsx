@@ -103,7 +103,7 @@ export default function VolunteerPage() {
               <p className="text-text-secondary leading-relaxed flex-1">
                 Share your knowledge and experience by guiding a young scientist
                 through their project. Help them develop research skills,
-                understand the scientific method, and build confidence.
+                understand the scientific method, and build confidence. The typical commitment is approximately 1–2 hours per week over the project period.
               </p>
               <div className="mt-6 space-y-3">
                 {[
@@ -139,7 +139,7 @@ export default function VolunteerPage() {
                 </div>
               </div>
               <a
-                href="https://docs.google.com/forms/d/1KctjqLpK1bSmvTULL0OjStBtLDaBQhSY_xb-NmvyxOg/viewform"
+                href="https://docs.google.com/forms/d/1Go59zVliqQohI9kTUKptz8PFpYWdTSJbQ5qzyY6b2yY/viewform"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-[#0A0A0F] font-semibold text-sm px-6 py-3 hover:opacity-90 transition-opacity mt-2 w-full min-h-[44px]"
