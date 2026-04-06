@@ -32,7 +32,7 @@ const rules = [
     number: 3,
     title: "Table Display with Size Limits",
     description:
-      "All projects will sit on a table (no floor-standing displays allowed). Your project may not exceed the following dimensions:",
+      "All projects will sit on a table (no floor-standing displays allowed). We recommend a standard tri-fold display board (approximately 36\" tall × 48\" wide). Your entire project setup may not exceed the following dimensions from the table surface:",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -98,6 +98,21 @@ const rules = [
     ),
     dimensions: false,
   },
+  {
+    number: 8,
+    title: "No Name on Front of Board",
+    description:
+      "Do not put your name on the front of your display board. Your name should be on the back only. This ensures fair and unbiased judging.",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <line x1="17" y1="14" x2="23" y2="8" />
+        <line x1="17" y1="8" x2="23" y2="14" />
+      </svg>
+    ),
+    dimensions: false,
+  },
 ];
 
 const accentColors = [
@@ -108,6 +123,7 @@ const accentColors = [
   "text-accent-emerald",
   "text-accent-rose",
   "text-accent-indigo",
+  "text-accent-cyan",
 ];
 
 export default function DisplayAndSafetyPage() {
@@ -198,14 +214,15 @@ export default function DisplayAndSafetyPage() {
           <p className="text-text-secondary mb-5">Your display board must include:</p>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
+              "Title",
               "Abstract",
-              "Research Question/Problem",
-              "Hypothesis",
+              "Question or Problem",
+              "Hypothesis or Design Goal",
               "Materials",
               "Procedure",
-              "Data & Results",
+              "Data and Results",
               "Conclusion",
-              "Bibliography (if applicable)",
+              "Citations / Bibliography",
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3">
                 <svg
@@ -244,6 +261,8 @@ export default function DisplayAndSafetyPage() {
               "No materials to hand out to judges",
               "Acknowledgments are text-only (no logos)",
               "All images and data have citations",
+              "No name on the front of the board",
+              "Title is clear and visible",
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3">
                 <svg

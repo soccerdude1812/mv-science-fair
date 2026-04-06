@@ -46,7 +46,7 @@ const infoCards = [
 const categoryCards = [
   {
     title: "Life & Health Sciences",
-    desc: "Projects related to people, plants, psychology, or the environment.",
+    desc: "Projects related to people, plants, psychology, or the environment. No live animals or nutrition/diet experiments.",
     color: "text-accent-emerald",
     bgColor: "bg-accent-emerald/10",
     borderColor: "border-l-accent-emerald",
@@ -88,7 +88,7 @@ const categoryCards = [
   },
   {
     title: "Technology & Innovation",
-    desc: "Projects involving computers, coding, robotics, apps, or problem-solving inventions. These projects must demonstrate a STEM method such as the engineering design process.",
+    desc: "Projects involving computers, coding, robotics, apps, or problem-solving inventions.",
     color: "text-accent-cyan",
     bgColor: "bg-accent-cyan/10",
     borderColor: "border-l-accent-cyan",
@@ -284,6 +284,9 @@ export default function Home() {
               participate. Whether you&apos;re curious about the natural world,
               technology, or anything in between, there&apos;s a place for you
               at the science fair!
+            </p>
+            <p className="mt-3 text-sm text-text-muted">
+              Organized by the STEM and Research Club at Mountain View High School.
             </p>
           </div>
         </div>
