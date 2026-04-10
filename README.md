@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MVWSD Science Fair 2026
+
+Website for the Mountain View Whisman School District (MVWSD) Science Fair 2026, built for elementary school students, families, judges, and volunteers.
+
+## Tech Stack
+
+- **Framework**: Next.js 16, React 19, TypeScript
+- **Styling**: Tailwind CSS v4
+- **Components**: shadcn/ui
+- **Deployment**: Vercel (auto-deploy from `main`)
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Route | Description |
+|-------|-------------|
+| `/` | Home page with hero, categories, and quick navigation |
+| `/students-families` | Information for students and families |
+| `/the-process` | Science fair process and timeline |
+| `/rules` | Rules and guidelines |
+| `/forms` | Registration and submission forms |
+| `/judges` | Judge information and sign-up |
+| `/volunteer` | Volunteer information |
+| `/display-and-safety` | Display board and safety guidelines |
 
-## Learn More
+## Forms
 
-To learn more about Next.js, take a look at the following resources:
+All forms use external Google Forms integration -- no backend database. Form links are configured in the page components.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run build    # production build
+npm run lint     # ESLint
+```
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deployed on Vercel from the `website/` subdirectory of the repo. Pushes to `main` trigger auto-deploy. Git author email must be `soccerdude1812@gmail.com`.
