@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Geist } from "next/font/google";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import ScrollReveal from "@/components/ScrollReveal";
-import ScienceBackground from "@/components/ScienceBackground";
+import { Inter, Geist, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import ConditionalChrome from "@/components/ConditionalChrome";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -17,6 +14,19 @@ const inter = Inter({
 
 const interBody = Inter({
   variable: "--font-body",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument",
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
 });
@@ -46,7 +56,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", inter.variable, interBody.variable, "font-sans", geist.variable)}
+      className={cn("h-full", "antialiased", inter.variable, interBody.variable, "font-sans", geist.variable, instrumentSerif.variable, jetbrainsMono.variable)}
     >
       <body className="min-h-full flex flex-col bg-transparent text-text-secondary">
         <a
@@ -55,13 +65,11 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <ScienceBackground />
-        <ScrollReveal />
-        <Navbar />
-        <main id="main-content" className="flex-1 relative z-10">
-          {children}
-        </main>
-        <Footer />
+        <ConditionalChrome>
+          <main id="main-content" className="flex-1 relative z-10">
+            {children}
+          </main>
+        </ConditionalChrome>
       </body>
     </html>
   );
