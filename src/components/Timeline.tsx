@@ -46,9 +46,9 @@ const timelineSteps = [
   {
     step: 6,
     title: "Science Fair Day",
-    date: "September 2026",
+    date: "Fall 2026 (TBD)",
     description:
-      "Present your project to judges and visitors. Celebrate your hard work and scientific discovery!",
+      "Present your project to judges and visitors. Celebrate your hard work and scientific discovery! The exact date and venue will be announced once we confirm interest.",
     status: "upcoming" as const,
   },
 ];

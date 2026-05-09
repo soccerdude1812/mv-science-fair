@@ -253,7 +253,7 @@ function Hero() {
         <Reveal className="hero-meta" delay={300}>
           <div className="hero-meta-item">
             <div className="hero-meta-label">Date</div>
-            <div className="hero-meta-value">September 2026</div>
+            <div className="hero-meta-value">Fall 2026 (TBD)</div>
           </div>
           <div className="hero-meta-item">
             <div className="hero-meta-label">Location</div>
@@ -377,7 +377,7 @@ function Welcome() {
           </div>
           <div className="welcome-stat">
             <span className="welcome-stat-label">Event Day</span>
-            <span className="welcome-stat-value">Sep · 26</span>
+            <span className="welcome-stat-value">Fall '26</span>
           </div>
         </Reveal>
       </div>
@@ -431,7 +431,7 @@ const STEPS = [
   { n: "03", title: "Approval & Safety Review", when: "TBD", body: "The Science Fair Committee reviews each application against safety and ethics guidelines. Wait for confirmation before starting your experiment — you'll get an email." },
   { n: "04", title: "Project Work Period", when: "TBD", body: "Conduct your experiments, run at least three trials, collect data honestly, and keep a date-stamped logbook. Mentors are here to help — but the work is yours." },
   { n: "05", title: "Display Board Prep", when: "TBD", body: "Build your tri-fold board: title, abstract, question, hypothesis, materials, procedure, data, conclusion, and citations. Name on the back only — for fair judging." },
-  { n: "06", title: "Science Fair Day", when: "September 2026", body: "Present to judges and visitors. Six criteria: scientific thought, creativity, thoroughness, skill, clarity, and presentation. Celebrate what you discovered." },
+  { n: "06", title: "Science Fair Day", when: "Fall 2026 (TBD)", body: "Present to judges and visitors. Six criteria: scientific thought, creativity, thoroughness, skill, clarity, and presentation. Celebrate what you discovered. The exact date and venue will be announced once we confirm interest." },
 ];
 
 function Process() {
