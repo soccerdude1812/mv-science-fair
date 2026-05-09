@@ -8,7 +8,7 @@ export default function VolunteerPage() {
     <>
       <PageHero
         title="Volunteer"
-        subtitle="Want to be a superhero? As a nonprofit, we need your help to make the MVWSD Science Fair a success!"
+        subtitle="Want to be a superhero? As a nonprofit, we need your help to make the MVHS Science Fair a success!"
       />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 space-y-8 sm:space-y-10">
@@ -19,7 +19,7 @@ export default function VolunteerPage() {
             Every Volunteer Makes a Difference
           </h2>
           <p className="text-lg text-text-secondary max-w-2xl leading-relaxed">
-            The MVWSD Science Fair is a community-powered event. Whether you
+            The MVHS Science Fair is a community-powered event. Whether you
             can spare a few hours on event day or want to mentor a student
             over several weeks, your contribution helps inspire the next
             generation of scientists.

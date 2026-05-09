@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 
 const ruleCards = [
   {
-    title: "MVWSD Science Fair Rules",
+    title: "MVHS Science Fair Rules",
     description:
       "The comprehensive rulebook covering all aspects of the science fair including eligibility, project categories, timelines, and general guidelines.",
     href: "https://docs.google.com/document/d/15SAahb5817DqSySY_MRZs1WQ0aFv-XnKye_OrsofJPc/edit",

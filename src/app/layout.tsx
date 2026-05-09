@@ -33,14 +33,15 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "MVWSD Science Fair 2026",
-    template: "%s | MVWSD Science Fair 2026",
+    default: "MVHS Science Fair 2026",
+    template: "%s | MVHS Science Fair 2026",
   },
   description:
-    "Inspiring young scientists in Mountain View! The 2026 MVWSD Science Fair is open to grades 3-5 elementary school students in the Mountain View Whisman School District.",
+    "Inspiring young scientists in Mountain View! The 2026 MVHS Science Fair, organized by the Mountain View High School STEM & Research Club, is open to grades 3-5 elementary school students.",
   keywords: [
     "science fair",
-    "MVWSD",
+    "MVHS",
+    "Mountain View High School",
     "Mountain View",
     "elementary school",
     "STEM",

@@ -100,7 +100,7 @@ export default function FormsPage() {
           <div className="space-y-4">
             <FormCard
               title="Interest Form"
-              description="Show your interest in participating in the 2026 MVWSD Science Fair! This is the first step to getting started."
+              description="Show your interest in participating in the 2026 MVHS Science Fair! This is the first step to getting started."
               href="https://docs.google.com/forms/d/1O1DXH_eq0GQIcTJcLQlrcusY5I7xKejzBw_p3WHIVao/viewform"
               highlighted
               icon={
@@ -111,7 +111,7 @@ export default function FormsPage() {
             />
             <FormCard
               title="Application & Registration Form"
-              description="Your all-in-one form to register and apply for the 2026 MVWSD Science Fair. Includes project details, parental consent, photo release, and liability waiver — everything in one place."
+              description="Your all-in-one form to register and apply for the 2026 MVHS Science Fair. Includes project details, parental consent, photo release, and liability waiver — everything in one place."
               href="https://docs.google.com/forms/d/1Uys9ePwF965Nn722dpa3eSypNVK9tLp-J4PnvOGN4xg/viewform"
               icon={<FormIcon />}
             />

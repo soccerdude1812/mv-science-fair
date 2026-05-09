@@ -8,7 +8,7 @@ export default function StudentsFamiliesPage() {
     <>
       <PageHero
         title="Students & Families"
-        subtitle="Everything you need to help your young scientist succeed at the MVWSD Science Fair."
+        subtitle="Everything you need to help your young scientist succeed at the MVHS Science Fair."
       />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 space-y-8 sm:space-y-10">

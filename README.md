@@ -1,6 +1,6 @@
-# MVWSD Science Fair 2026
+# MVHS Science Fair 2026
 
-Website for the Mountain View Whisman School District (MVWSD) Science Fair 2026, built for elementary school students, families, judges, and volunteers.
+Website for the MVHS Science Fair 2026 — a student-led STEM event organized by the Mountain View High School STEM & Research Club for elementary school students, families, judges, and volunteers in Mountain View. Not affiliated with or endorsed by MVWSD.
 
 ## Tech Stack
 

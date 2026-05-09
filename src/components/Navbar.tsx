@@ -146,10 +146,10 @@ export default function Navbar() {
             <Link
               href="/"
               className="flex items-center gap-2.5 shrink-0 group"
-              aria-label="MVWSD Science Fair home"
+              aria-label="MVHS Science Fair home"
             >
               <span className="gradient-text font-display font-bold text-lg tracking-[-0.02em]">
-                MVWSD
+                MVHS
               </span>
               <span className="hidden sm:inline text-text-muted text-sm font-medium">
                 Science Fair
@@ -281,7 +281,7 @@ export default function Navbar() {
                 </svg>
               </a>
               <p className="text-center text-xs text-text-muted mt-3">
-                MVWSD Science Fair 2026
+                MVHS Science Fair 2026
               </p>
             </div>
           </div>

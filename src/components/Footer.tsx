@@ -22,15 +22,15 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
               <span className="gradient-text font-display font-bold text-lg tracking-[-0.02em]">
-                MVWSD
+                MVHS
               </span>
               <span className="text-text-muted text-sm font-medium">
                 Science Fair
               </span>
             </div>
             <p className="text-text-muted text-sm leading-relaxed max-w-xs">
-              Inspiring young scientists across the Mountain View Whisman School
-              District. Organized by the STEM and Research Club at Mountain View High School.
+              Inspiring young scientists across Mountain View. Organized by
+              the STEM &amp; Research Club at Mountain View High School.
             </p>
           </div>
 
@@ -90,11 +90,11 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-text-muted text-sm">
-            &copy; {new Date().getFullYear()} MVWSD Science Fair. All rights
+            &copy; {new Date().getFullYear()} MVHS Science Fair. All rights
             reserved.
           </p>
           <p className="text-text-muted/50 text-xs">
-            Mountain View Whisman School District
+            A student-led event by the Mountain View High School STEM &amp; Research Club. Not affiliated with or endorsed by MVWSD.
           </p>
         </div>
       </div>

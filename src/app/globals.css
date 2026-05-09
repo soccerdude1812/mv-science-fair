@@ -634,7 +634,7 @@ button:focus-visible {
     @apply font-sans;
   }
 }
-/* ===== MVWSD Science Fair 2026 — Laboratory theme (homepage) ===== */
+/* ===== MVHS Science Fair 2026 — Laboratory theme (homepage) ===== */
 /* Scoped under .sf-lab so it does not affect existing subpages. */
 
 .sf-lab {

@@ -188,7 +188,7 @@ function Nav() {
       <div className="nav-brand">
         <span className="nav-brand-mark">M</span>
         <span>
-          MVWSD
+          MVHS
           <span style={{ color: "var(--sf-ink-3)", fontWeight: 400, marginLeft: 6 }}>
             Science Fair
           </span>
@@ -245,9 +245,9 @@ function Hero() {
           <span className="badge-year">EST · 2026</span>
         </Reveal>
         <Reveal as="p" className="hero-sub" delay={220}>
-          The Mountain View Whisman School District Science Fair invites elementary
-          explorers to investigate, build, and discover. Curiosity is the only
-          prerequisite.
+          The MVHS Science Fair — hosted by the Mountain View High School STEM &amp; Research
+          Club — invites elementary explorers across Mountain View to investigate, build,
+          and discover. Curiosity is the only prerequisite.
         </Reveal>
 
         <Reveal className="hero-meta" delay={300}>
@@ -312,8 +312,8 @@ function Hero() {
 function Marquee() {
   const items = [
     "Curiosity → Question → Hypothesis → Experiment → Data → Conclusion",
-    "Grades 3–5 · Mountain View Whisman School District",
-    "Organized by the STEM and Research Club at Mountain View High School",
+    "Grades 3–5 · Open to elementary students across Mountain View",
+    "Organized by the STEM & Research Club at Mountain View High School",
     "Mentors available · Judges welcome · Volunteers needed",
   ];
   const all = [...items, ...items];
@@ -339,15 +339,15 @@ function Welcome() {
         <div>
           <div className="section-eyebrow">About the fair</div>
           <h2 className="section-title">
-            Welcome to the <em>2026</em> MVWSD Science Fair.
+            Welcome to the <em>2026</em> MVHS Science Fair.
           </h2>
         </div>
       </div>
       <div className="welcome">
         <Reveal className="welcome-body">
           <p>
-            We&apos;re excited to <strong>inspire young scientists</strong> across the
-            Mountain View Whisman School District.
+            We&apos;re excited to <strong>inspire young scientists</strong> across
+            Mountain View.
           </p>
           <p>
             Whether you&apos;re curious about the natural world, technology, or anything
@@ -494,7 +494,7 @@ type FormItem = { title: string; desc: string; href: string; featured?: boolean;
 
 const FORMS: { main: FormItem[]; risk: FormItem[]; helpers: FormItem[] } = {
   main: [
-    { title: "Interest Form", desc: "Show your interest in the 2026 MVWSD Science Fair! This is the first step.", href: FORM_URL, featured: true, icon: <I.star /> },
+    { title: "Interest Form", desc: "Show your interest in the 2026 MVHS Science Fair! This is the first step.", href: FORM_URL, featured: true, icon: <I.star /> },
     { title: "Application & Registration Form", desc: "Project details, parental consent, photo release, and liability waiver — everything in one place.", href: APPLICATION_URL, icon: <I.doc /> },
   ],
   risk: [
@@ -584,7 +584,7 @@ function Forms() {
 }
 
 const RULE_DOCS = [
-  { title: "MVWSD Science Fair Rules", desc: "The comprehensive rulebook covering eligibility, project categories, timelines, and general guidelines.", href: "https://docs.google.com/document/d/15SAahb5817DqSySY_MRZs1WQ0aFv-XnKye_OrsofJPc/edit", icon: <I.book />, tone: "" },
+  { title: "MVHS Science Fair Rules", desc: "The comprehensive rulebook covering eligibility, project categories, timelines, and general guidelines.", href: "https://docs.google.com/document/d/15SAahb5817DqSySY_MRZs1WQ0aFv-XnKye_OrsofJPc/edit", icon: <I.book />, tone: "" },
   { title: "Human Participant Rules", desc: "Guidelines for projects involving human subjects — surveys, interviews, behavioral observations.", href: "https://docs.google.com/document/d/12Y22HRdQ2ahjSZOgzAxBorjPfrTsH42qnb5A4sQ2J6U/edit", icon: <I.users />, tone: "cyan" },
   { title: "Hazardous Materials Rules", desc: "Safety rules for projects involving chemicals, electrical equipment, sharp tools, or heat sources.", href: "https://docs.google.com/document/d/18L9rhZy4CaveZ4F5KMN6-bMuaOcy0kNvsH0rKvqq_k8/edit", icon: <I.warn />, tone: "amber" },
   { title: "Mentor Rulebook", desc: "Guidelines and expectations for mentors supporting science fair participants.", href: "https://docs.google.com/document/d/1okIJtfiGXKSROUCFSIXBvdnN4pctZPD77df_KyQ8Uqs/edit", icon: <I.users />, tone: "violet" },
@@ -995,13 +995,13 @@ function Footer() {
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
               <span className="nav-brand-mark">M</span>
               <span style={{ fontWeight: 600 }}>
-                MVWSD{" "}
+                MVHS{" "}
                 <span style={{ color: "var(--sf-ink-3)", fontWeight: 400 }}>Science Fair</span>
               </span>
             </div>
             <p style={{ color: "var(--sf-ink-3)", fontSize: 13, lineHeight: 1.6, maxWidth: 340 }}>
-              Inspiring young scientists across the Mountain View Whisman School District.
-              Organized by the STEM and Research Club at Mountain View High School.
+              Inspiring young scientists across Mountain View. Organized by the
+              STEM &amp; Research Club at Mountain View High School.
             </p>
           </div>
           <div>
@@ -1029,8 +1029,8 @@ function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© 2026 MVWSD Science Fair</span>
-          <span>Mountain View Whisman School District</span>
+          <span>© 2026 MVHS Science Fair</span>
+          <span>A student-led event by the MVHS STEM &amp; Research Club. Not affiliated with or endorsed by MVWSD.</span>
         </div>
       </div>
     </footer>
