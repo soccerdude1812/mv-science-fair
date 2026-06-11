@@ -1730,6 +1730,8 @@ button:focus-visible {
 }
 .sf-lab .back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
 .sf-lab .back-to-top:hover { color: var(--sf-orange); border-color: var(--sf-orange-line); }
+/* suppress the legacy global .nav-link::after underline inside the lab nav */
+.sf-lab .nav-link::after { display: none; }
 
 .sf-lab .lab-spotlight {
   position: fixed; inset: 0; z-index: 1; pointer-events: none;
@@ -1904,12 +1906,13 @@ button:focus-visible {
 .sf-lab .crew-avatar { position: relative; width: 62px; height: 62px; margin: 18px 0 14px; }
 .sf-lab .crew-avatar .ring {
   position: absolute;
-  border: 1px dashed color-mix(in oklab, var(--crew-color) 55%, transparent);
+  border: 1px dashed var(--crew-color);
+  border-color: color-mix(in oklab, var(--crew-color) 55%, transparent);
   border-radius: 50%;
   animation: sf-spin linear infinite;
 }
 .sf-lab .crew-avatar .ring.r1 { inset: 0; animation-duration: 7s; }
-.sf-lab .crew-avatar .ring.r2 { inset: 7px; animation-duration: 11s; animation-direction: reverse; border-color: color-mix(in oklab, var(--crew-color) 30%, transparent); }
+.sf-lab .crew-avatar .ring.r2 { inset: 7px; animation-duration: 11s; animation-direction: reverse; border-color: var(--crew-color); border-color: color-mix(in oklab, var(--crew-color) 30%, transparent); }
 .sf-lab .crew-avatar .ring i {
   position: absolute; top: -3px; left: 50%;
   width: 5px; height: 5px; margin-left: -2.5px;
@@ -1998,4 +2001,5 @@ button:focus-visible {
   }
   .sf-lab .reveal { opacity: 1; transform: none; }
   .sf-lab .lab-spotlight { display: none; }
+  .sf-lab .back-to-top { transform: none !important; }
 }

@@ -256,9 +256,10 @@ function Nav() {
     );
     const io = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) setActive(e.target.id);
-        }
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length > 0) setActive(visible[0].target.id);
       },
       { rootMargin: "-35% 0px -60% 0px" },
     );
@@ -281,6 +282,7 @@ function Nav() {
           <button
             key={id}
             className={`nav-link ${active === id ? "active" : ""}`}
+            aria-current={active === id ? "location" : undefined}
             onClick={() => scrollTo(id)}
           >
             {label}
