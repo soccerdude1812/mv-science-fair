@@ -152,17 +152,21 @@ function Reveal({
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
+    let timer: ReturnType<typeof setTimeout> | undefined;
     const io = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
-          setTimeout(() => setShown(true), delay);
+          timer = setTimeout(() => setShown(true), delay);
           io.disconnect();
         }
       },
       { threshold: 0.12 },
     );
     io.observe(node);
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      clearTimeout(timer);
+    };
   }, [delay]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Comp: any = Tag;
