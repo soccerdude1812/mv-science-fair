@@ -152,17 +152,21 @@ function Reveal({
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
+    let timer: ReturnType<typeof setTimeout> | undefined;
     const io = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
-          setTimeout(() => setShown(true), delay);
+          timer = setTimeout(() => setShown(true), delay);
           io.disconnect();
         }
       },
       { threshold: 0.12 },
     );
     io.observe(node);
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      clearTimeout(timer);
+    };
   }, [delay]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Comp: any = Tag;
@@ -173,16 +177,95 @@ function Reveal({
   );
 }
 
+function Spotlight() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    let raf = 0;
+    const onMove = (e: MouseEvent) => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        ref.current?.style.setProperty("--mx", `${e.clientX}px`);
+        ref.current?.style.setProperty("--my", `${e.clientY}px`);
+      });
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+  return <div ref={ref} className="lab-spotlight" aria-hidden="true" />;
+}
+
+function ScrollProgress() {
+  const barRef = useRef<HTMLDivElement | null>(null);
+  const [showTop, setShowTop] = useState(false);
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const doc = document.documentElement;
+        const max = doc.scrollHeight - doc.clientHeight;
+        const p = max > 0 ? doc.scrollTop / max : 0;
+        if (barRef.current) barRef.current.style.transform = `scaleX(${p})`;
+        setShowTop(doc.scrollTop > 600);
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+  return (
+    <>
+      <div className="scroll-progress" aria-hidden="true">
+        <div ref={barRef} className="scroll-progress-bar" />
+      </div>
+      <button
+        className={`back-to-top ${showTop ? "show" : ""}`}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        aria-label="Back to top"
+      >
+        <I.arrowRight style={{ transform: "rotate(-90deg)" }} />
+        <span>TOP</span>
+      </button>
+    </>
+  );
+}
+
+const NAV_ITEMS: [string, string][] = [
+  ["Welcome", "welcome"],
+  ["Categories", "categories"],
+  ["Process", "process"],
+  ["Forms", "forms"],
+  ["Rules", "rules"],
+  ["Display", "display"],
+  ["Volunteer", "volunteer"],
+  ["Team", "team"],
+];
+
 function Nav() {
-  const items: [string, string][] = [
-    ["Welcome", "welcome"],
-    ["Categories", "categories"],
-    ["Process", "process"],
-    ["Forms", "forms"],
-    ["Rules", "rules"],
-    ["Display", "display"],
-    ["Volunteer", "volunteer"],
-  ];
+  const [active, setActive] = useState("");
+  useEffect(() => {
+    const sections = NAV_ITEMS.map(([, id]) => document.getElementById(id)).filter(
+      (el): el is HTMLElement => el !== null,
+    );
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length > 0) setActive(visible[0].target.id);
+      },
+      { rootMargin: "-35% 0px -60% 0px" },
+    );
+    sections.forEach((s) => io.observe(s));
+    return () => io.disconnect();
+  }, []);
   return (
     <nav className="nav" aria-label="primary">
       <div className="nav-brand">
@@ -195,8 +278,13 @@ function Nav() {
         </span>
       </div>
       <div className="nav-links">
-        {items.map(([label, id]) => (
-          <button key={id} className="nav-link" onClick={() => scrollTo(id)}>
+        {NAV_ITEMS.map(([label, id]) => (
+          <button
+            key={id}
+            className={`nav-link ${active === id ? "active" : ""}`}
+            aria-current={active === id ? "location" : undefined}
+            onClick={() => scrollTo(id)}
+          >
             {label}
           </button>
         ))}
@@ -326,6 +414,48 @@ function Marquee() {
             {s}
           </span>
         ))}
+      </div>
+    </div>
+  );
+}
+
+function LabBench() {
+  return (
+    <div className="bench" aria-hidden="true">
+      <div className="bench-inner">
+        <div className="bench-item">
+          <div className="apparatus beaker">
+            <span className="vessel"></span>
+            <span className="liquid"></span>
+            <span className="bubble b1"></span>
+            <span className="bubble b2"></span>
+            <span className="bubble b3"></span>
+          </div>
+          <div className="bench-label">
+            <b>EXP-01 · Specimen prep</b>
+            Bubbling since day one
+          </div>
+        </div>
+        <div className="bench-item">
+          <div className="apparatus atom">
+            <span className="nucleus"></span>
+            <span className="ring r1"><i></i></span>
+            <span className="ring r2"><i></i></span>
+          </div>
+          <div className="bench-label">
+            <b>EXP-02 · Hypothesis engine</b>
+            If… then… because…
+          </div>
+        </div>
+        <div className="bench-item">
+          <div className="apparatus readout">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div className="bench-label">
+            <b>EXP-03 · Live data feed</b>
+            Minimum three trials
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -950,6 +1080,82 @@ function Volunteer() {
   );
 }
 
+const TEAM = [
+  { code: "ORG", role: "Student Organizers", unit: "STEM & Research Club", desc: "MVHS students who design and run the fair — rulebooks, forms, judging, and fair-day logistics.", color: "var(--sf-orange)", status: "Active", bars: 4 },
+  { code: "MNT", role: "High-School Mentors", unit: "Mentor Program", desc: "Trained club volunteers who coach young scientists 1–2 hours a week. Advising only — the work stays yours.", color: "var(--sf-cyan)", status: "Recruiting", bars: 3 },
+  { code: "JDG", role: "Judging Panel", unit: "Fair-Day Operations", desc: "Teachers, STEM professionals, and community members who score projects on the six official criteria.", color: "var(--sf-violet)", status: "Recruiting", bars: 2 },
+  { code: "CRW", role: "Event-Day Crew", unit: "Fair-Day Operations", desc: "Volunteers behind setup, check-in, wayfinding, and cleanup — the people who make fair day run like clockwork.", color: "var(--sf-emerald)", status: "Recruiting", bars: 3 },
+];
+
+function Team() {
+  return (
+    <section className="section" id="team">
+      <div className="section-head">
+        <span className="section-num">§ 08</span>
+        <div>
+          <div className="section-eyebrow">Lab personnel</div>
+          <h2 className="section-title">
+            Meet the <em>crew.</em>
+          </h2>
+          <p className="section-sub">
+            The fair is designed, organized, and run by students of the MVHS STEM &amp; Research
+            Club — alongside mentors, judges, and volunteers from across the community.
+          </p>
+        </div>
+      </div>
+      <div className="crew">
+        {TEAM.map((m, i) => (
+          <Reveal key={m.code} delay={i * 80}>
+            <div className="crew-card" style={{ ["--crew-color" as string]: m.color } as React.CSSProperties}>
+              <div className="crew-head">
+                <span>MVHS-SRC · Personnel</span>
+                <span className="crew-led"></span>
+              </div>
+              <div className="crew-avatar" aria-hidden="true">
+                <span className="ring r1"><i></i></span>
+                <span className="ring r2"><i></i></span>
+                <span className="crew-code">{m.code}</span>
+              </div>
+              <div className="crew-role">{m.role}</div>
+              <div className="crew-unit">{m.unit}</div>
+              <div className="crew-desc">{m.desc}</div>
+              <div className="crew-foot">
+                <span className="crew-status">● {m.status}</span>
+                <span className="crew-bars" aria-hidden="true">
+                  {Array.from({ length: 4 }).map((_, b) => (
+                    <span key={b} className={b < m.bars ? "on" : ""}></span>
+                  ))}
+                </span>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+        <Reveal delay={320} className="crew-open-span">
+          <div className="crew-open">
+            <div>
+              <div className="crew-open-title">
+                This badge could be <em>yours.</em>
+              </div>
+              <p className="crew-open-sub">
+                The roster is open — join as a mentor, judge, or event-day volunteer and help
+                young scientists run their first real experiments.
+              </p>
+            </div>
+            <div className="crew-open-actions">
+              <button className="sf-btn sf-btn-primary" onClick={() => scrollTo("volunteer")}>
+                Join the crew <I.arrowRight className="btn-arrow" />
+              </button>
+              <button className="sf-btn sf-btn-ghost" onClick={() => scrollTo("forms")}>
+                See all forms
+              </button>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 function QuickNav() {
   const items = [
     { num: "01", name: "The Process", desc: "Step-by-step guide from idea to presentation.", id: "process" },
@@ -960,7 +1166,7 @@ function QuickNav() {
   return (
     <section className="section">
       <div className="section-head">
-        <span className="section-num">§ 08</span>
+        <span className="section-num">§ 09</span>
         <div>
           <div className="section-eyebrow">Jump to anything</div>
           <h2 className="section-title">
@@ -1011,6 +1217,7 @@ function Footer() {
               <li><a onClick={() => scrollTo("forms")}>Forms</a></li>
               <li><a onClick={() => scrollTo("rules")}>Rules</a></li>
               <li><a onClick={() => scrollTo("display")}>Display & Safety</a></li>
+              <li><a onClick={() => scrollTo("team")}>The Team</a></li>
             </ul>
           </div>
           <div>
@@ -1043,10 +1250,13 @@ export default function Home() {
       <div className="lab-grid"></div>
       <div className="lab-noise"></div>
       <Particles />
+      <Spotlight />
+      <ScrollProgress />
       <Nav />
       <div className="app">
         <Hero />
         <Marquee />
+        <LabBench />
         <Welcome />
         <Categories />
         <Process />
@@ -1054,6 +1264,7 @@ export default function Home() {
         <Rules />
         <Display />
         <Volunteer />
+        <Team />
         <QuickNav />
       </div>
       <Footer />
