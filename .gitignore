@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local Claude Code config: symlinks to ~/OS (dangle in CI -> action crash) and
+# agent memory with internal references. Machine-local only, never committed.
+.claude/
