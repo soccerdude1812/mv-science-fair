@@ -1,1 +1,0 @@
-/Users/eeshan/OS/.claude/rules/code-quality.md
