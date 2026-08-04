@@ -105,10 +105,10 @@ export default function FormsPage() {
             {EVENT.applicationDeadline}
           </p>
           <p className="mt-3 max-w-2xl leading-relaxed text-text-secondary">
-            We review applications as they arrive, usually within about three
-            school days, and you can start building the moment you&apos;re
-            approved. Apply early &mdash; earlier applications get more time to
-            work before the fair on {EVENT.dateMedium}.
+            We review applications as they arrive, and you can start building
+            the moment you&apos;re approved. Apply early &mdash; earlier
+            applications get more time to work before the fair on{" "}
+            {EVENT.dateMedium}.
           </p>
         </section>
 
