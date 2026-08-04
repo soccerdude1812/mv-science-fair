@@ -2,12 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
-import { EVENT, SCHEDULE } from "@/lib/event";
+import { EVENT, SCHEDULE, APPLICATION_URL } from "@/lib/event";
 
-const FORM_URL =
-  "https://docs.google.com/forms/d/1O1DXH_eq0GQIcTJcLQlrcusY5I7xKejzBw_p3WHIVao/viewform";
-const APPLICATION_URL =
-  "https://docs.google.com/forms/d/1Uys9ePwF965Nn722dpa3eSypNVK9tLp-J4PnvOGN4xg/viewform";
 
 const scrollTo = (id: string) => {
   const el = document.getElementById(id);
@@ -272,7 +268,7 @@ function Nav() {
       <div className="nav-brand">
         <span className="nav-brand-mark">M</span>
         <span>
-          MVHS
+          MV
           <span style={{ color: "var(--sf-ink-3)", fontWeight: 400, marginLeft: 6 }}>
             Science Fair
           </span>
@@ -290,8 +286,8 @@ function Nav() {
           </button>
         ))}
       </div>
-      <a className="nav-cta" href={FORM_URL} target="_blank" rel="noopener noreferrer">
-        Show Interest
+      <a className="nav-cta" href={APPLICATION_URL} target="_blank" rel="noopener noreferrer">
+        Apply Now
         <I.arrow />
       </a>
     </nav>
@@ -334,7 +330,7 @@ function Hero() {
           <span className="badge-year">EST · 2026</span>
         </Reveal>
         <Reveal as="p" className="hero-sub" delay={220}>
-          The MVHS Science Fair — hosted by the Mountain View High School STEM &amp; Research
+          The MV Science Fair — hosted by the Mountain View High School STEM &amp; Research
           Club — invites elementary explorers across Mountain View to investigate, build,
           and discover. Curiosity is the only prerequisite.
         </Reveal>
@@ -372,8 +368,8 @@ function Hero() {
         </Reveal>
 
         <Reveal className="hero-cta-row" delay={380}>
-          <a className="sf-btn sf-btn-primary" href={FORM_URL} target="_blank" rel="noopener noreferrer">
-            Show Your Interest <I.arrow className="btn-arrow" />
+          <a className="sf-btn sf-btn-primary" href={APPLICATION_URL} target="_blank" rel="noopener noreferrer">
+            Apply Now <I.arrow className="btn-arrow" />
           </a>
           <button className="sf-btn sf-btn-ghost" onClick={() => scrollTo("process")}>
             How it works <I.arrowRight className="btn-arrow" />
@@ -384,7 +380,7 @@ function Hero() {
       <Reveal delay={200}>
         <div className="qr-console" ref={tiltRef}>
           <div className="qr-console-head">
-            <span>SPECIMEN · INTEREST FORM</span>
+            <span>SPECIMEN · APPLICATION FORM</span>
             <div className="leds">
               <span className="led on" title="link"></span>
               <span className="led warn" title="ready"></span>
@@ -397,15 +393,15 @@ function Hero() {
             <span className="qr-corner tr"></span>
             <span className="qr-corner bl"></span>
             <span className="qr-corner br"></span>
-            <QRCodeSVG value={FORM_URL} size={260} fgColor="#0e1320" bgColor="#ffffff" level="H" />
+            <QRCodeSVG value={APPLICATION_URL} size={260} fgColor="#0e1320" bgColor="#ffffff" level="H" />
             <span className="qr-scanline"></span>
           </div>
 
           <div className="qr-cap">
             <div className="qr-cap-title">
-              <b>Scan to show interest</b>
+              <b>Scan to apply</b>
             </div>
-            <a href={FORM_URL} target="_blank" rel="noopener noreferrer">
+            <a href={APPLICATION_URL} target="_blank" rel="noopener noreferrer">
               open form ↗
             </a>
           </div>
@@ -487,7 +483,7 @@ function Welcome() {
         <div>
           <div className="section-eyebrow">About the fair</div>
           <h2 className="section-title">
-            Welcome to the <em>2026</em> MVHS Science Fair.
+            Welcome to the <em>2026</em> MV Science Fair.
           </h2>
         </div>
       </div>
@@ -635,8 +631,7 @@ type FormItem = { title: string; desc: string; href: string; featured?: boolean;
 
 const FORMS: { main: FormItem[]; risk: FormItem[]; helpers: FormItem[] } = {
   main: [
-    { title: "Interest Form", desc: "Show your interest in the 2026 MVHS Science Fair! This is the first step.", href: FORM_URL, featured: true, icon: <I.star /> },
-    { title: "Application & Registration Form", desc: "Project details, parental consent, photo release, and liability waiver — everything in one place.", href: APPLICATION_URL, icon: <I.doc /> },
+    { title: "Application & Registration Form", desc: "The one form you need to enter. Project details, parental consent, photo release, and liability waiver, all in one place.", href: APPLICATION_URL, featured: true, icon: <I.star /> },
   ],
   risk: [
     { title: "Human Participation Approval", desc: "Required if your project involves surveys, interviews, or testing people.", href: "https://docs.google.com/forms/d/12x3JQnRFlzUU86kUAPY_eyoPJ33u0h5tUsIFXcRCAjM/viewform", icon: <I.users /> },
@@ -683,7 +678,7 @@ function Forms() {
             Forms & <em>sign-ups.</em>
           </h2>
           <p className="section-sub">
-            Start with the Interest Form. Submit risk/approval forms only if your project requires them.
+            Start with the Application &amp; Registration Form. Submit risk/approval forms only if your project requires them.
           </p>
         </div>
       </div>
@@ -717,7 +712,7 @@ function Forms() {
 
       <Reveal delay={200}>
         <div className="callout warn" style={{ marginTop: 28 }}>
-          <strong>Submission order:</strong> ① Interest Form first, ② Application & Registration when applications open, ③ Safety forms only if needed. Mentor request is optional and can be made anytime.
+          <strong>Submission order:</strong> ① Application & Registration first, ② Safety forms only if your project needs them. Mentor request is optional and can be made anytime.
         </div>
       </Reveal>
     </section>
@@ -725,7 +720,7 @@ function Forms() {
 }
 
 const RULE_DOCS = [
-  { title: "MVHS Science Fair Rules", desc: "The comprehensive rulebook covering eligibility, project categories, timelines, and general guidelines.", href: "https://docs.google.com/document/d/15SAahb5817DqSySY_MRZs1WQ0aFv-XnKye_OrsofJPc/edit", icon: <I.book />, tone: "" },
+  { title: "MV Science Fair Rules", desc: "The comprehensive rulebook covering eligibility, project categories, timelines, and general guidelines.", href: "https://docs.google.com/document/d/15SAahb5817DqSySY_MRZs1WQ0aFv-XnKye_OrsofJPc/edit", icon: <I.book />, tone: "" },
   { title: "Human Participant Rules", desc: "Guidelines for projects involving human subjects — surveys, interviews, behavioral observations.", href: "https://docs.google.com/document/d/12Y22HRdQ2ahjSZOgzAxBorjPfrTsH42qnb5A4sQ2J6U/edit", icon: <I.users />, tone: "cyan" },
   { title: "Hazardous Materials Rules", desc: "Safety rules for projects involving chemicals, electrical equipment, sharp tools, or heat sources.", href: "https://docs.google.com/document/d/18L9rhZy4CaveZ4F5KMN6-bMuaOcy0kNvsH0rKvqq_k8/edit", icon: <I.warn />, tone: "amber" },
   { title: "Mentor Rulebook", desc: "Guidelines and expectations for mentors supporting science fair participants.", href: "https://docs.google.com/document/d/1okIJtfiGXKSROUCFSIXBvdnN4pctZPD77df_KyQ8Uqs/edit", icon: <I.users />, tone: "violet" },
@@ -1212,7 +1207,7 @@ function Footer() {
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
               <span className="nav-brand-mark">M</span>
               <span style={{ fontWeight: 600 }}>
-                MVHS{" "}
+                MV{" "}
                 <span style={{ color: "var(--sf-ink-3)", fontWeight: 400 }}>Science Fair</span>
               </span>
             </div>
@@ -1257,7 +1252,7 @@ function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© 2026 MVHS Science Fair</span>
+          <span>© 2026 MV Science Fair</span>
           <span>A student-led event by the MVHS STEM &amp; Research Club. Not affiliated with or endorsed by MVWSD.</span>
         </div>
       </div>

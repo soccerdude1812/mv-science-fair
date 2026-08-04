@@ -2,9 +2,13 @@
  * Single source of truth for event date, time, venue, and deadlines.
  *
  * Venue confirmed 2026-08-04. Address verified against imai.mvwsd.org/contact_us.
- * Note: Amy Imai Elementary is an MVWSD facility, but the fair is organized by the
- * MVHS STEM & Research Club and is NOT affiliated with or endorsed by MVWSD.
- * The venue is a location only — do not imply district sponsorship.
+ * Naming: the event is the "MV Science Fair". Not "MVHS Science Fair", not
+ * "MVWSD Science Fair". MVHS/Mountain View High School may still appear as the
+ * ORGANIZER (the STEM & Research Club runs it), just never in the event name.
+ *
+ * MVWSD appears in exactly two places on purpose: the footer non-affiliation
+ * disclaimer, and the liability waiver in the application form. Amy Imai is an
+ * MVWSD facility, so the district is named there as venue owner. Nowhere else.
  */
 
 export const EVENT = {
@@ -37,48 +41,49 @@ export const EVENT = {
   contactEmail: "eeshankhandelwal123@gmail.com",
 } as const;
 
+/**
+ * The application form is the single entry point for students. The old
+ * interest form is retired: it existed to gauge demand before applications
+ * opened, and is no longer linked anywhere on the site.
+ */
+export const APPLICATION_URL =
+  "https://docs.google.com/forms/d/1Uys9ePwF965Nn722dpa3eSypNVK9tLp-J4PnvOGN4xg/viewform";
+
 /** Full milestone schedule, shared by the homepage process rail and the Timeline component. */
 export const SCHEDULE = [
   {
     n: "01",
-    title: "Interest Form",
-    when: "Now Open",
-    short: "Now Open",
-    body: "Fill out the interest form to let us know you want to participate. This is the first signal we collect, and it unlocks everything that follows.",
+    title: "Apply",
+    when: `Open now – ${EVENT.applicationDeadlineShort}`,
+    short: `Now – ${EVENT.applicationDeadlineShort}`,
+    body: "Submit your application with your topic, hypothesis, team members, and a short description. One form covers registration, consent, and project details. Applications close Friday, September 4 — but apply early: we review as applications arrive, and you can start building the moment you're approved.",
   },
   {
     n: "02",
-    title: "Applications Open",
-    when: `Now – ${EVENT.applicationDeadlineShort}`,
-    short: `Now – ${EVENT.applicationDeadlineShort}`,
-    body: "Submit your project application with your topic, hypothesis, team members, and a short description. One form covers registration, consent, and project details. Applications close Friday, September 4 — but apply early: we review as applications arrive, and you can start building the moment you're approved.",
-  },
-  {
-    n: "03",
     title: "Approval & Safety Review",
     when: "Rolling review",
     short: "Rolling",
     body: "The Science Fair Committee reviews each application as it arrives — usually within about three school days. If we need changes, we'll email you, and you resubmit for a quick second look. Wait for confirmation before starting your experiment.",
   },
   {
-    n: "04",
+    n: "03",
     title: "Project Work Period",
     when: "Approval – Sept 18",
     short: "Approval – Sept 18",
     body: "Conduct your experiments, run at least three trials, collect data honestly, and keep a date-stamped logbook. You start as soon as you're approved, so earlier applications get more build time. Mentors are here to help — but the work is yours.",
   },
   {
-    n: "05",
+    n: "04",
     title: "Display Board & Rehearsal",
     when: "Sept 19 – 25",
     short: "Sept 19 – 25",
     body: "Build your tri-fold board: title, abstract, question, hypothesis, materials, procedure, data, conclusion, and citations. Name on the back only — for fair judging. Practice presenting out loud before fair day.",
   },
   {
-    n: "06",
+    n: "05",
     title: "Science Fair Day",
     when: `${EVENT.dateShort} · ${EVENT.timeShort}`,
     short: EVENT.dateShort,
-    body: `Present to judges and visitors at ${EVENT.venueName} — ${EVENT.venueRoom}, ${EVENT.venueAddress}. Doors ${EVENT.timeFull}. Six criteria: scientific thought, creativity, thoroughness, skill, clarity, and presentation. Celebrate what you discovered.`,
+    body: `Present to judges and visitors at ${EVENT.venueName} — ${EVENT.venueRoom}, ${EVENT.venueAddress}. The fair runs ${EVENT.timeFull}. Six criteria: scientific thought, creativity, thoroughness, skill, clarity, and presentation. Celebrate what you discovered.`,
   },
 ] as const;

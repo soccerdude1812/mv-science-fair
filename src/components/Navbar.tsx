@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { APPLICATION_URL } from "@/lib/event";
 
 const navLinks = [
   {
@@ -146,10 +147,10 @@ export default function Navbar() {
             <Link
               href="/"
               className="flex items-center gap-2.5 shrink-0 group"
-              aria-label="MVHS Science Fair home"
+              aria-label="MV Science Fair home"
             >
               <span className="gradient-text font-display font-bold text-lg tracking-[-0.02em]">
-                MVHS
+                MV
               </span>
               <span className="hidden sm:inline text-text-muted text-sm font-medium">
                 Science Fair
@@ -264,7 +265,7 @@ export default function Navbar() {
             {/* CTA at bottom of menu */}
             <div className="mt-6 pt-5 border-t border-border-subtle">
               <a
-                href="https://docs.google.com/forms/d/1O1DXH_eq0GQIcTJcLQlrcusY5I7xKejzBw_p3WHIVao/viewform"
+                href={APPLICATION_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
@@ -273,7 +274,7 @@ export default function Navbar() {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M12 2l2.09 6.26L20.18 9.27l-5.09 3.9L17.18 20 12 16.27 6.82 20l2.09-6.83L3.82 9.27l6.09-1.01z" />
                 </svg>
-                Show Your Interest
+                Apply Now
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="ml-1">
                   <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
                   <polyline points="15 3 21 3 21 9" />
@@ -281,7 +282,7 @@ export default function Navbar() {
                 </svg>
               </a>
               <p className="text-center text-xs text-text-muted mt-3">
-                MVHS Science Fair 2026
+                MV Science Fair 2026
               </p>
             </div>
           </div>

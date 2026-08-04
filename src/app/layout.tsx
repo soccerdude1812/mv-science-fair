@@ -34,13 +34,14 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "MVHS Science Fair 2026",
-    template: "%s | MVHS Science Fair 2026",
+    default: "MV Science Fair 2026",
+    template: "%s | MV Science Fair 2026",
   },
-  description: `Inspiring young scientists in Mountain View! The 2026 MVHS Science Fair is ${EVENT.dateFull}, ${EVENT.timeFull}, at ${EVENT.venueName} (${EVENT.venueRoom}). Organized by the Mountain View High School STEM & Research Club, open to grades 3-5. Applications close ${EVENT.applicationDeadline}.`,
+  description: `Inspiring young scientists in Mountain View! The 2026 MV Science Fair is ${EVENT.dateFull}, ${EVENT.timeFull}, at ${EVENT.venueName} (${EVENT.venueRoom}). Organized by the Mountain View High School STEM & Research Club, open to grades 3-5. Applications close ${EVENT.applicationDeadline}.`,
   keywords: [
     "science fair",
-    "MVHS",
+    "MV Science Fair",
+    "Mountain View science fair",
     "Mountain View High School",
     "Mountain View",
     "elementary school",
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
     "September 26 2026",
   ],
   openGraph: {
-    title: "MVHS Science Fair 2026",
+    title: "MV Science Fair 2026",
     description: `${EVENT.dateFull} · ${EVENT.timeFull} · ${EVENT.venueName}, ${EVENT.venueAddress}. Open to grades 3-5. Applications close ${EVENT.applicationDeadline}.`,
     type: "website",
     locale: "en_US",
@@ -61,7 +62,7 @@ export const metadata: Metadata = {
 const eventJsonLd = {
   "@context": "https://schema.org",
   "@type": "Event",
-  name: "MVHS Science Fair 2026",
+  name: "MV Science Fair 2026",
   description:
     "A student-led science fair for grades 3-5 in Mountain View, organized by the Mountain View High School STEM & Research Club.",
   startDate: EVENT.startISO,

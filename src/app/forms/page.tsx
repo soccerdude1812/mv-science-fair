@@ -4,7 +4,7 @@ import EventDetails from "@/components/EventDetails";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { EVENT } from "@/lib/event";
+import { EVENT, APPLICATION_URL } from "@/lib/event";
 
 function FormIcon() {
   return (
@@ -86,7 +86,7 @@ export default function FormsPage() {
     <div>
       <PageHero
         title="Forms"
-        subtitle="All the forms you need, organized and easy to find. Start with the Interest Form to get started!"
+        subtitle="All the forms you need, organized and easy to find. Start with the Application &amp; Registration Form."
       />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 space-y-8 sm:space-y-12">
@@ -125,20 +125,10 @@ export default function FormsPage() {
           </div>
           <div className="space-y-4">
             <FormCard
-              title="Interest Form"
-              description="Show your interest in participating in the 2026 MVHS Science Fair! This is the first step to getting started."
-              href="https://docs.google.com/forms/d/1O1DXH_eq0GQIcTJcLQlrcusY5I7xKejzBw_p3WHIVao/viewform"
-              highlighted
-              icon={
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2l2.09 6.26L20.18 9.27l-5.09 3.9L17.18 20 12 16.27 6.82 20l2.09-6.83L3.82 9.27l6.09-1.01z" />
-                </svg>
-              }
-            />
-            <FormCard
               title="Application & Registration Form"
-              description="Your all-in-one form to register and apply for the 2026 MVHS Science Fair. Includes project details, parental consent, photo release, and liability waiver — everything in one place."
-              href="https://docs.google.com/forms/d/1Uys9ePwF965Nn722dpa3eSypNVK9tLp-J4PnvOGN4xg/viewform"
+              description="The one form you need to enter the 2026 MV Science Fair. Includes project details, parental consent, photo release, and liability waiver — everything in one place. Applications close Friday, September 4."
+              href={APPLICATION_URL}
+              highlighted
               icon={<FormIcon />}
             />
           </div>
@@ -328,19 +318,12 @@ export default function FormsPage() {
             <div className="flex items-start gap-3 p-3 bg-bg-surface rounded-lg border border-border-subtle">
               <span className="inline-flex items-center justify-center w-7 h-7 rounded-full text-sm font-bold shrink-0 text-[#050507]" style={{ background: "var(--gradient-accent)" }}>1</span>
               <div>
-                <span className="font-semibold text-text-primary">Interest Form</span>
-                <span className="text-text-secondary"> &mdash; Fill out first to let us know you want to participate.</span>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 p-3 bg-bg-surface rounded-lg border border-border-subtle">
-              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full text-sm font-bold shrink-0 text-[#050507]" style={{ background: "var(--gradient-accent)" }}>2</span>
-              <div>
                 <span className="font-semibold text-text-primary">Application &amp; Registration Form</span>
-                <span className="text-text-secondary"> &mdash; Submit your project details, consent, and registration when applications open. This is the only form you need to register.</span>
+                <span className="text-text-secondary"> &mdash; Submit first. This is the only form you need to enter. Closes Friday, September 4.</span>
               </div>
             </div>
             <div className="flex items-start gap-3 p-3 bg-bg-surface rounded-lg border border-border-subtle">
-              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent-amber text-[#050507] text-sm font-bold shrink-0">3</span>
+              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent-amber text-[#050507] text-sm font-bold shrink-0">2</span>
               <div>
                 <span className="font-semibold text-text-primary">Safety Forms (if needed)</span>
                 <span className="text-text-secondary"> &mdash; Submit the Human Participation or Hazardous Materials form only if your project requires them.</span>
