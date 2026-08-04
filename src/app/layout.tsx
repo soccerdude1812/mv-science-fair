@@ -3,6 +3,7 @@ import { Inter, Geist, Instrument_Serif, JetBrains_Mono } from "next/font/google
 import ConditionalChrome from "@/components/ConditionalChrome";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { EVENT } from "@/lib/event";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -36,8 +37,7 @@ export const metadata: Metadata = {
     default: "MVHS Science Fair 2026",
     template: "%s | MVHS Science Fair 2026",
   },
-  description:
-    "Inspiring young scientists in Mountain View! The 2026 MVHS Science Fair, organized by the Mountain View High School STEM & Research Club, is open to grades 3-5 elementary school students.",
+  description: `Inspiring young scientists in Mountain View! The 2026 MVHS Science Fair is ${EVENT.dateFull}, ${EVENT.timeFull}, at ${EVENT.venueName} (${EVENT.venueRoom}). Organized by the Mountain View High School STEM & Research Club, open to grades 3-5. Applications close ${EVENT.applicationDeadline}.`,
   keywords: [
     "science fair",
     "MVHS",
@@ -46,7 +46,46 @@ export const metadata: Metadata = {
     "elementary school",
     "STEM",
     "science project",
+    "Amy Imai Elementary",
+    "September 26 2026",
   ],
+  openGraph: {
+    title: "MVHS Science Fair 2026",
+    description: `${EVENT.dateFull} · ${EVENT.timeFull} · ${EVENT.venueName}, ${EVENT.venueAddress}. Open to grades 3-5. Applications close ${EVENT.applicationDeadline}.`,
+    type: "website",
+    locale: "en_US",
+  },
+};
+
+/** Schema.org Event markup so search engines surface the date and venue directly. */
+const eventJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  name: "MVHS Science Fair 2026",
+  description:
+    "A student-led science fair for grades 3-5 in Mountain View, organized by the Mountain View High School STEM & Research Club.",
+  startDate: EVENT.startISO,
+  endDate: EVENT.endISO,
+  eventStatus: "https://schema.org/EventScheduled",
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  location: {
+    "@type": "Place",
+    name: `${EVENT.venueName} — ${EVENT.venueRoom}`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: EVENT.venueStreet,
+      addressLocality: EVENT.venueCity,
+      addressRegion: EVENT.venueState,
+      postalCode: EVENT.venueZip,
+      addressCountry: "US",
+    },
+  },
+  organizer: {
+    "@type": "Organization",
+    name: "Mountain View High School STEM & Research Club",
+    email: EVENT.contactEmail,
+  },
+  isAccessibleForFree: true,
 };
 
 export default function RootLayout({
@@ -60,6 +99,10 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", inter.variable, interBody.variable, "font-sans", geist.variable, instrumentSerif.variable, jetbrainsMono.variable)}
     >
       <body className="min-h-full flex flex-col bg-transparent text-text-secondary">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }}
+        />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-accent-indigo focus:text-bg-deep focus:top-0 focus:left-0 focus:font-bold"

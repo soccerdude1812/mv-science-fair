@@ -1,6 +1,8 @@
 import PageHero from "@/components/PageHero";
+import EventDetails from "@/components/EventDetails";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { EVENT } from "@/lib/event";
 
 export default function JudgesPage() {
   return (
@@ -11,6 +13,8 @@ export default function JudgesPage() {
       />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 space-y-8 sm:space-y-10">
+        <EventDetails className="reveal" />
+
         {/* Who Can Judge */}
         <Card className="reveal bg-bg-surface border-border-subtle">
           <CardContent className="p-8">
@@ -124,9 +128,12 @@ export default function JudgesPage() {
                 Category Judging Schedule
               </h3>
               <p className="text-text-secondary leading-relaxed">
-                TBD &mdash; The detailed schedule for category judging will be
-                shared closer to the event date. You&apos;ll be assigned to
-                specific categories based on your background.
+                Judging runs during the fair on{" "}
+                <strong className="text-text-primary">{EVENT.dateFull}</strong>,{" "}
+                {EVENT.timeFull}, at {EVENT.venueName}. You&apos;ll be assigned
+                to specific categories based on your background. We&apos;ll
+                email your category assignment, check-in time, and room layout
+                the week before the fair.
               </p>
               </CardContent>
             </Card>
@@ -143,9 +150,10 @@ export default function JudgesPage() {
                 Special Awards Judging
               </h3>
               <p className="text-text-secondary leading-relaxed">
-                TBD &mdash; Special awards judging schedule will be announced.
-                These awards recognize outstanding achievement in specific areas
-                like innovation, environmental impact, and more.
+                Special awards are judged alongside category judging on fair
+                morning, with winners announced before the noon close. These
+                awards recognize outstanding achievement in specific areas like
+                innovation, environmental impact, and more.
               </p>
               </CardContent>
             </Card>

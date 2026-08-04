@@ -2,6 +2,24 @@
 
 Website for the MVHS Science Fair 2026 — a student-led STEM event organized by the Mountain View High School STEM & Research Club for elementary school students, families, judges, and volunteers in Mountain View. Not affiliated with or endorsed by MVWSD.
 
+## Event
+
+| | |
+|---|---|
+| **Date** | Saturday, September 26, 2026 |
+| **Time** | 9:00 AM – 12:00 PM |
+| **Venue** | Amy Imai Elementary School — Multi-Use Room (MUR) |
+| **Address** | 253 Martens Ave, Mountain View, CA 94040 |
+| **Applications close** | Friday, September 4, 2026 (rolling review) |
+| **Contact** | eeshankhandelwal123@gmail.com |
+
+Date, time, venue, deadline, and contact all live in **`src/lib/event.ts`** — edit
+there, not in individual pages. `SCHEDULE` in the same file drives both the
+homepage process rail and the `Timeline` component.
+
+The venue is an MVWSD facility, but the fair is not an MVWSD event. Keep the
+non-affiliation disclaimer in the footer and do not imply district sponsorship.
+
 ## Tech Stack
 
 - **Framework**: Next.js 16, React 19, TypeScript

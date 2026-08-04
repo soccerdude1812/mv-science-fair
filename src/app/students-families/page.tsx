@@ -1,7 +1,9 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import EventDetails from "@/components/EventDetails";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { EVENT } from "@/lib/event";
 
 export default function StudentsFamiliesPage() {
   return (
@@ -12,6 +14,8 @@ export default function StudentsFamiliesPage() {
       />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 space-y-8 sm:space-y-10">
+        <EventDetails className="reveal" />
+
         {/* Getting Started */}
         <Card className="reveal bg-bg-surface border-border-subtle">
           <CardContent className="p-8 sm:p-10">
@@ -259,9 +263,12 @@ export default function StudentsFamiliesPage() {
             If you have any questions about the science fair, registration, or
             your project, don&apos;t hesitate to reach out.
           </p>
-          <p className="text-text-secondary text-sm font-medium">
-            Contact email coming soon. Check back for updates!
-          </p>
+          <a
+            href={`mailto:${EVENT.contactEmail}`}
+            className="text-text-primary text-sm font-medium underline decoration-border-hover underline-offset-4 transition-colors hover:decoration-accent-indigo"
+          >
+            {EVENT.contactEmail}
+          </a>
           </CardContent>
         </Card>
       </div>

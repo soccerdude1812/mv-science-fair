@@ -1,4 +1,5 @@
 import PageHero from "@/components/PageHero";
+import EventDetails from "@/components/EventDetails";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -12,6 +13,8 @@ export default function VolunteerPage() {
       />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 space-y-8 sm:space-y-10">
+        <EventDetails className="reveal" />
+
         {/* Call to Action Banner */}
         <Card className="reveal bg-bg-surface border-border-subtle">
           <CardContent className="p-8 sm:p-10">

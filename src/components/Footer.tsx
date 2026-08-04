@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { EVENT } from "@/lib/event";
 
 const quickLinks = [
   { href: "/the-process", label: "The Process" },
@@ -72,16 +73,44 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Event details + contact */}
           <div>
             <h3 className="font-display font-semibold text-xs uppercase tracking-[0.08em] text-text-secondary mb-4">
-              Contact
+              Fair Day
             </h3>
             <ul className="space-y-2.5" role="list">
               <li>
                 <span className="text-text-muted text-sm">
-                  Contact email coming soon
+                  {EVENT.dateMedium}
                 </span>
+              </li>
+              <li>
+                <span className="text-text-muted text-sm">
+                  {EVENT.timeFull}
+                </span>
+              </li>
+              <li>
+                <a
+                  href={EVENT.venueMapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-text-muted text-sm transition-colors hover:text-text-primary"
+                >
+                  {EVENT.venueName} &mdash; {EVENT.venueRoom}
+                </a>
+              </li>
+              <li>
+                <span className="text-text-muted text-sm">
+                  {EVENT.venueAddress}
+                </span>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${EVENT.contactEmail}`}
+                  className="text-text-muted text-sm transition-colors hover:text-text-primary"
+                >
+                  {EVENT.contactEmail}
+                </a>
               </li>
             </ul>
           </div>

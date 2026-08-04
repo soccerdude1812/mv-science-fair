@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
+import { EVENT, SCHEDULE } from "@/lib/event";
 
 const FORM_URL =
   "https://docs.google.com/forms/d/1O1DXH_eq0GQIcTJcLQlrcusY5I7xKejzBw_p3WHIVao/viewform";
@@ -324,7 +325,7 @@ function Hero() {
       <div>
         <Reveal className="hero-tag">
           <span className="hero-tag-dot"></span>
-          <span>Interest Form Now Open · Grades 3–5</span>
+          <span>Applications Open · Close {EVENT.applicationDeadlineShort} · Grades 3–5</span>
         </Reveal>
         <Reveal as="h1" className="hero-title" delay={120}>
           A field guide for
@@ -341,15 +342,32 @@ function Hero() {
         <Reveal className="hero-meta" delay={300}>
           <div className="hero-meta-item">
             <div className="hero-meta-label">Date</div>
-            <div className="hero-meta-value">TBD</div>
+            <div className="hero-meta-value">{EVENT.dateShort}</div>
+            <div className="hero-meta-sub">2026</div>
+          </div>
+          <div className="hero-meta-item">
+            <div className="hero-meta-label">Time</div>
+            <div className="hero-meta-value">{EVENT.timeShort}</div>
+            <div className="hero-meta-sub">Pacific</div>
           </div>
           <div className="hero-meta-item">
             <div className="hero-meta-label">Location</div>
-            <div className="hero-meta-value">TBD</div>
+            <div className="hero-meta-value">
+              <a
+                className="hero-meta-link"
+                href={EVENT.venueMapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Amy Imai Elementary
+              </a>
+            </div>
+            <div className="hero-meta-sub">{EVENT.venueRoom}</div>
           </div>
           <div className="hero-meta-item">
             <div className="hero-meta-label">Eligible</div>
             <div className="hero-meta-value">Grades 3–5</div>
+            <div className="hero-meta-sub">Mountain View</div>
           </div>
         </Reveal>
 
@@ -507,7 +525,7 @@ function Welcome() {
           </div>
           <div className="welcome-stat">
             <span className="welcome-stat-label">Event Day</span>
-            <span className="welcome-stat-value">TBD</span>
+            <span className="welcome-stat-value">{EVENT.dateShort}</span>
           </div>
         </Reveal>
       </div>
@@ -555,14 +573,7 @@ function Categories() {
   );
 }
 
-const STEPS = [
-  { n: "01", title: "Interest Form", when: "Now Open", body: "Fill out the interest form to let us know you want to participate. This is the first signal we collect, and it unlocks everything that follows." },
-  { n: "02", title: "Application Opens", when: "TBD", body: "Submit your project application with your topic, hypothesis, team members, and a short description. One form covers registration, consent, and project details." },
-  { n: "03", title: "Approval & Safety Review", when: "TBD", body: "The Science Fair Committee reviews each application against safety and ethics guidelines. Wait for confirmation before starting your experiment — you'll get an email." },
-  { n: "04", title: "Project Work Period", when: "TBD", body: "Conduct your experiments, run at least three trials, collect data honestly, and keep a date-stamped logbook. Mentors are here to help — but the work is yours." },
-  { n: "05", title: "Display Board Prep", when: "TBD", body: "Build your tri-fold board: title, abstract, question, hypothesis, materials, procedure, data, conclusion, and citations. Name on the back only — for fair judging." },
-  { n: "06", title: "Science Fair Day", when: "TBD", body: "Present to judges and visitors. Six criteria: scientific thought, creativity, thoroughness, skill, clarity, and presentation. Celebrate what you discovered. The exact date and venue will be announced once we confirm interest." },
-];
+const STEPS = SCHEDULE;
 
 function Process() {
   const [active, setActive] = useState(0);
@@ -1229,9 +1240,19 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <h5>Contact</h5>
+            <h5>Event Details</h5>
             <ul>
-              <li style={{ color: "var(--sf-ink-3)", fontSize: 13 }}>Contact email coming soon.</li>
+              <li style={{ color: "var(--sf-ink-3)", fontSize: 13 }}>{EVENT.dateFull}</li>
+              <li style={{ color: "var(--sf-ink-3)", fontSize: 13 }}>{EVENT.timeFull}</li>
+              <li>
+                <a href={EVENT.venueMapUrl} target="_blank" rel="noopener noreferrer">
+                  {EVENT.venueName} — {EVENT.venueRoom}
+                </a>
+              </li>
+              <li style={{ color: "var(--sf-ink-3)", fontSize: 13 }}>{EVENT.venueAddress}</li>
+              <li>
+                <a href={`mailto:${EVENT.contactEmail}`}>{EVENT.contactEmail}</a>
+              </li>
             </ul>
           </div>
         </div>
