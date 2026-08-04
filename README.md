@@ -1,6 +1,6 @@
-# MVHS Science Fair 2026
+# MV Science Fair 2026
 
-Website for the MVHS Science Fair 2026 — a student-led STEM event organized by the Mountain View High School STEM & Research Club for elementary school students, families, judges, and volunteers in Mountain View. Not affiliated with or endorsed by MVWSD.
+Website for the MV Science Fair 2026 — a student-led STEM event organized by the Mountain View High School STEM & Research Club for elementary school students, families, judges, and volunteers in Mountain View. Not affiliated with or endorsed by MVWSD.
 
 ## Event
 
@@ -13,12 +13,26 @@ Website for the MVHS Science Fair 2026 — a student-led STEM event organized by
 | **Applications close** | Friday, September 4, 2026 (rolling review) |
 | **Contact** | eeshankhandelwal123@gmail.com |
 
-Date, time, venue, deadline, and contact all live in **`src/lib/event.ts`** — edit
-there, not in individual pages. `SCHEDULE` in the same file drives both the
-homepage process rail and the `Timeline` component.
+Date, time, venue, deadline, contact, and the application form URL all live in
+**`src/lib/event.ts`** — edit there, not in individual pages. `SCHEDULE` in the
+same file drives both the homepage process rail and the `Timeline` component.
 
-The venue is an MVWSD facility, but the fair is not an MVWSD event. Keep the
-non-affiliation disclaimer in the footer and do not imply district sponsorship.
+## Naming
+
+The event is the **MV Science Fair**. Not "MVHS Science Fair", not "MVWSD
+Science Fair". MVHS / Mountain View High School may appear as the **organizer**
+(the STEM & Research Club runs it), never in the event name.
+
+MVWSD appears in exactly two places, deliberately: the footer non-affiliation
+disclaimer, and the liability waiver in the application form. Amy Imai is an
+MVWSD facility, so the district is named there as venue owner. Nowhere else.
+
+## Entry point
+
+The **Application & Registration Form** is the single entry point for students,
+linked and QR-coded across the site. The old interest form is retired — it
+existed to gauge demand before applications opened and is no longer linked
+anywhere.
 
 ## Tech Stack
 

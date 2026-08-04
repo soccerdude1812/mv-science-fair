@@ -23,7 +23,7 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
               <span className="gradient-text font-display font-bold text-lg tracking-[-0.02em]">
-                MVHS
+                MV
               </span>
               <span className="text-text-muted text-sm font-medium">
                 Science Fair
@@ -119,7 +119,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-text-muted text-sm">
-            &copy; {new Date().getFullYear()} MVHS Science Fair. All rights
+            &copy; {new Date().getFullYear()} MV Science Fair. All rights
             reserved.
           </p>
           <p className="text-text-muted/50 text-xs">

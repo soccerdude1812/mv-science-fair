@@ -7,22 +7,14 @@ import { EVENT } from "@/lib/event";
 const timelineSteps = [
   {
     step: 1,
-    title: "Interest Form",
-    date: "Now Open",
-    description:
-      "Fill out the interest form to let us know you want to participate.",
-    status: "active" as const,
-  },
-  {
-    step: 2,
-    title: "Applications Open",
+    title: "Apply",
     date: `Now – ${EVENT.applicationDeadlineShort}`,
     description:
       "Submit your project application with your topic, hypothesis, and team info. Applications close Friday, September 4 — apply early, since you can start building as soon as you're approved.",
     status: "active" as const,
   },
   {
-    step: 3,
+    step: 2,
     title: "Approval & Safety Review",
     date: "Rolling review",
     description:
@@ -30,7 +22,7 @@ const timelineSteps = [
     status: "upcoming" as const,
   },
   {
-    step: 4,
+    step: 3,
     title: "Project Work Period",
     date: "Approval – Sept 18",
     description:
@@ -38,7 +30,7 @@ const timelineSteps = [
     status: "upcoming" as const,
   },
   {
-    step: 5,
+    step: 4,
     title: "Display Board & Rehearsal",
     date: "Sept 19 – 25",
     description:
@@ -46,7 +38,7 @@ const timelineSteps = [
     status: "upcoming" as const,
   },
   {
-    step: 6,
+    step: 5,
     title: "Science Fair Day",
     date: `${EVENT.dateShort} · ${EVENT.timeShort}`,
     description: `Present your project to judges and visitors at ${EVENT.venueName} — ${EVENT.venueRoom}, ${EVENT.venueAddress}. Celebrate your hard work and scientific discovery!`,
