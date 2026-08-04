@@ -10,7 +10,7 @@ const timelineSteps = [
     title: "Apply",
     date: `Now – ${EVENT.applicationDeadlineShort}`,
     description:
-      "Submit your project application with your topic, hypothesis, and team info. Applications close Friday, September 4 — apply early, since you can start building as soon as you're approved.",
+      "One form covers registration, consent, and your project. All we ask about the project is what it is and how you plan to do it, 100-200 words each. Applications close Friday, September 4 — apply early, since you can start building as soon as you're approved.",
     status: "active" as const,
   },
   {
@@ -18,13 +18,13 @@ const timelineSteps = [
     title: "Approval & Safety Review",
     date: "Rolling review",
     description:
-      "We review each application as it arrives, usually within about three school days. If changes are needed we'll email you, and you resubmit for a quick second look.",
+      "We review each application as it arrives. If changes are needed we'll email you, and you resubmit for a quick second look. If your project involves human participants or hazardous materials, this is when we'll send you the extra safety form.",
     status: "upcoming" as const,
   },
   {
     step: 3,
     title: "Project Work Period",
-    date: "Approval – Sept 18",
+    date: "After approval",
     description:
       "Conduct your experiments, collect data, and build your project with guidance from mentors. You start as soon as you're approved, so earlier applications get more build time.",
     status: "upcoming" as const,
@@ -32,7 +32,7 @@ const timelineSteps = [
   {
     step: 4,
     title: "Display Board & Rehearsal",
-    date: "Sept 19 – 25",
+    date: "Before fair day",
     description:
       "Build your display board with all required sections: abstract, hypothesis, data, conclusion, and more. Practice presenting out loud before fair day.",
     status: "upcoming" as const,

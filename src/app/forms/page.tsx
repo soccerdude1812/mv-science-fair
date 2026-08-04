@@ -146,9 +146,11 @@ export default function FormsPage() {
             <Badge variant="secondary" className="hidden sm:inline-flex">RISK/APPROVAL FORMS</Badge>
           </div>
           <p className="text-text-secondary mb-6 sm:ml-[52px]">
-            These forms are only required if your project involves specific
-            materials or participants. Read the descriptions carefully to
-            determine which apply to your project.
+            <strong className="text-text-primary">You don&apos;t need to submit
+            these yourself.</strong> Apply first. We review every application, and
+            if your project involves human participants or hazardous materials
+            we&apos;ll email you the right form. They&apos;re listed here so you know
+            what to expect.
           </p>
 
           <div className="space-y-6">
@@ -157,7 +159,7 @@ export default function FormsPage() {
               <CardContent className="p-6">
               <FormCard
                 title="Human Participation Approval Form"
-                description="Required if your project involves interaction with human participants."
+                description="We send this to you after review if your project involves surveys, interviews, or testing people."
                 href="https://docs.google.com/forms/d/12x3JQnRFlzUU86kUAPY_eyoPJ33u0h5tUsIFXcRCAjM/viewform"
                 icon={
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -208,7 +210,7 @@ export default function FormsPage() {
               <CardContent className="p-6">
               <FormCard
                 title="Hazardous Materials & Safety Approval Form"
-                description="Required if your project uses potentially dangerous materials or equipment."
+                description="We send this to you after review if your project uses chemicals, electrical equipment, sharp tools, or heat sources."
                 href="https://docs.google.com/forms/d/1Jk1m1QwhiiDPHf-ZZ8C4D6FglqJB9aUStY8G4OlHpmk/viewform"
                 icon={
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -326,7 +328,7 @@ export default function FormsPage() {
               <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent-amber text-[#050507] text-sm font-bold shrink-0">2</span>
               <div>
                 <span className="font-semibold text-text-primary">Safety Forms (if needed)</span>
-                <span className="text-text-secondary"> &mdash; Submit the Human Participation or Hazardous Materials form only if your project requires them.</span>
+                <span className="text-text-secondary"> &mdash; Only if we ask. After reviewing your application we&apos;ll email you the Human Participation or Hazardous Materials form if your project needs one.</span>
               </div>
             </div>
             <div className="flex items-start gap-3 p-3 bg-bg-surface rounded-lg border border-border-subtle">
