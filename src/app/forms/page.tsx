@@ -1,8 +1,10 @@
 import PageHero from "@/components/PageHero";
 import FormCard from "@/components/FormCard";
+import EventDetails from "@/components/EventDetails";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { EVENT } from "@/lib/event";
 
 function FormIcon() {
   return (
@@ -88,6 +90,30 @@ export default function FormsPage() {
       />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 space-y-8 sm:space-y-12">
+        {/* Application deadline */}
+        <section className="reveal rounded-2xl border border-border-subtle border-l-2 border-l-accent-amber bg-bg-surface p-6 sm:p-8">
+          <div className="mb-2 flex items-center gap-2">
+            <span
+              className="inline-block h-1.5 w-1.5 rounded-full bg-accent-amber"
+              aria-hidden="true"
+            />
+            <h2 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-text-secondary">
+              Applications Close
+            </h2>
+          </div>
+          <p className="font-display text-2xl font-bold text-text-primary">
+            {EVENT.applicationDeadline}
+          </p>
+          <p className="mt-3 max-w-2xl leading-relaxed text-text-secondary">
+            We review applications as they arrive, usually within about three
+            school days, and you can start building the moment you&apos;re
+            approved. Apply early &mdash; earlier applications get more time to
+            work before the fair on {EVENT.dateMedium}.
+          </p>
+        </section>
+
+        <EventDetails className="reveal" />
+
         {/* Main Forms */}
         <section className="reveal">
           <div className="flex items-center gap-3 mb-6 flex-wrap">

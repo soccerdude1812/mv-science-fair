@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import CollapsibleSection from "@/components/CollapsibleSection";
+import EventDetails from "@/components/EventDetails";
 import Timeline from "@/components/Timeline";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -38,6 +39,7 @@ export default function TheProcessPage() {
       {/* Timeline Roadmap */}
       <section className="bg-bg-primary/80 py-10 sm:py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <EventDetails className="reveal mb-12" />
           <div className="text-center mb-12 reveal">
             <Badge variant="secondary" className="mb-4">Roadmap</Badge>
             <h2 className="text-2xl sm:text-3xl font-display font-semibold text-text-primary tracking-[-0.03em]">

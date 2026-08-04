@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { EVENT } from "@/lib/event";
+
 const timelineSteps = [
   {
     step: 1,
@@ -13,42 +15,41 @@ const timelineSteps = [
   },
   {
     step: 2,
-    title: "Application Opens",
-    date: "TBD",
+    title: "Applications Open",
+    date: `Now – ${EVENT.applicationDeadlineShort}`,
     description:
-      "Submit your project application with your topic, hypothesis, and team info.",
-    status: "upcoming" as const,
+      "Submit your project application with your topic, hypothesis, and team info. Applications close Friday, September 4 — apply early, since you can start building as soon as you're approved.",
+    status: "active" as const,
   },
   {
     step: 3,
     title: "Approval & Safety Review",
-    date: "TBD",
+    date: "Rolling review",
     description:
-      "Committee reviews applications and any required safety/ethics forms. You'll receive a confirmation email.",
+      "We review each application as it arrives, usually within about three school days. If changes are needed we'll email you, and you resubmit for a quick second look.",
     status: "upcoming" as const,
   },
   {
     step: 4,
     title: "Project Work Period",
-    date: "TBD",
+    date: "Approval – Sept 18",
     description:
-      "Conduct your experiments, collect data, and build your project with guidance from mentors.",
+      "Conduct your experiments, collect data, and build your project with guidance from mentors. You start as soon as you're approved, so earlier applications get more build time.",
     status: "upcoming" as const,
   },
   {
     step: 5,
-    title: "Display Board Preparation",
-    date: "TBD",
+    title: "Display Board & Rehearsal",
+    date: "Sept 19 – 25",
     description:
-      "Build your display board with all required sections: abstract, hypothesis, data, conclusion, and more.",
+      "Build your display board with all required sections: abstract, hypothesis, data, conclusion, and more. Practice presenting out loud before fair day.",
     status: "upcoming" as const,
   },
   {
     step: 6,
     title: "Science Fair Day",
-    date: "TBD",
-    description:
-      "Present your project to judges and visitors. Celebrate your hard work and scientific discovery! The exact date and venue will be announced once we confirm interest.",
+    date: `${EVENT.dateShort} · ${EVENT.timeShort}`,
+    description: `Present your project to judges and visitors at ${EVENT.venueName} — ${EVENT.venueRoom}, ${EVENT.venueAddress}. Celebrate your hard work and scientific discovery!`,
     status: "upcoming" as const,
   },
 ];
