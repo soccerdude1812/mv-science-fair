@@ -634,8 +634,8 @@ const FORMS: { main: FormItem[]; risk: FormItem[]; helpers: FormItem[] } = {
     { title: "Application & Registration Form", desc: "The one form you need to enter. Project details, parental consent, photo release, and liability waiver, all in one place.", href: APPLICATION_URL, featured: true, icon: <I.star /> },
   ],
   risk: [
-    { title: "Human Participation Approval", desc: "Required if your project involves surveys, interviews, or testing people.", href: "https://docs.google.com/forms/d/12x3JQnRFlzUU86kUAPY_eyoPJ33u0h5tUsIFXcRCAjM/viewform", icon: <I.users /> },
-    { title: "Hazardous Materials & Safety", desc: "Required if your project uses chemicals, electrical equipment, sharp tools, or heat sources.", href: "https://docs.google.com/forms/d/1Jk1m1QwhiiDPHf-ZZ8C4D6FglqJB9aUStY8G4OlHpmk/viewform", icon: <I.warn /> },
+    { title: "Human Participation Approval", desc: "We send this after review if your project involves surveys, interviews, or testing people.", href: "https://docs.google.com/forms/d/12x3JQnRFlzUU86kUAPY_eyoPJ33u0h5tUsIFXcRCAjM/viewform", icon: <I.users /> },
+    { title: "Hazardous Materials & Safety", desc: "We send this after review if your project uses chemicals, electrical equipment, sharp tools, or heat sources.", href: "https://docs.google.com/forms/d/1Jk1m1QwhiiDPHf-ZZ8C4D6FglqJB9aUStY8G4OlHpmk/viewform", icon: <I.warn /> },
   ],
   helpers: [
     { title: "Judge Sign-Up", desc: "Interested in judging projects? Training and rubrics are provided in advance.", href: "https://docs.google.com/forms/d/14Yo2IgS-PAsYNIFac4pzJRdTMX6xEnjtGslqGtAx6TQ/viewform", icon: <I.star /> },
@@ -678,7 +678,7 @@ function Forms() {
             Forms & <em>sign-ups.</em>
           </h2>
           <p className="section-sub">
-            Start with the Application &amp; Registration Form. Submit risk/approval forms only if your project requires them.
+            Apply with the Application &amp; Registration Form. If your project needs a safety form, we&apos;ll email it to you after review.
           </p>
         </div>
       </div>
@@ -712,7 +712,7 @@ function Forms() {
 
       <Reveal delay={200}>
         <div className="callout warn" style={{ marginTop: 28 }}>
-          <strong>Submission order:</strong> ① Application & Registration first, ② Safety forms only if your project needs them. Mentor request is optional and can be made anytime.
+          <strong>Submission order:</strong> ① Application &amp; Registration &mdash; that&apos;s it. ② If your project involves human participants or hazardous materials, we&apos;ll email you the right safety form after we review it. Mentor request is optional and can be made anytime.
         </div>
       </Reveal>
     </section>

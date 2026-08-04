@@ -2,6 +2,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import CollapsibleSection from "@/components/CollapsibleSection";
 import EventDetails from "@/components/EventDetails";
+import { APPLICATION_URL } from "@/lib/event";
 import Timeline from "@/components/Timeline";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -337,11 +338,13 @@ export default function TheProcessPage() {
                   }
                 >
                   <p className="mb-5 text-text-secondary">
-                    Complete the Application &amp; Registration Form with your project
-                    details, team members, consent, and project description. This is the only form you need to register and apply.
+                    Complete the Application &amp; Registration Form. It covers registration,
+                    consent, and your project. About the project itself we only ask two things:
+                    what it is, and how you plan to do it, 100&ndash;200 words each. Applications
+                    close Friday, September 4.
                   </p>
                   <a
-                    href="https://docs.google.com/forms/d/1Uys9ePwF965Nn722dpa3eSypNVK9tLp-J4PnvOGN4xg/viewform"
+                    href={APPLICATION_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-[#0A0A0F] font-semibold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
@@ -358,7 +361,7 @@ export default function TheProcessPage() {
 
               <div className="reveal stagger-2">
                 <CollapsibleSection
-                  title="Step 2: Submit Additional Forms (If Required)"
+                  title="Step 2: Safety Forms — Only If We Ask"
                   icon={
                     <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-accent-cyan/20 text-accent-cyan text-xs font-bold shrink-0">
                       2
@@ -366,21 +369,23 @@ export default function TheProcessPage() {
                   }
                 >
                   <p className="mb-4 text-text-secondary">
-                    Depending on your project, you may need to submit additional
-                    approval forms:
+                    <strong className="text-text-primary">Don&apos;t submit these yourself.</strong>{" "}
+                    We review every application, and if your project needs one we&apos;ll email
+                    it to you during the approval round. Most projects need nothing extra.
+                    The two we may send are:
                   </p>
                   <BulletList
                     items={[
-                      "Human Participants Form -- if your project involves surveying, interviewing, or testing people",
-                      "Hazardous Materials Form -- if your project uses chemicals, electrical equipment, sharp tools, or heat sources",
+                      "Human Participants Form — if your project involves surveying, interviewing, or testing people",
+                      "Hazardous Materials Form — if your project uses chemicals, electrical equipment, sharp tools, or heat sources",
                     ]}
                   />
                   <p className="mt-5 text-text-secondary">
-                    Visit the{" "}
+                    You can preview them on the{" "}
                     <Link href="/forms" className="text-accent-indigo font-medium hover:underline">
                       Forms page
-                    </Link>{" "}
-                    for all required forms and details on when each is needed.
+                    </Link>
+                    , but wait for our email before filling one out.
                   </p>
                 </CollapsibleSection>
               </div>
