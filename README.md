@@ -10,12 +10,13 @@ Website for the MV Science Fair 2026 — a student-led STEM event organized by t
 | **Time** | 9:00 AM – 12:00 PM |
 | **Venue** | Amy Imai Elementary School — Multi-Use Room (MUR) |
 | **Address** | 253 Martens Ave, Mountain View, CA 94040 |
-| **Applications close** | Friday, September 4, 2026 (rolling review) |
-| **Contact** | eeshankhandelwal123@gmail.com |
+| **Applications close** | Friday, September 4, 2026 |
+| **Contact** | stemresearchclubmvhs@gmail.com |
 
 Date, time, venue, deadline, contact, and the application form URL all live in
-**`src/lib/event.ts`** — edit there, not in individual pages. `SCHEDULE` in the
-same file drives both the homepage process rail and the `Timeline` component.
+**`src/lib/event.ts`** — edit there, not in individual pages. The contact
+address is the club inbox, and the same address is set in the description of
+every Google Form; change both together.
 
 ## Naming
 
