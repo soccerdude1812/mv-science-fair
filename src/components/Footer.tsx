@@ -1,129 +1,100 @@
 import Link from "next/link";
-import { EVENT } from "@/lib/event";
+import { EVENT, APPLICATION_URL } from "@/lib/event";
 
-const quickLinks = [
-  { href: "/the-process", label: "The Process" },
-  { href: "/forms", label: "Forms" },
+const sitemap = [
+  { href: "/", label: "Home" },
+  { href: "/the-process", label: "How it works" },
   { href: "/rules", label: "Rules" },
+  { href: "/forms", label: "Forms" },
   { href: "/display-and-safety", label: "Display & Safety" },
-];
-
-const communityLinks = [
-  { href: "/judges", label: "Become a Judge" },
+  { href: "/judges", label: "Judges" },
   { href: "/volunteer", label: "Volunteer" },
   { href: "/students-families", label: "Students & Families" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-bg-deep border-t border-border-subtle" role="contentinfo">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand */}
-          <div className="sm:col-span-2 lg:col-span-1">
-            <div className="flex items-center gap-2.5 mb-4">
-              <span className="gradient-text font-display font-bold text-lg tracking-[-0.02em]">
-                MV
-              </span>
-              <span className="text-text-muted text-sm font-medium">
-                Science Fair
-              </span>
-            </div>
-            <p className="text-text-muted text-sm leading-relaxed max-w-xs">
-              Inspiring young scientists across Mountain View. Organized by
-              the STEM &amp; Research Club at Mountain View High School.
+    <footer className="border-t border-line bg-paper-warm">
+      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+        <div className="grid gap-10 md:grid-cols-3">
+          <div>
+            <p className="font-display text-xl font-semibold text-ink">
+              MV Science Fair
             </p>
+            <p className="mt-3 max-w-[36ch] text-[0.95rem] text-ink-soft">
+              A free science fair for Mountain View kids in grades 3 to 5,
+              run by high school student volunteers.
+            </p>
+            <a
+              href={`mailto:${EVENT.contactEmail}`}
+              className="mt-4 inline-block text-[0.95rem] font-medium text-coral-deep hover:underline"
+            >
+              {EVENT.contactEmail}
+            </a>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-display font-semibold text-xs uppercase tracking-[0.08em] text-text-secondary mb-4">
-              Quick Links
-            </h3>
-            <ul className="space-y-2.5" role="list">
-              {quickLinks.map((link) => (
-                <li key={link.href}>
+          <nav aria-label="Site pages">
+            <p className="data-label mb-4">Pages</p>
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5">
+              {sitemap.map(({ href, label }) => (
+                <li key={href}>
                   <Link
-                    href={link.href}
-                    className="text-text-muted hover:text-text-primary text-sm transition-colors"
+                    href={href}
+                    className="text-[0.95rem] text-ink-soft hover:text-ink hover:underline"
                   >
-                    {link.label}
+                    {label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
-          {/* Community */}
           <div>
-            <h3 className="font-display font-semibold text-xs uppercase tracking-[0.08em] text-text-secondary mb-4">
-              Get Involved
-            </h3>
-            <ul className="space-y-2.5" role="list">
-              {communityLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-text-muted hover:text-text-primary text-sm transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Event details + contact */}
-          <div>
-            <h3 className="font-display font-semibold text-xs uppercase tracking-[0.08em] text-text-secondary mb-4">
-              Fair Day
-            </h3>
-            <ul className="space-y-2.5" role="list">
+            <p className="data-label mb-4">The event</p>
+            <ul className="space-y-2.5 text-[0.95rem] text-ink-soft">
               <li>
-                <span className="text-text-muted text-sm">
-                  {EVENT.dateMedium}
-                </span>
-              </li>
-              <li>
-                <span className="text-text-muted text-sm">
-                  {EVENT.timeFull}
-                </span>
+                {EVENT.dateFull}
+                <br />
+                {EVENT.timeFull}
               </li>
               <li>
                 <a
                   href={EVENT.venueMapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-text-muted text-sm transition-colors hover:text-text-primary"
+                  className="hover:text-ink hover:underline"
                 >
-                  {EVENT.venueName} &mdash; {EVENT.venueRoom}
+                  {EVENT.venueName}, {EVENT.venueRoom}
+                  <br />
+                  {EVENT.venueAddress}
                 </a>
               </li>
               <li>
-                <span className="text-text-muted text-sm">
-                  {EVENT.venueAddress}
+                Applications close{" "}
+                <span className="font-semibold text-coral-deep">
+                  {EVENT.applicationDeadline}
                 </span>
               </li>
               <li>
                 <a
-                  href={`mailto:${EVENT.contactEmail}`}
-                  className="text-text-muted text-sm transition-colors hover:text-text-primary"
+                  href={APPLICATION_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-coral-deep hover:underline"
                 >
-                  {EVENT.contactEmail}
+                  Apply now
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-text-muted text-sm">
-            &copy; {new Date().getFullYear()} MV Science Fair. All rights
-            reserved.
-          </p>
-          <p className="text-text-muted/50 text-xs">
-            A student-led event by the Mountain View High School STEM &amp; Research Club. Not affiliated with or endorsed by MVWSD.
+        <div className="mt-12 border-t border-line pt-6">
+          <p className="text-[0.85rem] text-ink-faint">
+            A student-led event organized by the STEM & Research Club at
+            Mountain View High School. Not affiliated with or endorsed by the
+            Mountain View Whisman School District. Amy Imai Elementary School
+            is the venue only.
           </p>
         </div>
       </div>

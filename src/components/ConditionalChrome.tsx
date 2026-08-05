@@ -1,22 +1,22 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ScienceBackground from "@/components/ScienceBackground";
 import ScrollReveal from "@/components/ScrollReveal";
 
-export default function ConditionalChrome({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const isHome = pathname === "/";
-
-  if (isHome) {
-    return <>{children}</>;
-  }
-
+/**
+ * One chrome for every page. The home page used to carry its own private
+ * nav and footer; in the Chalk Lab system the whole site shares this
+ * shell. ScrollReveal powers the subpages' .reveal entrances; the home
+ * page animates with motion/react and simply has no .reveal elements.
+ */
+export default function ConditionalChrome({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <>
-      <ScienceBackground />
       <ScrollReveal />
       <Navbar />
       {children}
