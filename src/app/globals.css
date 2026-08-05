@@ -217,7 +217,7 @@ h1, h2, h3, h4 {
 .display-hero {
   font-family: var(--font-display), Georgia, serif;
   font-size: clamp(2.75rem, 6vw, 4.5rem);
-  font-weight: 550;
+  font-weight: 600;
   line-height: 1.06;
   letter-spacing: -0.025em;
   color: var(--ink);
@@ -226,7 +226,7 @@ h1, h2, h3, h4 {
 .display-section {
   font-family: var(--font-display), Georgia, serif;
   font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  font-weight: 550;
+  font-weight: 600;
   line-height: 1.15;
   color: var(--ink);
 }

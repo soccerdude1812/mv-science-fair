@@ -18,14 +18,14 @@ export const EVENT = {
   dateShort: "Sat, Sept 26",
   dateNumeric: "2026-09-26",
 
-  timeFull: "9:00 AM – 12:00 PM",
-  timeShort: "9AM–12PM",
+  timeFull: "9:00 AM to 12:00 PM",
+  timeShort: "9AM to 12PM",
   startISO: "2026-09-26T09:00:00-07:00",
   endISO: "2026-09-26T12:00:00-07:00",
 
   venueName: "Amy Imai Elementary School",
   venueRoom: "Multi-Use Room (MUR)",
-  venueShort: "Amy Imai Elementary — MUR",
+  venueShort: "Amy Imai Elementary, MUR",
   venueStreet: "253 Martens Ave",
   venueCity: "Mountain View",
   venueState: "CA",
@@ -48,42 +48,3 @@ export const EVENT = {
  */
 export const APPLICATION_URL =
   "https://docs.google.com/forms/d/1Uys9ePwF965Nn722dpa3eSypNVK9tLp-J4PnvOGN4xg/viewform";
-
-/** Full milestone schedule, shared by the homepage process rail and the Timeline component. */
-export const SCHEDULE = [
-  {
-    n: "01",
-    title: "Apply",
-    when: `Open now – ${EVENT.applicationDeadlineShort}`,
-    short: `Now – ${EVENT.applicationDeadlineShort}`,
-    body: "One form covers registration, consent, and your project. All we ask about the project itself is what it is and how you plan to do it, 100-200 words each. Applications close Friday, September 4 — but apply early: we review as applications arrive, and you can start building the moment you're approved.",
-  },
-  {
-    n: "02",
-    title: "Approval & Safety Review",
-    when: "Rolling review",
-    short: "Rolling",
-    body: "The Science Fair Committee reviews each application as it arrives. If we need changes, we'll email you, and you resubmit for a quick second look. If your project involves human participants or hazardous materials, this is when we'll send you the extra safety form. Wait for confirmation before starting your experiment.",
-  },
-  {
-    n: "03",
-    title: "Project Work Period",
-    when: "After approval",
-    short: "After approval",
-    body: "Conduct your experiments, run at least three trials, collect data honestly, and keep a date-stamped logbook. You start as soon as you're approved, so earlier applications get more build time. Mentors are here to help — but the work is yours.",
-  },
-  {
-    n: "04",
-    title: "Display Board & Rehearsal",
-    when: "Before fair day",
-    short: "Before fair day",
-    body: "Build your tri-fold board: title, abstract, question, hypothesis, materials, procedure, data, conclusion, and citations. Name on the back only — for fair judging. Practice presenting out loud before fair day.",
-  },
-  {
-    n: "05",
-    title: "Science Fair Day",
-    when: `${EVENT.dateShort} · ${EVENT.timeShort}`,
-    short: EVENT.dateShort,
-    body: `Present to judges and visitors at ${EVENT.venueName} — ${EVENT.venueRoom}, ${EVENT.venueAddress}. The fair runs ${EVENT.timeFull}. Six criteria: scientific thought, creativity, thoroughness, skill, clarity, and presentation. Celebrate what you discovered.`,
-  },
-] as const;
