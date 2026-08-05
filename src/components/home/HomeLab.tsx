@@ -18,12 +18,7 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-} from "motion/react";
+import { useScroll, useTransform, useReducedMotion } from "motion/react";
 import { EVENT, APPLICATION_URL } from "@/lib/event";
 import { Beaker, Gear, TestTube } from "@/components/lab/cast";
 import { Reveal } from "@/components/lab/Reveal";
@@ -39,18 +34,18 @@ function Hero({ look }: { look: ReturnType<typeof useLook> }) {
     offset: ["start start", "end start"],
   });
   // The pour happens in the FIRST third of scroll, while the beaker is
-  // still fully on screen: the glass rolls to 60 degrees (the liquid
-  // stays level inside and reaches the spout), pours, and rights itself
-  // before leaving the viewport.
+  // still fully on screen: the glass rolls to 60 degrees while its
+  // liquid stays level, so the surface only REACHES the spout at about
+  // 52 degrees. The stream starts exactly there (progress ~0.175),
+  // flows while the glass holds its tilt, and retracts as it rights.
   const tilt = useTransform(
     scrollYProgress,
-    [0.02, 0.2, 0.32, 0.46],
+    [0.02, 0.18, 0.32, 0.46],
     [0, 60, 60, 0],
   );
-  const streamScale = useTransform(scrollYProgress, [0.12, 0.24], [0, 1]);
-  const streamOpacity = useTransform(
+  const pour = useTransform(
     scrollYProgress,
-    [0.1, 0.16, 0.34, 0.44],
+    [0.175, 0.26, 0.34, 0.42],
     [0, 1, 1, 0],
   );
 
@@ -85,22 +80,10 @@ function Hero({ look }: { look: ReturnType<typeof useLook> }) {
             <Beaker
               look={look}
               tilt={reduce ? undefined : tilt}
+              pour={reduce ? undefined : pour}
               className="h-auto w-full"
             />
           </div>
-          {/* the poured stream, anchored where the spout sits at full
-              60-degree tilt */}
-          {!reduce && (
-            <motion.div
-              aria-hidden="true"
-              className="absolute left-[83%] top-[58%] h-48 w-2.5 rounded-b-full bg-coral"
-              style={{
-                scaleY: streamScale,
-                opacity: streamOpacity,
-                transformOrigin: "top center",
-              }}
-            />
-          )}
         </div>
       </div>
     </section>

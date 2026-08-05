@@ -92,6 +92,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      /* Next 16: restores instant snap-to-top on route navigation while
+         keeping CSS smooth scroll for in-page anchors (version-16.md) */
+      data-scroll-behavior="smooth"
       className={cn(
         "h-full antialiased",
         sourceSerif.variable,

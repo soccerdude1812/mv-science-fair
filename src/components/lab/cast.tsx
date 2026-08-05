@@ -107,9 +107,13 @@ function Smile({
 
 /* -------------------------------------------------------------- beaker -- */
 
+/** the spout tip in viewBox coordinates; the stream hangs from here */
+const LIP = { x: 93.6, y: 31.6 };
+
 export function Beaker({
   look,
   tilt,
+  pour,
   className,
   style,
 }: {
@@ -118,12 +122,24 @@ export function Beaker({
       counter-rotates inside a clip of the interior so it stays level
       like real liquid and reaches the spout as the glass tips */
   tilt?: MotionValue<number>;
+  /** 0..1 stream length. The stream is drawn INSIDE the svg, anchored
+      to the spout, and counter-rotated about the lip point so it always
+      falls world-vertical no matter the glass tilt. Time it so it only
+      flows once the leveled liquid actually reaches the spout (from
+      about 52 degrees of tilt). */
+  pour?: MotionValue<number>;
   className?: string;
   style?: React.CSSProperties;
 }) {
   const interiorId = useId();
+  const streamGradId = useId();
   const zero = useMotionValue(0);
   const level = useTransform(tilt ?? zero, (t) => -t);
+  /* Motion forces transform-box: fill-box on SVG elements, so the lip
+     anchor is expressed as a FRACTION of the stream group's bbox
+     (x 91.2..97.2, y 30.4..161): the lip (93.6, 31.6) sits at ~(0.4,
+     0.01). Verified against getBBox in the browser. */
+  const lipOrigin = { originX: 0.4, originY: 0.01 };
 
   return (
     <svg
@@ -131,7 +147,7 @@ export function Beaker({
       fill="none"
       aria-hidden="true"
       className={className}
-      style={style}
+      style={{ overflow: "visible", ...style }}
     >
       <motion.g className="rotor" style={tilt ? { rotate: tilt } : undefined}>
         <clipPath id={interiorId}>
@@ -175,6 +191,44 @@ export function Beaker({
           strokeWidth={5.5}
           strokeLinecap="round"
         />
+        {/* the poured stream: lives in the beaker frame, glued to the
+            spout; the outer group counter-rotates it about the lip so
+            it falls world-vertical, the inner group grows it out of the
+            lip. It swells over the spout, then tapers as it falls
+            (faster liquid is thinner) and fades at the tip. */}
+        {pour && (
+          <motion.g className="rotor-lip" style={{ ...lipOrigin, rotate: level }}>
+            <motion.g className="rotor-lip" style={{ ...lipOrigin, scaleY: pour }}>
+              <defs>
+                <linearGradient
+                  id={streamGradId}
+                  x1="0"
+                  y1={LIP.y}
+                  x2="0"
+                  y2="165"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0.82" stopColor={CRAYON.coral} />
+                  <stop
+                    offset="1"
+                    stopColor={CRAYON.coral}
+                    stopOpacity="0"
+                  />
+                </linearGradient>
+              </defs>
+              <path
+                d={`M${LIP.x - 2.4},${LIP.y - 1.2}
+                    C${LIP.x + 0.6},${LIP.y - 0.4} ${LIP.x + 2.6},${LIP.y + 1.6} ${LIP.x + 3.2},${LIP.y + 5}
+                    C${LIP.x + 3.9},${LIP.y + 14} ${LIP.x + 3.4},${LIP.y + 40} ${LIP.x + 2.9},${LIP.y + 70}
+                    L${LIP.x + 2.8},160
+                    Q${LIP.x + 1},163 ${LIP.x - 0.7},160
+                    L${LIP.x - 0.6},${LIP.y + 70}
+                    C${LIP.x - 1.2},${LIP.y + 40} ${LIP.x - 1.9},${LIP.y + 12} ${LIP.x - 2.4},${LIP.y + 4} Z`}
+                fill={`url(#${streamGradId})`}
+              />
+            </motion.g>
+          </motion.g>
+        )}
         {/* measurement ticks */}
         <path
           d="M77.5,50 L84,50 M77.5,60.5 L84.2,60.5"

@@ -13,7 +13,6 @@ interface CollapsibleSectionProps {
   title: string;
   children: React.ReactNode;
   defaultOpen?: boolean;
-  icon?: React.ReactNode;
 }
 
 export default function CollapsibleSection({
@@ -27,22 +26,23 @@ export default function CollapsibleSection({
     <Collapsible
       defaultOpen={defaultOpen}
       onOpenChange={setIsOpen}
-      className="border-b border-border-subtle"
+      className="border-b border-line"
     >
-      <CollapsibleTrigger className="w-full flex items-center justify-between gap-3 py-4 px-1 text-left transition-colors cursor-pointer">
-        <span className="flex-1 font-medium text-text-primary">{title}</span>
+      <CollapsibleTrigger className="w-full flex items-center justify-between gap-3 py-4 px-1 text-left cursor-pointer transition-colors hover:text-ink">
+        <span className="flex-1 font-medium text-ink">{title}</span>
         <ChevronDown
           size={20}
+          strokeWidth={2}
           className={cn(
             "shrink-0 transition-transform duration-300",
-            isOpen ? "rotate-180 text-text-primary" : "text-text-muted"
+            isOpen ? "rotate-180 text-ink" : "text-ink-faint"
           )}
           aria-hidden="true"
         />
       </CollapsibleTrigger>
 
       <CollapsibleContent>
-        <div className="pt-4 pb-6 px-1 text-text-secondary leading-relaxed">
+        <div className="pt-2 pb-7 px-1 text-ink-soft leading-relaxed">
           {children}
         </div>
       </CollapsibleContent>

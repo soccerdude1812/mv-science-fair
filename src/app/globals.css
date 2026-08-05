@@ -42,31 +42,6 @@
   --duration-fast: 150ms;
   --duration-normal: 300ms;
 
-  /* --- legacy bridge -------------------------------------------
-     Old "Midnight Science" token names, remapped to Chalk Lab
-     values so unmigrated pages render correctly in the light
-     theme. Migration agents replace these usages per page;
-     delete this block once `grep -r "accent-indigo\|bg-deep"` is
-     clean. Mapping: indigo/purple→blue, cyan/emerald→green,
-     amber→marigold, rose→coral. ------------------------------- */
-  --bg-deep: var(--paper);
-  --bg-primary: var(--paper);
-  --bg-surface: var(--card-surface);
-  --bg-surface-hover: var(--paper-warm);
-  --bg-elevated: var(--card-surface);
-  --text-primary: var(--ink);
-  --text-secondary: var(--ink-soft);
-  --text-muted: var(--ink-faint);
-  --accent-indigo: var(--blue);
-  --accent-cyan: var(--green);
-  --accent-purple: var(--blue);
-  --accent-rose: var(--coral);
-  --accent-amber: var(--marigold);
-  --accent-emerald: var(--green);
-  --border-subtle: var(--line);
-  --border-hover: var(--line-strong);
-  --border-accent: rgba(217, 108, 79, 0.4);
-
   /* --- shadcn/ui semantic tokens, tuned to Chalk Lab --- */
   --background: var(--paper);
   --foreground: var(--ink);
@@ -107,25 +82,6 @@
   --color-green-soft: var(--green-soft);
   --color-marigold: var(--marigold);
   --color-marigold-soft: var(--marigold-soft);
-
-  /* legacy bridge utilities (see :root note) */
-  --color-bg-deep: var(--bg-deep);
-  --color-bg-primary: var(--bg-primary);
-  --color-bg-surface: var(--bg-surface);
-  --color-bg-surface-hover: var(--bg-surface-hover);
-  --color-bg-elevated: var(--bg-elevated);
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-muted: var(--text-muted);
-  --color-accent-indigo: var(--accent-indigo);
-  --color-accent-cyan: var(--accent-cyan);
-  --color-accent-purple: var(--accent-purple);
-  --color-accent-rose: var(--accent-rose);
-  --color-accent-amber: var(--accent-amber);
-  --color-accent-emerald: var(--accent-emerald);
-  --color-border-subtle: var(--border-subtle);
-  --color-border-hover: var(--border-hover);
-  --color-border-accent: var(--border-accent);
 
   /* type */
   --font-display: var(--font-display);
@@ -300,15 +256,6 @@ h1, h2, h3, h4 {
   box-shadow: var(--shadow-sm);
 }
 
-/* legacy names still referenced by unmigrated pages */
-.surface-card,
-.glass-card {
-  background: var(--card-surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-}
-
 /* chips: pill, soft crayon fill, ink text */
 .chip {
   display: inline-flex;
@@ -338,16 +285,17 @@ h1, h2, h3, h4 {
   color: var(--coral-deep);
 }
 
-/* gradient-text is a legacy class; gradients are retired, so it
-   simply reads as ink until migrated off */
-.gradient-text {
-  color: var(--ink);
-}
-
 /* rotating SVG groups (gear bodies): rotate around their own center */
 .rotor {
   transform-box: fill-box;
   transform-origin: 50% 50%;
+}
+
+/* SVG groups anchored to an exact viewBox point (the beaker's pour
+   lip): motion supplies originX/originY in px, which only mean
+   viewBox coordinates when the box is view-box */
+.rotor-lip {
+  transform-box: view-box;
 }
 
 /* gentle idle bob for characters; off under reduced motion via the

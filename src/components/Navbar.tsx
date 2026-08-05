@@ -27,11 +27,7 @@ const sheetOnlyLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-
-  // close the sheet on navigation
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  const close = () => setOpen(false);
 
   // lock scroll while the sheet is open
   useEffect(() => {
@@ -117,6 +113,7 @@ export default function Navbar() {
               <Link
                 key={href}
                 href={href}
+                onClick={close}
                 className={`block rounded-2xl px-4 py-3 text-[1.05rem] font-medium ${
                   pathname === href
                     ? "bg-paper-warm text-ink"
