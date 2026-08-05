@@ -38,7 +38,13 @@ export const EVENT = {
   applicationDeadline: "Friday, September 4, 2026",
   applicationDeadlineShort: "Sept 4",
 
-  contactEmail: "eeshankhandelwal123@gmail.com",
+  /**
+   * Public inbox for all questions. Deliberately the club address, not a
+   * personal one: it outlives any single officer and reads as an
+   * organization to parents. Changed 2026-08-05 (was a personal Gmail).
+   * The Google Forms carry the same address in their descriptions.
+   */
+  contactEmail: "stemresearchclubmvhs@gmail.com",
 } as const;
 
 /**
