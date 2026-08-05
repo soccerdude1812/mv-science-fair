@@ -13,12 +13,12 @@ import { APPLICATION_URL } from "@/lib/event";
 
 const primaryLinks = [
   { href: "/the-process", label: "How it works" },
+  { href: "/forms", label: "Forms" },
   { href: "/rules", label: "Rules" },
   { href: "/volunteer", label: "Volunteer" },
 ];
 
 const sheetOnlyLinks = [
-  { href: "/forms", label: "Forms" },
   { href: "/display-and-safety", label: "Display & Safety" },
   { href: "/judges", label: "Judges" },
   { href: "/students-families", label: "Students & Families" },

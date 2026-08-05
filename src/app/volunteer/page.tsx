@@ -1,3 +1,4 @@
+import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import EventDetails from "@/components/EventDetails";
 import { Lightbulb } from "@/components/lab/cast";
@@ -135,6 +136,36 @@ export default function VolunteerPage() {
             </a>
           </section>
         </div>
+
+        {/* Judging is volunteering too */}
+        <section className="reveal card-soft flex flex-col items-start justify-between gap-6 p-6 sm:flex-row sm:items-center sm:p-8">
+          <div>
+            <h2 className="font-display text-2xl font-semibold text-ink">
+              Prefer to judge?
+            </h2>
+            <p className="mt-2 max-w-[52ch] text-ink-soft">
+              Judges are volunteers too: spend fair-day morning talking with
+              young scientists about their projects. No experience needed.
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-wrap items-center gap-4">
+            <a
+              href="https://docs.google.com/forms/d/14Yo2IgS-PAsYNIFac4pzJRdTMX6xEnjtGslqGtAx6TQ/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
+              Sign up to judge
+              <ExternalLink size={16} strokeWidth={2} aria-hidden="true" />
+            </a>
+            <Link
+              href="/judges"
+              className="font-medium text-coral-deep hover:underline"
+            >
+              How judging works
+            </Link>
+          </div>
+        </section>
 
         {/* Why volunteer */}
         <section className="reveal border-t border-line pt-10 sm:pt-12">
