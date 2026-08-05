@@ -1,82 +1,91 @@
+import { ArrowUpRight, Check, X } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import FormCard from "@/components/FormCard";
 import EventDetails from "@/components/EventDetails";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { EVENT, APPLICATION_URL } from "@/lib/event";
 
-function FormIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-      <polyline points="14 2 14 8 20 8" />
-      <line x1="16" y1="13" x2="8" y2="13" />
-      <line x1="16" y1="17" x2="8" y2="17" />
-    </svg>
-  );
-}
+const CONSENT_RULES = [
+  "Tell participants what your project is about and what they will be asked to do",
+  "Get their voluntary permission; no one should be pressured or forced",
+  "Get written parent/guardian permission if participants are under 18",
+  "Let them stop at any time, for any reason",
+  "Keep all data confidential: use codes (e.g., Participant 1), never real names on your data, notes, or display board",
+];
 
-function ShieldIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-    </svg>
-  );
-}
+const NEVER_ALLOWED = [
+  "Open flames (candles, matches, lighters)",
+  "Industrial or laboratory chemicals",
+  "High-voltage electricity (wall outlets)",
+  "Compressed gases or pressurized containers",
+  "Radioactive materials",
+  "Toxic substances (pesticides, paint thinner)",
+  "Weapons, projectiles, or launchers",
+  "Biological hazards (bacteria, mold, blood)",
+];
 
-function HeartIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
-    </svg>
-  );
-}
-
-function RequirementBox({
-  title,
+/** "Required when / not required when" facts for a safety form. */
+function WhenNeeded({
   required,
   notRequired,
   examplesRequired,
   examplesNotRequired,
 }: {
-  title: string;
   required: string;
   notRequired: string;
   examplesRequired: string;
   examplesNotRequired: string;
 }) {
   return (
-    <div className="mt-4 bg-bg-surface border border-border-subtle rounded-lg p-4 space-y-3">
-      <h4 className="font-semibold text-text-primary text-sm">{title}</h4>
-      <div className="grid sm:grid-cols-2 gap-3">
-        <div className="p-3 bg-accent-rose/10 rounded-lg border border-accent-rose/20">
-          <p className="text-xs font-semibold text-accent-rose uppercase tracking-wider mb-1">
-            Required when:
-          </p>
-          <p className="text-sm text-text-secondary">{required}</p>
-        </div>
-        <div className="p-3 bg-accent-emerald/10 rounded-lg border border-accent-emerald/20">
-          <p className="text-xs font-semibold text-accent-emerald uppercase tracking-wider mb-1">
-            Not required when:
-          </p>
-          <p className="text-sm text-text-secondary">{notRequired}</p>
-        </div>
+    <dl className="mt-6 grid gap-x-10 gap-y-5 border-t border-line pt-6 sm:grid-cols-2">
+      <div>
+        <dt className="data-label mb-1.5">Required when</dt>
+        <dd className="text-sm leading-relaxed text-ink-soft">
+          {required}
+          <span className="mt-1.5 block text-ink-faint">
+            Examples: {examplesRequired}.
+          </span>
+        </dd>
       </div>
-      <div className="grid sm:grid-cols-2 gap-3">
-        <div className="p-3 bg-bg-elevated rounded-lg border border-border-subtle">
-          <p className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-1">
-            Examples (Required):
-          </p>
-          <p className="text-sm text-text-secondary">{examplesRequired}</p>
-        </div>
-        <div className="p-3 bg-bg-elevated rounded-lg border border-border-subtle">
-          <p className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-1">
-            Examples (Not Required):
-          </p>
-          <p className="text-sm text-text-secondary">{examplesNotRequired}</p>
-        </div>
+      <div>
+        <dt className="data-label mb-1.5">Not required when</dt>
+        <dd className="text-sm leading-relaxed text-ink-soft">
+          {notRequired}
+          <span className="mt-1.5 block text-ink-faint">
+            Examples: {examplesNotRequired}.
+          </span>
+        </dd>
       </div>
+    </dl>
+  );
+}
+
+/** Header for a safety form card: title plus a preview link to the form. */
+function SafetyFormHeader({
+  title,
+  description,
+  href,
+}: {
+  title: string;
+  description: string;
+  href: string;
+}) {
+  return (
+    <div>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+        <h3 className="text-xl font-semibold">{title}</h3>
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-sm font-semibold text-coral-deep underline-offset-4 hover:underline"
+        >
+          Preview the form
+          <ArrowUpRight size={14} strokeWidth={2} aria-hidden="true" />
+        </a>
+      </div>
+      <p className="mt-2 text-sm leading-relaxed text-ink-soft sm:text-base">
+        {description}
+      </p>
     </div>
   );
 }
@@ -86,263 +95,227 @@ export default function FormsPage() {
     <div>
       <PageHero
         title="Forms"
-        subtitle="All the forms you need, organized and easy to find. Start with the Application &amp; Registration Form."
+        subtitle="Everything in one place. Start with the Application & Registration Form."
       />
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 space-y-8 sm:space-y-12">
-        {/* Application deadline */}
-        <section className="reveal rounded-2xl border border-border-subtle border-l-2 border-l-accent-amber bg-bg-surface p-6 sm:p-8">
-          <div className="mb-2 flex items-center gap-2">
-            <span
-              className="inline-block h-1.5 w-1.5 rounded-full bg-accent-amber"
-              aria-hidden="true"
-            />
-            <h2 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-text-secondary">
-              Applications Close
-            </h2>
+      <div className="mx-auto max-w-4xl space-y-16 px-4 py-12 sm:px-6 sm:py-16 lg:px-8 sm:space-y-20">
+        {/* The application: the one form that enters you in the fair */}
+        <section className="reveal card-soft p-7 sm:p-10">
+          <span className="badge-accent">
+            Closes {EVENT.applicationDeadline}
+          </span>
+          <h2 className="mt-5 text-2xl font-semibold sm:text-3xl">
+            Application &amp; Registration Form
+          </h2>
+          <p className="mt-3 max-w-2xl text-ink-soft">
+            The one form you need to enter the 2026 MV Science Fair: project
+            details, parental consent, photo release, and liability waiver in
+            one place.
+          </p>
+          <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <a
+              href={APPLICATION_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
+              Apply now
+            </a>
+            <p className="max-w-[38ch] text-sm leading-relaxed text-ink-faint">
+              We review as applications arrive. Apply early and start building
+              the moment you&apos;re approved.
+            </p>
           </div>
-          <p className="font-display text-2xl font-bold text-text-primary">
-            {EVENT.applicationDeadline}
-          </p>
-          <p className="mt-3 max-w-2xl leading-relaxed text-text-secondary">
-            We review applications as they arrive, and you can start building
-            the moment you&apos;re approved. Apply early &mdash; earlier
-            applications get more time to work before the fair on{" "}
-            {EVENT.dateMedium}.
-          </p>
         </section>
 
         <EventDetails className="reveal" />
 
-        {/* Main Forms */}
+        {/* Safety forms: sent by us, only when a project needs one */}
         <section className="reveal">
-          <div className="flex items-center gap-3 mb-6 flex-wrap">
-            <span className="w-10 h-10 rounded-xl bg-accent-indigo/10 text-accent-indigo flex items-center justify-center shrink-0" aria-hidden="true">
-              <FormIcon />
-            </span>
-            <h2 className="text-xl sm:text-2xl font-bold text-text-primary">Main Forms</h2>
-            <Badge variant="secondary" className="ml-auto sm:ml-2">MAIN FORMS</Badge>
-          </div>
-          <div className="space-y-4">
-            <FormCard
-              title="Application & Registration Form"
-              description="The one form you need to enter the 2026 MV Science Fair. Includes project details, parental consent, photo release, and liability waiver — everything in one place. Applications close Friday, September 4."
-              href={APPLICATION_URL}
-              highlighted
-              icon={<FormIcon />}
-            />
-          </div>
-        </section>
-
-        <Separator className="my-0 bg-border-subtle" />
-
-        {/* Risk/Approval Forms */}
-        <section className="reveal">
-          <div className="flex items-center gap-3 mb-2 flex-wrap">
-            <span className="w-10 h-10 rounded-xl bg-accent-amber/10 text-accent-amber flex items-center justify-center shrink-0" aria-hidden="true">
-              <ShieldIcon />
-            </span>
-            <h2 className="text-xl sm:text-2xl font-bold text-text-primary">Risk/Approval Forms</h2>
-            <Badge variant="secondary" className="hidden sm:inline-flex">RISK/APPROVAL FORMS</Badge>
-          </div>
-          <p className="text-text-secondary mb-6 sm:ml-[52px]">
-            <strong className="text-text-primary">You don&apos;t need to submit
-            these yourself.</strong> Apply first. We review every application, and
-            if your project involves human participants or hazardous materials
-            we&apos;ll email you the right form. They&apos;re listed here so you know
-            what to expect.
+          <h2 className="text-2xl font-semibold sm:text-3xl">Safety forms</h2>
+          <p className="mt-3 max-w-2xl text-ink-soft">
+            <strong className="font-semibold text-ink">
+              You don&apos;t submit these yourself.
+            </strong>{" "}
+            Apply first. If your project involves human participants or
+            hazardous materials, we&apos;ll email you the right form after
+            review. They&apos;re listed here so you know what to expect.
           </p>
 
-          <div className="space-y-6">
-            {/* Human Participation */}
-            <Card className="reveal bg-bg-surface border-border-subtle">
-              <CardContent className="p-6">
-              <FormCard
+          <div className="mt-8 space-y-6">
+            {/* Human participation */}
+            <article className="reveal card-soft p-6 sm:p-8">
+              <SafetyFormHeader
                 title="Human Participation Approval Form"
                 description="We send this to you after review if your project involves surveys, interviews, or testing people."
                 href="https://docs.google.com/forms/d/12x3JQnRFlzUU86kUAPY_eyoPJ33u0h5tUsIFXcRCAjM/viewform"
-                icon={
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M23 21v-2a4 4 0 00-3-3.87" />
-                    <path d="M16 3.13a4 4 0 010 7.75" />
-                  </svg>
-                }
               />
-              <div className="mt-4 bg-accent-rose/10 border border-accent-rose/20 rounded-lg p-4 border-l-4 border-l-accent-rose">
-                <p className="font-semibold text-accent-rose text-sm">Important:</p>
-                <p className="text-sm text-text-secondary mt-1">
-                  No projects involving any risk to human participants are permitted. All projects involving human participants must be limited to simple, safe interactions such as surveys or taste tests. Participants&apos; wellbeing and comfort must be the top priority at all times.
+
+              <div className="mt-6 rounded-2xl bg-coral-soft p-5">
+                <p className="text-sm font-semibold text-ink">
+                  No projects involving any risk to human participants are
+                  permitted.
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+                  Keep interactions simple and safe, such as surveys or taste
+                  tests. Participants&apos; wellbeing and comfort come first,
+                  always.
                 </p>
               </div>
-              <RequirementBox
-                title="When is this form needed?"
-                required="Surveying, interviewing, testing people, or observing behavior"
-                notRequired="Using existing public data, no interaction with people"
-                examplesRequired="Surveying classmates about screen time, testing how music affects study habits"
-                examplesNotRequired="Analyzing published health data, measuring plant growth"
-              />
-              <div className="mt-4 bg-bg-surface border border-border-subtle rounded-lg p-4 space-y-3">
-                <h4 className="font-semibold text-text-primary text-sm">Participant Consent Requirements</h4>
-                <div className="space-y-2">
-                  {[
-                    "Tell participants what your project is about and what they will be asked to do",
-                    "Get their voluntary permission — no one should be pressured or forced",
-                    "Get written parent/guardian permission if participants are under 18",
-                    "Let them stop at any time, for any reason",
-                    "Keep all data confidential — use codes (e.g., Participant 1), never real names on your data, notes, or display board",
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-2 text-sm text-text-secondary">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent-cyan shrink-0 mt-0.5" aria-hidden="true">
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-            </Card>
 
-            {/* Hazardous Materials */}
-            <Card className="reveal bg-bg-surface border-border-subtle">
-              <CardContent className="p-6">
-              <FormCard
+              <WhenNeeded
+                required="Surveying, interviewing, testing people, or observing behavior."
+                notRequired="Using existing public data, no interaction with people."
+                examplesRequired="surveying classmates about screen time, testing how music affects study habits"
+                examplesNotRequired="analyzing published health data, measuring plant growth"
+              />
+
+              <div className="mt-6 border-t border-line pt-6">
+                <h4 className="text-base font-semibold">
+                  Participant consent requirements
+                </h4>
+                <ul className="mt-3 space-y-2">
+                  {CONSENT_RULES.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2.5 text-sm leading-relaxed text-ink-soft"
+                    >
+                      <Check
+                        size={15}
+                        strokeWidth={2}
+                        aria-hidden="true"
+                        className="mt-1 shrink-0 text-green"
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+
+            {/* Hazardous materials */}
+            <article className="reveal card-soft p-6 sm:p-8">
+              <SafetyFormHeader
                 title="Hazardous Materials & Safety Approval Form"
                 description="We send this to you after review if your project uses chemicals, electrical equipment, sharp tools, or heat sources."
                 href="https://docs.google.com/forms/d/1Jk1m1QwhiiDPHf-ZZ8C4D6FglqJB9aUStY8G4OlHpmk/viewform"
-                icon={
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-                    <line x1="12" y1="9" x2="12" y2="13" />
-                    <line x1="12" y1="17" x2="12.01" y2="17" />
-                  </svg>
-                }
               />
-              <RequirementBox
-                title="When is this form needed?"
-                required="Chemicals, electrical equipment, sharp tools, heat sources"
-                notRequired="Common household items with no realistic safety risk"
-                examplesRequired="Vinegar and steel wool reaction, building motor circuits"
-                examplesNotRequired="Baking soda and vinegar in small amounts, paper airplanes"
-              />
-              <div className="mt-4 bg-accent-rose/10 border border-accent-rose/20 rounded-lg p-4 border-l-4 border-l-accent-rose">
-                <p className="font-semibold text-accent-rose text-sm mb-2">Never Allowed (No Exceptions):</p>
-                <div className="grid sm:grid-cols-2 gap-1.5">
-                  {[
-                    "Open flames (candles, matches, lighters)",
-                    "Industrial or laboratory chemicals",
-                    "High-voltage electricity (wall outlets)",
-                    "Compressed gases or pressurized containers",
-                    "Radioactive materials",
-                    "Toxic substances (pesticides, paint thinner)",
-                    "Weapons, projectiles, or launchers",
-                    "Biological hazards (bacteria, mold, blood)",
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-2 text-sm text-text-secondary">
-                      <span className="text-accent-rose shrink-0 mt-0.5 font-bold" aria-hidden="true">×</span>
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              </CardContent>
-            </Card>
 
+              <WhenNeeded
+                required="Chemicals, electrical equipment, sharp tools, heat sources."
+                notRequired="Common household items with no realistic safety risk."
+                examplesRequired="vinegar and steel wool reaction, building motor circuits"
+                examplesNotRequired="baking soda and vinegar in small amounts, paper airplanes"
+              />
+
+              <div className="mt-6 rounded-2xl bg-coral-soft p-5">
+                <p className="text-sm font-semibold text-ink">
+                  Never allowed, no exceptions:
+                </p>
+                <ul className="mt-2 grid gap-x-6 gap-y-1.5 sm:grid-cols-2">
+                  {NEVER_ALLOWED.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2.5 text-sm leading-relaxed text-ink-soft"
+                    >
+                      <X
+                        size={15}
+                        strokeWidth={2}
+                        aria-hidden="true"
+                        className="mt-1 shrink-0 text-coral-deep"
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
           </div>
         </section>
 
-        <Separator className="my-0 bg-border-subtle" />
-
-        {/* Volunteer/Judge Forms */}
+        {/* Volunteer and judge forms */}
         <section className="reveal">
-          <div className="flex items-center gap-3 mb-6 flex-wrap">
-            <span className="w-10 h-10 rounded-xl bg-accent-rose/10 text-accent-rose flex items-center justify-center shrink-0" aria-hidden="true">
-              <HeartIcon />
-            </span>
-            <h2 className="text-xl sm:text-2xl font-bold text-text-primary">Volunteer & Judge Forms</h2>
-            <Badge variant="secondary" className="hidden sm:inline-flex">VOLUNTEER/JUDGE</Badge>
-          </div>
-          <div className="space-y-4">
+          <h2 className="text-2xl font-semibold sm:text-3xl">
+            Volunteer and judge forms
+          </h2>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
             <FormCard
+              className="reveal stagger-1"
               title="Judge Sign-Up"
               description="Interested in judging projects? Sign up here. Training and rubrics will be provided in advance."
               href="https://docs.google.com/forms/d/14Yo2IgS-PAsYNIFac4pzJRdTMX6xEnjtGslqGtAx6TQ/viewform"
-              icon={
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                </svg>
-              }
             />
             <FormCard
+              className="reveal stagger-2"
               title="Event-Day Volunteering"
-              description="Help out on the day of the science fair! Open to high school students and community members."
+              description="Help out on fair day. Open to high school students and community members."
               href="https://docs.google.com/forms/d/1iuy7stpEJE6Espci9gCiEdNe06Cx0DR8I73fKNuyCbg/viewform"
-              icon={<HeartIcon />}
             />
             <FormCard
+              className="reveal stagger-3"
               title="Mentor Volunteer Interest"
-              description="Want to mentor a young scientist? High school students can share their knowledge and experience by becoming a mentor."
+              description="High school students: share your knowledge and experience by mentoring a young scientist."
               href="https://docs.google.com/forms/d/1Go59zVliqQohI9kTUKptz8PFpYWdTSJbQ5qzyY6b2yY/viewform"
-              icon={
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M23 21v-2a4 4 0 00-3-3.87" />
-                  <path d="M16 3.13a4 4 0 010 7.75" />
-                </svg>
-              }
             />
             <FormCard
+              className="reveal stagger-4"
               title="High School Mentor Request"
-              description="Parents: request a high school student mentor to guide your child through their science fair project."
+              description="Parents: request a high school student mentor to guide your child through their project."
               href="https://docs.google.com/forms/d/1KctjqLpK1bSmvTULL0OjStBtLDaBQhSY_xb-NmvyxOg/viewform"
-              icon={
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <line x1="19" y1="8" x2="19" y2="14" />
-                  <line x1="22" y1="11" x2="16" y2="11" />
-                </svg>
-              }
             />
           </div>
         </section>
 
-        <Separator className="my-0 bg-border-subtle" />
-
-        {/* Form Timeline */}
-        <Card className="reveal bg-bg-surface border-border-subtle">
-          <CardContent className="p-6 sm:p-8">
-          <h2 className="text-xl font-bold text-text-primary mb-4">When to Submit Each Form</h2>
-          <div className="space-y-3">
-            <div className="flex items-start gap-3 p-3 bg-bg-surface rounded-lg border border-border-subtle">
-              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full text-sm font-bold shrink-0 text-[#050507]" style={{ background: "var(--gradient-accent)" }}>1</span>
-              <div>
-                <span className="font-semibold text-text-primary">Application &amp; Registration Form</span>
-                <span className="text-text-secondary"> &mdash; Submit first. This is the only form you need to enter. Closes Friday, September 4.</span>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 p-3 bg-bg-surface rounded-lg border border-border-subtle">
-              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent-amber text-[#050507] text-sm font-bold shrink-0">2</span>
-              <div>
-                <span className="font-semibold text-text-primary">Safety Forms (if needed)</span>
-                <span className="text-text-secondary"> &mdash; Only if we ask. After reviewing your application we&apos;ll email you the Human Participation or Hazardous Materials form if your project needs one.</span>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 p-3 bg-bg-surface rounded-lg border border-border-subtle">
-              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-accent-emerald text-[#050507] text-sm font-bold shrink-0">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
+        {/* When to submit each form */}
+        <section className="reveal">
+          <h2 className="text-2xl font-semibold sm:text-3xl">
+            When to submit each form
+          </h2>
+          <ol className="mt-6 divide-y divide-line border-t border-line">
+            <li className="grid grid-cols-[2.75rem_1fr] py-5">
+              <span className="data-label pt-1.5" aria-hidden="true">
+                01
               </span>
               <div>
-                <span className="font-semibold text-text-primary">Mentor Request (optional)</span>
-                <span className="text-text-secondary"> &mdash; Request a high school mentor anytime during the process.</span>
+                <p className="font-semibold text-ink">
+                  Application &amp; Registration Form
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+                  Submit first. This is the only form you need to enter. Closes{" "}
+                  {EVENT.applicationDeadline}.
+                </p>
               </div>
-            </div>
-          </div>
-          </CardContent>
-        </Card>
+            </li>
+            <li className="grid grid-cols-[2.75rem_1fr] py-5">
+              <span className="data-label pt-1.5" aria-hidden="true">
+                02
+              </span>
+              <div>
+                <p className="font-semibold text-ink">
+                  Safety forms, only if we ask
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+                  After reviewing your application we&apos;ll email you the
+                  Human Participation or Hazardous Materials form if your
+                  project needs one.
+                </p>
+              </div>
+            </li>
+            <li className="grid grid-cols-[2.75rem_1fr] py-5">
+              <span className="data-label pt-1.5" aria-hidden="true">
+                03
+              </span>
+              <div>
+                <p className="font-semibold text-ink">
+                  Mentor request, optional
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+                  Request a high school mentor anytime during the process.
+                </p>
+              </div>
+            </li>
+          </ol>
+        </section>
       </div>
     </div>
   );

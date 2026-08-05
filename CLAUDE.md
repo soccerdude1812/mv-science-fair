@@ -10,6 +10,10 @@ MV Science Fair website for elementary schoolers in Mountain View. Organized by 
 ## Tech Stack
 - Next.js (check `node_modules/next/dist/docs/` for API conventions — may differ from training data)
 
+## Design
+- The visual system is "Chalk Lab" — see `DESIGN.md` at the repo root. That file is the constitution: tokens, type, the character cast, motion rules, and copy rules (zero em-dashes on the site; only two real dates: Sept 4 close, Sept 26 fair). Read it before any visual change.
+- `src/lib/event.ts` stays the single source of truth for date/venue/deadline/contact. Edit there, never inline.
+
 ## Slack
 - Post progress updates to #science-fair channel
 

@@ -1,43 +1,25 @@
-import { Separator } from "@/components/ui/separator";
-
 interface PageHeroProps {
   title: string;
   subtitle?: string;
   children?: React.ReactNode;
 }
 
+/**
+ * Subpage header, Chalk Lab system: serif display on paper, a short coral
+ * rule as the only ornament. No glows, no gradients.
+ */
 export default function PageHero({ title, subtitle, children }: PageHeroProps) {
   return (
-    <section className="relative bg-bg-primary border-b border-border-subtle overflow-hidden">
-      {/* Subtle ambient glow */}
-      <div
-        className="absolute top-0 left-1/4 w-96 h-64 rounded-full opacity-30 blur-3xl pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(129,140,248,0.08) 0%, transparent 70%)",
-        }}
-        aria-hidden="true"
-      />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-24 md:py-32">
-        {/* Accent line */}
-        <Separator className="w-12 h-1 bg-accent-indigo mb-8" />
-
-        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-semibold tracking-[-0.03em] text-text-primary animate-fade-in-up">
+    <section className="border-b border-line">
+      <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 sm:py-20">
+        <div className="mb-7 h-1 w-12 rounded-full bg-coral" aria-hidden="true" />
+        <h1 className="display-hero !text-[clamp(2.2rem,4.5vw,3.4rem)]">
           {title}
         </h1>
-
         {subtitle && (
-          <p className="mt-5 text-lg text-text-secondary max-w-2xl leading-relaxed animate-fade-in-up [animation-delay:150ms]">
-            {subtitle}
-          </p>
+          <p className="mt-5 max-w-2xl text-lg text-ink-soft">{subtitle}</p>
         )}
-
-        {children && (
-          <div className="mt-8 animate-fade-in-up [animation-delay:300ms]">
-            {children}
-          </div>
-        )}
+        {children && <div className="mt-8">{children}</div>}
       </div>
     </section>
   );

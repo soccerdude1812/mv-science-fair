@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 import { EVENT } from "@/lib/event";
 
@@ -8,9 +9,9 @@ const timelineSteps = [
   {
     step: 1,
     title: "Apply",
-    date: `Now – ${EVENT.applicationDeadlineShort}`,
+    date: `Now to ${EVENT.applicationDeadlineShort}`,
     description:
-      "One form covers registration, consent, and your project. All we ask about the project is what it is and how you plan to do it, 100-200 words each. Applications close Friday, September 4 — apply early, since you can start building as soon as you're approved.",
+      "One form covers registration, consent, and your project: what it is and how you plan to do it, 100 to 200 words each. Applications close Friday, September 4, 2026. Apply early, since you can start building as soon as you're approved.",
     status: "active" as const,
   },
   {
@@ -18,7 +19,7 @@ const timelineSteps = [
     title: "Approval & Safety Review",
     date: "Rolling review",
     description:
-      "We review each application as it arrives. If changes are needed we'll email you, and you resubmit for a quick second look. If your project involves human participants or hazardous materials, this is when we'll send you the extra safety form.",
+      "We review each application as it arrives. If changes are needed we email you, and you resubmit for a quick second look. If your project involves human participants or hazardous materials, this is when we send the extra safety form.",
     status: "upcoming" as const,
   },
   {
@@ -40,8 +41,8 @@ const timelineSteps = [
   {
     step: 5,
     title: "Science Fair Day",
-    date: `${EVENT.dateShort} · ${EVENT.timeShort}`,
-    description: `Present your project to judges and visitors at ${EVENT.venueName} — ${EVENT.venueRoom}, ${EVENT.venueAddress}. Celebrate your hard work and scientific discovery!`,
+    date: `${EVENT.dateShort} · 9 AM to 12 PM`,
+    description: `Present your project to judges and visitors at ${EVENT.venueName}, ${EVENT.venueRoom}, ${EVENT.venueAddress}. Celebrate your hard work and scientific discovery!`,
     status: "upcoming" as const,
   },
 ];
@@ -51,16 +52,15 @@ export default function Timeline({ compact = false }: { compact?: boolean }) {
 
   return (
     <div className="relative">
-      {/* Vertical glowing gradient center line — desktop: center, mobile: left */}
+      {/* Vertical hairline. Desktop: center; mobile: left rail. */}
       <div
-        className="timeline-line max-md:left-6"
+        className="timeline-line absolute inset-y-0 left-6 w-px -translate-x-1/2 md:left-1/2"
         aria-hidden="true"
       />
 
       <div className="space-y-8 md:space-y-12">
         {timelineSteps.map((step, i) => {
           const isActive = step.status === "active";
-          const isUpcoming = step.status === "upcoming";
           const isExpanded = expandedStep === i;
           const isOdd = i % 2 === 0; // 0-indexed: even index = odd step = left side
           const showDescription = isActive || isExpanded || !compact;
@@ -68,58 +68,43 @@ export default function Timeline({ compact = false }: { compact?: boolean }) {
           return (
             <div
               key={step.step}
-              className="relative md:flex md:items-start"
+              className="relative md:grid md:grid-cols-[1fr_auto_1fr] md:items-start md:gap-6"
             >
-              {/* Desktop: card on left side (odd steps) */}
-              <div
-                className={`hidden md:block md:w-[calc(50%-2rem)] ${
-                  isOdd ? "" : "md:order-3 md:invisible"
-                }`}
-              >
+              {/* Desktop: odd steps left of the line, even steps right */}
+              <div className="hidden md:flex md:justify-end">
                 {isOdd && (
-                  <div className="flex justify-end">
-                    <TimelineCard
-                      step={step}
-                      isActive={isActive}
-                      isExpanded={isExpanded}
-                      showDescription={showDescription}
-                      compact={compact}
-                      onToggle={() =>
-                        setExpandedStep(isExpanded ? null : i)
-                      }
-                    />
-                  </div>
+                  <TimelineCard
+                    step={step}
+                    isActive={isActive}
+                    isExpanded={isExpanded}
+                    showDescription={showDescription}
+                    compact={compact}
+                    onToggle={() => setExpandedStep(isExpanded ? null : i)}
+                  />
                 )}
               </div>
 
-              {/* Node on the center line — desktop: center, mobile: left */}
-              <div className="absolute left-6 md:left-1/2 md:relative md:mx-4 top-2 md:top-0 flex items-center justify-center md:shrink-0 z-10 -translate-x-1/2 md:translate-x-0">
+              {/* Node, sitting exactly on the hairline */}
+              <div className="absolute left-6 top-2 z-10 -translate-x-1/2 md:static md:translate-x-0 md:pt-2">
                 <div
-                  className={`timeline-node ${
-                    isActive ? "active" : ""
-                  } ${isUpcoming ? "upcoming" : ""}`}
+                  className={`h-3.5 w-3.5 rounded-full border ${
+                    isActive
+                      ? "border-coral bg-coral"
+                      : "border-line-strong bg-card"
+                  }`}
                 />
               </div>
 
-              {/* Desktop: card on right side (even steps) */}
-              <div
-                className={`hidden md:block md:w-[calc(50%-2rem)] ${
-                  isOdd ? "md:order-3 md:invisible" : ""
-                }`}
-              >
+              <div className="hidden md:flex md:justify-start">
                 {!isOdd && (
-                  <div className="flex justify-start">
-                    <TimelineCard
-                      step={step}
-                      isActive={isActive}
-                      isExpanded={isExpanded}
-                      showDescription={showDescription}
-                      compact={compact}
-                      onToggle={() =>
-                        setExpandedStep(isExpanded ? null : i)
-                      }
-                    />
-                  </div>
+                  <TimelineCard
+                    step={step}
+                    isActive={isActive}
+                    isExpanded={isExpanded}
+                    showDescription={showDescription}
+                    compact={compact}
+                    onToggle={() => setExpandedStep(isExpanded ? null : i)}
+                  />
                 )}
               </div>
 
@@ -162,25 +147,25 @@ function TimelineCard({
   return (
     <button
       onClick={onToggle}
-      className={`w-full max-w-md text-left glass-card-hover p-3 sm:p-5 transition-all duration-300 ${
+      className={`w-full max-w-md rounded-lg border bg-card p-4 sm:p-5 text-left transition-colors duration-300 ${
         isActive
-          ? "border-border-accent shadow-[0_0_20px_rgba(129,140,248,0.15)]"
-          : ""
+          ? "border-coral"
+          : "border-line hover:border-line-strong"
       }`}
       aria-expanded={isExpanded || isActive}
     >
       <div className="flex items-start gap-3">
         {/* Step number badge */}
-        <span className="badge badge-accent shrink-0 text-xs tabular-nums">
+        <span className="badge-accent shrink-0 tabular-nums">
           {step.step}
         </span>
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-3 flex-wrap">
-            <h3 className="font-semibold text-text-primary text-base">
+            <h3 className="font-semibold text-ink text-base">
               {step.title}
             </h3>
-            <span className="text-accent-indigo text-sm font-medium">
+            <span className="font-mono text-xs font-medium text-ink-faint">
               {step.date}
             </span>
           </div>
@@ -193,7 +178,7 @@ function TimelineCard({
                 : "max-h-0 opacity-0"
             }`}
           >
-            <p className="text-sm text-text-secondary leading-relaxed">
+            <p className="text-sm text-ink-soft leading-relaxed">
               {step.description}
             </p>
           </div>
@@ -201,22 +186,14 @@ function TimelineCard({
 
         {/* Expand chevron (compact mode, non-active steps only) */}
         {compact && !isActive && (
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className={`shrink-0 text-text-muted transition-transform duration-300 ${
+          <ChevronDown
+            size={16}
+            strokeWidth={2}
+            className={`shrink-0 text-ink-faint transition-transform duration-300 ${
               isExpanded ? "rotate-180" : ""
             }`}
             aria-hidden="true"
-          >
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
+          />
         )}
       </div>
     </button>

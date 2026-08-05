@@ -1,35 +1,30 @@
 import type { Metadata } from "next";
-import { Inter, Geist, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Source_Serif_4, Outfit, JetBrains_Mono } from "next/font/google";
 import ConditionalChrome from "@/components/ConditionalChrome";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { EVENT } from "@/lib/event";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+/* Chalk Lab type stack (DESIGN.md): Source Serif 4 display,
+   Outfit body/UI, JetBrains Mono for small data labels only. */
 
-const inter = Inter({
+const sourceSerif = Source_Serif_4({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600"],
+  style: ["normal", "italic"],
 });
 
-const interBody = Inter({
+const outfit = Outfit({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument",
-  subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -97,16 +92,24 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", inter.variable, interBody.variable, "font-sans", geist.variable, instrumentSerif.variable, jetbrainsMono.variable)}
+      /* Next 16: restores instant snap-to-top on route navigation while
+         keeping CSS smooth scroll for in-page anchors (version-16.md) */
+      data-scroll-behavior="smooth"
+      className={cn(
+        "h-full antialiased",
+        sourceSerif.variable,
+        outfit.variable,
+        jetbrainsMono.variable,
+      )}
     >
-      <body className="min-h-full flex flex-col bg-transparent text-text-secondary">
+      <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }}
         />
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-accent-indigo focus:text-bg-deep focus:top-0 focus:left-0 focus:font-bold"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-coral focus:text-white focus:top-0 focus:left-0 focus:font-bold"
         >
           Skip to main content
         </a>

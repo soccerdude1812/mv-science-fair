@@ -1,31 +1,38 @@
 import Link from "next/link";
+import { ArrowRight, Check } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import CollapsibleSection from "@/components/CollapsibleSection";
 import EventDetails from "@/components/EventDetails";
 import { APPLICATION_URL } from "@/lib/event";
 import Timeline from "@/components/Timeline";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 
-function BulletList({ items }: { items: string[] }) {
+function BulletList({ items }: { items: React.ReactNode[] }) {
   return (
-    <ul className="space-y-2.5 mt-3">
+    <ul className="mt-3 space-y-2.5">
       {items.map((item, i) => (
         <li key={i} className="flex items-start gap-3">
-          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-accent-indigo shrink-0" aria-hidden="true" />
-          <span className="text-text-secondary">{item}</span>
+          <span
+            className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-coral"
+            aria-hidden="true"
+          />
+          <span className="text-ink-soft">{item}</span>
         </li>
       ))}
     </ul>
   );
 }
 
-function SectionNumber({ num, color }: { num: string; color: string }) {
+function SectionHeading({ num, title }: { num: string; title: string }) {
   return (
-    <span className={`inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-bold shrink-0 ${color}`}>
-      {num}
-    </span>
+    <div className="reveal mb-8 flex items-baseline gap-4">
+      <span
+        className="font-mono text-sm font-medium text-ink-faint"
+        aria-hidden="true"
+      >
+        {num}
+      </span>
+      <h2 className="display-section">{title}</h2>
+    </div>
   );
 }
 
@@ -34,744 +41,573 @@ export default function TheProcessPage() {
     <>
       <PageHero
         title="The Process"
-        subtitle="Your step-by-step guide from curiosity to science fair presentation. Follow these stages to build an amazing project!"
+        subtitle="Your step-by-step guide from first question to fair day."
       />
 
-      {/* Timeline Roadmap */}
-      <section className="bg-bg-primary/80 py-10 sm:py-16 md:py-20">
+      {/* Timeline roadmap */}
+      <section className="dotted-band py-12 sm:py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <EventDetails className="reveal mb-12" />
-          <div className="text-center mb-12 reveal">
-            <Badge variant="secondary" className="mb-4">Roadmap</Badge>
-            <h2 className="text-2xl sm:text-3xl font-display font-semibold text-text-primary tracking-[-0.03em]">
-              Science Fair Roadmap
-            </h2>
-            <p className="mt-3 text-text-secondary max-w-xl mx-auto">
-              Follow these milestones from start to finish. Click any step for details.
+          <div className="reveal mb-12 text-center">
+            <h2 className="display-section">Science Fair Roadmap</h2>
+            <p className="mx-auto mt-3 max-w-xl text-ink-soft">
+              Five milestones from application to fair day. Click any step for
+              details.
             </p>
           </div>
           <Timeline />
         </div>
       </section>
 
-      {/* Main content */}
-      <div>
-        {/* ── Section 1: Before Starting ── */}
-        <section className="bg-bg-surface/80 py-10 sm:py-16 md:py-20">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-3 mb-8 reveal">
-              <SectionNumber num="01" color="bg-accent-indigo/10 text-accent-indigo" />
-              <h2 className="text-2xl sm:text-3xl font-display font-semibold text-text-primary tracking-[-0.03em]">
-                Before Starting Your Project
-              </h2>
-            </div>
+      {/* ── Section 1: Before You Start ── */}
+      <section className="border-t border-line py-12 sm:py-16 md:py-20">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading num="01" title="Before You Start" />
 
-            <div className="space-y-4">
-              <div className="reveal stagger-1">
-                <CollapsibleSection
-                  title="Topic Selection"
-                  defaultOpen={false}
-                  icon={
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="11" cy="11" r="8" />
-                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                    </svg>
-                  }
-                >
-                  <p className="font-display font-medium text-text-primary text-lg mb-3">
-                    The best projects come from YOUR curiosity!
-                  </p>
-                  <p className="mb-5 text-text-secondary">
-                    Ask yourself: What do I wonder about? What would I love to explore?
-                  </p>
-
-                  {/* Start Here box */}
-                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-indigo mb-5">
-                    <CardContent className="p-5">
-                    <h4 className="font-display font-semibold text-accent-indigo mb-2">
-                      Start Here: What Excites You?
-                    </h4>
-                    <BulletList
-                      items={[
-                        "What problems in the world do you wish you could solve?",
-                        "What cool science topics have you heard about?",
-                        "What have you loved learning about in school?",
-                        "What jobs in science or technology interest you?",
-                        "What are you passionate about outside of school?",
-                      ]}
-                    />
-                    </CardContent>
-                  </Card>
-
-                  {/* Pro Tip box */}
-                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-cyan mb-5">
-                    <CardContent className="p-4">
-                    <p className="font-display font-semibold text-accent-cyan">
-                      Pro Tip:
-                    </p>
-                    <p className="text-text-secondary">
-                      Pick 2 or 3 ideas at first. That way, if one doesn&apos;t work
-                      out, you&apos;ve got backups!
-                    </p>
-                    </CardContent>
-                  </Card>
-
-                  {/* STEM method requirement */}
-                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-indigo mb-5">
-                    <CardContent className="p-4">
-                      <h4 className="font-display font-semibold text-accent-indigo mb-2">
-                        STEM Method Required for All Projects
-                      </h4>
-                      <p className="text-text-secondary">
-                        Every project must follow either the <strong className="text-text-primary">Scientific Method</strong> (question → hypothesis → experiment → data → conclusion) or the <strong className="text-text-primary">Engineering Design Process</strong> (problem → design → build → test → improve). Your project must include at least 3 trials to ensure reliable results.
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  {/* Category cards */}
-                  <div className="mb-5">
-                    <h4 className="font-display font-semibold text-text-primary mb-4">
-                      Projects should fit into one of these four categories:
-                    </h4>
-                    <div className="grid sm:grid-cols-2 gap-3">
-                      {[
-                        {
-                          name: "Life & Health Sciences",
-                          desc: "people, plants, psychology, environment — no live animals, no nutrition or diet experiments",
-                          color: "text-accent-emerald",
-                          dot: "bg-accent-emerald",
-                        },
-                        {
-                          name: "Physical Science & Engineering",
-                          desc: "forces, motion, energy, machines, astronomy, inventions",
-                          color: "text-accent-indigo",
-                          dot: "bg-accent-indigo",
-                        },
-                        {
-                          name: "Chemistry & Materials",
-                          desc: "reactions, mixtures, states of matter, testing materials",
-                          color: "text-accent-amber",
-                          dot: "bg-accent-amber",
-                        },
-                        {
-                          name: "Technology & Innovation",
-                          desc: "computers, coding, robotics, apps, problem-solving inventions",
-                          color: "text-accent-purple",
-                          dot: "bg-accent-purple",
-                        },
-                      ].map((cat) => (
-                        <div
-                          key={cat.name}
-                          className="surface-card p-4 flex items-start gap-3"
-                        >
-                          <span className={`mt-1.5 w-2 h-2 rounded-full ${cat.dot} shrink-0`} aria-hidden="true" />
-                          <div>
-                            <span className={`font-semibold ${cat.color}`}>{cat.name}</span>
-                            <span className="text-sm text-text-muted"> &mdash; {cat.desc}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <p className="mb-4 text-text-secondary">
-                    Be sure to{" "}
-                    <Link href="/rules" className="text-accent-indigo font-medium hover:underline">
-                      check the rules
-                    </Link>{" "}
-                    before settling on a topic.
-                  </p>
-
-                  {/* Important notes */}
-                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-rose mb-3">
-                    <CardContent className="p-4">
-                    <p className="font-semibold text-accent-rose">
-                      IMPORTANT: Individual or team participation is allowed (maximum 3 members per team).
-                    </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-rose">
-                    <CardContent className="p-4">
-                    <p className="font-semibold text-accent-rose">
-                      No continuation projects are allowed. All projects must be new and original work for this year&apos;s science fair.
-                    </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-rose mt-3">
-                    <CardContent className="p-4">
-                      <p className="font-semibold text-accent-rose">
-                        Each student or team may only submit one project.
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-rose mt-3">
-                    <CardContent className="p-4">
-                      <p className="font-semibold text-accent-rose">
-                        No live organisms: You may not use live animals, bacteria, mold, or any living creatures in your project.
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-amber mt-3">
-                    <CardContent className="p-4">
-                      <p className="font-semibold text-accent-amber">
-                        A parent or guardian must supervise all experiments.
-                      </p>
-                    </CardContent>
-                  </Card>
-                </CollapsibleSection>
-              </div>
-
-              <div className="reveal stagger-2">
-                <CollapsibleSection
-                  title="Planning Your Project"
-                  icon={
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-                      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
-                    </svg>
-                  }
-                >
-                  <p className="mb-5 text-text-secondary">
-                    Before you begin experimenting, make sure you&apos;ve thought through
-                    these key elements:
-                  </p>
-                  <div className="grid gap-3">
-                    {[
-                      { title: "Safety", desc: "Are there any safety concerns? Do you need approval forms? Address this first before starting any work." },
-                      { title: "Research Question", desc: "What specific question are you trying to answer?" },
-                      { title: "Hypothesis", desc: 'Your educated guess about the answer. Use "If... then... because..." format.' },
-                      { title: "Materials", desc: "List everything you'll need for your experiment." },
-                      { title: "Procedure", desc: "Step-by-step instructions someone else could follow to repeat your experiment. Your experiment must include at least 3 trials so results can be verified." },
-                      { title: "Variables", desc: "Identify what you're changing (independent), measuring (dependent), and keeping the same (controlled)." },
-                      { title: "Data Collection", desc: "How will you record and organize your results?" },
-                    ].map((item) => (
-                      <div
-                        key={item.title}
-                        className="surface-card p-4 flex items-start gap-3"
-                      >
-                        <svg
-                          width="18"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="text-accent-indigo mt-0.5 shrink-0"
-                          aria-hidden="true"
-                        >
-                          <polyline points="9 11 12 14 22 4" />
-                          <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-                        </svg>
-                        <div>
-                          <span className="font-semibold text-text-primary">
-                            {item.title}:
-                          </span>{" "}
-                          <span className="text-text-secondary">{item.desc}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CollapsibleSection>
-              </div>
-
-              <div className="reveal stagger-3">
-                <CollapsibleSection
-                  title="Mentors"
-                  icon={
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                      <circle cx="9" cy="7" r="4" />
-                      <path d="M23 21v-2a4 4 0 00-3-3.87" />
-                      <path d="M16 3.13a4 4 0 010 7.75" />
-                    </svg>
-                  }
-                >
-                  <p className="mb-4 text-text-secondary">
-                    Mentors can help guide you through the scientific process. Mentors are volunteers who provide support and encouragement throughout your project.
-                  </p>
-                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-indigo">
-                    <CardContent className="p-4">
-                    <h4 className="font-display font-semibold text-text-primary mb-2">
-                      Mentors
-                    </h4>
-                    <p className="text-sm text-text-secondary mb-2">
-                      Volunteer mentors can help you with your project by guiding you through the scientific method, helping you stay organized, and offering encouragement along the way.
-                    </p>
-                    <p className="text-sm text-text-muted">
-                      Mentors are high school student volunteers from the STEM and Research Club at Mountain View High School. The typical time commitment is approximately 1–2 hours per week.
-                    </p>
-                    </CardContent>
-                  </Card>
-                </CollapsibleSection>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <Separator className="my-0 bg-border-subtle" />
-
-        {/* ── Section 2: Apply to the Fair ── */}
-        <section className="bg-bg-primary/80 py-10 sm:py-16 md:py-20">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-3 mb-8 reveal">
-              <SectionNumber num="02" color="bg-accent-cyan/10 text-accent-cyan" />
-              <h2 className="text-2xl sm:text-3xl font-display font-semibold text-text-primary tracking-[-0.03em]">
-                Apply to the Fair
-              </h2>
-            </div>
-
-            <div className="space-y-4">
-              <div className="reveal stagger-1">
-                <CollapsibleSection
-                  title="Step 1: Fill Out the Application Form"
-                  defaultOpen={false}
-                  icon={
-                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-accent-cyan/20 text-accent-cyan text-xs font-bold shrink-0">
-                      1
-                    </span>
-                  }
-                >
-                  <p className="mb-5 text-text-secondary">
-                    Complete the Application &amp; Registration Form. It covers registration,
-                    consent, and your project. About the project itself we only ask two things:
-                    what it is, and how you plan to do it, 100&ndash;200 words each. Applications
-                    close Friday, September 4.
-                  </p>
-                  <a
-                    href={APPLICATION_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-[#0A0A0F] font-semibold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
-                  >
-                    Open Application &amp; Registration Form
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
-                      <polyline points="15 3 21 3 21 9" />
-                      <line x1="10" y1="14" x2="21" y2="3" />
-                    </svg>
-                  </a>
-                </CollapsibleSection>
-              </div>
-
-              <div className="reveal stagger-2">
-                <CollapsibleSection
-                  title="Step 2: Safety Forms — Only If We Ask"
-                  icon={
-                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-accent-cyan/20 text-accent-cyan text-xs font-bold shrink-0">
-                      2
-                    </span>
-                  }
-                >
-                  <p className="mb-4 text-text-secondary">
-                    <strong className="text-text-primary">Don&apos;t submit these yourself.</strong>{" "}
-                    We review every application, and if your project needs one we&apos;ll email
-                    it to you during the approval round. Most projects need nothing extra.
-                    The two we may send are:
-                  </p>
-                  <BulletList
-                    items={[
-                      "Human Participants Form — if your project involves surveying, interviewing, or testing people",
-                      "Hazardous Materials Form — if your project uses chemicals, electrical equipment, sharp tools, or heat sources",
-                    ]}
-                  />
-                  <p className="mt-5 text-text-secondary">
-                    You can preview them on the{" "}
-                    <Link href="/forms" className="text-accent-indigo font-medium hover:underline">
-                      Forms page
-                    </Link>
-                    , but wait for our email before filling one out.
-                  </p>
-                </CollapsibleSection>
-              </div>
-
-              <div className="reveal stagger-3">
-                <CollapsibleSection
-                  title="What Happens Next (Pre-Approval)"
-                  icon={
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10" />
-                      <polyline points="12 6 12 12 16 14" />
-                    </svg>
-                  }
-                >
-                  <p className="mb-4 text-text-secondary">
-                    After you submit your application, the Science Fair Committee
-                    will review your project proposal.
-                  </p>
-                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-amber">
-                    <CardContent className="p-4">
-                    <p className="font-display font-semibold text-accent-amber">Important:</p>
-                    <p className="text-text-secondary">
-                      You must wait for a confirmation email before starting your
-                      experiment. The committee needs to verify that your project
-                      meets all safety and ethical guidelines.
-                    </p>
-                    </CardContent>
-                  </Card>
-                </CollapsibleSection>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <Separator className="my-0 bg-border-subtle" />
-
-        {/* ── Section 3: During Your Project ── */}
-        <section className="bg-bg-surface/80 py-10 sm:py-16 md:py-20">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-3 mb-8 reveal">
-              <SectionNumber num="03" color="bg-accent-purple/10 text-accent-purple" />
-              <h2 className="text-2xl sm:text-3xl font-display font-semibold text-text-primary tracking-[-0.03em]">
-                During Your Project
-              </h2>
-            </div>
-
-            <div className="reveal stagger-1">
-              <CollapsibleSection
-                title="Research Logbook"
-                icon={
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
-                  </svg>
-                }
-              >
-                {/* Required callout */}
-                <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-rose mb-5">
-                  <CardContent className="p-4">
-                  <p className="font-semibold text-accent-rose">
-                    REQUIRED — Students MUST maintain a project logbook documenting planning, execution, results, and sources.
-                  </p>
-                  </CardContent>
-                </Card>
-
-                <p className="mb-5 text-text-secondary">
-                  A research logbook is a detailed record of your entire scientific
-                  journey. Keep date-stamped entries that include:
-                </p>
-
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {[
-                    "Brainstorming and initial ideas",
-                    "Research notes and sources",
-                    "Planning and procedure changes",
-                    "Daily observations and data",
-                    "Mistakes and what you learned from them",
-                    "Photos and sketches",
-                    "Reflections on your progress",
-                  ].map((item) => (
-                    <div
-                      key={item}
-                      className="surface-card p-3 flex items-center gap-3"
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="text-accent-purple shrink-0"
-                        aria-hidden="true"
-                      >
-                        <polyline points="9 11 12 14 22 4" />
-                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-                      </svg>
-                      <span className="text-sm text-text-secondary">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </CollapsibleSection>
-            </div>
-
-            <Card className="reveal stagger-2 bg-bg-surface border-border-subtle border-l-4 border-l-accent-amber mt-4">
-              <CardContent className="p-6">
-                <h3 className="font-display font-semibold text-text-primary text-lg mb-3">Important Reminders</h3>
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent-amber shrink-0 mt-0.5" aria-hidden="true">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                    <p className="text-text-secondary"><strong className="text-text-primary">All work must be your own.</strong> Parents, mentors, and teachers can help guide you, but YOU must do the work.</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent-amber shrink-0 mt-0.5" aria-hidden="true">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                    <p className="text-text-secondary"><strong className="text-text-primary">Be honest with your data.</strong> Record what actually happened, even if it was not what you expected.</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
-        <Separator className="my-0 bg-border-subtle" />
-
-        {/* ── Section 4: After Data Collection ── */}
-        <section className="bg-bg-primary/80 py-10 sm:py-16 md:py-20">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-3 mb-8 reveal">
-              <SectionNumber num="04" color="bg-accent-amber/10 text-accent-amber" />
-              <h2 className="text-2xl sm:text-3xl font-display font-semibold text-text-primary tracking-[-0.03em]">
-                After Data Collection
-              </h2>
-            </div>
-
-            <div className="space-y-4">
-              <div className="reveal stagger-1">
-                <CollapsibleSection
-                  title="Data Analysis"
-                  icon={
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="18" y1="20" x2="18" y2="10" />
-                      <line x1="12" y1="20" x2="12" y2="4" />
-                      <line x1="6" y1="20" x2="6" y2="14" />
-                    </svg>
-                  }
-                >
-                  <p className="mb-5 text-text-secondary">
-                    For elementary school students, data analysis doesn&apos;t need
-                    to be complicated! Here are some things to look at:
-                  </p>
-                  <div className="grid sm:grid-cols-3 gap-4">
-                    <Card className="bg-bg-surface border-border-subtle">
-                      <CardContent className="p-5 text-center">
-                      <p className="font-display font-bold text-accent-indigo text-lg mb-2">Average</p>
-                      <p className="text-sm text-text-secondary">
-                        Add up your results and divide by the number of trials to
-                        find the average.
-                      </p>
-                      </CardContent>
-                    </Card>
-                    <Card className="bg-bg-surface border-border-subtle">
-                      <CardContent className="p-5 text-center">
-                      <p className="font-display font-bold text-accent-cyan text-lg mb-2">Compare</p>
-                      <p className="text-sm text-text-secondary">
-                        Compare groups or conditions to see if there are differences
-                        between them.
-                      </p>
-                      </CardContent>
-                    </Card>
-                    <Card className="bg-bg-surface border-border-subtle">
-                      <CardContent className="p-5 text-center">
-                      <p className="font-display font-bold text-accent-amber text-lg mb-2">Patterns</p>
-                      <p className="text-sm text-text-secondary">
-                        Look for patterns: Are results increasing, decreasing, or
-                        staying the same?
-                      </p>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </CollapsibleSection>
-              </div>
-
-              <div className="reveal stagger-2">
-                <CollapsibleSection
-                  title="Write Your Abstract"
-                  icon={
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-                      <polyline points="14 2 14 8 20 8" />
-                      <line x1="16" y1="13" x2="8" y2="13" />
-                      <line x1="16" y1="17" x2="8" y2="17" />
-                    </svg>
-                  }
-                >
-                  <p className="mb-4 text-text-secondary">
-                    An abstract is a one-paragraph summary of your entire project that will go on your display board.
-                    It should include:
-                  </p>
-                  <BulletList
-                    items={[
-                      "Why it matters -- What problem or question inspired your project?",
-                      "What you did -- Briefly describe your experiment and methods.",
-                      "What you found -- Summarize your key results.",
-                      "Why results matter -- Explain what your findings mean and why they are important.",
-                    ]}
-                  />
-                  <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-cyan mt-5">
-                    <CardContent className="p-4">
-                    <p className="font-medium text-accent-cyan">
-                      Tip: Write your abstract in past tense, since your experiment
-                      is already complete.
-                    </p>
-                    </CardContent>
-                  </Card>
-                </CollapsibleSection>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <Separator className="my-0 bg-border-subtle" />
-
-        {/* ── Section 5: Display ── */}
-        <section className="bg-bg-surface/80 py-10 sm:py-16 md:py-20">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-3 mb-8 reveal">
-              <SectionNumber num="05" color="bg-accent-rose/10 text-accent-rose" />
-              <h2 className="text-2xl sm:text-3xl font-display font-semibold text-text-primary tracking-[-0.03em]">
-                Display
-              </h2>
-            </div>
-
-            <Card className="bg-bg-surface border-border-subtle reveal stagger-1">
-              <CardContent className="p-6 sm:p-8">
-              <p className="text-lg mb-5 text-text-secondary">
-                Your display board is the first thing judges see &mdash; make it
-                clear, organized, and engaging!
+          <div className="reveal stagger-1">
+            <CollapsibleSection title="Topic Selection" defaultOpen={false}>
+              <p className="mb-2 font-display text-lg font-medium text-ink">
+                The best projects come from your curiosity.
+              </p>
+              <p className="mb-6">
+                What do you wonder about? What would you love to explore?
               </p>
 
-              <div className="mb-6">
-                <h4 className="font-display font-semibold text-text-primary mb-4">
-                  Your final presentation must include all of the following:
+              <h4 className="mb-2 text-base font-semibold">
+                What excites you?
+              </h4>
+              <BulletList
+                items={[
+                  "What problems in the world do you wish you could solve?",
+                  "What cool science topics have you heard about?",
+                  "What have you loved learning about in school?",
+                  "What jobs in science or technology interest you?",
+                  "What are you passionate about outside of school?",
+                ]}
+              />
+              <p className="mt-5">
+                <strong className="text-ink">Tip:</strong> pick two or three
+                ideas at first, so you have backups if one doesn&apos;t work
+                out.
+              </p>
+
+              <div className="mt-6 border-t border-line pt-5">
+                <h4 className="mb-2 text-base font-semibold">
+                  Every project follows a STEM method
                 </h4>
-                <div className="grid sm:grid-cols-2 gap-3">
+                <p>
+                  Use the{" "}
+                  <strong className="text-ink">Scientific Method</strong>{" "}
+                  (question → hypothesis → experiment → data → conclusion) or
+                  the{" "}
+                  <strong className="text-ink">
+                    Engineering Design Process
+                  </strong>{" "}
+                  (problem → design → build → test → improve). Every project
+                  must include at least 3 trials so results are reliable.
+                </p>
+              </div>
+
+              <div className="mt-6 border-t border-line pt-5">
+                <h4 className="mb-4 text-base font-semibold">
+                  Your project fits one of four categories
+                </h4>
+                <div className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
                   {[
-                    "Title",
-                    "Abstract",
-                    "Question or Problem",
-                    "Hypothesis or Design Goal",
-                    "Materials",
-                    "Procedure",
-                    "Data and Results",
-                    "Conclusion",
-                    "Citations / Bibliography",
-                  ].map((item) => (
-                    <div key={item} className="surface-card p-3 flex items-center gap-3">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent-rose shrink-0" aria-hidden="true">
-                        <polyline points="9 11 12 14 22 4" />
-                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-                      </svg>
-                      <span className="text-sm text-text-secondary">{item}</span>
+                    {
+                      name: "Life & Health Sciences",
+                      desc: "People, plants, psychology, environment. No live animals, no nutrition or diet experiments.",
+                      dot: "bg-green",
+                    },
+                    {
+                      name: "Physical Science & Engineering",
+                      desc: "Forces, motion, energy, machines, astronomy, inventions.",
+                      dot: "bg-blue",
+                    },
+                    {
+                      name: "Chemistry & Materials",
+                      desc: "Reactions, mixtures, states of matter, testing materials.",
+                      dot: "bg-marigold",
+                    },
+                    {
+                      name: "Technology & Innovation",
+                      desc: "Computers, coding, robotics, apps, problem-solving inventions.",
+                      dot: "bg-coral",
+                    },
+                  ].map((cat) => (
+                    <div key={cat.name} className="flex items-start gap-3">
+                      <span
+                        className={`mt-2 h-2 w-2 shrink-0 rounded-full ${cat.dot}`}
+                        aria-hidden="true"
+                      />
+                      <div>
+                        <p className="font-semibold text-ink">{cat.name}</p>
+                        <p className="text-sm text-ink-faint">{cat.desc}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
+                <p className="mt-5">
+                  Be sure to{" "}
+                  <Link
+                    href="/rules"
+                    className="font-medium text-coral-deep hover:underline"
+                  >
+                    check the rules
+                  </Link>{" "}
+                  before settling on a topic.
+                </p>
               </div>
 
-              <Card className="bg-bg-surface border-border-subtle border-l-2 border-l-accent-rose mt-4 mb-6">
-                <CardContent className="p-4">
-                  <p className="font-semibold text-accent-rose">
-                    Do NOT put your name on the front of the board. Your name should be on the back only, to ensure fair judging.
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="mt-6 border-t border-line pt-5">
+                <h4 className="mb-1 text-base font-semibold">Ground rules</h4>
+                <BulletList
+                  items={[
+                    <>
+                      <strong className="text-ink">Solo or team:</strong> work
+                      alone or in a team of up to 3 members.
+                    </>,
+                    <>
+                      <strong className="text-ink">One project</strong> per
+                      student or team.
+                    </>,
+                    <>
+                      <strong className="text-ink">New work only:</strong> no
+                      continuation projects. Every project must be new and
+                      original for this year&apos;s fair.
+                    </>,
+                    <>
+                      <strong className="text-ink">No live organisms:</strong>{" "}
+                      no live animals, bacteria, mold, or any living creatures.
+                    </>,
+                    <>
+                      <strong className="text-ink">Adult supervision:</strong>{" "}
+                      a parent or guardian must supervise all experiments.
+                    </>,
+                  ]}
+                />
+              </div>
+            </CollapsibleSection>
+          </div>
 
-              <Link
-                href="/display-and-safety"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-border-subtle bg-transparent text-text-primary font-medium text-sm px-6 py-3 hover:border-border-hover hover:bg-bg-surface transition-colors"
+          <div className="reveal stagger-2">
+            <CollapsibleSection title="Planning Your Project">
+              <p className="mb-2">
+                Before you begin experimenting, think through these key
+                elements:
+              </p>
+              <div className="divide-y divide-line">
+                {[
+                  {
+                    title: "Safety",
+                    desc: "Any safety concerns? Need approval forms? Address this first, before starting any work.",
+                  },
+                  {
+                    title: "Research Question",
+                    desc: "What specific question are you trying to answer?",
+                  },
+                  {
+                    title: "Hypothesis",
+                    desc: 'Your educated guess about the answer. Use "If... then... because..." format.',
+                  },
+                  {
+                    title: "Materials",
+                    desc: "List everything you'll need for your experiment.",
+                  },
+                  {
+                    title: "Procedure",
+                    desc: "Step-by-step instructions someone else could follow. Your experiment must include at least 3 trials so results can be verified.",
+                  },
+                  {
+                    title: "Variables",
+                    desc: "What you're changing (independent), measuring (dependent), and keeping the same (controlled).",
+                  },
+                  {
+                    title: "Data Collection",
+                    desc: "How will you record and organize your results?",
+                  },
+                ].map((item) => (
+                  <div key={item.title} className="py-3">
+                    <span className="font-semibold text-ink">
+                      {item.title}:
+                    </span>{" "}
+                    <span>{item.desc}</span>
+                  </div>
+                ))}
+              </div>
+            </CollapsibleSection>
+          </div>
+
+          <div className="reveal stagger-3">
+            <CollapsibleSection title="Mentors">
+              <p>
+                Mentors are high school student volunteers from the STEM and
+                Research Club at Mountain View High School. They guide you
+                through the scientific method, help you stay organized, and
+                offer encouragement along the way.
+              </p>
+              <p className="mt-3 text-sm text-ink-faint">
+                Typical commitment: about 1 to 2 hours per week.
+              </p>
+            </CollapsibleSection>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 2: Apply to the Fair ── */}
+      <section className="border-t border-line py-12 sm:py-16 md:py-20">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading num="02" title="Apply to the Fair" />
+
+          <div className="reveal stagger-1">
+            <CollapsibleSection
+              title="Step 1: The Application Form"
+              defaultOpen={false}
+            >
+              <p className="mb-6">
+                One form covers registration, consent, and your project. About
+                the project we ask two things: what it is, and how you plan to
+                do it, 100 to 200 words each. Applications close Friday,
+                September 4, 2026.
+              </p>
+              <a
+                href={APPLICATION_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
               >
-                View Display & Safety Guidelines
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </Link>
-              </CardContent>
-            </Card>
+                Apply now
+              </a>
+            </CollapsibleSection>
           </div>
-        </section>
 
-        <Separator className="my-0 bg-border-subtle" />
-
-        {/* ── Section 6: Preparing for Judging ── */}
-        <section id="judging" className="bg-bg-primary/80 py-10 sm:py-16 md:py-20">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-3 mb-8 reveal">
-              <SectionNumber num="06" color="bg-accent-emerald/10 text-accent-emerald" />
-              <h2 className="text-2xl sm:text-3xl font-display font-semibold text-text-primary tracking-[-0.03em]">
-                Preparing for Judging
-              </h2>
-            </div>
-
-            <div className="space-y-4">
-              <div className="reveal stagger-1">
-                <CollapsibleSection
-                  title="Common Judging Questions"
-                  icon={
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                    </svg>
-                  }
+          <div className="reveal stagger-2">
+            <CollapsibleSection title="Step 2: Safety Forms, Only If We Ask">
+              <p className="mb-2">
+                <strong className="text-ink">
+                  Don&apos;t submit these yourself.
+                </strong>{" "}
+                We review every application, and if your project needs one we
+                email it to you during the approval round. Most projects need
+                nothing extra. The two we may send:
+              </p>
+              <BulletList
+                items={[
+                  <>
+                    <strong className="text-ink">
+                      Human Participants Form:
+                    </strong>{" "}
+                    for projects that survey, interview, or test people.
+                  </>,
+                  <>
+                    <strong className="text-ink">
+                      Hazardous Materials Form:
+                    </strong>{" "}
+                    for projects using chemicals, electrical equipment, sharp
+                    tools, or heat sources.
+                  </>,
+                ]}
+              />
+              <p className="mt-5">
+                You can preview them on the{" "}
+                <Link
+                  href="/forms"
+                  className="font-medium text-coral-deep hover:underline"
                 >
-                  <p className="mb-5 text-text-secondary">
-                    Practice answering these questions to prepare for judging:
-                  </p>
-                  <div className="space-y-3">
-                    {[
-                      "Why did you choose this topic?",
-                      "What is your research question and hypothesis?",
-                      "Can you walk me through your experiment step by step?",
-                      "What were your most important findings?",
-                      "Did anything surprise you?",
-                      "What would you do differently if you did this again?",
-                      "What did you learn from this project?",
-                      "How could your project help people in real life?",
-                    ].map((q, i) => (
-                      <div
-                        key={i}
-                        className="surface-card p-4 flex items-start gap-3"
-                      >
-                        <span className="text-accent-emerald font-bold shrink-0 font-display">
-                          Q{i + 1}.
-                        </span>
-                        <span className="text-text-secondary">{q}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CollapsibleSection>
-              </div>
-
-              <div className="reveal stagger-2">
-                <CollapsibleSection
-                  title="Judging Rubric"
-                  icon={
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="3" y="3" width="18" height="18" rx="2" />
-                      <line x1="3" y1="9" x2="21" y2="9" />
-                      <line x1="3" y1="15" x2="21" y2="15" />
-                      <line x1="9" y1="3" x2="9" y2="21" />
-                    </svg>
-                  }
-                >
-                  <p className="mb-5 text-text-secondary">
-                    Judges will evaluate your project based on these six official criteria:
-                  </p>
-                  <div className="grid sm:grid-cols-2 gap-3">
-                    {[
-                      { area: "Scientific Thought", desc: "Is the problem clearly stated? Is the hypothesis reasonable and testable? Are conclusions based on evidence?" },
-                      { area: "Creativity", desc: "Does the project show original thinking and a unique approach to the problem?" },
-                      { area: "Thoroughness", desc: "Is the research comprehensive? Were enough trials conducted and variables considered?" },
-                      { area: "Skill", desc: "Does the project demonstrate appropriate use of scientific methods, equipment, and analysis techniques?" },
-                      { area: "Clarity", desc: "Is the project clearly explained? Are the data, charts, and conclusions easy to understand?" },
-                      { area: "Presentation", desc: "Is the display board well-organized and visually appealing? Can the student explain their work effectively?" },
-                    ].map((item) => (
-                      <Card
-                        key={item.area}
-                        className="bg-bg-surface border-border-subtle hover:border-border-hover transition-colors"
-                      >
-                        <CardContent className="p-5">
-                        <p className="font-display font-semibold text-text-primary">{item.area}</p>
-                        <p className="text-sm text-text-muted mt-1.5">{item.desc}</p>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </CollapsibleSection>
-              </div>
-            </div>
+                  Forms page
+                </Link>
+                , but wait for our email before filling one out.
+              </p>
+            </CollapsibleSection>
           </div>
-        </section>
-      </div>
+
+          <div className="reveal stagger-3">
+            <CollapsibleSection title="What Happens Next (Pre-Approval)">
+              <p className="mb-4">
+                After you submit, the Science Fair Committee reviews your
+                project proposal.
+              </p>
+              <p className="border-t border-line pt-4">
+                <strong className="text-ink">
+                  Wait for a confirmation email before starting your
+                  experiment.
+                </strong>{" "}
+                The committee needs to verify that your project meets all
+                safety and ethical guidelines.
+              </p>
+            </CollapsibleSection>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 3: During Your Project ── */}
+      <section className="border-t border-line py-12 sm:py-16 md:py-20">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading num="03" title="During Your Project" />
+
+          <div className="reveal stagger-1">
+            <CollapsibleSection title="Research Logbook">
+              <p className="mb-4 font-semibold text-coral-deep">
+                Required: every student must keep a project logbook documenting
+                planning, execution, results, and sources.
+              </p>
+              <p className="mb-4">
+                Your logbook records your whole scientific journey. Keep
+                date-stamped entries that include:
+              </p>
+              <ul className="grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
+                {[
+                  "Brainstorming and initial ideas",
+                  "Research notes and sources",
+                  "Planning and procedure changes",
+                  "Daily observations and data",
+                  "Mistakes and what you learned from them",
+                  "Photos and sketches",
+                  "Reflections on your progress",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span
+                      className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-coral"
+                      aria-hidden="true"
+                    />
+                    <span className="text-sm">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </CollapsibleSection>
+          </div>
+
+          <div className="reveal stagger-2 mt-10">
+            <h3 className="mb-3 text-lg font-semibold">Important reminders</h3>
+            <BulletList
+              items={[
+                <>
+                  <strong className="text-ink">
+                    All work must be your own.
+                  </strong>{" "}
+                  Parents, mentors, and teachers can help guide you, but you
+                  must do the work.
+                </>,
+                <>
+                  <strong className="text-ink">
+                    Be honest with your data.
+                  </strong>{" "}
+                  Record what actually happened, even if it was not what you
+                  expected.
+                </>,
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 4: After Data Collection ── */}
+      <section className="border-t border-line py-12 sm:py-16 md:py-20">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading num="04" title="After Data Collection" />
+
+          <div className="reveal stagger-1">
+            <CollapsibleSection title="Data Analysis">
+              <p className="mb-6">
+                Data analysis doesn&apos;t need to be complicated. Three things
+                to look at:
+              </p>
+              <div className="grid gap-6 sm:grid-cols-3">
+                {[
+                  {
+                    title: "Average",
+                    desc: "Add up your results and divide by the number of trials.",
+                  },
+                  {
+                    title: "Compare",
+                    desc: "Compare groups or conditions to see if there are differences.",
+                  },
+                  {
+                    title: "Patterns",
+                    desc: "Are results increasing, decreasing, or staying the same?",
+                  },
+                ].map((item) => (
+                  <div key={item.title}>
+                    <p className="mb-1 font-display font-semibold text-ink">
+                      {item.title}
+                    </p>
+                    <p className="text-sm">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </CollapsibleSection>
+          </div>
+
+          <div className="reveal stagger-2">
+            <CollapsibleSection title="Write Your Abstract">
+              <p className="mb-2">
+                An abstract is a one-paragraph summary of your whole project
+                for your display board. It should include:
+              </p>
+              <BulletList
+                items={[
+                  <>
+                    <strong className="text-ink">Why it matters:</strong> the
+                    problem or question that inspired your project.
+                  </>,
+                  <>
+                    <strong className="text-ink">What you did:</strong> your
+                    experiment and methods, briefly.
+                  </>,
+                  <>
+                    <strong className="text-ink">What you found:</strong> your
+                    key results.
+                  </>,
+                  <>
+                    <strong className="text-ink">Why results matter:</strong>{" "}
+                    what your findings mean and why they are important.
+                  </>,
+                ]}
+              />
+              <p className="mt-5 border-t border-line pt-4">
+                <strong className="text-ink">Tip:</strong> write your abstract
+                in past tense, since your experiment is already complete.
+              </p>
+            </CollapsibleSection>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 5: Your Display Board ── */}
+      <section className="border-t border-line py-12 sm:py-16 md:py-20">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading num="05" title="Your Display Board" />
+
+          <p className="reveal stagger-1 mb-8 max-w-2xl text-ink-soft">
+            Your display board is the first thing judges see. Make it clear,
+            organized, and engaging.
+          </p>
+
+          <div className="reveal stagger-2">
+            <h4 className="mb-4 text-base font-semibold">
+              Your board must include all of the following:
+            </h4>
+            <ul className="grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
+              {[
+                "Title",
+                "Abstract",
+                "Question or Problem",
+                "Hypothesis or Design Goal",
+                "Materials",
+                "Procedure",
+                "Data and Results",
+                "Conclusion",
+                "Citations / Bibliography",
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-3">
+                  <Check
+                    size={16}
+                    strokeWidth={2}
+                    className="shrink-0 text-green"
+                    aria-hidden="true"
+                  />
+                  <span className="text-ink-soft">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="reveal stagger-3 mt-8 border-t border-line pt-6">
+            <p className="mb-6 max-w-2xl">
+              <strong className="font-semibold text-coral-deep">
+                Do not put your name on the front of the board.
+              </strong>{" "}
+              <span className="text-ink-soft">
+                Your name goes on the back only, to ensure fair judging.
+              </span>
+            </p>
+            <Link href="/display-and-safety" className="btn-ghost">
+              View Display & Safety Guidelines
+              <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 6: Preparing for Judging ── */}
+      <section
+        id="judging"
+        className="border-t border-line py-12 sm:py-16 md:py-20"
+      >
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading num="06" title="Preparing for Judging" />
+
+          <div className="reveal stagger-1">
+            <CollapsibleSection title="Common Judging Questions">
+              <p className="mb-2">
+                Practice answering these before fair day:
+              </p>
+              <ol className="divide-y divide-line">
+                {[
+                  "Why did you choose this topic?",
+                  "What is your research question and hypothesis?",
+                  "Can you walk me through your experiment step by step?",
+                  "What were your most important findings?",
+                  "Did anything surprise you?",
+                  "What would you do differently if you did this again?",
+                  "What did you learn from this project?",
+                  "How could your project help people in real life?",
+                ].map((q, i) => (
+                  <li key={i} className="flex items-start gap-4 py-3">
+                    <span className="pt-0.5 font-mono text-sm font-medium text-ink-faint">
+                      Q{i + 1}
+                    </span>
+                    <span>{q}</span>
+                  </li>
+                ))}
+              </ol>
+            </CollapsibleSection>
+          </div>
+
+          <div className="reveal stagger-2">
+            <CollapsibleSection title="Judging Rubric">
+              <p className="mb-6">
+                Judges evaluate your project on six official criteria:
+              </p>
+              <div className="grid gap-x-10 gap-y-6 sm:grid-cols-2">
+                {[
+                  {
+                    area: "Scientific Thought",
+                    desc: "Is the problem clearly stated? Is the hypothesis reasonable and testable? Are conclusions based on evidence?",
+                  },
+                  {
+                    area: "Creativity",
+                    desc: "Does the project show original thinking and a unique approach to the problem?",
+                  },
+                  {
+                    area: "Thoroughness",
+                    desc: "Is the research comprehensive? Were enough trials conducted and variables considered?",
+                  },
+                  {
+                    area: "Skill",
+                    desc: "Does the project demonstrate appropriate use of scientific methods, equipment, and analysis techniques?",
+                  },
+                  {
+                    area: "Clarity",
+                    desc: "Is the project clearly explained? Are the data, charts, and conclusions easy to understand?",
+                  },
+                  {
+                    area: "Presentation",
+                    desc: "Is the display board well-organized and visually appealing? Can the student explain their work effectively?",
+                  },
+                ].map((item) => (
+                  <div key={item.area}>
+                    <p className="font-display font-semibold text-ink">
+                      {item.area}
+                    </p>
+                    <p className="mt-1 text-sm text-ink-faint">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </CollapsibleSection>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
