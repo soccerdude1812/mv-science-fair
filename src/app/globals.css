@@ -368,3 +368,14 @@ h1, h2, h3, h4 {
   from { opacity: 0; transform: translateY(-6px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Nav disclosure panel. Shorter and smaller-travel than the mobile sheet
+   because it drops right under its own button: the movement only has to say
+   "this came from there", not cover the viewport. */
+.nav-dropdown-enter {
+  animation: nav-dropdown-in 0.16s var(--ease-out-soft) both;
+}
+@keyframes nav-dropdown-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
