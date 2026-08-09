@@ -22,6 +22,7 @@ const sheetOnlyLinks = [
   { href: "/display-and-safety", label: "Display & Safety" },
   { href: "/judges", label: "Judges" },
   { href: "/students-families", label: "Students & Families" },
+  { href: "/sponsors", label: "Sponsors" },
 ];
 
 export default function Navbar() {

@@ -45,6 +45,15 @@ export const EVENT = {
    * The Google Forms carry the same address in their descriptions.
    */
   contactEmail: "stemresearchclubmvhs@gmail.com",
+
+  /**
+   * The live site. Recorded here on 2026-08-09 because it was NOT written
+   * down anywhere in the repo and the GitHub repo `homepageUrl` field points
+   * at a stale, unrelated Vercel project (website-sigma-ochre.vercel.app),
+   * which is exactly the kind of thing that ends up pasted into an outbound
+   * sponsorship email. Anything that needs the public URL reads it here.
+   */
+  siteUrl: "https://mvsciencefair.vercel.app",
 } as const;
 
 /**
@@ -54,3 +63,11 @@ export const EVENT = {
  */
 export const APPLICATION_URL =
   "https://docs.google.com/forms/d/1Uys9ePwF965Nn722dpa3eSypNVK9tLp-J4PnvOGN4xg/viewform";
+
+/**
+ * Sponsor interest form. Added 2026-08-09 alongside /sponsors, so businesses
+ * reached by outreach have somewhere to land that is not a bare mailto.
+ * Responses flow into the master tracker workbook in Drive.
+ */
+export const SPONSOR_INTEREST_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLScvF2zszjJrKxpSN_-3LPg9UqpoVCemxUoDGK65HuPoB06Aww/viewform";

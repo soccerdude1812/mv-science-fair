@@ -10,6 +10,7 @@ const sitemap = [
   { href: "/judges", label: "Judges" },
   { href: "/volunteer", label: "Volunteer" },
   { href: "/students-families", label: "Students & Families" },
+  { href: "/sponsors", label: "Sponsors" },
 ];
 
 export default function Footer() {
