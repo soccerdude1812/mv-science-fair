@@ -17,3 +17,9 @@
 **Root cause:** JSX formatters break sentences mid-phrase; single-line grep can't see across the break.
 **Fix:** Grep the RENDERED HTML (curl the route) for copy audits; that's what audit_site.sh does.
 **Prevention:** Copy-level audits run against rendered output, never only source.
+
+## [2026-08-09][forms-sheet-linking] Google Forms response destination is not settable via API
+**Mistake:** Assumed the Forms API could point a form's responses at an existing spreadsheet, so the master tracker was designed around API-created response tabs.
+**Root cause:** `Form.linkedSheetId` is output-only in Forms API v1. There is no `setLinkedSheet` request, and the Sheets API has no form-attach request either. The only path is the Forms web UI.
+**Fix:** Drove the UI with browser automation for all 7 forms. Working sequence: `/edit#responses` → click the Responses tab → click "Link to Sheets" (the first click after page load typically only focuses the button; expect two clicks) → "Select existing spreadsheet" → Select → **double-click** the file card in the Drive picker. A single click selects the file but the "Insert" action bar renders below the visible dialog region and cannot be clicked.
+**Prevention:** For Forms work, assume anything about response *destination* or *accepting-responses UI state* is manual. What IS scriptable: `forms.setPublishSettings` (unpublish / stop accepting responses), `forms.get`, `forms.responses.list`, and renaming/moving the generated response tabs afterwards via the Sheets API.
