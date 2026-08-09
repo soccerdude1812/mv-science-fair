@@ -79,12 +79,6 @@ export default function Navbar() {
     };
   }, [open]);
 
-  // a completed navigation means both surfaces have done their job
-  useEffect(() => {
-    setOpen(false);
-    setSupportOpen(false);
-  }, [pathname]);
-
   // pointerdown, not click: a press that starts outside should dismiss even if
   // it ends on something else entirely
   useEffect(() => {
@@ -154,7 +148,11 @@ export default function Navbar() {
               type="button"
               id="support-menu-button"
               aria-expanded={supportOpen}
-              aria-controls="support-menu"
+              /* Only while the panel is mounted. A permanent aria-controls
+                 would dangle in the closed state, which axe flags under
+                 aria-valid-attr-value; aria-expanded carries the state on its
+                 own regardless. */
+              aria-controls={supportOpen ? "support-menu" : undefined}
               onClick={() => setSupportOpen((v) => !v)}
               className={`flex items-center gap-1.5 ${navLinkClass(
                 supportActive || supportOpen,
@@ -175,6 +173,11 @@ export default function Navbar() {
                   <Link
                     key={href}
                     href={href}
+                    /* Closing here rather than on a pathname effect: clicking
+                       the link for the page you are already on is a no-op
+                       navigation, so pathname never changes and an effect
+                       would leave the panel stuck open. */
+                    onClick={() => setSupportOpen(false)}
                     className={`block rounded-xl px-3.5 py-3 transition-colors ${
                       pathname === href ? "bg-paper-warm" : "hover:bg-paper-warm"
                     }`}
