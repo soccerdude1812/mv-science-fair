@@ -6,6 +6,11 @@ import { EVENT, APPLICATION_URL } from "@/lib/event";
 
 const RESOURCES = [
   {
+    href: "/project-ideas",
+    title: "Project Ideas",
+    blurb: "Twelve example projects with steps, materials, and ways to make each one your own.",
+  },
+  {
     href: "/display-and-safety",
     title: "Display & Safety Guidelines",
     blurb: "Board dimensions and safety rules.",

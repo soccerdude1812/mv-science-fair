@@ -4,6 +4,7 @@ import { EVENT, APPLICATION_URL } from "@/lib/event";
 const sitemap = [
   { href: "/", label: "Home" },
   { href: "/the-process", label: "How it works" },
+  { href: "/project-ideas", label: "Project ideas" },
   { href: "/rules", label: "Rules" },
   { href: "/forms", label: "Forms" },
   { href: "/display-and-safety", label: "Display & Safety" },

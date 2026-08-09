@@ -16,13 +16,14 @@ const primaryLinks = [
   { href: "/forms", label: "Forms" },
   { href: "/rules", label: "Rules" },
   { href: "/volunteer", label: "Volunteer" },
+  { href: "/sponsors", label: "Sponsors" },
 ];
 
 const sheetOnlyLinks = [
+  { href: "/project-ideas", label: "Project ideas" },
   { href: "/display-and-safety", label: "Display & Safety" },
   { href: "/judges", label: "Judges" },
   { href: "/students-families", label: "Students & Families" },
-  { href: "/sponsors", label: "Sponsors" },
 ];
 
 export default function Navbar() {
@@ -46,17 +47,21 @@ export default function Navbar() {
       >
         <Link
           href="/"
-          className="font-display text-[1.35rem] font-semibold tracking-tight text-ink"
+          className="font-display text-[1.2rem] font-semibold tracking-tight text-ink lg:text-[1.35rem]"
         >
           MV Science Fair
         </Link>
 
-        <div className="hidden items-center gap-1 md:flex">
+        {/* Five links plus the CTA is a tight fit at the md breakpoint, so the
+            chip padding and type step down between 768px and 1024px and only
+            open back up on real desktop. Measured: without this the logo and
+            the first link touch at exactly 768px. */}
+        <div className="hidden items-center gap-0.5 md:flex lg:gap-1">
           {primaryLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
-              className={`rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors ${
+              className={`rounded-full px-2.5 py-2 text-[0.875rem] font-medium transition-colors lg:px-4 lg:text-[0.95rem] ${
                 pathname === href
                   ? "bg-paper-warm text-ink"
                   : "text-ink-soft hover:bg-paper-warm hover:text-ink"
@@ -69,7 +74,7 @@ export default function Navbar() {
             href={APPLICATION_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary ml-3 !px-5 !py-2.5 text-[0.95rem]"
+            className="btn-primary ml-2 !px-3.5 !py-2.5 text-[0.875rem] lg:ml-3 lg:!px-5 lg:text-[0.95rem]"
           >
             Apply now
           </a>
