@@ -90,6 +90,16 @@ export default function TheProcessPage() {
                 ideas at first, so you have backups if one doesn&apos;t work
                 out.
               </p>
+              <p className="mt-4">
+                Stuck?{" "}
+                <Link
+                  href="/project-ideas"
+                  className="font-semibold text-coral-deep hover:underline"
+                >
+                  Browse twelve example projects
+                </Link>{" "}
+                with materials, steps, and ways to make each one your own.
+              </p>
 
               <div className="mt-6 border-t border-line pt-5">
                 <h4 className="mb-2 text-base font-semibold">
