@@ -43,3 +43,11 @@ next-env.d.ts
 # Local Claude Code config: symlinks to ~/OS (dangle in CI -> action crash) and
 # agent memory with internal references. Machine-local only, never committed.
 .claude/
+
+# Flier generator intermediates. The finished PDF/PNGs in fliers/ are committed;
+# these are rebuilt by `node inline-fonts.mjs` and `./render.sh` (see
+# fliers/README.md). inlined.css alone is 650KB of base64 font.
+/fliers/src/node_modules
+/fliers/src/fonts
+/fliers/src/out
+/fliers/src/*.html

@@ -1,5 +1,17 @@
 # Lessons
 
+## [2026-08-11][chrome-pdf-drops-gradient-tiles] Chrome's print-to-PDF renders a tiled radial-gradient background erratically
+**Mistake:** Reused the site's `radial-gradient(...) / background-size: 27px` notebook-dot ground on the print flier and checked only the PNG screenshot, which looked right.
+**Root cause:** `--screenshot` and `--print-to-pdf` are different render paths. The PNG rasterizes the gradient tile per pixel; the PDF has to express it as a repeating pattern and got it wrong, dropping the dots across most of the page and scattering a few oversized blobs elsewhere. Proven by cropping the same patch of empty paper out of both and viewing them side by side: even dot grid in the PNG, bare cream in the PDF.
+**Fix:** Emit the dots as explicit SVG `<circle>` elements (1240 of them on an 8.5x11 sheet, ~40KB) instead of a CSS pattern. Plain vector content that every renderer treats identically.
+**Prevention:** A PNG screenshot is not evidence about the PDF. Verify each output format on its own, and prefer explicit geometry over any tiling/pattern mechanism in anything destined for print.
+
+## [2026-08-11][qr-verify-from-artifact] jsQR fails on a small code inside a full-page render
+**Mistake:** Verified the flier's QR codes by decoding the whole rendered page in one jsQR call. It returned 0 codes on artifacts whose codes are in fact perfectly scannable, which nearly triggered a pointless redesign of a working layout.
+**Root cause:** jsQR binarizes the entire frame at once. When the code occupies a small share of a 1632x2112 render, the global threshold washes it out. Confirmed by rendering the same QR SVG alone at 400x400: decoded instantly.
+**Fix:** Sweep tiles instead. Several window sizes (256/384/512/704), half-window stride, dedupe by decoded payload. `fliers/src/verify-qr.mjs`.
+**Prevention:** Always decode QR codes back out of the FINAL artifact (PNG and the PDF rasterized), then fetch each decoded URL and assert on the page title. Checking the source SVG proves nothing about layout, scaling or rasterisation, and a dead code on a printed flier cannot be fixed after it goes on a wall.
+
 ## [2026-08-05][motion-svg-origin] Motion forces transform-box: fill-box on SVG
 **Mistake:** Set `transformOrigin`/`transform-box: view-box` in CSS for a motion.g rotating around an exact viewBox point (the beaker's pour lip); Motion silently overrode both, so the stream rotated around the wrong point and never appeared where expected.
 **Root cause:** motion/react manages transform-origin itself for SVG elements and applies `transform-box: fill-box`; plain CSS on the same element loses.
