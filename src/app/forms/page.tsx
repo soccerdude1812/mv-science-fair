@@ -7,7 +7,7 @@ import { EVENT, APPLICATION_URL } from "@/lib/event";
 const CONSENT_RULES = [
   "Tell participants what your project is about and what they will be asked to do",
   "Get their voluntary permission; no one should be pressured or forced",
-  "Get written parent/guardian permission if participants are under 18",
+  "Get written parent/guardian permission if participants are under 18, unless we approve the anonymous survey exception",
   "Let them stop at any time, for any reason",
   "Keep all data confidential: use codes (e.g., Participant 1), never real names on your data, notes, or display board",
 ];
