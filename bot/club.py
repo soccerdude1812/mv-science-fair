@@ -18,7 +18,7 @@ HOME = os.path.expanduser("~/mv-sponsor-bot")
 CRED_PATH = os.path.join(HOME, "secrets", "club_creds.json")
 SHEET = "1SGUf_xL5bMHu2ANPJQfDvBLFhzvt4lVqp4zI-KoPXwk"
 CLUB = "stemresearchclubmvhs@gmail.com"
-SENDER = f"Tristan, MV Science Fair <{CLUB}>"
+SENDER = f"Tristan Schaefer, MV Science Fair <{CLUB}>"
 
 _creds = None
 

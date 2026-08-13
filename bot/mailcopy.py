@@ -63,6 +63,25 @@ def render(body, org, line, site):
     assert "not a 501(c)(3)" in b, f"501c3 disclaimer missing for {org}"
     assert "hand the award to the student in person" in b, f"award option 1 missing for {org}"
     assert "present it in your name from the stage" in b, f"award option 2 missing for {org}"
+    assert b.startswith(f"Dear {org},"), f"greeting is not addressed to {org}"
+    assert "Tristan Schaefer" in b, f"signature missing for {org}"
+    return b
+
+
+def render_followup(body, org):
+    """Follow-ups carry no personal line and no site URL, only the org name.
+
+    Kept separate from render() rather than sharing it: the asserts that matter
+    for a first contact (501c3 line, both award options, the site) are not in a
+    follow-up, and a shared function would have to weaken all of them.
+    """
+    if not org or len(org) > 120 or BANNED.search(org):
+        raise ValueError(f"organisation name rejected: {org!r}")
+    b = body.replace("{{ORG}}", org)
+    assert "{{" not in b and "}}" not in b, f"unrendered placeholder for {org}"
+    assert "—" not in b and "–" not in b, f"dash in follow-up for {org}"
+    assert b.startswith(f"Dear {org},"), f"greeting is not addressed to {org}"
+    assert "Tristan Schaefer" in b, f"signature missing for {org}"
     return b
 
 

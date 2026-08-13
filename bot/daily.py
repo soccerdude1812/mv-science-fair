@@ -234,11 +234,16 @@ def cmd_followups(args):
     svc = club.gmail()
     made = []
     for d in due[:args.cap]:
+        try:
+            rendered = cp.render_followup(fbody, d["org"])
+        except (ValueError, AssertionError) as e:
+            log(f"  SKIP  {d['org']}: {e}")
+            continue
         msg = EmailMessage()
         msg["To"] = d["email"]
         msg["From"] = club.SENDER
         msg["Subject"] = f"Re: {SUBJECT}"
-        msg.set_content(fbody)
+        msg.set_content(rendered)
         raw = base64.urlsafe_b64encode(msg.as_bytes()).decode()
         try:
             res = svc.users().drafts().create(userId="me", body={"message": {"raw": raw}}).execute()

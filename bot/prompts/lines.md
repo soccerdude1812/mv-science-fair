@@ -7,17 +7,23 @@ template.
 
 The email around your sentence reads:
 
-> I am Tristan, outreach lead for the STEM & Research Club at Mountain View High School. On
+> Dear [the business name],
+>
+> I'm Tristan, outreach lead for the STEM & Research Club at Mountain View High School. On
 > Saturday, September 26 we are running the MV Science Fair, a free science fair for 3rd through
 > 5th graders, at Amy Imai Elementary here in Mountain View. Kids design their own projects,
 > present them to volunteer judges, and every participant goes home with something.
 >
 > **[your sentence goes here]**
 >
-> We are a student run club funding this ourselves, so I am asking local businesses for help...
+> 1. Supplies. For example, tri-fold display boards for students whose families would rather...
 
-Then it offers four things: supplies (tri-fold display boards, snacks, printing), a named award,
-anything they already give away as a prize, or money.
+Your sentence is the last thing the reader sees before a numbered list of four things we are
+asking for: supplies (tri-fold display boards, snacks, printing), a named award, anything they
+already give away as a prize, or money. As of template v4 there is no lead-in sentence between
+you and that list, so end on something the list can follow. Do not number your own sentence, do
+not write "here are four ways", and do not try to introduce the list; just do not end on a
+dangling clause.
 
 ## Get your worklist
 
