@@ -1,5 +1,11 @@
 # Lessons
 
+## [2026-08-12][two-templates-one-renderer] The follow-up email had no renderer, so a merge field in that cell would have gone out literally
+**Mistake:** Rewrote the cold email template to open `Dear {{ORG}},` and only then noticed that `daily.py cmd_followups` passes the follow-up body straight to `msg.set_content(fbody)`. No substitution, no asserts. Putting the same greeting in the follow-up cell would have mailed `Dear {{ORG}},` to a real business.
+**Root cause:** Two bodies live in the same workbook and read the same way, but only one had a renderer. `mailcopy.render()` guarded the cold email hard (unrendered-placeholder assert, dash assert, 501c3 assert, both award options); the follow-up path had grown up alongside it with none of that, because when it was written the follow-up body happened to contain no merge fields. The safety was a property of that day's copy, not of the code.
+**Fix:** Added `mailcopy.render_followup()` with the same org validation plus placeholder, dash, greeting and signature asserts, and routed `cmd_followups` through it. Kept it separate from `render()` rather than sharing one function: a shared renderer would have had to drop the 501c3 and award-option asserts that make the cold-email check worth having.
+**Prevention:** Every string that reaches `set_content` goes through a render function with an `assert "{{" not in b`, even when today's copy has no placeholders. When one of two parallel templates gets a guard, ask immediately what the other one is missing. Also worth noting the guard that did work: `cmd_followups` refuses to run unless `Template!A27` still contains "Following up", which is why editing that cell could not silently mail the wrong body.
+
 ## [2026-08-12][headless-mac-deploy-gotchas] Four things that each would have silently broken a 09:10 launchd job on a bare Mac
 **Mistake:** Built the daily sponsor bot on the Mac mini and nearly shipped it with four separate latent failures, none of which show up when you run the pieces by hand in an ssh session.
 **Root cause:** Four unrelated environment assumptions, all false on a bare macOS box.
