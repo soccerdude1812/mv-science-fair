@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.mvsciencefair.sponsorbot</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>-lc</string>
+    <string>$HOME/mv-sponsor-bot/run_daily.sh</string>
+  </array>
+
+  <!-- 09:10 Pacific. Business inboxes are staffed, and it is not so early that a
+       burst of mail at 6am looks automated. -->
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key><integer>9</integer>
+    <key>Minute</key><integer>10</integer>
+  </dict>
+
+  <!-- If the mini was asleep or off at 09:10, run once on the next wake. -->
+  <key>RunAtLoad</key>
+  <false/>
+
+  <key>StandardOutPath</key>
+  <string>/Users/eeshan/mv-sponsor-bot/logs/launchd.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/eeshan/mv-sponsor-bot/logs/launchd.err.log</string>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/eeshan/mv-sponsor-bot</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>SPONSOR_CAP</key><string>300</string>
+    <key>SPONSOR_GAP</key><string>15</string>
+    <key>LANG</key><string>en_US.UTF-8</string>
+  </dict>
+
+  <!-- One run at a time. A long research stage must never overlap the next day's. -->
+  <key>AbandonProcessGroup</key>
+  <false/>
+</dict>
+</plist>
