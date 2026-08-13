@@ -1,0 +1,17 @@
+{
+  "name": "mv-science-fair-fliers",
+  "private": true,
+  "type": "module",
+  "description": "Generator for the MV Science Fair volunteer and mentor flier. Standalone: not part of the Next.js app build.",
+  "scripts": {
+    "fonts": "node inline-fonts.mjs",
+    "qr": "node make-qr.mjs",
+    "build": "./render.sh",
+    "verify": "node verify-qr.mjs out/MV-Science-Fair-Volunteer-Slide-16x9.png out/MV-Science-Fair-Volunteer-Flier.png"
+  },
+  "dependencies": {
+    "jsqr": "^1.4.0",
+    "pngjs": "^7.0.0",
+    "qrcode": "^1.5.4"
+  }
+}

@@ -3,7 +3,7 @@ import { ArrowRight, Check } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import CollapsibleSection from "@/components/CollapsibleSection";
 import EventDetails from "@/components/EventDetails";
-import { APPLICATION_URL } from "@/lib/event";
+import { APPLICATION_URL, MENTOR_REQUEST_URL } from "@/lib/event";
 import Timeline from "@/components/Timeline";
 
 function BulletList({ items }: { items: React.ReactNode[] }) {
@@ -258,6 +258,19 @@ export default function TheProcessPage() {
               </p>
               <p className="mt-3 text-sm text-ink-faint">
                 Typical commitment: about 1 to 2 hours per week.
+              </p>
+              <p className="mt-4">
+                Want one?{" "}
+                <a
+                  href={MENTOR_REQUEST_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-coral-deep hover:underline"
+                >
+                  Request a high school mentor
+                </a>{" "}
+                at any point, before or after you apply. Mentors are free, and
+                you can ask for one later if you change your mind.
               </p>
             </CollapsibleSection>
           </div>

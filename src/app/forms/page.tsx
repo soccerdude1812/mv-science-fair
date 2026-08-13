@@ -2,12 +2,12 @@ import { ArrowUpRight, Check, X } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import FormCard from "@/components/FormCard";
 import EventDetails from "@/components/EventDetails";
-import { EVENT, APPLICATION_URL } from "@/lib/event";
+import { EVENT, APPLICATION_URL, MENTOR_REQUEST_URL } from "@/lib/event";
 
 const CONSENT_RULES = [
   "Tell participants what your project is about and what they will be asked to do",
   "Get their voluntary permission; no one should be pressured or forced",
-  "Get written parent/guardian permission if participants are under 18",
+  "Get written parent/guardian permission if participants are under 18, unless we approve the anonymous survey exception",
   "Let them stop at any time, for any reason",
   "Keep all data confidential: use codes (e.g., Participant 1), never real names on your data, notes, or display board",
 ];
@@ -16,7 +16,7 @@ const NEVER_ALLOWED = [
   "Open flames (candles, matches, lighters)",
   "Industrial or laboratory chemicals",
   "High-voltage electricity (wall outlets)",
-  "Compressed gases or pressurized containers",
+  "Compressed gas cylinders (propane, CO2 cartridges, air tanks)",
   "Radioactive materials",
   "Toxic substances (pesticides, paint thinner)",
   "Weapons, projectiles, or launchers",
@@ -205,7 +205,7 @@ export default function FormsPage() {
                 required="Chemicals, electrical equipment, sharp tools, heat sources."
                 notRequired="Common household items with no realistic safety risk."
                 examplesRequired="vinegar and steel wool reaction, building motor circuits"
-                examplesNotRequired="baking soda and vinegar in small amounts, paper airplanes"
+                examplesNotRequired="baking soda and vinegar in small amounts, a household spray can with a grown-up, paper airplanes"
               />
 
               <div className="mt-6 rounded-2xl bg-coral-soft p-5">
@@ -261,7 +261,7 @@ export default function FormsPage() {
               className="reveal stagger-4"
               title="High School Mentor Request"
               description="Parents: request a high school student mentor to guide your child through their project."
-              href="https://docs.google.com/forms/d/1KctjqLpK1bSmvTULL0OjStBtLDaBQhSY_xb-NmvyxOg/viewform"
+              href={MENTOR_REQUEST_URL}
             />
           </div>
         </section>
@@ -310,7 +310,15 @@ export default function FormsPage() {
                   Mentor request, optional
                 </p>
                 <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                  Request a high school mentor anytime during the process.
+                  <a
+                    href={MENTOR_REQUEST_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-coral-deep hover:underline"
+                  >
+                    Request a high school mentor
+                  </a>{" "}
+                  anytime during the process. Free and optional.
                 </p>
               </div>
             </li>

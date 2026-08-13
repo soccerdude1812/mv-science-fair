@@ -65,6 +65,17 @@ export const APPLICATION_URL =
   "https://docs.google.com/forms/d/1Uys9ePwF965Nn722dpa3eSypNVK9tLp-J4PnvOGN4xg/viewform";
 
 /**
+ * Mentor request form, for parents asking for a high school mentor. Promoted
+ * to a shared constant on 2026-08-11: it used to be linked from /forms only,
+ * so a family that went application form to approval email never saw it. Now
+ * also linked from the Mentors section of /the-process and named directly in
+ * the application form's mentor question. Mentors are high school student
+ * volunteers, never teachers or other adults.
+ */
+export const MENTOR_REQUEST_URL =
+  "https://docs.google.com/forms/d/1KctjqLpK1bSmvTULL0OjStBtLDaBQhSY_xb-NmvyxOg/viewform";
+
+/**
  * Sponsor interest form. Added 2026-08-09 alongside /sponsors, so businesses
  * reached by outreach have somewhere to land that is not a bare mailto.
  * Responses flow into the master tracker workbook in Drive.
