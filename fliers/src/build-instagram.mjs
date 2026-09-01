@@ -121,8 +121,17 @@ const POSTS = [
     hue: "green",
     eyebrow: "MV SCIENCE FAIR &middot; MVHS STEM &amp; RESEARCH CLUB",
     headline: "Be a research<br>mentor.",
-    sub: "Walk a 3rd to 5th grader through<br>their first real experiment,<br>from question to poster board.",
-    facts: ["HIGH SCHOOLERS", "1 TO 2 HRS / WEEK", "SERVICE HOURS"],
+    sub: "High schoolers, 1 to 2 hours a week,<br>start to finish. Your student brings the<br>question. You bring the scientific method.",
+    /* The four categories the fair runs, in the site's own pigments
+       (src/lib/projectIdeas.ts CATEGORY_COLOR), so a prospective mentor can see
+       what they would actually be mentoring. Coral is absent on purpose: it is
+       reserved for calls to action. */
+    chips: [
+      { t: "LIFE &amp; HEALTH SCIENCES", hue: "green" },
+      { t: "PHYSICAL SCIENCE &amp; ENGINEERING", hue: "blue" },
+      { t: "CHEMISTRY &amp; MATERIALS", hue: "marigold" },
+      { t: "TECHNOLOGY &amp; INNOVATION", hue: "blue" },
+    ],
     qr: qrMentor,
     scan: "Scan to sign up",
     link: "mvsciencefair.vercel.app/volunteer",
@@ -139,8 +148,12 @@ const POSTS = [
     hue: "blue",
     eyebrow: "MV SCIENCE FAIR &middot; MVHS STEM &amp; RESEARCH CLUB",
     headline: "Get volunteer<br>hours.",
-    sub: "One Saturday morning. Setup,<br>check-in, and guiding families<br>around the fair.",
-    facts: ["SAT, SEPT 26", "9 AM TO 12 PM", "AMY IMAI ELEMENTARY"],
+    sub: "Set up the night before, run check-in and<br>guide families on fair day, then help pack<br>down after. Take any part of it.",
+    chips: [
+      { t: "SAT, SEPT 26", hue: "blue" },
+      { t: "9 AM TO 12 PM", hue: "blue" },
+      { t: "AMY IMAI ELEMENTARY", hue: "blue" },
+    ],
     qr: qrEventDay,
     scan: "Scan to sign up",
     link: "mvsciencefair.vercel.app/volunteer",
@@ -257,8 +270,11 @@ html, body {
 
 .facts {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 10px 12px;
+  max-width: 900px;
 }
 .facts li {
   list-style: none;
@@ -272,8 +288,9 @@ html, body {
   color: var(--ink);
   white-space: nowrap;
 }
-.post--green .facts li { background: var(--green-soft); }
-.post--blue .facts li { background: var(--blue-soft); }
+.chip--green { background: var(--green-soft); }
+.chip--blue { background: var(--blue-soft); }
+.chip--marigold { background: var(--marigold-soft); }
 
 /* ---- sign up ---- */
 
@@ -333,7 +350,7 @@ FEED.css = `
   .rule { margin-top: 34px; }
   .sub { margin-top: 30px; }
   .facts { margin-top: 38px; }
-  .signup { margin-top: 88px; }
+  .signup { margin-top: 72px; }
   .qr { width: 238px; height: 238px; }
 `;
 
@@ -346,7 +363,7 @@ STORY.css = `
   .sub { margin-top: 44px; font-size: 33px; }
   .facts { margin-top: 54px; gap: 13px; }
   .facts li { font-size: 18px; padding: 12px 20px 13px; }
-  .signup { margin-top: 128px; }
+  .signup { margin-top: 116px; }
   .qr { width: 272px; height: 272px; }
   .scan { margin-top: 24px; font-size: 30px; }
   .scan::before { width: 32px; height: 32px; }
@@ -380,7 +397,7 @@ ${fmt.css}
     <h1 class="headline">${p.headline}</h1>
     ${rule(p.hue)}
     <p class="sub">${p.sub}</p>
-    <ul class="facts">${p.facts.map((f) => `<li>${f}</li>`).join("")}</ul>
+    <ul class="facts">${p.chips.map((c) => `<li class="chip--${c.hue}">${c.t}</li>`).join("")}</ul>
     <div class="signup">
       <div class="qr">${p.qr}</div>
       <p class="scan">${p.scan}</p>

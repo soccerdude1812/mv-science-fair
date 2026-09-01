@@ -25,11 +25,19 @@ deadline that event-day volunteering does not.
 > You do not need a PhD. You need to be a high schooler who likes science.
 >
 > We are pairing MVHS students with 3rd to 5th graders for the MV Science Fair
-> on September 26. You help one kid pick a question, run a real experiment, and
-> build a board they are proud of. One to two hours a week.
+> on September 26. Your student brings the question. You bring the scientific
+> method, and you stay with them the whole way: planning it, running it, keeping
+> them organized, and getting them to the board they present on fair day. About
+> 1 to 2 hours a week.
 >
-> They get someone who has actually been through it. You get community service
-> hours and a kid who thinks you invented science.
+> Projects land in one of four categories, and you take whichever you like: Life
+> and Health Sciences, Physical Science and Engineering, Chemistry and
+> Materials, Technology and Innovation.
+>
+> The project stays theirs. You advise. That is the whole job, and it is the
+> part that makes a kid believe they can do science.
+>
+> Community service hours for all of it.
 >
 > Scan the QR on the post, or go to mvsciencefair.vercel.app/volunteer
 >
@@ -39,7 +47,13 @@ deadline that event-day volunteering does not.
 
 **Location tag:** Mountain View, California
 **Alt text:** Cream poster reading "Be a research mentor", ringed by hand drawn
-science doodles with eyes, with a QR code to the mentor sign up form.
+science doodles with eyes, with the fair's four project categories and a QR
+code to the mentor sign up form.
+
+**Do not say** that mentors help pick the question. They do not. The student
+owns the question and the project; the mentor guides the scientific method,
+helps them stay organized, and encourages them. That is what /the-process and
+/volunteer both promise, and the mentor conduct rules turn on it.
 
 ---
 
@@ -47,14 +61,15 @@ science doodles with eyes, with a QR code to the mentor sign up form.
 
 **Caption**
 
-> Volunteer hours. One Saturday. Done before lunch.
+> Volunteer hours. One weekend. Mostly before noon.
 >
 > The MV Science Fair is Saturday, September 26, 9 AM to 12 PM at Amy Imai
-> Elementary. We need MVHS students to set up, check families in, point people
-> at the right table, and pack down at the end.
+> Elementary. There are three ways in: help set up the night before, work
+> check-in and guide families during the fair, or stay after and help pack down.
+> Take one, take all three.
 >
-> Three hours, community service hours for all of it, and a morning of watching
-> 4th graders explain their projects with total confidence.
+> Community service hours for whatever you do, plus a morning of watching 4th
+> graders explain their projects with total confidence.
 >
 > Scan the QR on the post, or go to mvsciencefair.vercel.app/volunteer
 >
@@ -64,7 +79,16 @@ science doodles with eyes, with a QR code to the mentor sign up form.
 
 **Location tag:** Mountain View, California
 **Alt text:** Cream poster reading "Get volunteer hours", ringed by hand drawn
-science doodles with eyes, with a QR code to the event day volunteer form.
+science doodles with eyes, with the fair's date, time and venue and a QR code
+to the event day volunteer form.
+
+**Open question, flagged 2026-09-01.** The post and this caption advertise
+night-before setup and after-the-fair cleanup. The Event-Day Volunteering Form
+does not ask about either: Q7 asks only "Are you available for fair day,
+Saturday, September 26, 2026, 9:00 AM to 12:00 PM?" and Q8's options are the
+only place a volunteer could say otherwise. Someone who wants the Friday shift
+has nowhere to say so. Either add the option to the form or drop the claim from
+the post.
 
 ---
 
