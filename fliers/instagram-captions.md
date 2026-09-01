@@ -92,6 +92,32 @@ shift had nowhere to say so. It had no responses yet, so nothing was disturbed.
 
 ---
 
+## What has shipped
+
+| | Status |
+|---|---|
+| Mentor feed post | **Live 2026-09-01**, [/p/Dcw2pmaj7YrzVhmij43-KyP7gz8ljCMb4mal480](https://www.instagram.com/p/Dcw2pmaj7YrzVhmij43-KyP7gz8ljCMb4mal480/). 4:5 uncropped, location Mountain View California, alt text set, no filter. |
+| Mentor story | Not posted. See below. |
+| Event day, both | Held until closer to September 26. |
+| Bio link | Not set. See below. |
+
+### Two things desktop web cannot do
+
+Both need the phone app, and neither is worth fighting from a browser.
+
+- **Stories.** The Create menu on instagram.com offers exactly one option, "Post".
+  There is no story entry point on desktop web, so the 9:16 files have to be
+  posted from the app.
+- **The bio link.** The Website field on /accounts/edit/ is read only and says so:
+  "Editing your links is only available on mobile. Visit the Instagram app and
+  edit your profile to change the websites in your bio." Typing into it does
+  nothing.
+
+When posting the feed image, set the crop to **4:5**. Instagram defaults to 1:1,
+which eats the eyebrow off the top and the sign-up URL off the bottom.
+
+---
+
 ## Reach notes
 
 These are judgement calls, not measured results. Nothing here has been A/B
