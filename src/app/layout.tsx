@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     default: "MV Science Fair 2026",
     template: "%s | MV Science Fair 2026",
   },
-  description: `Inspiring young scientists in Mountain View! The 2026 MV Science Fair is ${EVENT.dateFull}, ${EVENT.timeFull}, at ${EVENT.venueName} (${EVENT.venueRoom}). Organized by the Mountain View High School STEM & Research Club, open to grades 3-5. Applications close ${EVENT.applicationDeadline}.`,
+  description: `Inspiring young scientists in Mountain View! The 2026 MV Science Fair is ${EVENT.dateFull}, ${EVENT.timeFull}, at ${EVENT.venueName} (${EVENT.venueRoom}). Organized by the ${EVENT.organizer}, open to grades 3-5. Applications close ${EVENT.applicationDeadline}.`,
   keywords: [
     "science fair",
     "MV Science Fair",
@@ -59,7 +59,7 @@ const eventJsonLd = {
   "@type": "Event",
   name: "MV Science Fair 2026",
   description:
-    "A student-led science fair for grades 3-5 in Mountain View, organized by the Mountain View High School STEM & Research Club.",
+    `A student-led science fair for grades 3-5 in Mountain View, organized by the ${EVENT.organizer}.`,
   startDate: EVENT.startISO,
   endDate: EVENT.endISO,
   eventStatus: "https://schema.org/EventScheduled",
@@ -78,7 +78,8 @@ const eventJsonLd = {
   },
   organizer: {
     "@type": "Organization",
-    name: "Mountain View High School STEM & Research Club",
+    name: EVENT.organizer,
+    alternateName: EVENT.organizerLong,
     email: EVENT.contactEmail,
   },
   isAccessibleForFree: true,

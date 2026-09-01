@@ -251,10 +251,10 @@ export default function TheProcessPage() {
           <div className="reveal stagger-3">
             <CollapsibleSection title="Mentors">
               <p>
-                Mentors are high school student volunteers from the STEM and
-                Research Club at Mountain View High School. They guide you
-                through the scientific method, help you stay organized, and
-                offer encouragement along the way.
+                Mentors are high school student volunteers from the{" "}
+                {EVENT.organizer}. They guide you through the scientific
+                method, help you stay organized, and offer encouragement along
+                the way.
               </p>
               <p className="mt-3 text-sm text-ink-faint">
                 Typical commitment: about 1 to 2 hours per week.

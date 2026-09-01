@@ -93,10 +93,9 @@ export default function Footer() {
 
         <div className="mt-12 border-t border-line pt-6">
           <p className="text-[0.85rem] text-ink-faint">
-            A student-led event organized by the STEM & Research Club at
-            Mountain View High School. Not affiliated with or endorsed by the
-            Mountain View Whisman School District. Amy Imai Elementary School
-            is the venue only.
+            A student-led event organized by the {EVENT.organizer}. Not
+            affiliated with or endorsed by the Mountain View Whisman School
+            District. Amy Imai Elementary School is the venue only.
           </p>
         </div>
       </div>

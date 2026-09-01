@@ -124,7 +124,8 @@ Animate only `transform` and `opacity`.
 - Zero em-dashes anywhere on the site. Use periods, commas, or colons
 - Max one small-caps eyebrow label per 3 sections (data labels on fact tiles
   do not count)
-- Event name is "MV Science Fair". MVHS appears only as organizer; MVWSD only
+- Event name is "MV Science Fair". MVHS appears only as organizer, always
+  spelled "MVHS STEM & Research Club"; MVWSD only
   in the footer disclaimer
 - CTA intent: exactly one apply label, "Apply now", used identically everywhere
 
