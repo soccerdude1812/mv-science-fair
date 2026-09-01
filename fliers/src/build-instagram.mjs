@@ -148,7 +148,7 @@ const POSTS = [
     hue: "blue",
     eyebrow: "MV SCIENCE FAIR &middot; MVHS STEM &amp; RESEARCH CLUB",
     headline: "Get volunteer<br>hours.",
-    sub: "Set up the night before, run check-in and<br>guide families on fair day, then help pack<br>down after. Take any part of it.",
+    sub: "Set up the evening before, run check-in and<br>guide families on fair day, then help pack<br>down after. Take any part of it.",
     chips: [
       { t: "SAT, SEPT 26", hue: "blue" },
       { t: "9 AM TO 12 PM", hue: "blue" },

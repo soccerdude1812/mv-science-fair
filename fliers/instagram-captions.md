@@ -64,7 +64,7 @@ helps them stay organized, and encourages them. That is what /the-process and
 > Volunteer hours. One weekend. Mostly before noon.
 >
 > The MV Science Fair is Saturday, September 26, 9 AM to 12 PM at Amy Imai
-> Elementary. There are three ways in: help set up the night before, work
+> Elementary. There are three ways in: help set up the evening before, work
 > check-in and guide families during the fair, or stay after and help pack down.
 > Take one, take all three.
 >
@@ -82,13 +82,13 @@ helps them stay organized, and encourages them. That is what /the-process and
 science doodles with eyes, with the fair's date, time and venue and a QR code
 to the event day volunteer form.
 
-**Open question, flagged 2026-09-01.** The post and this caption advertise
-night-before setup and after-the-fair cleanup. The Event-Day Volunteering Form
-does not ask about either: Q7 asks only "Are you available for fair day,
-Saturday, September 26, 2026, 9:00 AM to 12:00 PM?" and Q8's options are the
-only place a volunteer could say otherwise. Someone who wants the Friday shift
-has nowhere to say so. Either add the option to the form or drop the claim from
-the post.
+**Form matches the post, as of 2026-09-01.** The post advertises three shifts,
+so the Event-Day Volunteering Form was given a question that can accept them:
+"Which shifts can you help with?", a required checkbox offering setup the
+evening before (Friday, September 25, 2026), fair day itself, and pack down
+right after. The form description says the same. Before that change the form
+asked only about Saturday 9 AM to 12 PM and a volunteer who wanted the Friday
+shift had nowhere to say so. It had no responses yet, so nothing was disturbed.
 
 ---
 
