@@ -10,7 +10,7 @@ Event landing site for parents and kids (grades 3-5). Playful-warm "chalk lab
 notebook" language on a cream ground, in the family of Anthropic's design language
 (warm paper, serif display, generous space, hand-drawn characters) with Google's
 palette discipline (few clear hues, high clarity). The site has ONE job: get
-families to apply before Sept 4. Dials: VARIANCE 7 / MOTION 6 / DENSITY 3.
+families to apply before Sept 13. Dials: VARIANCE 7 / MOTION 6 / DENSITY 3.
 
 Explicit owner brief (2026-08-05): chalk light theme; elegant fonts, margins, text;
 minimal copy (old home was overwhelming); scroll-driven science animations (turning
@@ -118,7 +118,8 @@ Animate only `transform` and `opacity`.
 
 - Home page is minimal: short declaratives, one idea per section
 - Section heads ≤ 8 words; sub-copy ≤ 25 words
-- Only two real dates exist: applications close Fri Sept 4; fair day Sat Sept 26,
+- Only two real dates exist: applications close Sun Sept 13 at 11:59 PM (moved
+  from Fri Sept 4 on 2026-08-31, fair day unchanged); fair day Sat Sept 26,
   9 AM to 12 PM. Never invent timeframes
 - Zero em-dashes anywhere on the site. Use periods, commas, or colons
 - Max one small-caps eyebrow label per 3 sections (data labels on fact tiles

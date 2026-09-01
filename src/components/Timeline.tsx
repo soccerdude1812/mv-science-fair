@@ -11,7 +11,7 @@ const timelineSteps = [
     title: "Apply",
     date: `Now to ${EVENT.applicationDeadlineShort}`,
     description:
-      "One form covers registration, consent, and your project: what it is and how you plan to do it, 100 to 200 words each. Applications close Friday, September 4, 2026. Apply early, since you can start building as soon as you're approved.",
+      `One form covers registration, consent, and your project: what it is and how you plan to do it, 100 to 200 words each. Applications close ${EVENT.applicationDeadlineFull}. Apply early, since you can start building as soon as you're approved.`,
     status: "active" as const,
   },
   {

@@ -3,7 +3,7 @@ import { ArrowRight, Check } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import CollapsibleSection from "@/components/CollapsibleSection";
 import EventDetails from "@/components/EventDetails";
-import { APPLICATION_URL } from "@/lib/event";
+import { EVENT, APPLICATION_URL, MENTOR_REQUEST_URL } from "@/lib/event";
 import Timeline from "@/components/Timeline";
 
 function BulletList({ items }: { items: React.ReactNode[] }) {
@@ -259,6 +259,19 @@ export default function TheProcessPage() {
               <p className="mt-3 text-sm text-ink-faint">
                 Typical commitment: about 1 to 2 hours per week.
               </p>
+              <p className="mt-4">
+                Want one?{" "}
+                <a
+                  href={MENTOR_REQUEST_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-coral-deep hover:underline"
+                >
+                  Request a high school mentor
+                </a>{" "}
+                at any point, before or after you apply. Mentors are free, and
+                you can ask for one later if you change your mind.
+              </p>
             </CollapsibleSection>
           </div>
         </div>
@@ -277,8 +290,8 @@ export default function TheProcessPage() {
               <p className="mb-6">
                 One form covers registration, consent, and your project. About
                 the project we ask two things: what it is, and how you plan to
-                do it, 100 to 200 words each. Applications close Friday,
-                September 4, 2026.
+                do it, 100 to 200 words each. Applications close{" "}
+                {EVENT.applicationDeadlineFull}.
               </p>
               <a
                 href={APPLICATION_URL}

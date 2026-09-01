@@ -164,7 +164,7 @@ export default async function ProjectIdeaPage({ params }: Params) {
         <section className="reveal dotted-band rounded-2xl border border-line p-8 text-center sm:p-10">
           <h2 className="display-section mb-3">Want to do this one?</h2>
           <p className="mx-auto mb-8 max-w-xl text-lg text-ink-soft">
-            Applications close {EVENT.applicationDeadline}. You do not need
+            Applications close {EVENT.applicationDeadlineFull}. You do not need
             results yet, just the question you want to answer.
           </p>
           <a

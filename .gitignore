@@ -43,3 +43,21 @@ next-env.d.ts
 # Local Claude Code config: symlinks to ~/OS (dangle in CI -> action crash) and
 # agent memory with internal references. Machine-local only, never committed.
 .claude/
+
+# Flier generator intermediates. The finished PDF/PNGs in fliers/ are committed;
+# these are rebuilt by `node inline-fonts.mjs` and `./render.sh` (see
+# fliers/README.md). inlined.css alone is 650KB of base64 font.
+/fliers/src/node_modules
+__pycache__/
+/fliers/src/fonts
+/fliers/src/out
+/fliers/src/*.html
+
+# Playwright MCP scratch output (page snapshots + console logs from UI review runs).
+# Tool-generated, machine-local, never useful in a commit.
+.playwright-mcp/
+
+# Working copy of the student flier. The canonical, committed copy lives in
+# fliers/; this root copy exists because it is where it has always been opened
+# from. Two tracked copies of the same PDF would only drift apart.
+/MV-Science-Fair-Flier.pdf

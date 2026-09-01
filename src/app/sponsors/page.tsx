@@ -15,7 +15,7 @@ export const metadata: Metadata = {
  * wall, currently empty and honest about it).
  *
  * Copy rule from DESIGN.md holds: no em-dashes, and the only two dates on
- * the site are the Sept 4 close and the Sept 26 fair.
+ * the site are the Sept 13 close and the Sept 26 fair.
  */
 
 const WAYS = [

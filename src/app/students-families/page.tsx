@@ -99,7 +99,7 @@ export default function StudentsFamiliesPage() {
         <section className="reveal mt-14 border-t border-line pt-10 sm:mt-16 sm:pt-12">
           <h2 className="display-section">Not signed up yet?</h2>
           <p className="mt-3 max-w-2xl text-ink-soft">
-            Applications close {EVENT.applicationDeadline}. We review them as
+            Applications close {EVENT.applicationDeadlineFull}. We review them as
             they arrive, so the earlier you apply, the sooner you can start.
           </p>
           <a

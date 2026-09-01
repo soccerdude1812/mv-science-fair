@@ -74,7 +74,7 @@ export default function Footer() {
               <li>
                 Applications close{" "}
                 <span className="font-semibold text-coral-deep">
-                  {EVENT.applicationDeadline}
+                  {EVENT.applicationDeadlineFull}
                 </span>
               </li>
               <li>

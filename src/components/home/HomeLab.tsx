@@ -104,7 +104,8 @@ const FACTS: { label: string; lines: (string | { text: string; href: string })[]
   { label: "Who", lines: ["Grades 3 to 5", "Solo or in a team"] },
   {
     label: "Apply by",
-    lines: [EVENT.applicationDeadline, "Free to enter"],
+    /* Mirrors the When tile: bold date on line one, the detail light beneath. */
+    lines: [EVENT.applicationDeadline, `${EVENT.applicationDeadlineTime}, free to enter`],
   },
 ];
 
@@ -151,7 +152,7 @@ function FactStrip() {
 const STEPS = [
   {
     title: "Apply",
-    body: "Tell us your idea in two short answers. Applications close September 4.",
+    body: `Tell us your idea in two short answers. Applications close ${EVENT.applicationDeadlineShort}.`,
   },
   {
     title: "Get the green light",
@@ -361,7 +362,7 @@ function ApplyBand() {
                 Apply now
               </a>
               <p className="text-[0.95rem] font-medium text-ink">
-                Applications close {EVENT.applicationDeadline}.
+                Applications close {EVENT.applicationDeadlineFull}.
               </p>
             </div>
           </div>
