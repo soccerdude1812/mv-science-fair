@@ -258,3 +258,15 @@ other - two independently-consented copies of one token will always drift.
 **Root cause:** The URL was copy-pasted out of a Gmail-rendered message body. Gmail rewrites links in rendered/quoted text as `google.com/url?q=...&source=gmail&ust=...`; pasting one back into compose ships the redirect. Verified in the raw sent message (`19fd77b2658f11f4`): three `google.com/url` occurrences across the text/plain and text/html parts, and zero bare `https://mvsciencefair.vercel.app`.
 **Fix:** Every outbound blurb retypes the canonical URL from `EVENT.siteUrl` in `src/lib/event.ts` (`https://mvsciencefair.vercel.app`). The 2026-08-31 approval draft to Mr. Simon uses the clean link.
 **Prevention:** Never copy a URL out of an email body, including your own sent mail. This is already a hard rule in the `outreach-voice` skill ("Never copy a URL out of an email body"); this is the first confirmed case of it reaching a district publication.
+
+## [2026-09-01][instagram-desktop-web-cannot-do-stories-or-bio-links] Half the Instagram plan needed a phone
+**Mistake:** Planned an Instagram push around three actions, a feed post, a story with a link sticker, and a bio link, and only found out at execution time that browser automation can do exactly one of them.
+**Root cause:** Assumed instagram.com was a full client because it can post to the feed. It is not. The Create menu offers a single option, "Post", with no story entry point, and `/accounts/edit/` renders the Website field read only over the text "Editing your links is only available on mobile. Visit the Instagram app and edit your profile to change the websites in your bio."
+**Fix:** Posted the feed image from the browser; the story and the bio link go to Eeshan's phone. Both limits are now recorded in `fliers/instagram-captions.md` so the next plan budgets for them.
+**Prevention:** Before promising a social action in a plan, check whether the surface supports it on the web at all. Meta reserves stories, link stickers and profile links for the app. Assume app-only for anything that is not a plain feed post.
+
+## [2026-09-01][instagram-crops-4x5-uploads-to-square] A 1080x1350 upload defaults to 1:1 and eats the design
+**Mistake:** Uploaded the 4:5 post and the crop step opened on a square, cutting the eyebrow off the top and "Scan to sign up" plus the URL off the bottom. Sharing from that screen would have published a post with no call to action.
+**Root cause:** Instagram's crop step does not honour the file's aspect ratio. It opens at 1:1 whatever you give it.
+**Fix:** Opened the crop selector and picked 4:5 before Next.
+**Prevention:** Every time a 4:5 image is uploaded, set the crop by hand and confirm the top and bottom of the design survive before advancing. Do not trust the default.
