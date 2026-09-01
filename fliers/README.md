@@ -15,21 +15,35 @@ The QR code goes to the Application & Registration Form.
 
 Its generator did not survive the session that produced it: the PDF is a
 ReportLab artefact from 2026-08-04 and there is no source for it in the repo.
-Until one exists, edit it with `src/patch-deadline.py`, which rewrites the
-deadline pill in place and leaves the other ~1300 content-stream operators
-untouched:
+Until one exists, edit it with `src/patch-flier.py`, which rewrites one run of
+copy in place and leaves the other ~1300 content-stream operators untouched.
 
 ```sh
 cd fliers/src
-uv run --with pikepdf --with reportlab --with pymupdf python patch-deadline.py \
-  "CLOSES SUNDAY, SEPT 13 · 11:59 PM" ../MV-Science-Fair-Flier.pdf
+R="uv run --with pikepdf --with reportlab --with pymupdf python patch-flier.py"
+
+$R pill "CLOSES SUNDAY, SEPT 13 · 11:59 PM"
+
+$R footer "A student-led event organized by the MVHS STEM & Research Club." \
+          "Not affiliated with or endorsed by MVWSD."
 ```
 
-The pill's own embedded font subset carries only the glyphs the first version of
-that string needed, with no `1`, `3`, `:` or middot, so the script embeds a
-fresh JetBrains Mono Bold for the pill alone. It resizes the rounded rect to the
-new text and asserts on every anchor it edits, so a copy change that no longer
-matches fails loudly instead of writing a broken page.
+`pill` resizes the rounded rect to fit the new string, reusing the original left
+padding on the right. `footer` rewrites the left footer, one argument per line,
+and leaves the event stamp on the right alone.
+
+Both read the geometry, size and tracking back out of the PDF instead of
+hardcoding them, so they still work after they have been run once, and both
+assert on the operators they match: copy that no longer matches fails loudly
+rather than writing a broken page. Both also embed a font. The flier's own
+JetBrains Mono subsets carry only the glyphs their original strings needed, with
+no `1`, `3`, `:`, `&` or middot between them, so each rewritten run gets a fresh
+full-coverage subset and the untouched runs keep the flier's.
+
+After any change, check three things rather than eyeballing the render: that the
+content streams differ only where you meant, that the QR still decodes out of a
+rasterised page to the live application form, and that a second engine agrees
+with poppler.
 
 ## Volunteer and mentor flier
 

@@ -3,8 +3,13 @@
  *
  * Venue confirmed 2026-08-04. Address verified against imai.mvwsd.org/contact_us.
  * Naming: the event is the "MV Science Fair". Not "MVHS Science Fair", not
- * "MVWSD Science Fair". MVHS/Mountain View High School may still appear as the
- * ORGANIZER (the STEM & Research Club runs it), just never in the event name.
+ * "MVWSD Science Fair". MVHS may still appear as the ORGANIZER, just never in
+ * the event name.
+ *
+ * The organizer is the "MVHS STEM & Research Club", one spelling everywhere, as
+ * of 2026-08-31: the club completed its school re-registration, so the MVHS
+ * attribution is now an official one rather than a description of where its
+ * members happen to go to school. It had been written four different ways.
  *
  * MVWSD appears in exactly two places on purpose: the footer non-affiliation
  * disclaimer, and the liability waiver in the application form. Amy Imai is an
@@ -22,6 +27,15 @@ export const EVENT = {
   timeShort: "9AM to 12PM",
   startISO: "2026-09-26T09:00:00-07:00",
   endISO: "2026-09-26T12:00:00-07:00",
+
+  /**
+   * The organizing club. One spelling, used everywhere: site copy, form
+   * descriptions, the printed fliers and outbound email. `organizerLong` exists
+   * only for schema.org's alternateName, so a parent searching "Mountain View
+   * High School science fair" still finds the event.
+   */
+  organizer: "MVHS STEM & Research Club",
+  organizerLong: "Mountain View High School STEM & Research Club",
 
   venueName: "Amy Imai Elementary School",
   venueRoom: "Multi-Use Room (MUR)",

@@ -9,7 +9,7 @@ The email around your sentence reads:
 
 > Dear [the business name],
 >
-> I'm Tristan, outreach lead for the STEM & Research Club at Mountain View High School. On
+> I'm Tristan, outreach lead for the MVHS STEM & Research Club. On
 > Saturday, September 26 we are running the MV Science Fair, a free science fair for 3rd through
 > 5th graders, at Amy Imai Elementary here in Mountain View. Kids design their own projects,
 > present them to volunteer judges, and every participant goes home with something.

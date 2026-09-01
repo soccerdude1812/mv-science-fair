@@ -173,7 +173,7 @@ const SUBLINE =
 const VENUE = "Amy Imai Elementary, Multi-Use Room · 253 Martens Ave, Mountain View";
 const LINKS = "mvsciencefair.vercel.app · stemresearchclubmvhs@gmail.com · @stemresearchclubmvhs";
 const DISCLAIMER =
-  "Organized by the Mountain View High School STEM &amp; Research Club. Not affiliated with or endorsed by MVWSD.";
+  "Organized by the MVHS STEM &amp; Research Club. Not affiliated with or endorsed by MVWSD.";
 
 const check = (hue) =>
   `<svg class="tick" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5 L6.4 12 L13 4.6"
