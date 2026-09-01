@@ -56,6 +56,28 @@ event-day volunteering and mentoring. Two layouts, one content source.
 | `MV-Science-Fair-Volunteer-Flier.pdf` | 8.5 x 11 in, 1 page | Printing and posting. Vector, no page margin, prints edge to edge. |
 | `MV-Science-Fair-Volunteer-Flier.png` | 1632 x 2112 | The same portrait sheet as an image (2x, ~192dpi) for anything that will not take a PDF. |
 
+## Instagram posts
+
+Two recruitment posts aimed at MVHS students, one per volunteer role, on both
+surfaces. Copy, hashtags and the reasoning behind them live in
+[`instagram-captions.md`](instagram-captions.md).
+
+| File | Size | Use |
+|------|------|-----|
+| `MV-Science-Fair-IG-Mentor.png` | 1080 x 1350 | Feed post, 4:5, Instagram's tallest allowed frame. |
+| `MV-Science-Fair-IG-Mentor-Story.png` | 1080 x 1920 | Story, 9:16. A separate layout, not a crop: words stay clear of the ~250px Instagram overlays top and bottom. |
+| `MV-Science-Fair-IG-EventDay.png` | 1080 x 1350 | Feed post, 4:5. |
+| `MV-Science-Fair-IG-EventDay-Story.png` | 1080 x 1920 | Story, 9:16. |
+
+The mentor post carries the mentor code, the event-day post the event-day code,
+and `verify-qr.mjs` now checks that pairing rather than only counting codes.
+
+The border is thirteen figures from the cast, every one of them with a face.
+`build-flier.mjs` and `build-instagram.mjs` both import them from
+`src/cast-static.mjs`, so the printed sheet and the feed cannot drift apart.
+That refactor was verified by regenerating the flier HTML and confirming it came
+back byte for byte identical.
+
 ## What the QR codes point at
 
 Both encode the short `/forms/d/<id>/viewform` URL, which Google redirects to the
@@ -93,7 +115,8 @@ npm install                # qrcode, jsqr, pngjs
 node inline-fonts.mjs      # needs network: fetches the Google Fonts CSS and
                            # inlines the latin subsets into fonts/inlined.css
 node make-qr.mjs           # writes qr/*.svg
-./render.sh                # builds the HTML and renders to out/
+./render.sh                # the flier and slide
+./render-instagram.sh      # the four Instagram artefacts
 node verify-qr.mjs out/*.png
 ```
 
@@ -104,8 +127,15 @@ about 2% of pixels move and nothing reflows. Do not commit a rebuild unless the
 flier actually changed, since the committed files are the ones that were
 printed.
 
-`render.sh` drives headless Chrome. `build-flier.mjs` holds all the copy and both
-layouts; edit there, never the generated HTML.
+`render.sh` and `render-instagram.sh` drive headless Chrome. `build-flier.mjs`
+and `build-instagram.mjs` hold all the copy and every layout; edit there, never
+the generated HTML.
+
+The Instagram artefacts are authored at their delivered pixel size, shot at 2x
+and downsampled back, which buys the serif display and the hairline strokes an
+antialiasing pass they do not get at device scale 1. `verify-qr.mjs` then reads
+the codes back out of the downsampled files, so the resample is proven not to
+have cost them.
 
 `verify-qr.mjs` decodes the codes back out of the **rendered** artefacts and
 fetches each URL to confirm it still returns the right form. Run it after any

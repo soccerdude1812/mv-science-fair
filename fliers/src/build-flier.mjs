@@ -7,130 +7,21 @@
  * Everything traces to DESIGN.md ("Chalk Lab"): the token values, the type
  * stack, the 16px container / pill interactive radius system, hairline borders,
  * warm never-black shadows, and the character style contract. The characters
- * are static ports of src/components/lab/cast.tsx, same path data and the same
- * derived-geometry formulas, with the motion stripped and pupils at rest.
+ * come from cast-static.mjs, ports of src/components/lab/cast.tsx with the
+ * motion stripped, shared with the Instagram posts so paper and feed cannot
+ * drift apart.
  *
  * Colour coding follows /volunteer, which is already live: blue = event day,
  * green = mentor. Coral stays the accent that points at the two QR codes.
  */
 import { readFile, writeFile } from "node:fs/promises";
+import { gear, testTube, lightbulb, dottedGround } from "./cast-static.mjs";
 
 const here = (p) => new URL(p, import.meta.url);
 
 const fontCss = await readFile(here("./fonts/inlined.css"), "utf8");
 const qrEventDay = await readFile(here("./qr/qr-eventday.svg"), "utf8");
 const qrMentor = await readFile(here("./qr/qr-mentor.svg"), "utf8");
-
-/* ------------------------------------------------------------------ cast -- */
-/* Ports of cast.tsx. INK/pigment come out as literal hex because the SVG is
-   inlined into a print document where CSS custom properties on <html> would
-   still resolve, but a PDF renderer given the file standalone should not have
-   to. Stroke widths, radii and wobble are copied verbatim. */
-
-const INK = "#22211C";
-
-/** cast.tsx <Eye>: white ellipse, low pupil, heavy upper lid, optional tilt. */
-function eye({ cx, cy, rx = 8.5, ry = 10, tilt = 0 }) {
-  const pupilR = ry * 0.46;
-  const lid =
-    `M${cx - rx + 0.5},${cy - ry * 0.28} ` +
-    `Q${cx - rx * 0.2},${cy - ry * 0.72} ${cx + rx - 0.5},${cy - ry * 0.34}`;
-  return `<g${tilt ? ` transform="rotate(${tilt} ${cx} ${cy})"` : ""}>
-    <ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="#fff" stroke="${INK}" stroke-width="5"/>
-    <circle cx="${cx}" cy="${cy + ry * 0.3}" r="${pupilR}" fill="${INK}"/>
-    <path d="${lid}" fill="none" stroke="${INK}" stroke-width="4.5" stroke-linecap="round"/>
-  </g>`;
-}
-
-/** cast.tsx <Smile>. */
-function smile({ cx, cy, w = 8, depth = 3 }) {
-  return `<path d="M${cx - w / 2},${cy} Q${cx},${cy + depth} ${cx + w / 2},${cy - 0.5}"
-    fill="none" stroke="${INK}" stroke-width="4" stroke-linecap="round"/>`;
-}
-
-/**
- * The notebook ground. globals.css draws this with a tiled radial-gradient,
- * which is right for the browser and wrong here: Chrome's print-to-PDF renders
- * that tile erratically, dropping the dots across most of the page and
- * scattering blobs elsewhere (verified by cropping the same patch of paper out
- * of the PDF and the PNG side by side). Explicit circles are plain vector
- * content that every renderer treats the same way.
- */
-const dottedGround = (w, h, step) => {
-  const dots = [];
-  for (let y = step / 2; y < h; y += step)
-    for (let x = step / 2; x < w; x += step)
-      dots.push(`<circle cx="${+x.toFixed(1)}" cy="${+y.toFixed(1)}" r="1.1"/>`);
-  return `<svg class="dots" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true">
-    <g fill="#22211C" fill-opacity="0.066">${dots.join("")}</g>
-  </svg>`;
-};
-
-const svg = (body, cls) =>
-  `<svg class="${cls}" viewBox="0 0 120 120" fill="none" aria-hidden="true">${body}</svg>`;
-
-/** Lightbulb: the volunteer-band character in DESIGN.md. Marigold glow. */
-const lightbulb = (cls) =>
-  svg(
-    `<path d="M60,8 L60,15 M31,20 L36,26 M89,19.5 L84,25.5 M20,49 L28,50 M100,48 L92,49.5"
-       stroke="${INK}" stroke-width="4.5" stroke-linecap="round"/>
-     <path d="M45.5,72 Q31,62 31.5,47 Q32.5,25.5 60,25 Q87.5,25.5 88.5,47 Q89,62 74.5,72 Z"
-       fill="#F9EEDA" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
-     <path d="M51,58 Q60,65 69,57.5" fill="none" stroke="${INK}" stroke-width="4.2" stroke-linecap="round"/>
-     ${eye({ cx: 51.5, cy: 45.5, rx: 7.5, ry: 9, tilt: -2 })}
-     ${eye({ cx: 69, cy: 45, rx: 7.8, ry: 9.2, tilt: 2 })}
-     <path d="M46.5,79 L73.5,78.5 M47.5,86.5 L72.5,86 M50.5,94 L69.5,93.5"
-       stroke="${INK}" stroke-width="5.5" stroke-linecap="round"/>`,
-    cls,
-  );
-
-/** Gear, blue: the event-day mark. Teeth carry cast.tsx's hand-cut jitter. */
-const TOOTH_JITTER = [0.8, -0.6, 0.4, -0.9, 0.7, -0.4, 0.9, -0.7];
-const gear = (cls) => {
-  const teeth = TOOTH_JITTER.map(
-    (j, i) => `<g transform="rotate(${i * 45 + j} 60 60)">
-      <path d="M52.5,25.5 Q52,11.5 56.5,11 L63.5,11 Q68,11.5 67.5,25.5"
-        stroke="${INK}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="#E4ECF7"/>
-    </g>`,
-  ).join("");
-  const rivets = [45, 135, 225, 315]
-    .map((a) => {
-      const x = (60 + 28.5 * Math.cos((a * Math.PI) / 180)).toFixed(2);
-      const y = (60 + 28.5 * Math.sin((a * Math.PI) / 180)).toFixed(2);
-      return `<circle cx="${x}" cy="${y}" r="2.2" fill="#4E7DC4"/>`;
-    })
-    .join("");
-  return svg(
-    `${teeth}
-     <circle cx="60" cy="60" r="35" fill="#E4ECF7" stroke="${INK}" stroke-width="6"/>
-     ${rivets}
-     <circle cx="60" cy="60" r="20.5" fill="#fff" stroke="${INK}" stroke-width="5"/>
-     ${eye({ cx: 52.5, cy: 57.5, rx: 7.4, ry: 8.4 })}
-     ${eye({ cx: 68, cy: 57, rx: 7.6, ry: 8.6, tilt: 2 })}
-     ${smile({ cx: 60.5, cy: 70, w: 9 })}`,
-    cls,
-  );
-};
-
-/** Test tube, green: the mentor mark. */
-const testTube = (cls) =>
-  svg(
-    `<g transform="rotate(7 60 60)">
-      <path d="M46.6,66 Q53,62.5 60,66 T73.4,65.5 L73.4,84 Q73.4,98 60,98 Q46.6,98 46.6,84 Z" fill="#619B6E"/>
-      <path d="M46.6,66 Q53,62.5 60,66 T73.4,65.5" stroke="${INK}" stroke-width="4.2" stroke-linecap="round"/>
-      <path d="M47,21 L46.4,82 Q46.2,97.8 60,98 Q73.8,97.8 73.6,82 L73,20.5"
-        stroke="${INK}" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M42.5,21.8 L47,21 M73,20.5 L77.6,21.6" stroke="${INK}" stroke-width="5.5" stroke-linecap="round"/>
-      <path d="M66,74 L72,74 M66,83 L71.8,83" stroke="${INK}" stroke-width="3.2" stroke-linecap="round"/>
-      <circle cx="55" cy="54" r="2.6" stroke="${INK}" stroke-width="3.2"/>
-      <circle cx="64" cy="44" r="2" stroke="${INK}" stroke-width="3"/>
-      <circle cx="58" cy="12" r="3" stroke="${INK}" stroke-width="3.4"/>
-      ${eye({ cx: 52.5, cy: 34, rx: 7, ry: 8.5, tilt: -2 })}
-      ${eye({ cx: 68, cy: 33.5, rx: 7.2, ry: 8.7, tilt: 2 })}
-      ${smile({ cx: 60.5, cy: 45, w: 7 })}
-    </g>`,
-    cls,
-  );
 
 /* --------------------------------------------------------------- content -- */
 /* Copy obeys DESIGN.md: zero em-dashes, no invented timeframes. The Sept 13
