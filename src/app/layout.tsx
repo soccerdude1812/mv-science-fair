@@ -3,7 +3,7 @@ import { Source_Serif_4, Outfit, JetBrains_Mono } from "next/font/google";
 import ConditionalChrome from "@/components/ConditionalChrome";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { EVENT } from "@/lib/event";
+import { EVENT, APPLICATION_URL } from "@/lib/event";
 
 /* Chalk Lab type stack (DESIGN.md): Source Serif 4 display,
    Outfit body/UI, JetBrains Mono for small data labels only. */
@@ -82,6 +82,16 @@ const eventJsonLd = {
     email: EVENT.contactEmail,
   },
   isAccessibleForFree: true,
+  /* Free registration, expressed as an Offer so search engines can show the
+     application window and stop surfacing the event once entries have closed. */
+  offers: {
+    "@type": "Offer",
+    url: APPLICATION_URL,
+    price: 0,
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+    validThrough: EVENT.applicationDeadlineISO,
+  },
 };
 
 export default function RootLayout({

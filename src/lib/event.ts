@@ -34,9 +34,21 @@ export const EVENT = {
   venueMapUrl:
     "https://maps.google.com/?q=Amy+Imai+Elementary+School,+253+Martens+Ave,+Mountain+View,+CA+94040",
 
-  /** Applications reviewed on a rolling basis; hard close Friday, September 4, 2026. */
-  applicationDeadline: "Friday, September 4, 2026",
-  applicationDeadlineShort: "Sept 4",
+  /**
+   * Applications reviewed on a rolling basis; hard close Sunday, September 13,
+   * 2026 at 11:59 PM. Extended from Friday, September 4 on 2026-08-31 to widen
+   * the window. The fair itself does not move: it is still September 26.
+   *
+   * The cutoff time is part of the deadline now, not decoration. It is stated
+   * wherever the deadline appears as a sentence, so a family reading the site
+   * on the 13th can tell they still have the day.
+   */
+  applicationDeadline: "Sunday, September 13, 2026",
+  applicationDeadlineShort: "Sept 13",
+  applicationDeadlineTime: "11:59 PM",
+  applicationDeadlineFull: "Sunday, September 13, 2026 at 11:59 PM",
+  /** Local cutoff instant, for schema.org and anything that needs a real date. */
+  applicationDeadlineISO: "2026-09-13T23:59:00-07:00",
 
   /**
    * Public inbox for all questions. Deliberately the club address, not a

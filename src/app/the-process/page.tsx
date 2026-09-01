@@ -3,7 +3,7 @@ import { ArrowRight, Check } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import CollapsibleSection from "@/components/CollapsibleSection";
 import EventDetails from "@/components/EventDetails";
-import { APPLICATION_URL, MENTOR_REQUEST_URL } from "@/lib/event";
+import { EVENT, APPLICATION_URL, MENTOR_REQUEST_URL } from "@/lib/event";
 import Timeline from "@/components/Timeline";
 
 function BulletList({ items }: { items: React.ReactNode[] }) {
@@ -290,8 +290,8 @@ export default function TheProcessPage() {
               <p className="mb-6">
                 One form covers registration, consent, and your project. About
                 the project we ask two things: what it is, and how you plan to
-                do it, 100 to 200 words each. Applications close Friday,
-                September 4, 2026.
+                do it, 100 to 200 words each. Applications close{" "}
+                {EVENT.applicationDeadlineFull}.
               </p>
               <a
                 href={APPLICATION_URL}

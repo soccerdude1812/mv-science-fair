@@ -1,4 +1,33 @@
-# Volunteer and mentor flier
+# Fliers
+
+Two separate pieces live here. The **student flier** recruits applicants; the
+**volunteer and mentor flier** recruits helpers. They do not share a source.
+
+## Student flier
+
+`MV-Science-Fair-Flier.pdf` (8.5 x 11 in, 1 page) and `MV-Science-Fair-Flier.png`
+(2550 x 3300, 300dpi). The QR code goes to the Application & Registration Form.
+Imai has confirmed these can go up on their walls.
+
+Its generator did not survive the session that produced it: the PDF is a
+ReportLab artefact from 2026-08-04 and there is no source for it in the repo.
+Until one exists, edit it with `src/patch-deadline.py`, which rewrites the
+deadline pill in place and leaves the other ~1300 content-stream operators
+untouched:
+
+```sh
+cd fliers/src
+uv run --with pikepdf --with reportlab --with pymupdf python patch-deadline.py \
+  "CLOSES SUNDAY, SEPT 13 · 11:59 PM" ../MV-Science-Fair-Flier.pdf
+```
+
+The pill's own embedded font subset carries only the glyphs the first version of
+that string needed, with no `1`, `3`, `:` or middot, so the script embeds a
+fresh JetBrains Mono Bold for the pill alone. It resizes the rounded rect to the
+new text and asserts on every anchor it edits, so a copy change that no longer
+matches fails loudly instead of writing a broken page.
+
+## Volunteer and mentor flier
 
 Recruitment piece for the two roles on [/volunteer](../src/app/volunteer/page.tsx):
 event-day volunteering and mentoring. Two layouts, one content source.
@@ -34,7 +63,7 @@ stripped, reusing the same path data and derived-geometry formulas. Blue for
 event day and green for mentoring matches what `/volunteer` already ships; coral
 stays the accent, used only to point at the codes.
 
-Deliberately absent: the Sept 4 deadline. That gates student *applications*, not
+Deliberately absent: the application deadline. That gates student *applications*, not
 volunteer or mentor sign-ups, so printing it here would be wrong. Sept 26 is the
 only date on the flier.
 

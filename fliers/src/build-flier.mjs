@@ -133,10 +133,10 @@ const testTube = (cls) =>
   );
 
 /* --------------------------------------------------------------- content -- */
-/* Copy obeys DESIGN.md: zero em-dashes, no invented timeframes. Sept 4 is the
-   STUDENT application deadline and deliberately absent here; it does not gate
-   volunteer or mentor sign-ups, so printing it would be wrong. Sept 26 is the
-   only date on the flier. Role copy tracks /volunteer so the page and the
+/* Copy obeys DESIGN.md: zero em-dashes, no invented timeframes. The Sept 13
+   deadline is the STUDENT application deadline and is deliberately absent here;
+   it does not gate volunteer or mentor sign-ups, so printing it would be wrong.
+   Sept 26 is the only date on the flier. Role copy tracks /volunteer so the page and the
    paper say the same thing. */
 
 const ROLES = [

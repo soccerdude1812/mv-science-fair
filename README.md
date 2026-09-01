@@ -10,7 +10,7 @@ Website for the MV Science Fair 2026 — a student-led STEM event organized by t
 | **Time** | 9:00 AM – 12:00 PM |
 | **Venue** | Amy Imai Elementary School — Multi-Use Room (MUR) |
 | **Address** | 253 Martens Ave, Mountain View, CA 94040 |
-| **Applications close** | Friday, September 4, 2026 |
+| **Applications close** | Sunday, September 13, 2026, 11:59 PM |
 | **Contact** | stemresearchclubmvhs@gmail.com |
 
 Date, time, venue, deadline, contact, and the application form URL all live in

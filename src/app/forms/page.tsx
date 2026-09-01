@@ -102,7 +102,7 @@ export default function FormsPage() {
         {/* The application: the one form that enters you in the fair */}
         <section className="reveal card-soft p-7 sm:p-10">
           <span className="badge-accent">
-            Closes {EVENT.applicationDeadline}
+            Closes {EVENT.applicationDeadlineShort}, {EVENT.applicationDeadlineTime}
           </span>
           <h2 className="mt-5 text-2xl font-semibold sm:text-3xl">
             Application &amp; Registration Form
@@ -282,7 +282,7 @@ export default function FormsPage() {
                 </p>
                 <p className="mt-1 text-sm leading-relaxed text-ink-soft">
                   Submit first. This is the only form you need to enter. Closes{" "}
-                  {EVENT.applicationDeadline}.
+                  {EVENT.applicationDeadlineFull}.
                 </p>
               </div>
             </li>
