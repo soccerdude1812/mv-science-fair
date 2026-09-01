@@ -5,9 +5,13 @@ Two separate pieces live here. The **student flier** recruits applicants; the
 
 ## Student flier
 
-`MV-Science-Fair-Flier.pdf` (8.5 x 11 in, 1 page) and `MV-Science-Fair-Flier.png`
-(2550 x 3300, 300dpi). The QR code goes to the Application & Registration Form.
-Imai has confirmed these can go up on their walls.
+| File | Size | Use |
+|------|------|-----|
+| `MV-Science-Fair-Flier.pdf` | 8.5 x 11 in, 1 page | Printing and posting. Imai has confirmed these can go up on their walls. |
+| `MV-Science-Fair-Flier.png` | 2550 x 3300 | The same sheet at 300dpi, for anything that will not take a PDF. |
+| `MV-Science-Fair-Flier-Instagram-4x5.png` | 1080 x 1350 | Instagram's tallest allowed frame. The whole sheet, uncropped, centred on its own white with 18px either side. |
+
+The QR code goes to the Application & Registration Form.
 
 Its generator did not survive the session that produced it: the PDF is a
 ReportLab artefact from 2026-08-04 and there is no source for it in the repo.
