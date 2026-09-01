@@ -4,9 +4,34 @@
  * identically in Playwright, in a PDF, and on any machine that opens the HTML,
  * so nothing may depend on the network at render time.
  */
-import { readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 
-const css = await readFile(new URL("./fonts/gf.css", import.meta.url), "utf8");
+/* The stylesheet is fetched rather than read off disk. It used to be read from
+   ./fonts/gf.css, which is inside the gitignored fonts/ directory and which
+   nothing ever wrote, so this script and the render that depends on it both
+   failed on a clean checkout.
+
+   Google Fonts serves woff2 only to a user agent it believes supports it, so
+   the request carries a modern UA; without one it answers with truetype and
+   the inlined data URIs below would be several times larger. The families and
+   weights are the ones build-flier.mjs actually sets. */
+
+const FAMILIES = [
+  "family=Outfit:wght@400;500;600;700",
+  "family=Source+Serif+4:ital,wght@0,500;0,600;1,500;1,600",
+  "family=JetBrains+Mono:wght@400;500",
+].join("&");
+
+const res = await fetch(`https://fonts.googleapis.com/css2?${FAMILIES}&display=swap`, {
+  headers: {
+    "user-agent":
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 " +
+      "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+  },
+});
+if (!res.ok) throw new Error(`${res.status} fetching the Google Fonts stylesheet`);
+const css = await res.text();
+await mkdir(new URL("./fonts/", import.meta.url), { recursive: true });
 
 // Split on @font-face; keep only the latin subset (the block whose
 // unicode-range covers basic latin U+0000-00FF and is not latin-ext).

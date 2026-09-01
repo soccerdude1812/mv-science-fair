@@ -76,11 +76,19 @@ only date on the flier.
 ```sh
 cd fliers/src
 npm install                # qrcode, jsqr, pngjs
-node inline-fonts.mjs      # needs network: pulls the latin subsets from Google Fonts
+node inline-fonts.mjs      # needs network: fetches the Google Fonts CSS and
+                           # inlines the latin subsets into fonts/inlined.css
 node make-qr.mjs           # writes qr/*.svg
 ./render.sh                # builds the HTML and renders to out/
 node verify-qr.mjs out/*.png
 ```
+
+The faces come from Google Fonts at run time, so a rebuild picks up whatever
+release is current. Regenerating on 2026-08-31 reproduced the committed sheet
+exactly in layout, with the display serif a touch wider than the August cut:
+about 2% of pixels move and nothing reflows. Do not commit a rebuild unless the
+flier actually changed, since the committed files are the ones that were
+printed.
 
 `render.sh` drives headless Chrome. `build-flier.mjs` holds all the copy and both
 layouts; edit there, never the generated HTML.
