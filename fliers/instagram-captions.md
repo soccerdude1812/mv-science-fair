@@ -96,10 +96,20 @@ shift had nowhere to say so. It had no responses yet, so nothing was disturbed.
 
 | | Status |
 |---|---|
-| Mentor feed post | **Live 2026-09-01**, [/p/Dcw2pmaj7YrzVhmij43-KyP7gz8ljCMb4mal480](https://www.instagram.com/p/Dcw2pmaj7YrzVhmij43-KyP7gz8ljCMb4mal480/). 4:5 uncropped, location Mountain View California, alt text set, no filter. |
-| Mentor story | Not posted. See below. |
-| Event day, both | Held until closer to September 26. |
+| Mentor feed post | **Live 2026-09-01**, [/p/Dcw2pmaj7YrzVhmij43-KyP7gz8ljCMb4mal480](https://www.instagram.com/p/Dcw2pmaj7YrzVhmij43-KyP7gz8ljCMb4mal480/) |
+| Event day feed post | **Live 2026-09-01**, [/p/Dcw5fpcD9vaJQOKxU2_pOXWvgdVrjsCLo6vSTU0](https://www.instagram.com/p/Dcw5fpcD9vaJQOKxU2_pOXWvgdVrjsCLo6vSTU0/) |
+| Both stories | Not posted. See below. |
 | Bio link | Not set. See below. |
+
+Both feed posts went up the same day, event day second, so they sit adjacent in
+the grid and read as a pair. Both are 4:5 uncropped, tagged Mountain View
+California, alt text set, no filter.
+
+Watch the location picker. It reorders its results while you are reading them,
+and on the event-day post a click aimed at "Mountain View, California" landed on
+"Mountain View High School" instead. That one is wrong here: the fair is at Amy
+Imai Elementary, not at the high school. Confirm the chip says what you meant
+before sharing.
 
 ### Two things desktop web cannot do
 
