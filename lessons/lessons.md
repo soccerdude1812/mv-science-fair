@@ -270,3 +270,9 @@ other - two independently-consented copies of one token will always drift.
 **Root cause:** Instagram's crop step does not honour the file's aspect ratio. It opens at 1:1 whatever you give it.
 **Fix:** Opened the crop selector and picked 4:5 before Next.
 **Prevention:** Every time a 4:5 image is uploaded, set the crop by hand and confirm the top and bottom of the design survive before advancing. Do not trust the default.
+
+## [2026-09-01][instagram-location-picker-reorders-under-the-click] Tagged the wrong place because the dropdown moved
+**Mistake:** On the event-day post, clicked the row reading "Mountain View, California" and the post came back tagged "Mountain View High School". The fair is at Amy Imai Elementary, so the tag was simply wrong.
+**Root cause:** Instagram's location picker keeps re-ranking results as it fetches. The row under the cursor at screenshot time was not the row under the cursor at click time. A screenshot is a stale read of a live list.
+**Fix:** Cleared the field, retyped, waited for the list to settle, clicked, then zoomed on the chip to confirm it said "Mountain View, California" before sharing.
+**Prevention:** For any async-populated dropdown, verify the committed value after selecting rather than trusting the click. Cheap check, and the failure is silent otherwise.
