@@ -196,8 +196,83 @@
 **Fix:** Measured it (`document.hidden`, plus timer drift over a known interval), then asked Eeshan to bring the tab to the front. Throttling lifted instantly — drift went 1883ms -> 1002ms — and the remaining 37 lookups finished in about two minutes instead of the projected 40.
 **Prevention:** Before diagnosing a slow page under browser automation, check `document.hidden` and time a `setTimeout(1000)`. If the tab is hidden, ask for focus rather than tuning waits or retrying, and never escalate retry rate into a 429. Keep in-page loops short enough to finish inside the 45s CDP budget, or make them abortable via a flag the loop actually checks; a timed-out `Runtime.evaluate` does not stop the JavaScript it started.
 
+## [2026-09-01][gws-cli-had-its-own-token-to-lose] The gws CLI kept breaking because it held a second copy of a credential the MCP was already keeping alive
+
+**Mistake:** Told to draft an approved email, I read `gws-health`'s
+`gws-school ... state: needs_login` as "the school mailbox is unreachable",
+printed an OAuth consent URL, and ended a turn blocked on a click. The school
+mailbox was reachable the whole time: `mcp__stem-gws__*` takes a
+`user_google_email` parameter that overrides the server's env var, and
+`100035635@mvla.net` was live in the MCP keychain. Eeshan: "Why the fuck is the
+draft not on my personal email."
+
+**Root cause:** Two credential stores for the same account and the same OAuth
+client (`93053591867-...`, project `claude-mcp-488400`), with nothing keeping
+them in step. `gws-health` only ever probed the **gws CLI** store
+(`~/.config/gws*/credentials.enc`); the **MCP keychain**
+(`hardened-google-workspace-mcp`) is a different store it never looked at. So a
+dead CLI token printed a red banner that read as "account dead" while all four
+MCP accounts refreshed fine. Worse, the CLI store is structurally fragile: it is
+AES-encrypted with a key in the OS keyring, and when the keyring is unreachable
+(any non-login context, e.g. a LaunchAgent) gws does not report "keyring
+unavailable" - it concludes the credentials are corrupt and **deletes**
+`credentials.enc` + `token_cache.json`. That is how `~/.config/gws` lost its
+credentials outright.
+
+**Fix:** Stopped giving the CLI its own thing to lose. `~/.local/bin/gws-sync`
+mirrors the MCP keychain's live refresh token into a plaintext
+`credentials.json`, which is slot 4 of the CLI's documented precedence chain
+(`GOOGLE_WORKSPACE_CLI_TOKEN` > `..._CREDENTIALS_FILE` > `credentials.enc` >
+`credentials.json` > ADC). Slot 4 needs no keyring, so the delete-on-decrypt
+path cannot fire, and it sits *below* the encrypted store, so it is a silent
+fallback that engages exactly when the encrypted store is missing or stale.
+`gws_guard.heal()` runs `gws-sync` before it judges anything, so a wiped or
+stale CLI store is repaired before it is ever reported. `classify()` now probes
+the mirrored path first and reports `ok - healthy (MCP-mirrored credentials)`,
+instead of calling a working CLI broken. One consent now repairs every consumer.
+
+Gotcha found on the way: gws bills each API call to the `project_id` in the
+config dir's `client_secret.json`. The school account is an MVLA Workspace user
+with no IAM on `claude-mcp-488400`, so it 403s with "Caller does not have
+required permission to use project". `quota_project_id` in the credentials file
+does **not** override it; only the absence of `client_secret.json` does. Hence
+`~/.config/gws-school-api/` (no client_secret.json) for API calls, with the real
+dir kept for `gws auth login`. Granting the school account
+`roles/serviceusage.serviceUsageConsumer` would be cleaner but needs
+`setIamPolicy`, and the authenticated gcloud identity
+(`eeshankhandelwal.websites@gmail.com`) only holds `roles/editor`.
+
+**Verified by drill:** deleted both mirrors AND moved
+`gws-school/credentials.enc` aside, confirmed `gws` then failed with
+`authError`, ran the SessionStart heal path alone, and both accounts came back
+(`eeshankhandelwal123@gmail.com`, `100035635@mvla.net`) with no human step.
+
+**Prevention:** Before concluding an account is unreachable, check every store
+that holds a credential for it, not the one whose health tool happens to be
+wired up. A per-call `user_google_email` beats a server's env var. And when the
+same secret lives in two places, make one of them the source and generate the
+other - two independently-consented copies of one token will always drift.
+
 ## [2026-08-31][gmail-rewrote-the-apply-link-in-the-newsletter-blurb] The apply link Shelly published came from a Gmail tracking redirect, not the canonical URL
 **Mistake:** The Aug 6 email to Shelly Hausman (MVWSD PIO) carried the newsletter blurb whose only call to action read `Apply at https://www.google.com/url?q=https://mvsciencefair.vercel.app&source=gmail&ust=1785985231477000&sa=E.` She approved it verbatim ("This looks great") and ran it in the Aug 12 elementary newsletters.
 **Root cause:** The URL was copy-pasted out of a Gmail-rendered message body. Gmail rewrites links in rendered/quoted text as `google.com/url?q=...&source=gmail&ust=...`; pasting one back into compose ships the redirect. Verified in the raw sent message (`19fd77b2658f11f4`): three `google.com/url` occurrences across the text/plain and text/html parts, and zero bare `https://mvsciencefair.vercel.app`.
 **Fix:** Every outbound blurb retypes the canonical URL from `EVENT.siteUrl` in `src/lib/event.ts` (`https://mvsciencefair.vercel.app`). The 2026-08-31 approval draft to Mr. Simon uses the clean link.
 **Prevention:** Never copy a URL out of an email body, including your own sent mail. This is already a hard rule in the `outreach-voice` skill ("Never copy a URL out of an email body"); this is the first confirmed case of it reaching a district publication.
+
+## [2026-09-01][instagram-desktop-web-cannot-do-stories-or-bio-links] Half the Instagram plan needed a phone
+**Mistake:** Planned an Instagram push around three actions, a feed post, a story with a link sticker, and a bio link, and only found out at execution time that browser automation can do exactly one of them.
+**Root cause:** Assumed instagram.com was a full client because it can post to the feed. It is not. The Create menu offers a single option, "Post", with no story entry point, and `/accounts/edit/` renders the Website field read only over the text "Editing your links is only available on mobile. Visit the Instagram app and edit your profile to change the websites in your bio."
+**Fix:** Posted the feed image from the browser; the story and the bio link go to Eeshan's phone. Both limits are now recorded in `fliers/instagram-captions.md` so the next plan budgets for them.
+**Prevention:** Before promising a social action in a plan, check whether the surface supports it on the web at all. Meta reserves stories, link stickers and profile links for the app. Assume app-only for anything that is not a plain feed post.
+
+## [2026-09-01][instagram-crops-4x5-uploads-to-square] A 1080x1350 upload defaults to 1:1 and eats the design
+**Mistake:** Uploaded the 4:5 post and the crop step opened on a square, cutting the eyebrow off the top and "Scan to sign up" plus the URL off the bottom. Sharing from that screen would have published a post with no call to action.
+**Root cause:** Instagram's crop step does not honour the file's aspect ratio. It opens at 1:1 whatever you give it.
+**Fix:** Opened the crop selector and picked 4:5 before Next.
+**Prevention:** Every time a 4:5 image is uploaded, set the crop by hand and confirm the top and bottom of the design survive before advancing. Do not trust the default.
+
+## [2026-09-01][instagram-location-picker-reorders-under-the-click] Tagged the wrong place because the dropdown moved
+**Mistake:** On the event-day post, clicked the row reading "Mountain View, California" and the post came back tagged "Mountain View High School". The fair is at Amy Imai Elementary, so the tag was simply wrong.
+**Root cause:** Instagram's location picker keeps re-ranking results as it fetches. The row under the cursor at screenshot time was not the row under the cursor at click time. A screenshot is a stale read of a live list.
+**Fix:** Cleared the field, retyped, waited for the list to settle, clicked, then zoomed on the chip to confirm it said "Mountain View, California" before sharing.
+**Prevention:** For any async-populated dropdown, verify the committed value after selecting rather than trusting the click. Cheap check, and the failure is silent otherwise.

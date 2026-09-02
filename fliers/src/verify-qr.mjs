@@ -11,11 +11,35 @@ import { readFile } from "node:fs/promises";
 import { PNG } from "pngjs";
 import jsQR from "jsqr";
 
+const EVENT_DAY =
+  "https://docs.google.com/forms/d/1iuy7stpEJE6Espci9gCiEdNe06Cx0DR8I73fKNuyCbg/viewform";
+const MENTOR =
+  "https://docs.google.com/forms/d/1Go59zVliqQohI9kTUKptz8PFpYWdTSJbQ5qzyY6b2yY/viewform";
+
 const EXPECTED = {
-  "https://docs.google.com/forms/d/1iuy7stpEJE6Espci9gCiEdNe06Cx0DR8I73fKNuyCbg/viewform":
-    "MV Science Fair - Event-Day Volunteering Form",
-  "https://docs.google.com/forms/d/1Go59zVliqQohI9kTUKptz8PFpYWdTSJbQ5qzyY6b2yY/viewform":
-    "MV Science Fair - Mentor Volunteer Interest Form",
+  [EVENT_DAY]: "MV Science Fair - Event-Day Volunteering Form",
+  [MENTOR]: "MV Science Fair - Mentor Volunteer Interest Form",
+};
+
+/**
+ * Which codes belong on which artefact, matched against the file name. The
+ * volunteer flier and slide carry both roles; the Instagram posts carry one
+ * each, and putting the mentor code on the event-day post is exactly the
+ * failure a bare "did we find two codes" check would wave through.
+ */
+const MANIFEST = [
+  [/IG-Mentor/, [MENTOR]],
+  [/IG-EventDay/, [EVENT_DAY]],
+  [/Volunteer-(Flier|Slide)/, [EVENT_DAY, MENTOR]],
+];
+
+const expectedFor = (file) => {
+  const hit = MANIFEST.find(([re]) => re.test(file));
+  if (!hit) {
+    console.log(`  FAIL: ${file} is not in the manifest, so nothing is being checked`);
+    return null;
+  }
+  return hit[1];
 };
 
 const UA =
@@ -42,6 +66,9 @@ for (const file of process.argv.slice(2)) {
      share of a full-page render goes undetected even though a phone camera
      pointed at that code would read it fine. Sweep tiles instead: several
      window sizes, half-window stride, dedupe by decoded payload. */
+  const want = expectedFor(file);
+  if (!want) { failures++; continue; }
+
   const found = new Set();
   for (const win of [256, 384, 512, 704]) {
     const stride = Math.round(win / 2);
@@ -54,17 +81,23 @@ for (const file of process.argv.slice(2)) {
         if (hit) found.add(hit.data);
       }
     }
-    if (found.size >= 2) break;
+    if (found.size >= want.length) break;
   }
   for (const url of found) console.log(`  decoded: ${url}`);
 
-  if (found.size !== 2) {
-    console.log(`  FAIL: expected 2 codes, decoded ${found.size}`);
+  if (found.size !== want.length) {
+    console.log(`  FAIL: expected ${want.length} code(s), decoded ${found.size}`);
     failures++;
   }
+  for (const url of want) {
+    if (!found.has(url)) {
+      console.log(`  FAIL: missing the code for ${EXPECTED[url]}`);
+      failures++;
+    }
+  }
   for (const url of found) {
-    if (!(url in EXPECTED)) {
-      console.log(`  FAIL: unexpected URL ${url}`);
+    if (!want.includes(url)) {
+      console.log(`  FAIL: unexpected URL on this artefact, ${url}`);
       failures++;
       continue;
     }
