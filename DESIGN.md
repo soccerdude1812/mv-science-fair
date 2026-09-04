@@ -112,8 +112,10 @@ Rules for the portraits:
 - Cards: 20px radius on `card-soft`, role as a chip. Chips use blue / green /
   marigold only. Coral stays the CTA colour, here as everywhere
 - The home band is the lighter cut of the same roster: no card, no chip, a
-  hairline-bordered portrait and one short role line. The home page is an index,
-  not a directory, so full titles live on `/team` and `shortRole` runs the band
+  hairline-bordered portrait and one role line. Lighter means less chrome, never
+  a shorter title: both surfaces print `role` verbatim, and the home grid drops
+  to two columns on a phone so the real titles fit (ruled 2026-09-03, after an
+  abbreviated `shortRole` shipped and was removed)
 - Both surfaces read `src/lib/team.ts`. Never hand-maintain a second list
 
 Cast and placement (each appears once, with a purpose):

@@ -366,8 +366,8 @@ function Team() {
           </p>
         </Reveal>
 
-        <ul className="mt-12 grid grid-cols-3 gap-x-5 gap-y-9 sm:gap-x-6 md:grid-cols-6">
-          {TEAM.map(({ name, shortRole, photo }, i) => (
+        <ul className="mt-12 grid grid-cols-2 gap-x-5 gap-y-9 sm:grid-cols-3 sm:gap-x-6 md:grid-cols-6">
+          {TEAM.map(({ name, role, photo }, i) => (
             <Reveal key={name} delay={i * 0.05}>
               <li>
                 <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line bg-card">
@@ -375,20 +375,18 @@ function Team() {
                     src={photo}
                     alt={name}
                     fill
-                    sizes="(max-width: 768px) 30vw, 170px"
+                    sizes="(max-width: 640px) 45vw, (max-width: 768px) 30vw, 170px"
                     className="object-cover"
                   />
                 </div>
-                {/* Below sm the grid is 3-across on a ~104px column. text-balance
-                    stops "Mentor & Volunteer" breaking to three lines with the
-                    ampersand orphaned; the two-line floor on the name keeps the
-                    role lines on one baseline when a name fits on one line and
-                    its neighbours do not. Both are off from sm up. */}
-                <p className="mt-3 min-h-[2.45rem] text-balance font-display text-[0.98rem] font-semibold leading-tight text-ink sm:min-h-0">
+                {/* Full titles, so the columns have to be wide enough for them:
+                    two across on a phone, not three. text-balance keeps a title
+                    that wraps from stranding one word on its own last line. */}
+                <p className="mt-3 text-balance font-display text-[0.98rem] font-semibold leading-tight text-ink">
                   {name}
                 </p>
-                <p className="mt-1 text-balance text-[0.8rem] leading-snug text-ink-faint">
-                  {shortRole}
+                <p className="mt-1 min-h-[2.2rem] text-balance text-[0.8rem] leading-snug text-ink-faint">
+                  {role}
                 </p>
               </li>
             </Reveal>
