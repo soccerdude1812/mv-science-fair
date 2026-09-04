@@ -90,8 +90,9 @@ Style contract for every character:
 
 ## Photography
 
-There is exactly one page with photographs on it: `/team`. Everywhere else the
-hand-drawn cast above is the imagery, and that rule is unchanged.
+Photographs appear in exactly two places: the `/team` page, and the "The students
+behind it" band on the home page. Everywhere else the hand-drawn cast above is
+the imagery, and that rule is unchanged.
 
 The exception exists because a parent deciding whether to hand their 9 year old
 to a group of teenagers is owed real faces, and a doodle cannot do that job.
@@ -110,6 +111,10 @@ Rules for the portraits:
   hotlinked from the other site
 - Cards: 20px radius on `card-soft`, role as a chip. Chips use blue / green /
   marigold only. Coral stays the CTA colour, here as everywhere
+- The home band is the lighter cut of the same roster: no card, no chip, a
+  hairline-bordered portrait and one short role line. The home page is an index,
+  not a directory, so full titles live on `/team` and `shortRole` runs the band
+- Both surfaces read `src/lib/team.ts`. Never hand-maintain a second list
 
 Cast and placement (each appears once, with a purpose):
 - **Beaker** (hero): coral liquid; idle bob; pours its liquid as you scroll past
@@ -158,7 +163,8 @@ Animate only `transform` and `opacity`.
   pill. Everything else reachable from the footer sitemap. Mobile: sheet menu
 - Home: Hero (split: copy left, beaker right) → fact strip (when/where/who) →
   How it works (4 steps + gears) → What kids explore (category chips + test tube)
-  → Parents' quick answers (3 items) → Apply band (CTA + QR + deadline) → footer
+  → Parents' quick answers (3 items) → The students behind it (6 portraits,
+  added 2026-09-03) → Apply band (CTA + QR + deadline) → footer
 - All 8 routes stay alive at their current slugs (SEO + external links).
   Subpages keep their reference-density content, rethemed, copy tightened
 - Footer: sitemap (all routes), contact email, MVWSD non-affiliation disclaimer

@@ -4,6 +4,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { Gear } from "@/components/lab/cast";
 import { EVENT } from "@/lib/event";
+import { TEAM, type TeamMember } from "@/lib/team";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -14,74 +15,20 @@ export const metadata: Metadata = {
 /**
  * Who runs the fair, Chalk Lab system.
  *
- * This is the one page on the site that carries photography. DESIGN.md
- * otherwise says the hand-drawn cast is the imagery, and that rule still
- * holds everywhere else: a team page is the single place where a parent is
- * owed real faces rather than a doodle, so the exception is written into
- * DESIGN.md rather than left as silent drift.
+ * This page and the team band on the home page are the only two places on
+ * the site that carry photography. DESIGN.md otherwise says the hand-drawn
+ * cast is the imagery, and that still holds everywhere else: these are the
+ * places a parent is owed real faces rather than a doodle, so the exception
+ * is written into DESIGN.md rather than left as silent drift.
  *
  * Portraits come from the MV Physics & Astronomy Club site (mvhsastro.org),
  * re-cropped to a common 4:5 frame with the eye line at 40% so six photos
  * taken in six different places read as one row.
  *
- * Mr. Simon Huynh, faculty advisor, is deliberately not listed yet. He has
- * been asked whether he wants to be and which photo to use, and he goes in
- * only once he says yes. The ADVISOR block below is the whole change.
+ * The roster itself lives in src/lib/team.ts, because the home page shows
+ * the same six people and two hand-maintained lists would drift. Mr. Simon
+ * Huynh is deliberately absent; that file says how to add him.
  */
-
-type Member = {
-  name: string;
-  role: string;
-  photo: string;
-  tone: "marigold" | "blue" | "green";
-};
-
-const TEAM: Member[] = [
-  {
-    name: "Eeshan Khandelwal",
-    role: "Project Organizer & Club Vice-President",
-    photo: "/team/eeshan.jpg",
-    tone: "marigold",
-  },
-  {
-    name: "Aryan Khanna",
-    role: "Club President",
-    photo: "/team/aryan_khanna.jpg",
-    tone: "marigold",
-  },
-  {
-    name: "Tristan Schaefer",
-    role: "Outreach Relations",
-    photo: "/team/tristan.jpg",
-    tone: "blue",
-  },
-  {
-    name: "David Cho",
-    role: "Student Mentor & Volunteer",
-    photo: "/team/david.jpg",
-    tone: "green",
-  },
-  {
-    name: "Neel Chhatrala",
-    role: "Student Mentor & Volunteer",
-    photo: "/team/neel.jpg",
-    tone: "green",
-  },
-  {
-    name: "Vidu Senadheera",
-    role: "Student Mentor & Volunteer",
-    photo: "/team/vidu.jpg",
-    tone: "green",
-  },
-];
-
-// Once Mr. Huynh confirms, add him here and render the block below.
-// const ADVISOR: Member = {
-//   name: "Simon Huynh",
-//   role: "Faculty Advisor",
-//   photo: "/team/simon.jpg",
-//   tone: "blue",
-// };
 
 const chipClass = {
   marigold: "chip chip--marigold",
@@ -89,7 +36,7 @@ const chipClass = {
   green: "chip chip--green",
 } as const;
 
-function PersonCard({ member, index }: { member: Member; index: number }) {
+function PersonCard({ member, index }: { member: TeamMember; index: number }) {
   return (
     <li
       className={`reveal stagger-${(index % 3) + 1} card-soft flex h-full flex-col overflow-hidden p-3`}
