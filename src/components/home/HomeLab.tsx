@@ -17,9 +17,11 @@
 
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { QRCodeSVG } from "qrcode.react";
 import { useScroll, useTransform, useReducedMotion } from "motion/react";
 import { EVENT, APPLICATION_URL } from "@/lib/event";
+import { TEAM } from "@/lib/team";
 import { Beaker, Gear, TestTube } from "@/components/lab/cast";
 import { Reveal } from "@/components/lab/Reveal";
 import { useLook } from "@/components/lab/useLook";
@@ -339,6 +341,83 @@ function Parents() {
   );
 }
 
+/* --------------------------------------------------------------- team ---- */
+
+/**
+ * Six faces between the parent answers and the apply band. A parent who has
+ * just read that the fair is free and that we review safety is, right then,
+ * wondering who "we" is. This answers it before the CTA rather than after.
+ *
+ * Deliberately lighter than /team: no cards, no chips, one short role line.
+ * The home page is an index, not a directory, and the full titles are one
+ * click away. Roster comes from src/lib/team.ts so the two never drift.
+ */
+function Team() {
+  return (
+    <section className="dotted-band border-y border-line">
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+        <Reveal>
+          <h2 className="display-section">The students behind it</h2>
+        </Reveal>
+        <Reveal delay={0.06}>
+          <p className="mt-4 max-w-2xl text-lg text-ink-soft">
+            We read every application, write the feedback ourselves, and set
+            the room up on fair day.
+          </p>
+        </Reveal>
+
+        <ul className="mt-12 grid grid-cols-3 gap-x-5 gap-y-9 sm:gap-x-6 md:grid-cols-6">
+          {TEAM.map(({ name, shortRole, photo }, i) => (
+            <Reveal key={name} delay={i * 0.05}>
+              <li>
+                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line bg-card">
+                  <Image
+                    src={photo}
+                    alt={name}
+                    fill
+                    sizes="(max-width: 768px) 30vw, 170px"
+                    className="object-cover"
+                  />
+                </div>
+                {/* Below sm the grid is 3-across on a ~104px column. text-balance
+                    stops "Mentor & Volunteer" breaking to three lines with the
+                    ampersand orphaned; the two-line floor on the name keeps the
+                    role lines on one baseline when a name fits on one line and
+                    its neighbours do not. Both are off from sm up. */}
+                <p className="mt-3 min-h-[2.45rem] text-balance font-display text-[0.98rem] font-semibold leading-tight text-ink sm:min-h-0">
+                  {name}
+                </p>
+                <p className="mt-1 text-balance text-[0.8rem] leading-snug text-ink-faint">
+                  {shortRole}
+                </p>
+              </li>
+            </Reveal>
+          ))}
+        </ul>
+
+        <Reveal delay={0.2}>
+          <p className="mt-11 text-ink-soft">
+            <Link
+              href="/team"
+              className="font-medium text-coral-deep hover:underline"
+            >
+              Meet the team
+            </Link>{" "}
+            or{" "}
+            <Link
+              href="/volunteer"
+              className="font-medium text-coral-deep hover:underline"
+            >
+              join us
+            </Link>
+            .
+          </p>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 /* -------------------------------------------------------- apply band ---- */
 
 function ApplyBand() {
@@ -396,6 +475,7 @@ export default function HomeLab() {
       <HowItWorks look={look} />
       <Categories look={look} />
       <Parents />
+      <Team />
       <ApplyBand />
     </>
   );
