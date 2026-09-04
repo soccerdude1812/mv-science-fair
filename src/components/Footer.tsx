@@ -12,6 +12,7 @@ const sitemap = [
   { href: "/volunteer", label: "Volunteer" },
   { href: "/students-families", label: "Students & Families" },
   { href: "/sponsors", label: "Sponsors" },
+  { href: "/team", label: "Our team" },
 ];
 
 export default function Footer() {

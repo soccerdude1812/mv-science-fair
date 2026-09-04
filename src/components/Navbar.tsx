@@ -40,6 +40,7 @@ const sheetOnlyLinks = [
   { href: "/display-and-safety", label: "Display & Safety" },
   { href: "/judges", label: "Judges" },
   { href: "/students-families", label: "Students & Families" },
+  { href: "/team", label: "Our team" },
 ];
 
 function Chevron({ open }: { open: boolean }) {

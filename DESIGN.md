@@ -88,6 +88,29 @@ Style contract for every character:
 - Accent color as flat fill only where the object demands it (liquid, gear
   center), one hue per character
 
+## Photography
+
+There is exactly one page with photographs on it: `/team`. Everywhere else the
+hand-drawn cast above is the imagery, and that rule is unchanged.
+
+The exception exists because a parent deciding whether to hand their 9 year old
+to a group of teenagers is owed real faces, and a doodle cannot do that job.
+Added 2026-09-03 on the owner's instruction; recorded here rather than left as
+silent drift.
+
+Rules for the portraits:
+- Source is the MV Physics & Astronomy Club site, `mvhsastro.org/team/`, so the
+  two student sites show the same people the same way
+- Every portrait is re-cropped to **4:5** at 400x500, with the **eye line at 40%
+  from the top** and the head filling ~46% of the frame height. Six photos taken
+  in six different places have to read as one row
+- A cutout portrait is composited onto the card surface it sits on, `#FFFFFF`,
+  so the crop has no visible rectangle behind it
+- Photos live in `public/team/`, are served through `next/image`, and are never
+  hotlinked from the other site
+- Cards: 20px radius on `card-soft`, role as a chip. Chips use blue / green /
+  marigold only. Coral stays the CTA colour, here as everywhere
+
 Cast and placement (each appears once, with a purpose):
 - **Beaker** (hero): coral liquid; idle bob; pours its liquid as you scroll past
 - **Gears** (how it works): blue + marigold pair; rotate with scroll progress;
