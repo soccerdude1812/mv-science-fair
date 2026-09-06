@@ -116,11 +116,14 @@ export default function TeamPage() {
           className="reveal card-soft flex flex-col gap-6 p-7 sm:flex-row sm:items-center sm:gap-8 sm:p-9"
         >
           <div className="relative aspect-[4/5] w-32 shrink-0 self-start overflow-hidden rounded-2xl bg-paper-warm sm:w-40">
+            {/* 639, not 640: `sm:` starts AT 640px, so a `max-width: 640px`
+                slot would promise 128px on the first width where the box is
+                already 160px, and the browser would fetch too small a file. */}
             <Image
               src={ADVISOR.photo}
               alt={ADVISOR.name}
               fill
-              sizes="(max-width: 640px) 128px, 160px"
+              sizes="(max-width: 639px) 128px, 160px"
               className="object-cover"
             />
           </div>
