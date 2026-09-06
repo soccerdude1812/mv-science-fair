@@ -101,7 +101,10 @@ silent drift.
 
 Rules for the portraits:
 - Source is the MV Physics & Astronomy Club site, `mvhsastro.org/team/`, so the
-  two student sites show the same people the same way
+  two student sites show the same people the same way. The one exception is the
+  faculty advisor, who had no headshot to hand and named the Spartans Sports
+  Camp staff page as the photo to use (2026-09-06), so his comes from there and
+  is cropped to the same frame
 - Every portrait is re-cropped to **4:5** at 400x500, with the **eye line at 40%
   from the top** and the head filling ~46% of the frame height. Six photos taken
   in six different places have to read as one row
@@ -117,6 +120,10 @@ Rules for the portraits:
   to two columns on a phone so the real titles fit (ruled 2026-09-03, after an
   abbreviated `shortRole` shipped and was removed)
 - Both surfaces read `src/lib/team.ts`. Never hand-maintain a second list
+- The advisor is a photograph too, but not a seventh face. He is the `ADVISOR`
+  export, he appears only on `/team`, in his own band under the grid, and the
+  home band stays six students wide. A teacher listed among students under the
+  heading "The students behind it" would make that heading false
 
 Cast and placement (each appears once, with a purpose):
 - **Beaker** (hero): coral liquid; idle bob; pours its liquid as you scroll past

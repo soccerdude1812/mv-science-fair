@@ -4,7 +4,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { Gear } from "@/components/lab/cast";
 import { EVENT } from "@/lib/event";
-import { TEAM, type TeamMember } from "@/lib/team";
+import { ADVISOR, TEAM, type TeamMember } from "@/lib/team";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -27,7 +27,9 @@ export const metadata: Metadata = {
  *
  * The roster itself lives in src/lib/team.ts, because the home page shows
  * the same six people and two hand-maintained lists would drift. Mr. Simon
- * Huynh is deliberately absent; that file says how to add him.
+ * Huynh, the faculty advisor, is the ADVISOR export in that file and renders
+ * in his own band below the grid: he said yes to being listed on 2026-09-06,
+ * but he is not a student and the home page's six wide row is students only.
  */
 
 const chipClass = {
@@ -105,6 +107,41 @@ export default function TeamPage() {
             through the scientific method for about one to two hours a week,
             and they are free and completely optional.
           </p>
+        </section>
+
+        {/* The advisor. His own band, not a seventh card: the section above
+            says students all the way down and that stays literally true. */}
+        <section
+          aria-labelledby="advisor-heading"
+          className="reveal card-soft flex flex-col gap-6 p-7 sm:flex-row sm:items-center sm:gap-8 sm:p-9"
+        >
+          <div className="relative aspect-[4/5] w-32 shrink-0 self-start overflow-hidden rounded-2xl bg-paper-warm sm:w-40">
+            {/* 639, not 640: `sm:` starts AT 640px, so a `max-width: 640px`
+                slot would promise 128px on the first width where the box is
+                already 160px, and the browser would fetch too small a file. */}
+            <Image
+              src={ADVISOR.photo}
+              alt={ADVISOR.name}
+              fill
+              sizes="(max-width: 639px) 128px, 160px"
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <h2 id="advisor-heading" className="display-section">
+              Our advisor
+            </h2>
+            <h3 className="mt-5 font-display text-[1.15rem] font-semibold leading-tight text-ink">
+              {ADVISOR.name}
+            </h3>
+            <span className={`${chipClass[ADVISOR.tone]} mt-3 text-xs`}>
+              {ADVISOR.role}
+            </span>
+            <p className="mt-4 max-w-xl text-lg text-ink-soft">
+              Mr. Simon teaches Biology and Chemistry Honors at Mountain View
+              High School.
+            </p>
+          </div>
         </section>
 
         {/* Join us */}
