@@ -66,7 +66,7 @@ const eventJsonLd = {
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   location: {
     "@type": "Place",
-    name: `${EVENT.venueName} — ${EVENT.venueRoom}`,
+    name: `${EVENT.venueName}, ${EVENT.venueRoom}`,
     address: {
       "@type": "PostalAddress",
       streetAddress: EVENT.venueStreet,
