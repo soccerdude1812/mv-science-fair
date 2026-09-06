@@ -68,11 +68,23 @@ export const TEAM: TeamMember[] = [
 ];
 
 /**
- * Mr. Simon Huynh, the club's faculty advisor, is deliberately absent. He was
- * asked on 2026-09-03 whether he wants to be listed and which photo to use,
- * and he goes in only once he says yes. Adding him is this entry plus a photo
- * at `public/team/simon.jpg`:
+ * Mr. Simon Huynh, the club's faculty advisor. Asked on 2026-09-03 whether he
+ * wanted to be listed and which photo to use; he said yes on 2026-09-06.
  *
- *   { name: "Simon Huynh", role: "Faculty Advisor",
- *     photo: "/team/simon.jpg", tone: "blue" }
+ * He is a separate export rather than a seventh entry in TEAM, which is what
+ * the note here used to prescribe. TEAM feeds the home band, and that band is
+ * headed "The students behind it" and laid out `md:grid-cols-6`. A teacher is
+ * neither a student nor a seventh column, so /team gives him his own block
+ * under the grid and the home page is left at six faces.
+ *
+ * His portrait is the one photo on the site not re-cropped from mvhsastro.org.
+ * He had no headshot to hand and pointed at the Spartans Sports Camp staff
+ * page, where he teaches the Wacky Science week, so that photo is cropped to
+ * the same 4:5 frame as the rest. Recorded in DESIGN.md under Photography.
  */
+export const ADVISOR: TeamMember = {
+  name: "Simon Huynh",
+  role: "Faculty Advisor",
+  photo: "/team/simon.jpg",
+  tone: "blue",
+};
