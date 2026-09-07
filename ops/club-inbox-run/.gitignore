@@ -1,0 +1,5 @@
+# Runtime artifacts. The operating code (run_daily.sh, prompt.md) IS tracked;
+# what the job produces each morning is not.
+logs/
+reports/
+state/
