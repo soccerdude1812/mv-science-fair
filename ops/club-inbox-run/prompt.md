@@ -264,6 +264,15 @@ Team** / MVHS STEM & Research Club / mvsciencefair.vercel.app.
 Rules:
 
 - **Zero em-dashes.** Periods, commas, colons.
+- **Who a family letter goes to.** The parent address (`Applicants!G`, from `RAW · Applications!L`)
+  is the addressee. Copy the student and every other address the application carries, with the
+  teacher as the only exclusion. In practice that means the Forms respondent address in
+  `RAW · Applications!B` whenever it differs from the parent address, since those two are the only
+  family addresses an application holds; the teacher sits in `RAW · Applications!I` and is never
+  copied. Student accounts are on `mvwsd.net` and staff on `mvwsd.org`. Both are live Google mail
+  domains with valid MX, so never "correct" one to the other. An individual student mailbox can
+  still hard bounce `550 5.1.1`, which is harmless because the parent copy delivers, and is not a
+  reason to drop the address next time. Set 2026-09-07 by Eeshan.
 - Write to the child by name. Warm, specific, never gushing. Praise the method, not the kid.
 - Only two dates exist: **Sept 13** close, **Sept 26** fair. Never invent a timeframe. The
   8 to 9 AM arrival window is for participants only, never in public "when is the fair" copy.
