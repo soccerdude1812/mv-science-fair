@@ -50,19 +50,28 @@ it.** Use this table, which was established by inspecting returned message heade
 
 | MCP prefix | Mailbox it actually serves |
 |---|---|
-| `mcp__stem-gws__*` | `stemresearchclubmvhs@gmail.com` (club) |
-| `mcp__club-gws__*` | **`100035635@mvla.net` (school)**, despite the name |
+| `mcp__club-gws__*` | `stemresearchclubmvhs@gmail.com` (club) |
+| `mcp__stem-gws__*` | `100035635@mvla.net` (school), despite the name |
 | `mcp__google-workspace__*` | `eeshankhandelwal123@gmail.com` (personal) |
+
+**This table was inverted until 2026-09-07 and the wrong version had been carried since
+2026-09-01.** Re-established by creating a draft through each server and reading the `From`
+header back, which is the only test that cannot be misread: `club-gws` produced
+`From: stemresearchclubmvhs@gmail.com` (drafts `1a07f9c734e38d96`, `1a07f9cb555123cb`) and
+`stem-gws` produced `From: 100035635@mvla.net` (draft `1a07fb8f12429cc9`). The 2026-09-06
+report had already caught it from the read side, `from:jon.robell@mvla.net` returning nine
+messages through `stem-gws`, and the table was left wrong anyway. Do not re-invert it
+without doing the draft-and-read-back test first.
 
 **`google-workspace` silently ignores `user_google_email` and always returns the personal
 mailbox.** It does not error. It returns plausible results from the wrong account. Verified:
 `from:jon.robell@mvla.net` with `user_google_email="100035635@mvla.net"` returns **nothing**
-through `google-workspace` and **five messages** through `club-gws`. A whole school-account
+through `google-workspace` and **nine messages** through `stem-gws`. A whole school-account
 sweep was silently duplicated this way on the first run, and the conclusion drawn from it
 ("no such thread exists") was false.
 
-So: **read the school account through `club-gws`.** Pass `user_google_email` anyway, but
-never trust it to do the routing.
+So: **read the school account through `stem-gws` and the club account through
+`club-gws`.** Pass `user_google_email` anyway, but never trust it to do the routing.
 
 Sanity check this every run, because it is silent when it breaks. Search the school account
 for `from:jon.robell@mvla.net`, which is known to have results. If it returns nothing, you
