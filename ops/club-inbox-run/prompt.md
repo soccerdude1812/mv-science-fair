@@ -21,6 +21,11 @@ every tracker number is true, and anything genuinely stuck is named out loud.
   record it at the top of the report in capital letters, and continue with read-only work.
 - Before you finish, run `in:sent newer_than:1d` and list what comes back. If anything in
   that list was not there when you started, say so loudly. The run script checks this too.
+- **Also run `in:scheduled`, every run, and list it beside the sends.** A scheduled message
+  is in neither `in:draft` nor `in:sent`, so it is invisible to both checks above. Eeshan
+  schedules letters, and one of them delivers itself at 09:00 while this job runs at 07:00.
+  A family with a scheduled letter has been answered: do not draft them again, and never
+  report them as owed a reply. You may not create, cancel or reschedule one.
 
 Other hard limits:
 
@@ -146,9 +151,18 @@ Anyone owed a reply gets a draft, unless `state/handled.json` says one already e
 
 **Families.** Every application without a decision. Read the actual application text and
 write a real, specific reply about *their* project. Match the house voice exactly (see
-below). Cross-check against `in:sent` before concluding nobody wrote to them: decisions are
-often sent as fresh messages rather than replies, so search by the parent's address, not
-just by thread.
+below). Cross-check against `in:sent` **and `in:scheduled`** before concluding nobody wrote
+to them: decisions are often sent as fresh messages rather than replies, and some are
+scheduled rather than sent, so search by the parent's address, not just by thread. Search
+by address rather than by keyword: draft and scheduled bodies are indexed late, so
+`in:draft to:<parent address>` finds letters that `in:draft <student surname>` misses.
+
+A draft's **message id changes every time it is saved**, and saving also **drops its star**.
+The id you recorded when you created it becomes the *thread* id. So match decisions on the
+thread id or the recipient, never on a stored message id, and treat
+`in:draft is:starred` as a lower bound on the review queue rather than its size. The real
+queue is the set of `Applicants` rows whose Stage reads `Drafted, not sent`; reconcile the
+two every run and re-star anything that lost its star.
 
 **Mentor requests.** A parent asking for a mentor. Match them against Mentor Offers and
 draft the introduction. Never introduce a mentor to a family before that mentor has
@@ -293,7 +307,8 @@ Rules:
 1. Write the report to `reports/<YYYY-MM-DD>.md`, and print it to stdout too.
 2. Save `state/handled.json`.
 3. Re-run `in:sent newer_than:1d` and paste the result into the report as proof of the
-   no-send rule.
+   no-send rule. Paste `in:scheduled` underneath it, because a letter that leaves on a timer
+   is mail going out that neither of the other two queries can see.
 
 Report shape, most urgent first:
 
