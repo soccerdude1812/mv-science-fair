@@ -308,6 +308,13 @@ Rules:
   apologize once, plainly. No excuses beyond one honest clause.
 - `body_format="html"` with real `<p>`, `<b>`, `<ul>` tags. Do **not** HTML-escape them:
   writing `&lt;p&gt;` puts literal tag text in the email.
+- **Reply drafts must carry real angle brackets in `In-Reply-To` and `References`.** Every
+  reply drafted through the MCP has landed with `&lt;...&gt;` in both headers, which is not a
+  message id any client will match, so the letter arrives as a new conversation instead of
+  under the family's own reply. Gmail hides this, because the draft still sits in the right
+  thread server side on `threadId`. Check it after drafting: `drafts.get?format=raw` on the
+  raw API, and if the headers are escaped, PUT the draft back with the header block
+  unescaped and the body bytes untouched. Editing drops every label, so reapply them after.
 
 ---
 
