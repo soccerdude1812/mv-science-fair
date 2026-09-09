@@ -271,7 +271,10 @@ the day count stated plainly.
 
 ---
 
-## House voice for family email
+## House voice for every letter this job writes
+
+The structure below is for family decision letters. **The length rule under Rules is for every
+address this job writes to**, mentors and sponsors and teachers included.
 
 Read the real thing before writing: the emails sent on 2026-09-01 to `mandakinirg@gmail.com`
 (approval) and `reemrahman@gmail.com` (changes requested) are the reference. Match them.
@@ -286,6 +289,22 @@ Team** / MVHS STEM & Research Club / mvsciencefair.vercel.app.
 
 Rules:
 
+- **Length. Cut it, then cut it again.** Set 2026-09-09 by Eeshan, twice in one day: on a family
+  letter, "change the draft to make it shorter for them. Be more clear and less AI" (487 words to
+  285), and then on a mentor acknowledgement with no family in it, "make it much shorter. In
+  general no bombarding people by email, they don't want to read all of that" (300 words to 178).
+  The second one generalises the first, so this is not a rule about elementary parents. Decide the
+  one ask or one decision, write that, add only the conditions that change what the reader does,
+  then the standing blocks. Cut praise recaps, restated history, and any sentence that exists to
+  sound good. **Bold two things at most.** A bolded lead-in on every paragraph is the tell that a
+  machine wrote it. Length is not thoroughness: an honest catch that costs one sentence stays, a
+  paragraph that flatters goes.
+- **A mentor offer is about 180 words**, and it names one project. What we have from their form in
+  one line, the project in three, the honest catches, the shape (one to two hours a week, until
+  Sept 26, everything through the parents), and `Just reply yes or no`. The long version sat
+  unanswered; Arya Saikia answered the short one in under two hours. Never propose a project that
+  falls outside the grade range or the areas the mentor picked on their form, and never pass a
+  mentor's name, email or phone to a family before they have said yes in writing.
 - **Zero em-dashes.** Periods, commas, colons.
 - **Who a family letter goes to.** The parent address (`Applicants!G`, from `RAW · Applications!L`)
   is the addressee. Copy the student and every other address the application carries, with the
@@ -308,6 +327,11 @@ Rules:
   apologize once, plainly. No excuses beyond one honest clause.
 - `body_format="html"` with real `<p>`, `<b>`, `<ul>` tags. Do **not** HTML-escape them:
   writing `&lt;p&gt;` puts literal tag text in the email.
+- **Every letter must end up `multipart/alternative`.** `draft_gmail_message` with
+  `body_format: html` produces a `text/html` part and nothing else, so the letter has no
+  plain-text fallback. The Om Talwalkar acknowledgement shipped that way on 2026-09-09 and was
+  found only by reading `drafts.get?format=raw`. Check the part list after drafting, and if it
+  is html-only, rebuild with `EmailMessage.set_content` plus `add_alternative` and PUT the raw.
 - **Reply drafts must carry real angle brackets in `In-Reply-To` and `References`.** Every
   reply drafted through the MCP has landed with `&lt;...&gt;` in both headers, which is not a
   message id any client will match, so the letter arrives as a new conversation instead of
