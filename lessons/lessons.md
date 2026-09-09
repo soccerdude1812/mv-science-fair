@@ -269,3 +269,13 @@
 **Fix:** Rewrote all 14 formulas in `Safety · Haz-Mat!A2:N2` to `$A$2:$A` with row-2 value ranges, keeping the existing column mapping (mirror N reads RAW O, "Where will the experiment take place?"). Read back: row 2 now shows Oscar, sharp tools, nails, the supervision plan, No to flammable/toxic, the disposal plan and the kitchen. Column B had never held a value so it had no date format and rendered the serial `46273.39931`; set `M/d/yyyy h:mm AM/PM` on B2:B300 to match `Applicants!B`. Whole-workbook error scan after the write: zero `#REF!` or other error cells across all 17 tabs.
 
 **Prevention:** An empty mirror proves nothing until a response exists to prove it with. When a form has zero responses, its mirror is untested code, so check the formula against a sibling mirror rather than trusting the tab. Concretely: every green working tab in this workbook mirrors from `$A$2:$A`, except `Volunteers` and `Mentor Offers`, which carry a hand-entered CLUB TEAM block and start at `$A$9`. Anything else is a bug. The daily run's form-count reconciliation compares the Forms API to the Dashboard and would not have caught this one, because the Dashboard counts the RAW tab; add the working tab to that comparison when a form receives its first response.
+
+## [2026-09-09][gws-cli-prefixes-json-with-a-keyring-line] Every `gws` response has a non-JSON first line
+
+**Mistake:** Piped `gws gmail users drafts get ... --format json` straight into `json.load` and got `JSONDecodeError: Expecting value: line 1 column 1`. The response looked like clean JSON in the terminal.
+
+**Root cause:** the `gws` CLI writes `Using keyring backend: keyring` to stdout before the JSON body, on every single call. It is not on stderr and no flag observed suppresses it. Two related shapes bit in the same session: every Gmail method needs `userId` inside `--params` (`{"userId":"me",...}`) or it fails `Required path parameter userId is missing`, and paging options live in `--params` too, so `--max-results` is rejected as an unexpected argument.
+
+**Fix:** slice from the first `{` before parsing: `t = out[out.index("{"):]; json.loads(t)`. Request bodies go in `--json`, URL and query parameters in `--params`, and the two are never interchangeable.
+
+**Prevention:** never pipe `gws` output into a JSON parser unfiltered. Also note the write path used here: replacing a club draft is `gws gmail users drafts update --params '{"userId":"me","id":"r..."}' --json '{"id":"r...","message":{"threadId":"...","raw":"<urlsafe b64>"}}'`, and it drops every label, so capture `labelIds` from a read first and re-apply the whole set with `users messages modify` against the *new* message id. Both message ids in this session's two writes differed from the one read seconds earlier.
