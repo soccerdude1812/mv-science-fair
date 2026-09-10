@@ -92,6 +92,23 @@ for it.
 
 ---
 
+## Reconcile the tracker's draft ids against the mailbox, before anything else
+
+Every `r...` id written into `Applicants!U` or `Mentor Offers!Q` is a claim about the mailbox, and
+claims expire between runs. **Pull `drafts.list` and diff it against every id those columns name.**
+Three outcomes, and they need opposite responses:
+
+- **Still a draft.** The cell is accurate. Nothing to do.
+- **Gone, and a copy is in Sent.** The cell is stale, not wrong. Rewrite it to say what shipped and
+  when, with the sent message id.
+- **Gone, and nothing in Sent.** The draft vanished. Rebuild it. This has happened four times
+  (Megha Manohar 09-04, Kensky and Saikia 09-08, Gorman 09-09, Olivia Morrison found 09-09 having
+  been gone two days). Prove it is really gone before rebuilding: `q=to:<address>` and `q=<surname>`,
+  both with `includeSpamTrash=true`, and check the thread itself.
+
+Do this first. A cell reading "UNSENT" looks identical whether the letter is waiting or evaporated,
+and drafting on top of a wrong reading wastes the run.
+
 ## State: how not to pester the same person twice
 
 `state/handled.json` in this directory is the memory between runs.
