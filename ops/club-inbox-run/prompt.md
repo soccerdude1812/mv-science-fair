@@ -179,7 +179,20 @@ nothing owed), **waiting on them** (we asked, they have not answered), or **owed
 Anyone owed a reply gets a draft, unless `ops/club-inbox-run/state/handled.json` says
 one already exists.
 
-**Families.** Every application without a decision. Read the actual application text and
+**Families. Approve, then guide. Set by Eeshan on 2026-09-13 and it stands.**
+A project is approved unless it has a **glaring safety issue**. Design problems are not a
+reason to withhold approval: a weak experiment gets approved with the fix **stated as an
+instruction**, not requested as a question. Never leave a family pending on a reply they may
+never send, and never make approval conditional on one.
+
+That means: if the application varies four things at once, the letter says which single one
+to vary. If it has no measurement, the letter picks the measurement. If the family said they
+did not know their category or title, the letter decides both. Where the honest answer is
+that a build is unsafe, change the build and approve the changed version, saying plainly
+which version is not approved and why. A required safety form is an **open item on an
+approved project**, never a gate on the decision.
+
+Every application without a decision. Read the actual application text and
 write a real, specific reply about *their* project. Match the house voice exactly (see
 below). Cross-check against `in:sent` **and `in:scheduled`** before concluding nobody wrote
 to them: decisions are often sent as fresh messages rather than replies, and some are
