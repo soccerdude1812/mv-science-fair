@@ -3,8 +3,8 @@
  *
  * Every idea here has to survive three constraints that come from the rest of
  * the site, so read those before adding one:
- *   1. `/display-and-safety`: the venue has NO electricity. Anything shown at
- *      the fair is battery powered or not powered at all.
+ *   1. `/display-and-safety`: nothing runs at the fair. Projects are presented,
+ *      not demonstrated, so anything shown is a display piece, switched off.
  *   2. Same page: live organisms and biohazardous material may not be brought
  *      to the venue. Growing something is fine; bring photographs instead.
  *   3. Hazardous substances are out entirely. Kitchen-cupboard materials only.
@@ -431,7 +431,7 @@ export const PROJECT_IDEAS: ProjectIdea[] = [
       "Find something that surprised you and explain why it behaves that way.",
     ],
     headsUp:
-      "Battery powered only, never a wall outlet, and always with an adult. That also makes it one of the few projects you can safely demonstrate live at the fair, since the venue has no electricity.",
+      "Battery powered only, never a wall outlet, and always with an adult. At the fair the circuit stays switched off: projects are presented, not demonstrated, so let photographs or a short video show it lighting up.",
   },
 ];
 
