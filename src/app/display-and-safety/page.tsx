@@ -4,8 +4,8 @@ import PageHero from "@/components/PageHero";
 const rules = [
   {
     n: "01",
-    title: "No electricity available",
-    body: "The venue has no electricity. Only battery-operated demonstrations are permitted at the fair.",
+    title: "Nothing runs at the fair",
+    body: "Projects are presented, not demonstrated. Nothing is switched on, mixed, poured, or launched in the room. Bring your build as a display piece and let photographs or video show it working.",
     dimensions: false,
   },
   {

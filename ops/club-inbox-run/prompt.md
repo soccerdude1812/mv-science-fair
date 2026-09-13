@@ -111,7 +111,10 @@ and drafting on top of a wrong reading wastes the run.
 
 ## State: how not to pester the same person twice
 
-`state/handled.json` in this directory is the memory between runs.
+`ops/club-inbox-run/state/handled.json` is the memory between runs. Write that exact
+path, always. Your working directory is the repo root, not this directory, so a bare
+`state/handled.json` creates a second, empty state file at the repo root and the real
+one stops being updated. That happened on 2026-09-12.
 
 ```json
 {
@@ -173,7 +176,8 @@ Sanity checks worth repeating every day:
 
 For each person below, decide one of: **answered** (we replied after their last message,
 nothing owed), **waiting on them** (we asked, they have not answered), or **owed a reply**.
-Anyone owed a reply gets a draft, unless `state/handled.json` says one already exists.
+Anyone owed a reply gets a draft, unless `ops/club-inbox-run/state/handled.json` says
+one already exists.
 
 **Families.** Every application without a decision. Read the actual application text and
 write a real, specific reply about *their* project. Match the house voice exactly (see
@@ -362,7 +366,7 @@ Rules:
 ## Finish
 
 1. Write the report to `reports/<YYYY-MM-DD>.md`, and print it to stdout too.
-2. Save `state/handled.json`.
+2. Save `ops/club-inbox-run/state/handled.json`, at that exact path.
 3. Re-run `in:sent newer_than:1d` and paste the result into the report as proof of the
    no-send rule. Paste `in:scheduled` underneath it, because a letter that leaves on a timer
    is mail going out that neither of the other two queries can see.
