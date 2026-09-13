@@ -3,8 +3,9 @@
  *
  * Every idea here has to survive three constraints that come from the rest of
  * the site, so read those before adding one:
- *   1. `/display-and-safety`: nothing runs at the fair. Projects are presented,
- *      not demonstrated, so anything shown is a display piece, switched off.
+ *   1. `/display-and-safety`: nothing physical from the project goes to the fair.
+ *      The board, the photographs and the data table are the whole exhibit, so an
+ *      idea has to be one a family can photograph and tabulate at home.
  *   2. Same page: live organisms and biohazardous material may not be brought
  *      to the venue. Growing something is fine; bring photographs instead.
  *   3. Hazardous substances are out entirely. Kitchen-cupboard materials only.
@@ -151,7 +152,7 @@ export const PROJECT_IDEAS: ProjectIdea[] = [
       "Test whether a plant will grow through a small maze to reach the hole.",
     ],
     headsUp:
-      "Grow them at home, but do not bring the plants to the fair. Live organisms are not allowed at the venue, so bring photographs, your measurements, and your graphs instead. That is what judges want to see anyway.",
+      "Grow them at home, but do not bring the plants to the fair. Nothing physical from a project comes to the venue, live or otherwise, so bring photographs, your measurements, and your graphs instead. That is what judges want to see anyway.",
   },
 
   // ---------------- Physical Science & Engineering ----------------
@@ -431,7 +432,7 @@ export const PROJECT_IDEAS: ProjectIdea[] = [
       "Find something that surprised you and explain why it behaves that way.",
     ],
     headsUp:
-      "Battery powered only, never a wall outlet, and always with an adult. At the fair the circuit stays switched off: projects are presented, not demonstrated, so let photographs or a short video show it lighting up.",
+      "Battery powered only, never a wall outlet, and always with an adult. The circuit stays home on fair day: bring photographs of it lighting up and your table of which objects conducted, and nothing else.",
   },
 ];
 

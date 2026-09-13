@@ -4,14 +4,14 @@ import PageHero from "@/components/PageHero";
 const rules = [
   {
     n: "01",
-    title: "Nothing runs at the fair",
-    body: "Projects are presented, not demonstrated. Nothing is switched on, mixed, poured, or launched in the room. Bring your build as a display piece and let photographs or video show it working.",
+    title: "Your board only, no project materials",
+    body: "Projects are presented, not demonstrated. Bring your display board, your photographs, and your data table or notebook. Nothing else from the project comes into the room: no models, samples, builds, equipment, liquids, or materials, and nothing is switched on, mixed, poured, or launched. Do all your testing at home and let the photos and the numbers show what happened.",
     dimensions: false,
   },
   {
     n: "02",
     title: "Nothing handed to judges",
-    body: "No project materials, samples, or handouts may be given to judges during evaluation. Everything stays at your display.",
+    body: "Do not hand a judge anything during evaluation: no handouts, papers, printouts, or photographs. Everything stays on your board and on your table, and you talk a judge through it there.",
     dimensions: false,
   },
   {
