@@ -9,6 +9,7 @@ import {
   BOARD_ANATOMY,
   BOARD_HABITS,
   EXAMPLE_BOARDS,
+  type ExampleBoard,
 } from "@/lib/exampleBoards";
 import { CATEGORY_COLOR } from "@/lib/projectIdeas";
 
@@ -18,12 +19,19 @@ export const metadata: Metadata = {
     "What a strong grades 3 to 5 display board looks like: where the nine required sections go, and three worked examples with real data, charts and conclusions.",
 };
 
-/** Pigment per board. Coral stays reserved for CTAs, per DESIGN.md. */
-const BOARD_TONE = {
-  "paper-towels": "green",
-  "paper-airplane-weight": "blue",
-  "plants-and-light": "green",
-} as const;
+/**
+ * Pigment per board, keyed by category so it matches the chips on
+ * /project-ideas. Typed exhaustively: a new category has to be given a colour
+ * here or the build fails, which a slug-keyed map with a cast would not catch.
+ * Coral stays reserved for CTAs, per DESIGN.md.
+ */
+const BOARD_TONE: Record<
+  ExampleBoard["category"],
+  "blue" | "green" | "marigold"
+> = {
+  "Life & Health Sciences": "green",
+  "Physical Science & Engineering": "blue",
+};
 
 export default function ExampleBoardsPage() {
   return (
@@ -112,7 +120,7 @@ export default function ExampleBoardsPage() {
                 <div className="mt-6">
                   <BoardDiagram
                     spec={example.board}
-                    tone={BOARD_TONE[example.slug as keyof typeof BOARD_TONE]}
+                    tone={BOARD_TONE[example.category]}
                   />
                 </div>
 

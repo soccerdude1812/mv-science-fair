@@ -134,9 +134,13 @@ function LineChart({ chart }: { chart: BoardLineChart }) {
   const max = peak * 1.08;
   const xMin = chart.x[0];
   const xMax = chart.x[chart.x.length - 1];
+  /* A single x tick, or every tick the same value, would divide by zero here and
+     NaN the whole polyline silently. Nothing in the type stops either, so pin the
+     span to 1 and let a one-point series render at the left edge instead. */
+  const xSpan = xMax - xMin || 1;
 
   const px = (v: number) =>
-    padL + ((v - xMin) / (xMax - xMin)) * (W - padL - padR);
+    padL + ((v - xMin) / xSpan) * (W - padL - padR);
   const py = (v: number) => baseY - (v / max) * (baseY - padTop);
 
   const summary = chart.series
@@ -212,7 +216,10 @@ function LineChart({ chart }: { chart: BoardLineChart }) {
         ))}
         {chart.series.map((s, i) => {
           const tone = SERIES_TONES[i % SERIES_TONES.length];
-          const points = s.values
+          /* Plot only as far as both arrays agree. A series longer than the tick
+             list would otherwise read undefined off the end of chart.x. */
+          const values = s.values.slice(0, chart.x.length);
+          const points = values
             .map((v, j) => `${px(chart.x[j])},${py(v)}`)
             .join(" ");
           return (
@@ -225,7 +232,7 @@ function LineChart({ chart }: { chart: BoardLineChart }) {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
-              {s.values.map((v, j) => (
+              {values.map((v, j) => (
                 <circle
                   key={chart.x[j]}
                   cx={px(chart.x[j])}
@@ -267,8 +274,17 @@ function LineChart({ chart }: { chart: BoardLineChart }) {
 
 function DataTable({ table }: { table: BoardTable }) {
   return (
-    <figure className="mt-2 overflow-x-auto">
-      <table className="w-full border-collapse text-[0.72rem]">
+    <div className="mt-2 overflow-x-auto">
+      <table className="w-full caption-bottom border-collapse text-[0.72rem]">
+        {/* A real <caption>, not a sibling <figcaption>: this is the only table
+            on the site, and a rotor or table list that jumps straight to it
+            would otherwise announce an unnamed table. caption-side: bottom
+            keeps it looking exactly where it was. */}
+        {table.caption && (
+          <caption className="mt-1 text-left text-[0.7rem] text-ink-faint">
+            {table.caption}
+          </caption>
+        )}
         <thead>
           <tr>
             {table.head.map((h) => (
@@ -283,8 +299,8 @@ function DataTable({ table }: { table: BoardTable }) {
           </tr>
         </thead>
         <tbody>
-          {table.rows.map((row) => (
-            <tr key={row[0]} className="border-b border-line last:border-0">
+          {table.rows.map((row, r) => (
+            <tr key={r} className="border-b border-line last:border-0">
               {row.map((cell, i) => (
                 <td
                   key={i}
@@ -299,12 +315,7 @@ function DataTable({ table }: { table: BoardTable }) {
           ))}
         </tbody>
       </table>
-      {table.caption && (
-        <figcaption className="mt-1 text-[0.7rem] text-ink-faint">
-          {table.caption}
-        </figcaption>
-      )}
-    </figure>
+    </div>
   );
 }
 
@@ -385,8 +396,8 @@ function Panel({
 }) {
   return (
     <div className={`space-y-4 p-4 sm:p-5 ${className ?? ""}`}>
-      {blocks.map((block) => (
-        <Block key={block.label} block={block} tone={tone} />
+      {blocks.map((block, i) => (
+        <Block key={`${i}-${block.label}`} block={block} tone={tone} />
       ))}
     </div>
   );

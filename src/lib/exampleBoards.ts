@@ -274,7 +274,7 @@ export const EXAMPLE_BOARDS: ExampleBoard[] = [
         {
           label: "Conclusion",
           lines: [
-            "My hypothesis was wrong. Brand C did soak up the most water per sheet, 16.4 g, but it is also the heaviest sheet, so per gram of towel it came third. Brand B held 5.8 g of water for every gram of itself and won on the measure that is actually fair.",
+            "My hypothesis was wrong. Brand C did soak up the most water per sheet, 16.4 g, but it is also the heaviest sheet, so per gram of towel it came second, ahead of Brand A and behind Brand B. Brand B held 5.8 g of water for every gram of itself and won on the measure that is actually fair.",
             "If you compare brands by the sheet, you are measuring how big the sheet is, not how good the towel is.",
           ],
         },
@@ -394,7 +394,7 @@ export const EXAMPLE_BOARDS: ExampleBoard[] = [
         {
           label: "What I would change",
           lines: [
-            "My throws were not identical, and the gap between my longest and shortest throw at one weight was 200 cm. A rubber band launcher would take my arm out of the experiment. I would also time how long each plane stayed up, because the farthest plane might not be the one that flew longest.",
+            "My throws were not identical. At three clips my longest throw beat my shortest by 210 cm, which is more than a third of the average for that weight. A rubber band launcher would take my arm out of the experiment. I would also time how long each plane stayed up, because the farthest plane might not be the one that flew longest.",
           ],
         },
         {
@@ -470,7 +470,7 @@ export const EXAMPLE_BOARDS: ExampleBoard[] = [
           emphasis: true,
           chart: {
             kind: "line",
-            caption: "Average height in centimetres, four plants per group",
+            caption: "Average height in centimetres. Four plants per group, three in the maze box after one seed never sprouted",
             xLabel: "Day",
             yLabel: "cm",
             x: [0, 4, 8, 12, 16, 20],
@@ -486,7 +486,7 @@ export const EXAMPLE_BOARDS: ExampleBoard[] = [
         {
           label: "Data table",
           table: {
-            caption: "Day 20 averages",
+            caption: "Day 20 averages. Maze box is three plants, not four",
             head: ["Group", "Height", "Lean"],
             rows: [
               ["Open light", "13.0 cm", "6°"],
@@ -499,7 +499,7 @@ export const EXAMPLE_BOARDS: ExampleBoard[] = [
           label: "Conclusion",
           lines: [
             "Yes. The maze plants bent around the wall instead of stopping at it, reaching 61 degrees by day 20, so a bean plant will change direction rather than sit in the dark.",
-            "The part I got wrong is more interesting. The boxed plants grew taller, not shorter. But taller did not mean healthier: the maze stems were the longest and the thinnest, they were pale, and two of them fell over and had to be propped up. Stretching toward a small light is not the same as growing well.",
+            "The part I got wrong is more interesting. The boxed plants grew taller, not shorter. But taller did not mean healthier: the maze stems were the thinnest and the palest of the three groups, and two of them fell over and had to be propped up. Stretching toward a small light is not the same as growing well.",
           ],
         },
         {
