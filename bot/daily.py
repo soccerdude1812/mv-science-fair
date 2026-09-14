@@ -38,6 +38,8 @@ COL = {"num": 0, "org": 1, "cat": 2, "fit": 3, "phone": 4, "web": 5, "email": 6,
 # it as a failure is what ended the 2026-08-13 run 71 prospects early.
 MAX_RETRY = 4
 HARD_FAILS = 3
+# Flush the Email Log every this many sends, so a crash cannot cost the dedupe.
+CHECKPOINT = 20
 THROTTLE = re.compile(r"(429|rate limit|rateLimitExceeded|userRateLimitExceeded|"
                       r"quotaExceeded|backendError|503|500)", re.I)
 RETRY_AT = re.compile(r"Retry after (\d{4}-\d{2}-\d{2}T[\d:.]+Z)")
@@ -211,7 +213,7 @@ def cmd_send(args):
         log("no budget left in the 24h window. Nothing sent, and that is correct.")
         return 0
     batch = batch[:allowed]
-    sent, failed = [], []
+    sent, failed, flushed = [], [], 0
     for n, (r, rendered) in enumerate(batch):
         msg = EmailMessage()
         msg["To"] = r["email"]
@@ -238,6 +240,14 @@ def cmd_send(args):
                 failed.append({**r, "err": str(e)[:300], "at": stamp})
                 log(f"  FAIL {r['email']:<44} {str(e)[:200]}")
                 break
+        # Checkpoint. A 300 send run at a 22 second gap takes nearly two hours,
+        # and the dedupe that stops a business being asked twice lives in the
+        # Email Log. Writing it only at the end means a reboot, a network drop
+        # or a SIGTERM loses the record of everything already delivered, and
+        # tomorrow's run mails those businesses a second time.
+        if len(sent) - flushed >= CHECKPOINT:
+            record(sent[flushed:], version)
+            flushed = len(sent)
         if not ok and len(failed) >= HARD_FAILS and not any(
                 throttle_wait(None, f["err"]) for f in failed[-HARD_FAILS:]):
             log(f"  {HARD_FAILS} non-throttle failures in a row, stopping this run")
@@ -245,7 +255,7 @@ def cmd_send(args):
         if n < len(batch) - 1:
             time.sleep(args.gap)
 
-    record(sent, version)
+    record(sent[flushed:], version)
     log(f"sent {len(sent)}, failed {len(failed)}")
     return 0 if not failed else 1
 
