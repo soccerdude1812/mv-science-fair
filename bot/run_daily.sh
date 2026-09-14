@@ -47,6 +47,12 @@ if [[ "$DAY" > "2026-09-15" ]]; then
   exit 0
 fi
 
+# 0. Repair the dedupe before trusting it. A run killed mid-batch, or a machine
+#    that slept, leaves the Email Log naming fewer businesses than the mailbox
+#    actually mailed, and the gap is exactly the set that would be asked twice.
+say "--- reconciling the Email Log against the mailbox ---"
+$PY daily.py reconcile 2>&1 | tee -a "$LOG"
+
 say "--- inventory before ---"
 $PY daily.py status 2>&1 | tee -a "$LOG"
 
