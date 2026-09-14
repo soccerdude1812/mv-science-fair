@@ -40,8 +40,15 @@ MAX_RETRY = 4
 HARD_FAILS = 3
 # Flush the Email Log every this many sends, so a crash cannot cost the dedupe.
 CHECKPOINT = 20
-THROTTLE = re.compile(r"(429|rate limit|rateLimitExceeded|userRateLimitExceeded|"
-                      r"quotaExceeded|backendError|503|500)", re.I)
+# Deliberately narrow. Gmail's send is NOT idempotent, so a retry after an error
+# that actually delivered sends the message twice, and "do not email the same
+# business twice" is the hard constraint on this sprint. A 5xx is ambiguous: the
+# message may well have gone out. So only retry on an explicit "you are going too
+# fast" signal, where Gmail is telling us it did not accept the message. Losing
+# one prospect out of eight hundred to an unretried 500 is the cheap side of this
+# trade; a duplicate ask to a business is the expensive one.
+THROTTLE = re.compile(r"(\b429\b|rate limit|rateLimitExceeded|"
+                      r"userRateLimitExceeded|quotaExceeded)", re.I)
 RETRY_AT = re.compile(r"Retry after (\d{4}-\d{2}-\d{2}T[\d:.]+Z)")
 
 
