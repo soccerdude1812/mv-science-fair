@@ -8,13 +8,36 @@ on the mini; this directory is the version-controlled copy.
 
 | Stage | What runs | Fails safe? |
 |---|---|---|
-| 1. Research | `claude -p prompts/research.md` finds new Bay Area businesses and pipes them to `addprospects.py` | yes, sending still runs |
-| 2. Copywriting | `claude -p prompts/lines.md` writes one personal line per prospect via `setlines.py` | yes, rows without a line are simply not sent |
-| 3. Send | `daily.py send` mails every row that has a verified address **and** an approved line | stops after 3 consecutive failures |
-| 4. Follow-ups | `daily.py followups` creates Gmail **drafts** for anyone contacted 6+ days ago with no reply | never sends |
+| 1. Send | `daily.py send` mails every row that has a verified address **and** an approved line, inside the 24h budget | throttles are retried; stops only on 3 consecutive non-throttle failures |
+| 2. Follow-ups | `daily.py followups` creates Gmail **drafts** for anyone contacted 6+ days ago with no reply | never sends |
+| 3. Research | `claude -p prompts/research.md` finds new businesses for **tomorrow** and pipes them to `addprospects.py` | yes, tonight already sent |
+| 4. Copywriting | `claude -p prompts/lines.md` writes one personal line per new prospect via `setlines.py` | yes, rows without a line are simply not sent |
 
-Schedule: `com.mvsciencefair.sponsorbot` LaunchAgent, **09:10 Pacific daily**.
-It unloads itself after 2026-09-27, because a sponsorship ask after the fair is noise.
+**Send goes first, on purpose.** It used to run third. That meant a 19:00 slot did
+not actually mail anyone until 21:00 on a day the research stage ran long, which
+for a three day sprint is the wrong trade. Refill happens after the send, for
+tomorrow.
+
+Schedule: `com.mvsciencefair.sponsorbot` LaunchAgent, **19:00 Pacific daily**,
+`SPONSOR_CAP=300`, `SPONSOR_GAP=22`. It unloads itself after **2026-09-15**: Eeshan
+scoped this to three nights, and a cold ask in the last week before the fair is
+worse than no ask.
+
+## The send budget, which is not a guess
+
+Gmail's ceiling on this account is about **500 sends per rolling 24 hours**, not
+per calendar day. Measured, not assumed: on 2026-08-13 the first 429 landed at
+exactly 543 sends inside a 24 hour window.
+
+The club inbox also carries ordinary club mail, approvals, mentor pairings, family
+letters, and that spends the same budget. So `daily.py budget()` counts what the
+mailbox has actually sent in the trailing 24h and trims the run to
+`500 - 200 reserve - already sent`. The 200 is Eeshan's standing rule that club
+business must never be blocked by outreach. On the first night this trimmed 300
+to 271 without being asked.
+
+`resultSizeEstimate` is not a count. It reported 201 for a day that had sent 29.
+`sent_last_24h()` pages through real message ids.
 
 ## The safety property that matters
 
@@ -39,6 +62,15 @@ So nothing the research stage produces is trusted:
 message is not labelled `DRAFT`. This is deliberate: on 2026-08-11 a draft tool reported
 `Draft created!` and had in fact sent the message to a real sponsor.
 
+## Which workbook
+
+The bot reads and writes an **internal engine workbook** owned by the club account
+and shared with nobody but Eeshan. Split out on 2026-09-13: `Prospect Pool` was 778
+rows and `Email Log` was 597, sitting in the same book the sponsorship lead opens,
+and nobody can read a tracker that size. The human book keeps the curated
+`Prospects` tab plus a new `Replies` tab that lists only businesses that actually
+wrote back. `club.HUMAN_SHEET` points at it.
+
 ## Files
 
 | File | Role |
@@ -50,6 +82,7 @@ message is not labelled `DRAFT`. This is deliberate: on 2026-08-11 a draft tool 
 | `setlines.py` | writes sanitised personal lines to Pool column N |
 | `run_daily.sh` | the daily orchestration |
 | `prompts/` | the research and copywriting briefs |
+| `harvest/` | the deterministic prospect harvester. See its own README |
 
 ## Operating it
 
@@ -75,7 +108,10 @@ Change the daily cap in `~/Library/LaunchAgents/com.mvsciencefair.sponsorbot.pli
 - **The cap is a ceiling, not a target.** The bot sends what is genuinely verified and
   reports the real number. Sustained 300/day is not achievable for long: the set of Bay
   Area businesses that both publish an address and could plausibly sponsor a children's
-  science fair is finite, and most of it was harvested on 2026-08-12.
+  science fair is finite, and most of the close-in Bay Area was harvested on 2026-08-12.
+  The 2026-09-13 sweep went to the fringe (Solano, Napa, Sonoma, the Central Valley,
+  Monterey and Santa Cruz counties) and found 573 more. The next sweep has to go
+  further out again or go by category rather than geography.
 - **Deliverability.** `stemresearchclubmvhs@gmail.com` is a free consumer Gmail with a
   500/day ceiling. Sustained bulk cold email is the pattern Google suspends accounts for.
   Losing it would also lose every sponsor reply thread and the Master Tracker form

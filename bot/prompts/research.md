@@ -32,15 +32,36 @@ Concord, Danville, Lafayette, Berkeley, Albany, El Cerrito, Richmond, Oakland, A
 Piedmont, San Francisco, Daly City, South San Francisco, San Bruno, Millbrae, Burlingame,
 Marin County, Morgan Hill, Gilroy, Scotts Valley, Santa Cruz, Capitola, Watsonville.
 
-The close-in Bay Area is largely picked over. Go to the edges and to categories rather than
-geography: Vallejo, Benicia, Fairfield, Napa, Sonoma, Petaluma, Santa Rosa, Antioch, Brentwood,
-Tracy, Modesto, Stockton, Salinas, Monterey, Half Moon Bay, Pacifica, Hollister, Los Banos.
+Also harvested on 2026-09-13, do not re-grind: Fairfield, Suisun, Vacaville, Napa, Sonoma,
+Sebastopol, Windsor, Sausalito, Pleasant Hill, Danville, Livermore, Dublin, Pleasanton,
+Modesto, Lodi, Hollister, Pacifica, Capitola, Scotts Valley.
+
+Still untouched, go here first: Sacramento, West Sacramento, Davis, Woodland, Dixon, Elk
+Grove, Folsom, Roseville, Rocklin, Auburn, Placerville, Rio Vista, Ceres, Riverbank,
+Oakdale, Escalon, Patterson, Newman, Gustine, Livingston, Atwater, Madera, King City,
+Greenfield, Soledad, Gonzales, Castroville, San Juan Bautista, Carmel Valley, Boulder
+Creek, La Honda, Portola Valley, Woodside, Brisbane, Colma.
+
+Better still, stop thinking in cities. Go by CATEGORY across the whole region: kids
+enrichment and tutoring chains, children's music and dance and gymnastics studios, youth
+sports league locators, independent bookshops, maker spaces, print and promotional goods
+firms, and service clubs (Rotary, Kiwanis, Lions) which fund children's programmes and
+publish club contacts.
+
+Before hand-researching anything, check whether `harvest/` can do it deterministically.
+It crawls directory listings and reads addresses off business sites with no model in the
+loop, and on 2026-09-13 it produced 573 verified prospects in about 40 minutes. Hand
+research is for finding DIRECTORY URLs to feed it, not for reading pages one at a time.
 
 Directory shapes, learned the hard way:
 - WordPress Business Directory Plugin sites (`wpbdp_category` in the URL) sometimes print member
   emails straight into the listing HTML. Highest yield when they do.
 - ChamberMaster / GrowthZone (`business.*chamber.com`) NEVER expose member emails. Use them only
-  to collect names and websites, then visit each business's own site.
+  to collect names and websites, then visit each business's own site. Their `/list` page is a
+  JavaScript shell; the real listings are at `/list/FindStartsWith?term=A` through `Z`. That
+  one URL shape took a 17 chamber sweep from 60 business sites to 596.
+  Their outbound link is labelled "Visit Website", so anchor text is useless as a business
+  name. Take the name from the business's own site or you will send "Dear Visit Website,".
 - Individual business `/contact` pages hit about one in three.
 
 ## Who is worth writing to
