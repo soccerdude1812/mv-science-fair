@@ -77,6 +77,25 @@ ELSEWHERE_ZIP = re.compile(
     r"\s+\d{5}\b")
 CALIFORNIA = re.compile(r"\b(California|CA\s+9\d{4}|Bay Area)\b", re.I)
 
+# In-state but still not ours. Sacramento is about 115 miles and two hours from
+# Mountain View; the brief is a Bay Area drive. 67 Sacramento-region businesses
+# reached a send queue on 2026-09-13 because only other STATES were being checked.
+FAR_IN_STATE = re.compile(
+    r"\b(Sacramento|Citrus\s*Heights|Fair\s*Oaks|Folsom|Carmichael|Orangevale|"
+    r"Roseville|Rocklin|Elk\s*Grove|Rancho\s*Cordova|Placerville|Granite\s*Bay|"
+    r"Marysville|Wheatland|Placer\s*County|San\s*Juan\s*Unified|Orange\s*County|"
+    r"Los\s*Angeles|San\s*Diego|Ventura|Bakersfield|Fresno|Riverside|Anaheim|"
+    r"Irvine|Pasadena|Long\s*Beach)\b", re.I)
+# Anywhere we actually serve. Its presence outvotes a service-area mention:
+# a Napa video firm listing an 818 mobile is still a Napa video firm.
+NEARBY = re.compile(
+    r"\b(Mountain View|Palo Alto|San Jose|Sunnyvale|Santa Clara|Los Gatos|Campbell|"
+    r"Cupertino|Milpitas|Oakland|Berkeley|San Francisco|Fremont|Hayward|San Mateo|"
+    r"Redwood City|Menlo Park|Santa Cruz|Monterey|Salinas|Napa|Sonoma|Livermore|"
+    r"Pleasanton|Concord|Walnut Creek|Petaluma|Santa Rosa|Vallejo|Fairfield|"
+    r"Modesto|Stockton|Lodi|Gilroy|Morgan Hill|Watsonville|Capitola|Pacifica|"
+    r"Marin|Sausalito|Danville|Dublin|Half Moon Bay|Bay Area)\b", re.I)
+
 PERSONAL = {"gmail.com", "yahoo.com", "aol.com", "outlook.com", "hotmail.com",
             "comcast.net", "sbcglobal.net", "icloud.com", "me.com", "att.net",
             "msn.com", "live.com", "pacbell.net", "earthlink.net", "mac.com"}
@@ -92,13 +111,18 @@ def name_matches_domain(org, edom, site):
     two businesses, and 'Dear Palmas Pickleball' would land at an ale house."""
     dom = (site or edom).split(".")[0].lower()
     flat = re.sub(r"[^a-z]", "", org.lower())
+    # Digits and separators are noise in a domain: partners2media is Partners 2 Media.
+    domflat = re.sub(r"[^a-z]", "", dom)
     if not dom or not flat:
         return False
-    if dom in flat or flat in dom:
+    if domflat in flat or flat in domflat:
         return True
     words = [w for w in re.findall(r"[a-z]{4,}", org.lower())
              if w not in ("the", "and", "inc", "llc", "corp", "company", "group")]
-    if any(w in dom for w in words):
+    # The word has to sit at a token boundary in the domain, not anywhere inside
+    # it. "partners" in partners2media is a match because a digit ends the token;
+    # "cheese" in cheesecake-factory-graphics is not, because a letter follows.
+    if any(re.search(rf"(?:^|[^a-z]){re.escape(w)}(?:$|[^a-z])", dom) for w in words):
         return True
     # An all-caps token is an acronym already: "MW General Contracting" gives
     # mwgc, not mgc, which is what its domain actually is.
@@ -126,7 +150,7 @@ def screen(r):
     if edom not in PERSONAL:
         if not (edom == site or site.endswith("." + edom) or edom.endswith("." + site)):
             return f"address domain {edom} does not belong to {site or '(no site)'}"
-    if ABSURD.search(f"{org} {edom}"):
+    if ABSURD.search(blob):
         return "the ask would be absurd or embarrassing here"
     if edom not in PERSONAL and not name_matches_domain(org, edom, site):
         return f"name does not match the inbox ({org!r} -> {edom})"
@@ -134,6 +158,8 @@ def screen(r):
     if (ELSEWHERE.search(blob_geo) or ELSEWHERE_ZIP.search(blob_geo)) \
             and not CALIFORNIA.search(blob_geo):
         return "out of region, the page names another state"
+    if FAR_IN_STATE.search(blob_geo) and not NEARBY.search(blob_geo):
+        return "in California but not a Bay Area drive"
     if len(r.get("angle", "")) < 80:
         return "nothing true to say about them"
     # A name that is mostly punctuation or a slogan is not a greeting.
