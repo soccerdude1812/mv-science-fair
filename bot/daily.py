@@ -15,6 +15,7 @@ Column map on 'Prospect Pool':
 import argparse
 import base64
 import json
+import re
 import sys
 import time
 from datetime import datetime, timedelta
@@ -30,6 +31,67 @@ OPEN_STATUS = {"not started", "email found", "queued"}
 COL = {"num": 0, "org": 1, "cat": 2, "fit": 3, "phone": 4, "web": 5, "email": 6,
        "angle": 7, "status": 8, "owner": 9, "contacted": 10, "outcome": 11,
        "notes": 12, "line": 13}
+
+
+# Gmail answers a burst with 429 "User-rate limit exceeded. Retry after <ISO>".
+# That is the account asking us to slow down, not refusing the message. Treating
+# it as a failure is what ended the 2026-08-13 run 71 prospects early.
+MAX_RETRY = 4
+HARD_FAILS = 3
+THROTTLE = re.compile(r"(429|rate limit|rateLimitExceeded|userRateLimitExceeded|"
+                      r"quotaExceeded|backendError|503|500)", re.I)
+RETRY_AT = re.compile(r"Retry after (\d{4}-\d{2}-\d{2}T[\d:.]+Z)")
+
+
+def throttle_wait(exc, text=None):
+    """Seconds to wait before retrying, or 0 if this is not a throttle."""
+    msg = text if text is not None else str(exc)
+    if not THROTTLE.search(msg):
+        return 0
+    m = RETRY_AT.search(msg)
+    if m:
+        try:
+            when = datetime.strptime(m.group(1)[:19], "%Y-%m-%dT%H:%M:%S")
+            secs = (when.replace(tzinfo=ZoneInfo("UTC")) - datetime.now(ZoneInfo("UTC")))
+            secs = int(secs.total_seconds()) + 10
+            return max(30, min(secs, 1200))
+        except ValueError:
+            pass
+    return 120
+
+
+# Gmail's real ceiling is about 500 sends per ROLLING 24 hours, not per calendar
+# day. Measured, not assumed: the 2026-08-13 run took a 429 at exactly 543 sends
+# inside 24h. The club inbox also carries ordinary club mail, approvals, mentor
+# pairings and family letters, which spends the same budget. So the cap is
+# computed from what the mailbox has actually sent, and Eeshan's standing rule
+# that 200 sends stay free for club business is enforced here rather than hoped for.
+CEILING_24H = 500
+RESERVE = 200
+
+
+def sent_last_24h(svc):
+    """Count real messages sent in the trailing 24h. resultSizeEstimate lies."""
+    after = int(time.time()) - 24 * 3600
+    n, page = 0, None
+    while True:
+        req = svc.users().messages().list(userId="me", q=f"in:sent after:{after}",
+                                          maxResults=500, pageToken=page)
+        res = req.execute()
+        n += len(res.get("messages", []))
+        page = res.get("nextPageToken")
+        if not page:
+            return n
+
+
+def budget(svc, asked):
+    used = sent_last_24h(svc)
+    allowed = max(0, CEILING_24H - RESERVE - used)
+    log(f"sent in the last 24h: {used}. Ceiling {CEILING_24H}, reserve {RESERVE}, "
+        f"so at most {allowed} may go out now.")
+    if allowed < asked:
+        log(f"trimming this run from {asked} to {allowed} to keep the reserve intact")
+    return min(asked, allowed)
 
 
 def now():
@@ -144,6 +206,11 @@ def cmd_send(args):
         return 0
 
     svc = club.gmail()
+    allowed = budget(svc, len(batch))
+    if allowed <= 0:
+        log("no budget left in the 24h window. Nothing sent, and that is correct.")
+        return 0
+    batch = batch[:allowed]
     sent, failed = [], []
     for n, (r, rendered) in enumerate(batch):
         msg = EmailMessage()
@@ -153,16 +220,28 @@ def cmd_send(args):
         msg.set_content(rendered)
         raw = base64.urlsafe_b64encode(msg.as_bytes()).decode()
         stamp = f"{now():%Y-%m-%d %H:%M PT}"
-        try:
-            res = svc.users().messages().send(userId="me", body={"raw": raw}).execute()
-            sent.append({**r, "id": res["id"], "at": stamp})
-            log(f"  OK   {r['email']:<44} {res['id']}")
-        except Exception as e:
-            failed.append({**r, "err": str(e)[:300], "at": stamp})
-            log(f"  FAIL {r['email']:<44} {str(e)[:200]}")
-            if len(failed) >= 3:
-                log("  three failures, stopping this run")
+        ok = False
+        for attempt in range(MAX_RETRY + 1):
+            try:
+                res = svc.users().messages().send(userId="me", body={"raw": raw}).execute()
+                sent.append({**r, "id": res["id"], "at": stamp})
+                log(f"  OK   {r['email']:<44} {res['id']}")
+                ok = True
                 break
+            except Exception as e:
+                wait = throttle_wait(e)
+                if wait and attempt < MAX_RETRY:
+                    log(f"  WAIT {r['email']:<44} rate limited, sleeping {wait}s "
+                        f"(attempt {attempt + 1}/{MAX_RETRY})")
+                    time.sleep(wait)
+                    continue
+                failed.append({**r, "err": str(e)[:300], "at": stamp})
+                log(f"  FAIL {r['email']:<44} {str(e)[:200]}")
+                break
+        if not ok and len(failed) >= HARD_FAILS and not any(
+                throttle_wait(None, f["err"]) for f in failed[-HARD_FAILS:]):
+            log(f"  {HARD_FAILS} non-throttle failures in a row, stopping this run")
+            break
         if n < len(batch) - 1:
             time.sleep(args.gap)
 

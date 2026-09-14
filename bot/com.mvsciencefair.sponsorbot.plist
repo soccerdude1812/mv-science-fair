@@ -12,12 +12,14 @@
     <string>$HOME/mv-sponsor-bot/run_daily.sh</string>
   </array>
 
-  <!-- 09:10 Pacific. Business inboxes are staffed, and it is not so early that a
-       burst of mail at 6am looks automated. -->
+  <!-- 19:00 Pacific, set 2026-09-13 at Eeshan's direction for the three day
+       sprint. An evening send lands at the top of the next business morning's
+       inbox instead of competing with it, and it let the first of the three
+       batches go out the same evening the sprint was ordered. -->
   <key>StartCalendarInterval</key>
   <dict>
-    <key>Hour</key><integer>9</integer>
-    <key>Minute</key><integer>10</integer>
+    <key>Hour</key><integer>19</integer>
+    <key>Minute</key><integer>0</integer>
   </dict>
 
   <!-- If the mini was asleep or off at 09:10, run once on the next wake. -->
@@ -35,7 +37,7 @@
   <key>EnvironmentVariables</key>
   <dict>
     <key>SPONSOR_CAP</key><string>300</string>
-    <key>SPONSOR_GAP</key><string>15</string>
+    <key>SPONSOR_GAP</key><string>22</string>
     <key>LANG</key><string>en_US.UTF-8</string>
   </dict>
 
