@@ -58,6 +58,25 @@ FIT_B = re.compile(r"(cafe|coffee|restaurant|bistro|kitchen|eatery|brew|tea|gift
     r"lions|foundation|farm|orchard|creamery|butcher|market|grill|taco|burger|"
     r"sandwich|diner|inn|hotel|club)", re.I)
 
+# Out of region. A directory whose name looks Californian may not be: on
+# 2026-09-13 `business.davischamberofcommerce.com` turned out to be Davis
+# COUNTY, UTAH rather than Davis, California, and put 95 Utah businesses into a
+# queue asking them to sponsor a fair in Mountain View. The brief is a 30 minute
+# drive, so anything naming another state is wrong by definition.
+ELSEWHERE = re.compile(
+    r"\b(Alabama|Alaska|Arizona|Arkansas|Colorado|Connecticut|Delaware|Florida|"
+    r"Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|"
+    r"Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|"
+    r"Nebraska|Nevada|New Hampshire|New Jersey|New Mexico|New York|North Carolina|"
+    r"North Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode Island|South Carolina|"
+    r"South Dakota|Tennessee|Texas|Utah|Vermont|Virginia|Washington|West Virginia|"
+    r"Wisconsin|Wyoming|Ontario|Alberta|British Columbia|Quebec)\b", re.I)
+ELSEWHERE_ZIP = re.compile(
+    r"\b(AL|AK|AZ|AR|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|"
+    r"MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY)"
+    r"\s+\d{5}\b")
+CALIFORNIA = re.compile(r"\b(California|CA\s+9\d{4}|Bay Area)\b", re.I)
+
 PERSONAL = {"gmail.com", "yahoo.com", "aol.com", "outlook.com", "hotmail.com",
             "comcast.net", "sbcglobal.net", "icloud.com", "me.com", "att.net",
             "msn.com", "live.com", "pacbell.net", "earthlink.net", "mac.com"}
@@ -111,6 +130,10 @@ def screen(r):
         return "the ask would be absurd or embarrassing here"
     if edom not in PERSONAL and not name_matches_domain(org, edom, site):
         return f"name does not match the inbox ({org!r} -> {edom})"
+    blob_geo = f"{org} {r.get('angle','')}"
+    if (ELSEWHERE.search(blob_geo) or ELSEWHERE_ZIP.search(blob_geo)) \
+            and not CALIFORNIA.search(blob_geo):
+        return "out of region, the page names another state"
     if len(r.get("angle", "")) < 80:
         return "nothing true to say about them"
     # A name that is mostly punctuation or a slogan is not a greeting.

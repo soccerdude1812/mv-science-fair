@@ -369,3 +369,13 @@
 **Fix:** `rename.py` fetches each business's own site and takes the name from JSON-LD `name` on a LocalBusiness/Organization node, then `og:site_name`, then a cleaned `<title>`, rejecting anything matching a generic-label pattern. `screen.py` then drops any greeting that still reads like a page title ("Contact Us", "Top Reasons to Join", "Board of Directors") and any name that does not match the inbox it is addressed to, which caught `Dear Palmas Pickleball Resort` addressed to an ale house.
 
 **Prevention:** before a batch send, print the first twenty rendered greetings and read them. Also worth a standing rule: any field that will appear after the word "Dear" gets its own validation, separate from whether the record is otherwise usable.
+
+## [2026-09-13][davis-is-also-in-utah] A chamber directory that looked Californian put 95 Utah businesses in the send queue
+
+**Mistake:** a research agent, asked for chambers near Davis, California, returned `business.davischamberofcommerce.com`. It loaded, it was a real ChamberMaster directory, and it was **Davis County, UTAH**. 308 of its member sites were crawled and 95 of them reached the pool as `Queued`, each one about to be asked to sponsor a children's science fair 750 miles away. Hill Aerospace Museum in Roy, Utah was row 1441.
+
+**Root cause:** every existing filter asked *is this a real business with a real address*, and all 95 passed, because they were. Nothing asked *is this business anywhere near Mountain View*. Geography had been enforced only by the choice of seed URLs, which is an assumption about the seed list rather than a check on the data. City names are not unique: Davis, Vacaville, Woodland, Franklin, Springfield and dozens more repeat across states.
+
+**Fix:** `screen.py` now rejects any record whose name or page text names another US state or Canadian province, unless the same text also says California or Bay Area. Tested three ways: it drops Hill Aerospace Museum, keeps Red Rock Coffee in Mountain View, and keeps **Washington Square Bar in San Francisco**, which is the case that makes a naive state-name match wrong. The 95 rows already imported were traced back through the crawler's `from` field, which records the directory each business site came from, and closed with the reason written into the Outcome column.
+
+**Prevention:** when a filter chain is built to answer "is this record valid", check separately whether it answers "is this record *ours*". And keep the provenance field: being able to say "every site that came from this directory" turned an unbounded cleanup into one query. If the crawler had not recorded `from`, the only way to find the other 94 would have been to guess.
