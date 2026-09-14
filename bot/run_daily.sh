@@ -51,8 +51,13 @@ say "--- inventory before ---"
 $PY daily.py status 2>&1 | tee -a "$LOG"
 
 # 1. Send. The only stage that talks to real businesses, and it goes first.
+#
+# --wait matters more than it looks. Gmail's ceiling is per ROLLING 24 hours, so
+# at 19:00 the window still contains last night's whole batch and the budget is
+# near zero. Those sends age out over the next two hours. Waiting up to four
+# hours for the window to roll is the difference between 300 going out and 3.
 say "--- sending ---"
-$PY daily.py send --cap "$CAP" --gap "$GAP" 2>&1 | tee -a "$LOG"
+$PY daily.py send --cap "$CAP" --gap "$GAP" --wait "${SPONSOR_WAIT:-240}" 2>&1 | tee -a "$LOG"
 say "send exit ${PIPESTATUS[0]}"
 
 # 2. Follow-ups: DRAFTS ONLY. Eeshan reviews and sends these by hand.

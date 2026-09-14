@@ -38,6 +38,9 @@
   <dict>
     <key>SPONSOR_CAP</key><string>300</string>
     <key>SPONSOR_GAP</key><string>22</string>
+    <!-- Minutes the send may wait for the rolling 24h window to clear last
+         night's batch before giving up and sending whatever is allowed. -->
+    <key>SPONSOR_WAIT</key><string>240</string>
     <key>LANG</key><string>en_US.UTF-8</string>
   </dict>
 

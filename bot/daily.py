@@ -103,6 +103,32 @@ def budget(svc, asked):
     return min(asked, allowed)
 
 
+def wait_for_budget(svc, want, max_wait_s, poll_s=900):
+    """Sleep until the rolling window has room, then return the allowance.
+
+    The window is the whole problem with a fixed nightly slot. Last night's batch
+    is still inside the trailing 24h at tonight's start time, so a 19:00 run the
+    day after a 268 send night sees a budget near zero. Those sends age out over
+    the following two hours, so waiting is strictly better than either sending
+    almost nothing or raising the ceiling and getting the mailbox flagged.
+
+    Bounded, and it never blocks the rest of the run: on timeout it returns
+    whatever is allowed by then and the send proceeds at that size.
+    """
+    waited = 0
+    allowed = budget(svc, want)
+    while allowed < want and waited < max_wait_s:
+        nap = min(poll_s, max_wait_s - waited)
+        log(f"only {allowed} of {want} allowed. The 24h window still holds last "
+            f"night's batch. Waiting {nap // 60} min for it to roll.")
+        time.sleep(nap)
+        waited += nap
+        allowed = budget(svc, want)
+    if waited:
+        log(f"waited {waited // 60} min in total, now sending {allowed}")
+    return allowed
+
+
 def now():
     return datetime.now(PT)
 
@@ -215,7 +241,8 @@ def cmd_send(args):
         return 0
 
     svc = club.gmail()
-    allowed = budget(svc, len(batch))
+    allowed = (wait_for_budget(svc, len(batch), args.wait * 60)
+               if args.wait else budget(svc, len(batch)))
     if allowed <= 0:
         log("no budget left in the 24h window. Nothing sent, and that is correct.")
         return 0
@@ -379,6 +406,8 @@ def main():
         s.add_argument("--gap", type=float, default=15)
         s.add_argument("--days", type=int, default=6)
         s.add_argument("--dry", action="store_true")
+        s.add_argument("--wait", type=int, default=0,
+                       help="minutes to wait for the 24h window to roll before sending")
     a = p.parse_args()
     fn = {"status": cmd_status, "send": cmd_send, "followups": cmd_followups,
           "needs-lines": cmd_needs_lines, "needs-research": cmd_needs_research}[a.cmd]
