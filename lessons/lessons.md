@@ -337,3 +337,45 @@
 **Fix:** collect every `r...` id named in `Applicants!U` and `Mentor Offers!Q`, pull `drafts.list`, and diff. In one pass this separated six claimed drafts into four that had been **sent** (Helen Wong, Megha Manohar, Julia Wang, Simon Kensky, all that morning, so the cells were merely stale) and one that had **vanished** (Olivia). Rebuilt as `r7724020522737789121`, threaded onto `1a0658f92836cb18`, 182 words, and every stale cell rewritten to say what actually shipped and when.
 
 **Prevention:** an id in a tracker cell is a claim about the mailbox, and claims about the mailbox expire. `drafts.list` is cheap and it is ground truth. Run the diff at the start of every pass, before drafting anything, because a vanished draft and a sent draft need opposite responses and the cell text cannot tell you which happened.
+
+## [2026-09-13][launchctl-disable-outlives-the-plist] A LaunchAgent can be *disabled*, and `bootstrap` will not tell you why it failed
+
+**Mistake:** the sponsor bot had sent nothing since 2026-08-13. The plist was still in `~/Library/LaunchAgents`, `plutil -lint` passed, `run_daily.sh` was executable, and the mini was awake. `launchctl bootstrap gui/501 ...` answered `Bootstrap failed: 5: Input/output error` and nothing else. I nearly went looking for a corrupt plist.
+
+**Root cause:** the service was in launchd's **disabled** list for the user domain, left there by an earlier `launchctl bootout`. The disabled state is stored per-domain in launchd's own database, survives reboots, and is completely independent of whether the plist exists or parses. `bootstrap` refuses a disabled label and reports it as EIO, which names nothing.
+
+**Fix:** `launchctl print-disabled gui/$(id -u) | grep <label>` prints `"com.mvsciencefair.sponsorbot" => disabled` in one line. Then `launchctl enable gui/$(id -u)/<label>` followed by `bootstrap`. Verified with `launchctl print gui/$(id -u)/<label>` showing `state = not running`, `Hour => 19`, and the env vars.
+
+**Prevention:** when `bootstrap` fails with error 5 and the plist is valid, check `print-disabled` before anything else. Also: a job that has silently not run is invisible. The only reason this surfaced is that `daily.py status` was run by hand. Anything scheduled and important needs a check that notices absence, not just failure.
+
+## [2026-09-13][429-is-a-pause-not-a-failure] A rate limit counted as a send failure ended a run 71 prospects early
+
+**Mistake:** the 2026-08-13 send stopped after 183 of 254 with `three failures, stopping this run`. All three "failures" were the same HTTP 429: `User-rate limit exceeded. Retry after 2026-08-13T19:02:22.361Z (Mail sending)`. Gmail was asking for a fifteen minute pause and the loop read it as three refusals.
+
+**Root cause:** one `except Exception` treated every error identically. A 429 and a malformed-recipient 400 are opposite signals: one says wait, the other says this message will never work.
+
+**Fix:** `throttle_wait()` parses the `Retry after` timestamp out of the error, sleeps until then (clamped 30s..1200s), and retries up to four times. The three-strikes stop now fires only on three consecutive **non-throttle** failures. Tested against the literal August error string: it returns a wait, while `400 Invalid to header` and `550 mailbox unavailable` return 0 and still fail fast.
+
+**Also, the real ceiling:** about **500 sends per rolling 24 hours**, not per calendar day. The first 429 landed at exactly 543 sends inside the trailing 24h window, counted from the Email Log. And `resultSizeEstimate` is not a count: it reported 201 sent for a day that had actually sent 29. Page through message ids.
+
+**Prevention:** never catch a transport error without asking whether it means *stop* or *slow down*. And derive a rate cap from what the mailbox has actually sent, not from a number in a plist, because the same mailbox sends approvals and family letters out of the same budget.
+
+## [2026-09-13][visit-website-is-not-a-business-name] Anchor text from a directory would have opened 240 emails with "Dear Visit Website,"
+
+**Mistake:** the harvester took each business's name from the link text on the chamber directory page. ChamberMaster labels every outbound member link with the literal words **"Visit Website"**. 240 of 245 harvested prospects were named `Visit Website`, and the template asserts `b.startswith(f"Dear {org},")`, so every one of them would have rendered and sent.
+
+**Root cause:** the fallback to `<title>` only fired when anchor text was empty. "Visit Website" is not empty. A generic anchor is worse than a missing one, because it looks like data.
+
+**Fix:** `rename.py` fetches each business's own site and takes the name from JSON-LD `name` on a LocalBusiness/Organization node, then `og:site_name`, then a cleaned `<title>`, rejecting anything matching a generic-label pattern. `screen.py` then drops any greeting that still reads like a page title ("Contact Us", "Top Reasons to Join", "Board of Directors") and any name that does not match the inbox it is addressed to, which caught `Dear Palmas Pickleball Resort` addressed to an ale house.
+
+**Prevention:** before a batch send, print the first twenty rendered greetings and read them. Also worth a standing rule: any field that will appear after the word "Dear" gets its own validation, separate from whether the record is otherwise usable.
+
+## [2026-09-13][davis-is-also-in-utah] A chamber directory that looked Californian put 95 Utah businesses in the send queue
+
+**Mistake:** a research agent, asked for chambers near Davis, California, returned `business.davischamberofcommerce.com`. It loaded, it was a real ChamberMaster directory, and it was **Davis County, UTAH**. 308 of its member sites were crawled and 95 of them reached the pool as `Queued`, each one about to be asked to sponsor a children's science fair 750 miles away. Hill Aerospace Museum in Roy, Utah was row 1441.
+
+**Root cause:** every existing filter asked *is this a real business with a real address*, and all 95 passed, because they were. Nothing asked *is this business anywhere near Mountain View*. Geography had been enforced only by the choice of seed URLs, which is an assumption about the seed list rather than a check on the data. City names are not unique: Davis, Vacaville, Woodland, Franklin, Springfield and dozens more repeat across states.
+
+**Fix:** `screen.py` now rejects any record whose name or page text names another US state or Canadian province, unless the same text also says California or Bay Area. Tested three ways: it drops Hill Aerospace Museum, keeps Red Rock Coffee in Mountain View, and keeps **Washington Square Bar in San Francisco**, which is the case that makes a naive state-name match wrong. The 95 rows already imported were traced back through the crawler's `from` field, which records the directory each business site came from, and closed with the reason written into the Outcome column.
+
+**Prevention:** when a filter chain is built to answer "is this record valid", check separately whether it answers "is this record *ours*". And keep the provenance field: being able to say "every site that came from this directory" turned an unbounded cleanup into one query. If the crawler had not recorded `from`, the only way to find the other 94 would have been to guess.

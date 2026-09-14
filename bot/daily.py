@@ -15,6 +15,7 @@ Column map on 'Prospect Pool':
 import argparse
 import base64
 import json
+import re
 import sys
 import time
 from datetime import datetime, timedelta
@@ -30,6 +31,102 @@ OPEN_STATUS = {"not started", "email found", "queued"}
 COL = {"num": 0, "org": 1, "cat": 2, "fit": 3, "phone": 4, "web": 5, "email": 6,
        "angle": 7, "status": 8, "owner": 9, "contacted": 10, "outcome": 11,
        "notes": 12, "line": 13}
+
+
+# Gmail answers a burst with 429 "User-rate limit exceeded. Retry after <ISO>".
+# That is the account asking us to slow down, not refusing the message. Treating
+# it as a failure is what ended the 2026-08-13 run 71 prospects early.
+MAX_RETRY = 4
+HARD_FAILS = 3
+# Flush the Email Log every this many sends, so a crash cannot cost the dedupe.
+CHECKPOINT = 20
+# Deliberately narrow. Gmail's send is NOT idempotent, so a retry after an error
+# that actually delivered sends the message twice, and "do not email the same
+# business twice" is the hard constraint on this sprint. A 5xx is ambiguous: the
+# message may well have gone out. So only retry on an explicit "you are going too
+# fast" signal, where Gmail is telling us it did not accept the message. Losing
+# one prospect out of eight hundred to an unretried 500 is the cheap side of this
+# trade; a duplicate ask to a business is the expensive one.
+THROTTLE = re.compile(r"(\b429\b|rate limit|rateLimitExceeded|"
+                      r"userRateLimitExceeded|quotaExceeded)", re.I)
+RETRY_AT = re.compile(r"Retry after (\d{4}-\d{2}-\d{2}T[\d:.]+Z)")
+
+
+def throttle_wait(exc, text=None):
+    """Seconds to wait before retrying, or 0 if this is not a throttle."""
+    msg = text if text is not None else str(exc)
+    if not THROTTLE.search(msg):
+        return 0
+    m = RETRY_AT.search(msg)
+    if m:
+        try:
+            when = datetime.strptime(m.group(1)[:19], "%Y-%m-%dT%H:%M:%S")
+            secs = (when.replace(tzinfo=ZoneInfo("UTC")) - datetime.now(ZoneInfo("UTC")))
+            secs = int(secs.total_seconds()) + 10
+            return max(30, min(secs, 1200))
+        except ValueError:
+            pass
+    return 120
+
+
+# Gmail's real ceiling is about 500 sends per ROLLING 24 hours, not per calendar
+# day. Measured, not assumed: the 2026-08-13 run took a 429 at exactly 543 sends
+# inside 24h. The club inbox also carries ordinary club mail, approvals, mentor
+# pairings and family letters, which spends the same budget. So the cap is
+# computed from what the mailbox has actually sent, and Eeshan's standing rule
+# that 200 sends stay free for club business is enforced here rather than hoped for.
+CEILING_24H = 500
+RESERVE = 200
+
+
+def sent_last_24h(svc):
+    """Count real messages sent in the trailing 24h. resultSizeEstimate lies."""
+    after = int(time.time()) - 24 * 3600
+    n, page = 0, None
+    while True:
+        req = svc.users().messages().list(userId="me", q=f"in:sent after:{after}",
+                                          maxResults=500, pageToken=page)
+        res = req.execute()
+        n += len(res.get("messages", []))
+        page = res.get("nextPageToken")
+        if not page:
+            return n
+
+
+def budget(svc, asked):
+    used = sent_last_24h(svc)
+    allowed = max(0, CEILING_24H - RESERVE - used)
+    log(f"sent in the last 24h: {used}. Ceiling {CEILING_24H}, reserve {RESERVE}, "
+        f"so at most {allowed} may go out now.")
+    if allowed < asked:
+        log(f"trimming this run from {asked} to {allowed} to keep the reserve intact")
+    return min(asked, allowed)
+
+
+def wait_for_budget(svc, want, max_wait_s, poll_s=900):
+    """Sleep until the rolling window has room, then return the allowance.
+
+    The window is the whole problem with a fixed nightly slot. Last night's batch
+    is still inside the trailing 24h at tonight's start time, so a 19:00 run the
+    day after a 268 send night sees a budget near zero. Those sends age out over
+    the following two hours, so waiting is strictly better than either sending
+    almost nothing or raising the ceiling and getting the mailbox flagged.
+
+    Bounded, and it never blocks the rest of the run: on timeout it returns
+    whatever is allowed by then and the send proceeds at that size.
+    """
+    waited = 0
+    allowed = budget(svc, want)
+    while allowed < want and waited < max_wait_s:
+        nap = min(poll_s, max_wait_s - waited)
+        log(f"only {allowed} of {want} allowed. The 24h window still holds last "
+            f"night's batch. Waiting {nap // 60} min for it to roll.")
+        time.sleep(nap)
+        waited += nap
+        allowed = budget(svc, want)
+    if waited:
+        log(f"waited {waited // 60} min in total, now sending {allowed}")
+    return allowed
 
 
 def now():
@@ -144,7 +241,13 @@ def cmd_send(args):
         return 0
 
     svc = club.gmail()
-    sent, failed = [], []
+    allowed = (wait_for_budget(svc, len(batch), args.wait * 60)
+               if args.wait else budget(svc, len(batch)))
+    if allowed <= 0:
+        log("no budget left in the 24h window. Nothing sent, and that is correct.")
+        return 0
+    batch = batch[:allowed]
+    sent, failed, flushed = [], [], 0
     for n, (r, rendered) in enumerate(batch):
         msg = EmailMessage()
         msg["To"] = r["email"]
@@ -153,20 +256,40 @@ def cmd_send(args):
         msg.set_content(rendered)
         raw = base64.urlsafe_b64encode(msg.as_bytes()).decode()
         stamp = f"{now():%Y-%m-%d %H:%M PT}"
-        try:
-            res = svc.users().messages().send(userId="me", body={"raw": raw}).execute()
-            sent.append({**r, "id": res["id"], "at": stamp})
-            log(f"  OK   {r['email']:<44} {res['id']}")
-        except Exception as e:
-            failed.append({**r, "err": str(e)[:300], "at": stamp})
-            log(f"  FAIL {r['email']:<44} {str(e)[:200]}")
-            if len(failed) >= 3:
-                log("  three failures, stopping this run")
+        ok = False
+        for attempt in range(MAX_RETRY + 1):
+            try:
+                res = svc.users().messages().send(userId="me", body={"raw": raw}).execute()
+                sent.append({**r, "id": res["id"], "at": stamp})
+                log(f"  OK   {r['email']:<44} {res['id']}")
+                ok = True
                 break
+            except Exception as e:
+                wait = throttle_wait(e)
+                if wait and attempt < MAX_RETRY:
+                    log(f"  WAIT {r['email']:<44} rate limited, sleeping {wait}s "
+                        f"(attempt {attempt + 1}/{MAX_RETRY})")
+                    time.sleep(wait)
+                    continue
+                failed.append({**r, "err": str(e)[:300], "at": stamp})
+                log(f"  FAIL {r['email']:<44} {str(e)[:200]}")
+                break
+        # Checkpoint. A 300 send run at a 22 second gap takes nearly two hours,
+        # and the dedupe that stops a business being asked twice lives in the
+        # Email Log. Writing it only at the end means a reboot, a network drop
+        # or a SIGTERM loses the record of everything already delivered, and
+        # tomorrow's run mails those businesses a second time.
+        if len(sent) - flushed >= CHECKPOINT:
+            record(sent[flushed:], version)
+            flushed = len(sent)
+        if not ok and len(failed) >= HARD_FAILS and not any(
+                throttle_wait(None, f["err"]) for f in failed[-HARD_FAILS:]):
+            log(f"  {HARD_FAILS} non-throttle failures in a row, stopping this run")
+            break
         if n < len(batch) - 1:
             time.sleep(args.gap)
 
-    record(sent, version)
+    record(sent[flushed:], version)
     log(f"sent {len(sent)}, failed {len(failed)}")
     return 0 if not failed else 1
 
@@ -283,6 +406,8 @@ def main():
         s.add_argument("--gap", type=float, default=15)
         s.add_argument("--days", type=int, default=6)
         s.add_argument("--dry", action="store_true")
+        s.add_argument("--wait", type=int, default=0,
+                       help="minutes to wait for the 24h window to roll before sending")
     a = p.parse_args()
     fn = {"status": cmd_status, "send": cmd_send, "followups": cmd_followups,
           "needs-lines": cmd_needs_lines, "needs-research": cmd_needs_research}[a.cmd]

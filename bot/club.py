@@ -16,7 +16,12 @@ from googleapiclient.discovery import build
 
 HOME = os.path.expanduser("~/mv-sponsor-bot")
 CRED_PATH = os.path.join(HOME, "secrets", "club_creds.json")
-SHEET = "1SGUf_xL5bMHu2ANPJQfDvBLFhzvt4lVqp4zI-KoPXwk"
+# The internal engine workbook, owned by the club account and shared with nobody.
+# The human-facing "Sponsorship & Cold Outreach" book no longer carries the bulk
+# tabs: 778 pool rows and 600 log rows are noise to the sponsorship lead, whose
+# tracker is the curated Prospects tab. Split on 2026-09-13 at Eeshan's direction.
+SHEET = "1KVHooMIrgu5dDyOjBxN0N3nXBPmMTUGBlMpmPkMW3xU"
+HUMAN_SHEET = "1SGUf_xL5bMHu2ANPJQfDvBLFhzvt4lVqp4zI-KoPXwk"  # Replies tab only
 CLUB = "stemresearchclubmvhs@gmail.com"
 SENDER = f"Tristan Schaefer, MV Science Fair <{CLUB}>"
 
