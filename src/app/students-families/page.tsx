@@ -16,6 +16,11 @@ const RESOURCES = [
     blurb: "Board dimensions and safety rules.",
   },
   {
+    href: "/example-boards",
+    title: "Example Boards",
+    blurb: "Where the nine sections go, and three finished boards to copy.",
+  },
+  {
     href: "/the-process#judging",
     title: "Judging Questions & Rubric",
     blurb: "Practice questions judges ask and how they score.",

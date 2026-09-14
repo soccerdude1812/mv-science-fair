@@ -544,10 +544,16 @@ export default function TheProcessPage() {
                 Your name goes on the back only, to ensure fair judging.
               </span>
             </p>
-            <Link href="/display-and-safety" className="btn-ghost">
-              View Display & Safety Guidelines
-              <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
-            </Link>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/display-and-safety" className="btn-ghost">
+                View Display & Safety Guidelines
+                <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
+              </Link>
+              <Link href="/example-boards" className="btn-ghost">
+                See example boards
+                <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
