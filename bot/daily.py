@@ -248,7 +248,7 @@ def cmd_send(args):
         log("no budget left in the 24h window. Nothing sent, and that is correct.")
         return 0
     batch = batch[:allowed]
-    sent, failed, flushed = [], [], 0
+    sent, failed, flushed, streak = [], [], 0, 0
     for n, (r, rendered) in enumerate(batch):
         msg = EmailMessage()
         msg["To"] = r["email"]
@@ -264,6 +264,7 @@ def cmd_send(args):
                 sent.append({**r, "id": res["id"], "at": stamp})
                 log(f"  OK   {r['email']:<44} {res['id']}")
                 ok = True
+                streak = 0
                 break
             except Exception as e:
                 wait = throttle_wait(e)
@@ -274,6 +275,8 @@ def cmd_send(args):
                     continue
                 failed.append({**r, "err": str(e)[:300], "at": stamp})
                 log(f"  FAIL {r['email']:<44} {str(e)[:200]}")
+                if not throttle_wait(None, str(e)):
+                    streak += 1
                 break
         # Checkpoint. A 300 send run at a 22 second gap takes nearly two hours,
         # and the dedupe that stops a business being asked twice lives in the
@@ -281,16 +284,29 @@ def cmd_send(args):
         # or a SIGTERM loses the record of everything already delivered, and
         # tomorrow's run mails those businesses a second time.
         if len(sent) - flushed >= CHECKPOINT:
-            record(sent[flushed:], version)
-            flushed = len(sent)
-        if not ok and len(failed) >= HARD_FAILS and not any(
-                throttle_wait(None, f["err"]) for f in failed[-HARD_FAILS:]):
+            # A Sheets hiccup here must not abandon the rest of the batch. Leave
+            # flushed where it is and the next checkpoint retries the same range.
+            try:
+                record(sent[flushed:], version)
+                flushed = len(sent)
+            except Exception as e:
+                log(f"  checkpoint write failed, will retry at the next one: {str(e)[:160]}")
+        # Consecutive, and it means consecutive: `streak` resets on every success.
+        # Counting three failures scattered across a 300 send run would stop the
+        # run with most of the queue untouched, which is the bug this sprint began
+        # by fixing.
+        if streak >= HARD_FAILS:
             log(f"  {HARD_FAILS} non-throttle failures in a row, stopping this run")
             break
         if n < len(batch) - 1:
             time.sleep(args.gap)
 
-    record(sent[flushed:], version)
+    try:
+        record(sent[flushed:], version)
+    except Exception as e:
+        log(f"FINAL log write failed: {str(e)[:200]}")
+        log("Run `daily.py reconcile` before the next send: the mailbox is ground "
+            "truth and reconcile will recover every row this lost.")
     log(f"sent {len(sent)}, failed {len(failed)}")
     return 0 if not failed else 1
 

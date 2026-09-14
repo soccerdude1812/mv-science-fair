@@ -379,3 +379,23 @@
 **Fix:** `screen.py` now rejects any record whose name or page text names another US state or Canadian province, unless the same text also says California or Bay Area. Tested three ways: it drops Hill Aerospace Museum, keeps Red Rock Coffee in Mountain View, and keeps **Washington Square Bar in San Francisco**, which is the case that makes a naive state-name match wrong. The 95 rows already imported were traced back through the crawler's `from` field, which records the directory each business site came from, and closed with the reason written into the Outcome column.
 
 **Prevention:** when a filter chain is built to answer "is this record valid", check separately whether it answers "is this record *ours*". And keep the provenance field: being able to say "every site that came from this directory" turned an unbounded cleanup into one query. If the crawler had not recorded `from`, the only way to find the other 94 would have been to guess.
+
+## [2026-09-13][in-state-is-not-in-region] A filter that checks other states does not check distance
+
+**Mistake:** hours after adding a guard that rejects prospects whose page names another state, 67 Sacramento-region businesses were sitting in the send queue: Citrus Heights, Fair Oaks, Folsom, Roseville, plus one in Orange County. Sacramento is ~115 miles and two hours from Mountain View, against a brief of "a 20 to 30 minute drive, the entire Bay Area". They were in California, so the state guard waved them through.
+
+**Root cause:** mine. The August research prompt's territory stopped at Vallejo, Stockton, Modesto, Salinas. My round-2 seed brief added Sacramento, Davis, Folsom, Roseville and a dozen more without checking them against the brief, then the crawler faithfully harvested what I asked for. The guard I wrote encoded "not another state" because that was the failure I had just seen, rather than the actual requirement, which is distance.
+
+**Fix:** `screen.py` now also rejects in-state-but-far (`FAR_IN_STATE`), with a `NEARBY` list that outvotes it, so a Napa video firm that lists an 818 mobile survives. The 67 live rows were closed with the reason written into the Outcome column. Two false positives had to be reopened first: `Reno` matched inside "renovated", which is why every one of those patterns now carries `\b`.
+
+**Prevention:** write the filter against the requirement as stated, not against the last defect. The requirement here was a drive time; "another state" is a proxy for it that fails on the whole Central Valley. And when a bulk close touches dozens of rows, re-derive the set with the corrected rule and reopen the difference, rather than assuming the first pass was right.
+
+## [2026-09-13][three-in-a-row-was-three-anywhere] A guard that says "in a row" has to actually count in a row
+
+**Mistake:** the stop condition read `len(failed) >= 3 and not any(throttle(...) for f in failed[-3:])`. `failed` accumulates for the whole run and is never reset on success, so three *scattered* hard failures, at send 5, 105 and 205 of a 300 send batch, would stop the run at 205 and discard the remaining 95 prospects. A caught-by-review defect, not one that fired.
+
+**Root cause:** it was written as a slice of history rather than as a counter. The log message said "in a row" and the code said "the last three appended", and those only coincide when nothing succeeds in between. This is a milder second instance of the exact bug the sprint began by fixing, where 429s ended a run 71 prospects early.
+
+**Fix:** a `streak` counter incremented on a non-throttle failure and reset to 0 on every success. Tested four ways with a loop simulator: scattered failures at 5/105/205 no longer stop (297 sent); three consecutive do stop; two, a success, then two more does not; ten throttles followed by twenty good sends does not.
+
+**Prevention:** when a condition's name contains "consecutive" or "in a row", the implementation needs a variable that resets. A slice of an append-only list cannot express it. Worth grepping for the same shape elsewhere.
