@@ -7,6 +7,7 @@ Subcommands:
   followups           DRAFT follow-ups only, never send
   needs-lines         emit JSON for rows that have an address but no approved line
   needs-research      exit 0 if inventory is below target, 3 if it is fine
+  reconcile           make the Email Log agree with what the mailbox actually sent
 
 Column map on 'Prospect Pool':
   A # | B Business | C Category | D Fit | E Phone | F Website | G Email
@@ -312,6 +313,76 @@ def record(sent, version):
     log(f"logged {len(sent)} to Email Log and updated {len(data)//2} pool rows")
 
 
+def cmd_reconcile(args):
+    """Make the Email Log agree with what the mailbox actually sent.
+
+    The log is the only thing standing between a business and a second identical
+    cold email. Anything that can make it disagree with reality, a run killed
+    mid-batch before it checkpointed, a machine that slept, a send by hand, has
+    to be repairable, and the mailbox is the ground truth. So: list every message
+    this account actually sent under the sponsorship subject, and append any
+    recipient the log does not already name.
+    """
+    rows, logged, body, approved, site, version = load()
+    svc = club.gmail()
+    q = f'in:sent subject:("{SUBJECT}")'
+    seen, page = {}, None
+    while True:
+        res = svc.users().messages().list(userId="me", q=q, maxResults=500,
+                                          pageToken=page).execute()
+        for m in res.get("messages", []):
+            seen[m["id"]] = None
+        page = res.get("nextPageToken")
+        if not page:
+            break
+    log(f"{len(seen)} messages actually sent under the sponsorship subject")
+
+    missing = []
+    for mid in seen:
+        meta = svc.users().messages().get(userId="me", id=mid, format="metadata",
+                                          metadataHeaders=["To", "Date"]).execute()
+        hd = {h["name"].lower(): h["value"] for h in meta["payload"]["headers"]}
+        to = re.sub(r"^.*<|>.*$", "", (hd.get("to") or "")).strip().lower()
+        if to and to not in logged:
+            missing.append({"email": to, "id": mid, "at": hd.get("date", "")[:31]})
+            logged.add(to)
+
+    if not missing:
+        log("the Email Log already names every address the mailbox sent to. Nothing to do.")
+        return 0
+
+    log(f"{len(missing)} sent addresses are NOT in the Email Log.")
+    if args.dry:
+        for m in missing[:15]:
+            log(f"  DRY would log {m['email']}")
+        if len(missing) > 15:
+            log(f"  ... and {len(missing) - 15} more")
+        return 0
+    log("repairing")
+    by_addr = {}
+    for i, r in enumerate(rows):
+        em = get(r, "email").lower()
+        if em:
+            by_addr.setdefault(em, (i + 2, get(r, "org")))
+    today = f"{now():%Y-%m-%d}"
+    club.append("Email Log!A1", [[
+        m["at"], by_addr.get(m["email"], ("", "?"))[1], m["email"], SUBJECT, version,
+        "Tristan / club inbox", "", "", "", "", "",
+        f"Recovered by reconcile on {today}. Gmail message id {m['id']}. "
+        f"The run that sent it did not record it.",
+    ] for m in missing])
+    data = []
+    for m in missing:
+        hit = by_addr.get(m["email"])
+        if hit:
+            data.append({"range": f"Prospect Pool!I{hit[0]}:I{hit[0]}", "values": [["Sent"]]})
+    if data:
+        club.batch_update(data)
+    log(f"repaired {len(missing)} log rows and {len(data)} pool rows. "
+        f"Those businesses will not be emailed again.")
+    return 0
+
+
 def cmd_followups(args):
     """Create Gmail DRAFTS. This function must never call messages().send."""
     rows, logged, body, approved, site, version = load()
@@ -400,7 +471,8 @@ def cmd_followups(args):
 def main():
     p = argparse.ArgumentParser()
     sub = p.add_subparsers(dest="cmd", required=True)
-    for name in ("status", "send", "followups", "needs-lines", "needs-research"):
+    for name in ("status", "send", "followups", "needs-lines", "needs-research",
+                 "reconcile"):
         s = sub.add_parser(name)
         s.add_argument("--cap", type=int, default=300)
         s.add_argument("--gap", type=float, default=15)
@@ -410,7 +482,8 @@ def main():
                        help="minutes to wait for the 24h window to roll before sending")
     a = p.parse_args()
     fn = {"status": cmd_status, "send": cmd_send, "followups": cmd_followups,
-          "needs-lines": cmd_needs_lines, "needs-research": cmd_needs_research}[a.cmd]
+          "needs-lines": cmd_needs_lines, "needs-research": cmd_needs_research,
+          "reconcile": cmd_reconcile}[a.cmd]
     sys.exit(fn(a))
 
 
