@@ -1,4 +1,5 @@
-import { Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
+import Link from "next/link";
 import PageHero from "@/components/PageHero";
 
 const rules = [
@@ -147,6 +148,11 @@ export default function DisplayAndSafetyPage() {
             </li>
           ))}
         </ol>
+
+        <Link href="/example-boards" className="btn-ghost reveal mt-8">
+          See all nine on a finished board
+          <ArrowRight className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
+        </Link>
       </section>
 
       {/* Quick reference checklist */}

@@ -8,6 +8,7 @@ const sitemap = [
   { href: "/rules", label: "Rules" },
   { href: "/forms", label: "Forms" },
   { href: "/display-and-safety", label: "Display & Safety" },
+  { href: "/example-boards", label: "Example boards" },
   { href: "/judges", label: "Judges" },
   { href: "/volunteer", label: "Volunteer" },
   { href: "/students-families", label: "Students & Families" },

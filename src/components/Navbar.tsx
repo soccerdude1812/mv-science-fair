@@ -38,6 +38,7 @@ const supportLinks = [
 
 const sheetOnlyLinks = [
   { href: "/display-and-safety", label: "Display & Safety" },
+  { href: "/example-boards", label: "Example boards" },
   { href: "/judges", label: "Judges" },
   { href: "/students-families", label: "Students & Families" },
   { href: "/team", label: "Our team" },
