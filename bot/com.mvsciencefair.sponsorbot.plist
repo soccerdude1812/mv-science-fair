@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  RETIRED 2026-09-14. DO NOT INSTALL THIS.
+
+  Cold sponsorship outreach ended on the night of 2026-09-14 and a separate
+  sponsorship lead owns it now. The installed copy of this agent was booted out
+  mid-run, `launchctl disable`d, and moved to
+  ~/Library/LaunchAgents/disabled/ on eeshans-mac-mini.local.
+
+  This file is kept as the record of how the job was configured. Copying it back
+  into ~/Library/LaunchAgents would schedule run_daily.sh again, which now stops
+  and sends nothing, so the result would be a nightly no-op rather than mail.
+  That is a backstop, not a licence. See bot/README.md.
+-->
 <plist version="1.0">
 <dict>
   <key>Label</key>
