@@ -29,8 +29,12 @@ shoot() {  # url out.png height
     --screenshot="$2" "$1" 2>/dev/null
 }
 
-for src in booth-1-what booth-2-why booth-3-fairday booth-4-mentor; do
+# the slugs are the SHEETS keys and nowhere else: a second list is a second
+# thing to forget, and zsh expands a missing key to an empty filename rather
+# than complaining
+for src in ${(ko)SHEETS}; do
   name="${SHEETS[$src]}"
+  [[ -n "$name" ]] || { echo "no output name for $src" >&2; exit 1; }
   "$CHROME" --headless --disable-gpu --hide-scrollbars --virtual-time-budget=6000 \
     --no-pdf-header-footer --print-to-pdf-no-header \
     --print-to-pdf="$OUT/$name.pdf" "file://$PWD/$src.html" 2>/dev/null

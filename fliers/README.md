@@ -118,9 +118,26 @@ a clean one page PDF that looks finished until it is on a wall. Three of these
 four shipped that way on the first render.
 
 So every sheet is written twice: the real one, and a `.check.html` twin with the
-page height released. `render-booth.sh` shoots the twin into a 1500px window and
-`check-fit.mjs` fails if any ink lands below the 1056px fold, naming the sheet
-and how far over it ran. `./render-booth.sh` exits non-zero when one does.
+clipping released and nothing else. The page stays exactly 1056px, so what gets
+measured is the layout that gets printed rather than a reflowed approximation of
+it, and whatever the real page would have thrown away renders below the fold
+instead. `render-booth.sh` shoots the twin into a 1600px window and
+`check-fit.mjs` fails if any ink lands past 1056px, naming the sheet and how far
+over it ran. `./render-booth.sh` exits non-zero when one does.
+
+The check derives the device scale from the image rather than assuming it, and
+treats ink reaching the bottom edge of the capture as a failure too: that means
+the window ran out before the content did, so the shot proves nothing. All three
+branches are exercised against deliberately broken renders.
+
+A rebuild is never byte identical: Chrome stamps each PDF with a creation date
+and a document id. Compare the PNGs, which are deterministic, or the text layer
+(`pdftotext -layout`), and only replace the committed PDFs when one of those
+actually moves. The committed files are the ones that were printed.
+
+It does not catch content that is too big for the middle of the sheet. That row
+is `1fr` with its contents centred, so oversized content there overlaps its
+neighbours instead of falling off the page. That one is for the eye.
 
 ## Design
 
