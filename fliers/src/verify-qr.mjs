@@ -12,6 +12,7 @@ import { PNG } from "pngjs";
 import jsQR from "jsqr";
 
 const EXPECTED = {
+  "https://mvsciencefair.vercel.app": "MV Science Fair 2026",
   "https://docs.google.com/forms/d/1iuy7stpEJE6Espci9gCiEdNe06Cx0DR8I73fKNuyCbg/viewform":
     "MV Science Fair - Event-Day Volunteering Form",
   "https://docs.google.com/forms/d/1Go59zVliqQohI9kTUKptz8PFpYWdTSJbQ5qzyY6b2yY/viewform":
@@ -21,9 +22,19 @@ const EXPECTED = {
 const UA =
   "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1";
 
+/* The fliers carry two codes each, a booth sheet carries one. `--expect N`
+   applies to every file after it, so one invocation can check both. */
+let expect = 2;
+
 let failures = 0;
 
-for (const file of process.argv.slice(2)) {
+for (const arg of process.argv.slice(2)) {
+  const n = /^--expect=(\d+)$/.exec(arg);
+  if (n) {
+    expect = Number(n[1]);
+    continue;
+  }
+  const file = arg;
   const png = PNG.sync.read(await readFile(file));
   const data = new Uint8ClampedArray(png.data);
   console.log(`\n${file}  ${png.width}x${png.height}`);
@@ -54,12 +65,12 @@ for (const file of process.argv.slice(2)) {
         if (hit) found.add(hit.data);
       }
     }
-    if (found.size >= 2) break;
+    if (expect > 0 && found.size >= expect) break;
   }
   for (const url of found) console.log(`  decoded: ${url}`);
 
-  if (found.size !== 2) {
-    console.log(`  FAIL: expected 2 codes, decoded ${found.size}`);
+  if (found.size !== expect) {
+    console.log(`  FAIL: expected ${expect} code(s), decoded ${found.size}`);
     failures++;
   }
   for (const url of found) {

@@ -7,7 +7,9 @@
     "fonts": "node inline-fonts.mjs",
     "qr": "node make-qr.mjs",
     "build": "./render.sh",
-    "verify": "node verify-qr.mjs out/MV-Science-Fair-Volunteer-Slide-16x9.png out/MV-Science-Fair-Volunteer-Flier.png"
+    "verify": "node verify-qr.mjs out/MV-Science-Fair-Volunteer-Slide-16x9.png out/MV-Science-Fair-Volunteer-Flier.png",
+    "booth": "./render-booth.sh",
+    "booth:verify": "node verify-qr.mjs --expect=1 out/MV-Science-Fair-Booth-1-What-It-Is.png --expect=0 out/MV-Science-Fair-Booth-2-Why-Help.png --expect=1 out/MV-Science-Fair-Booth-3-Fair-Day.png out/MV-Science-Fair-Booth-4-Mentor.png"
   },
   "dependencies": {
     "jsqr": "^1.4.0",

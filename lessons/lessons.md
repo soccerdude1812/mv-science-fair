@@ -411,3 +411,13 @@
 **Fix:** a `streak` counter incremented on a non-throttle failure and reset to 0 on every success. Tested four ways with a loop simulator: scattered failures at 5/105/205 no longer stop (297 sent); three consecutive do stop; two, a success, then two more does not; ten throttles followed by twenty good sends does not.
 
 **Prevention:** when a condition's name contains "consecutive" or "in a row", the implementation needs a variable that resets. A slice of an append-only list cannot express it. Worth grepping for the same shape elsewhere.
+
+## [2026-09-14][fixed-height-print-sheets-clip-in-silence] Three of four booth sheets lost their footer and still rendered a clean one page PDF
+
+**Mistake:** the four club-fair booth sheets are `816 x 1056` CSS px with `.sheet { height: 1056px; overflow: hidden }`, inherited from the volunteer flier. Three of them had more content than that. Chrome rendered the top 11 inches, dropped the rest, and wrote a valid single page letter PDF for each. Sheet 3 lost the URL under its QR code, sheet 4 lost "Scan to sign up" and its URL, and sheet 1 lost the entire QR block, its label and the non-affiliation line. Every automated signal was green: four files written, one page each, 612 x 792 pts, right byte sizes.
+
+**Root cause:** `overflow: hidden` on a fixed-height page is a clipping instruction, and clipping is not an error. It exists on `.sheet` for a good reason, to keep the dotted ground and the characters inside the paper, so it cannot simply be removed. Nothing in the pipeline measured content height against page height, and the PDF page count, the pixel dimensions and the file size are all identical whether the content fits or overflows by 200px.
+
+**Fix:** every sheet is now written twice. The real one, and a `.check.html` twin carrying one extra rule, `.sheet { height: auto; min-height: 1056px; overflow: visible }`. `render-booth.sh` shoots the twin into a 1500px tall window and `check-fit.mjs` scans below the `1056px` fold for any pixel darker than the paper, failing with the sheet name and the overflow in px. It caught 67px on sheet 1 and 45px on sheet 4 after the first round of trimming, then 13px, then 5px, then 1px, until all four passed.
+
+**Prevention:** any fixed-size render, print sheet or slide, needs a check that the content fits, and the check has to run against a variant with the clipping released. Looking at the render works only if you look at the bottom edge and know what should be there. And the artifact-level checks that do exist here, page count, page size, QR decode, all pass on a clipped page, so none of them substitutes for it.

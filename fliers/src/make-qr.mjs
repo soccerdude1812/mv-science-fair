@@ -11,6 +11,10 @@ import QRCode from "qrcode";
 import { writeFile } from "node:fs/promises";
 
 const FORMS = {
+  /* The site itself, for the booth sheet that answers "what even is this".
+     Short host-only URL, so this one lands at 29x29 modules: the fattest
+     code on any of the sheets. */
+  "qr-site": "https://mvsciencefair.vercel.app",
   "qr-eventday": "https://docs.google.com/forms/d/1iuy7stpEJE6Espci9gCiEdNe06Cx0DR8I73fKNuyCbg/viewform",
   "qr-mentor": "https://docs.google.com/forms/d/1Go59zVliqQohI9kTUKptz8PFpYWdTSJbQ5qzyY6b2yY/viewform",
 };
