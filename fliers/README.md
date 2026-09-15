@@ -71,6 +71,57 @@ scan better off a wall.
 On the printed sheet the code box is 1.6 in, so a module is about 0.85 mm,
 comfortably above what a phone camera needs at arm's length.
 
+## Club-fair booth sheets
+
+Four 8.5 x 11 portrait sheets, made for the MVHS club fair on 2026-09-15: taped
+to a poster board and read by high schoolers walking past. One idea per sheet,
+in that order, so a passerby gets the pitch in the order they would ask for it.
+
+| File | Sheet | Carries |
+|------|-------|---------|
+| `MV-Science-Fair-Booth-1-What-It-Is.pdf` | What it is | Date, venue, who runs it, code to the site |
+| `MV-Science-Fair-Booth-2-Why-Help.pdf` | Why bother | Service hours, standing, the point. No code |
+| `MV-Science-Fair-Booth-3-Fair-Day.pdf` | Help on fair day | Giant code to the Event-Day Volunteering Form |
+| `MV-Science-Fair-Booth-4-Mentor.pdf` | Mentor a young scientist | Giant code to the Mentor Volunteer Interest Form |
+| `MV-Science-Fair-Booth-All-Four.pdf` | All four, in order | One print dialog instead of four |
+
+Each also ships as a 1632 x 2112 PNG (2x, ~192dpi) for anything that will not
+take a PDF.
+
+Sizes are blunt on purpose: `--u` is 34px, which puts headlines at 68 to 88px
+and floors body copy at 27px. Nothing on these sheets is caption sized except
+the one line of non-affiliation legal on sheet 1. The two sign-up codes are
+2.83in boxes, 1.47mm per module against the wall flier's 0.85mm, because these
+are read at poster distance over someone's shoulder.
+
+The audience is high schoolers, so judging is deliberately absent: `/judges`
+scopes judges to teachers, professionals and community members. The Sept 13
+application deadline is absent too, for the same reason it is absent from the
+volunteer flier, and because it has passed.
+
+```sh
+cd fliers/src
+npm install
+./render-booth.sh            # builds the HTML, renders 4 PDFs + 4 PNGs, checks fit
+npm run booth:verify         # decodes each code out of the render and fetches it
+```
+
+`build-booth.mjs` holds all four sheets' copy and layout. `chalk.mjs` holds what
+the booth sheets and the volunteer flier share: the tokens, the type, the dotted
+ground, the character cast and the page shell.
+
+### The fit check
+
+A fixed 816 x 1056 page clips in silence. Chrome renders the first 11 inches and
+throws the rest away, so a sheet whose footer fell off the bottom still produces
+a clean one page PDF that looks finished until it is on a wall. Three of these
+four shipped that way on the first render.
+
+So every sheet is written twice: the real one, and a `.check.html` twin with the
+page height released. `render-booth.sh` shoots the twin into a 1500px window and
+`check-fit.mjs` fails if any ink lands below the 1056px fold, naming the sheet
+and how far over it ran. `./render-booth.sh` exits non-zero when one does.
+
 ## Design
 
 Follows [`DESIGN.md`](../DESIGN.md) ("Chalk Lab"): the same tokens, the Source
