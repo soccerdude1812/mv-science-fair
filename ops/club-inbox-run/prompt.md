@@ -33,6 +33,11 @@ Other hard limits:
 - Never remove a Gmail label. Only add.
 - Never edit a `RAW · …` tab in any workbook. Those are written by Google Forms.
 - Never edit the site, the repo, or any Google Form's questions.
+- **Never draft anything to a business about sponsorship.** Sponsorship left this desk on
+  2026-09-14: cold outreach is over and a separate lead owns every business conversation.
+  Sponsor mail gets a label and one line in the report, and nothing else. This holds even
+  when a business asks a simple question, even when they are clearly about to say yes, and
+  even when nobody has answered them in a week.
 
 ---
 
@@ -132,7 +137,8 @@ one stops being updated. That happened on 2026-09-12.
    leave the key in place.
 
 `purpose` is one of: `decision`, `nudge`, `mentor-match`, `mentor-ack`, `judge-ack`,
-`volunteer-ack`, `sponsor-reply`, `safety-followup`.
+`volunteer-ack`, `safety-followup`. There is deliberately no `sponsor-reply`: this job
+does not draft to businesses. Existing `sponsor-reply` keys stay in the file as history.
 
 ---
 
@@ -220,10 +226,18 @@ with zero confirmed, say so at the top of the report every single day.
 **Event-day volunteers.** Acknowledge, confirm the 8:00 AM arrival, note service hours if
 they asked for them, and assign a role on the Volunteers tab.
 
-**Sponsors.** Anything that asks a question, requests a W-9, a 501(c)(3) letter or a tax
-ID, or proposes a call, is owed a reply. Autoresponders are not. Note that the club is not
-a 501(c)(3) and Ms. Gina Dunsmore, the faculty advisor, wants donations routed through the
-school finance office / ASB: never promise a tax receipt.
+**Sponsors. Read, label, list. Never draft.** Sponsorship left this desk on 2026-09-14
+and a separate sponsorship lead owns every business conversation now. When a business
+writes in, label the thread `Sponsors/Replied` and give it one line in the report under
+**Sponsorship, for the lead**: who wrote, when, and what they want. Then stop.
+
+Do not draft a reply. Do not answer a W-9, a 501(c)(3) letter, a tax ID or a call request,
+and do not promise, decline or negotiate anything, however easy the answer looks. Do not
+put sponsors in `Needs Reply` or `Overdue`; they have no service level here any more.
+Autoresponders, bounces and out-of-office replies are labeled and not listed at all.
+
+Nothing in this run ever initiates contact with a business. Cold sponsorship outreach is
+finished, and there is no circumstance in which this job restarts it.
 
 **Schools, teachers and the district.** Anything from `@mvwsd.org` or `@mvla.net` is
 high-priority by default.
@@ -251,8 +265,9 @@ their own signatures on 2026-09-01:
 **Gina Dunsmore advises the telescope project, not the science fair.** An earlier version of
 this brief named her as the fair's advisor and said donations must route through the school
 finance office. A search on 2026-09-01 found zero Dunsmore mail on the science fair and zero
-mail anywhere establishing a donation-routing rule. Do not repeat either claim, and do not
-write it to a sponsor, until something in the mail supports it.
+mail anywhere establishing a donation-routing rule. Do not repeat either claim until
+something in the mail supports it. Writing it to a sponsor is moot now in any case: this
+job no longer writes to businesses at all.
 
 Report only what is new since the last run or still outstanding. Never write to these
 mailboxes.
@@ -287,7 +302,6 @@ Measured from their last message, or from form submission if they never wrote.
 | Mentor request or offer | 1 day | 2 days |
 | Judge sign-up | 1 day | 2 days |
 | Event-day volunteer | 2 days | 4 days |
-| Sponsor question | 3 days | 7 days |
 | School, teacher or district | 1 day | 2 days |
 
 Anything past **Overdue** gets the `Overdue` label and goes at the top of the report with
@@ -308,7 +322,8 @@ the day count stated plainly.
 ## House voice for every letter this job writes
 
 The structure below is for family decision letters. **The length rule under Rules is for every
-address this job writes to**, mentors and sponsors and teachers included.
+address this job writes to**, mentors and judges and teachers included. Sponsors are
+absent from that list on purpose: this job writes to no business at all.
 
 Read the real thing before writing: the emails sent on 2026-09-01 to `mandakinirg@gmail.com`
 (approval) and `reemrahman@gmail.com` (changes requested) are the reference. Match them.
@@ -396,6 +411,9 @@ Report shape, most urgent first:
 ## Tracker changes    every cell written, with the evidence behind it
 ## Labels applied
 ## District and school context
+## Sponsorship, for the lead   businesses that wrote in: who, when, what they want.
+                     Labeled only. No drafts, no service level, no follow-up from this desk.
+                     Say "nothing new" when there is nothing new.
 ## Risks              judges, volunteers, deadlines, anything stale
 ## For Eeshan         only decisions that are genuinely his. Ideally none.
 ## Proof of no sends  raw output of in:sent newer_than:1d

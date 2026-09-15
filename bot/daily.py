@@ -484,6 +484,29 @@ def cmd_followups(args):
     return 0
 
 
+# RETIRED 2026-09-14. Cold sponsorship outreach ended and a separate lead owns
+# sponsorships now. `run_daily.sh` already stops, but the subcommands below are
+# documented in the README and reach the mailbox directly, so the two that put
+# outreach in front of a business are closed here as well:
+#
+#   send      - mails prospects. The only caller of messages().send in this repo.
+#   followups - drafts a chaser to businesses that never replied. Still outreach,
+#               and a draft sitting in the mailbox is one careless click from sent.
+#
+# status, needs-lines, needs-research and reconcile stay open: they read state and
+# write the workbook, and whoever inherits the replies will want them.
+#
+# To revive outreach, remove this set on purpose and say so to Eeshan first.
+RETIRED = {"send", "followups"}
+
+
+def refuse(cmd):
+    log(f"REFUSING: `{cmd}` is retired. Cold sponsorship outreach ended 2026-09-14 "
+        f"and a separate lead owns sponsorships now.")
+    log("Nothing was sent or drafted. See bot/README.md before changing this.")
+    return 2
+
+
 def main():
     p = argparse.ArgumentParser()
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -497,6 +520,8 @@ def main():
         s.add_argument("--wait", type=int, default=0,
                        help="minutes to wait for the 24h window to roll before sending")
     a = p.parse_args()
+    if a.cmd in RETIRED:
+        sys.exit(refuse(a.cmd))
     fn = {"status": cmd_status, "send": cmd_send, "followups": cmd_followups,
           "needs-lines": cmd_needs_lines, "needs-research": cmd_needs_research,
           "reconcile": cmd_reconcile}[a.cmd]

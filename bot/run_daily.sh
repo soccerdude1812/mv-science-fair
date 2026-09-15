@@ -38,14 +38,23 @@ run_limited() {  # run_limited SECONDS cmd...  (macOS has no coreutils timeout)
 say "=== MV sponsor bot, $DAY, cap $CAP, gap ${GAP}s ==="
 cd "$BOT" || exit 1
 
-# Eeshan scoped this to three days on 2026-09-13: tonight, the 14th and the 15th.
-# After that the job removes itself. A cold sponsorship ask in the last week
-# before the fair is worse than no ask at all, and after the fair it is noise.
-if [[ "$DAY" > "2026-09-15" ]]; then
-  say "the three day sprint is over. Unloading myself so this does not run again."
-  launchctl bootout "gui/$(id -u)/com.mvsciencefair.sponsorbot" 2>/dev/null
-  exit 0
-fi
+# RETIRED 2026-09-14, and this is not a date-based sunset any more.
+#
+# The three day sprint was scoped to the 13th, 14th and 15th. Eeshan ended the
+# whole programme on the night of the 14th instead: sponsorships now belong to a
+# separate lead who does not want cold outreach running. The run in progress was
+# booted out mid-batch at 23:40 having sent 102, the LaunchAgent is unloaded and
+# `launchctl disable`d, and its plist sits in ~/Library/LaunchAgents/disabled/.
+#
+# Nothing schedules this script. The stop below is for the manual path, because
+# the README still documents how to run the bot by hand and a future reader may
+# follow it without knowing the decision.
+#
+# To genuinely revive this, delete this block deliberately. There is no env var
+# and no flag that gets past it, on purpose.
+say "RETIRED 2026-09-14. Cold sponsorship outreach is over and a separate lead"
+say "owns sponsorships now. Nothing researched, drafted or sent. See README.md."
+exit 0
 
 # 0. Repair the dedupe before trusting it. A run killed mid-batch, or a machine
 #    that slept, leaves the Email Log naming fewer businesses than the mailbox

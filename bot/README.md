@@ -1,7 +1,51 @@
-# MV Science Fair sponsor bot
+# MV Science Fair sponsor bot — RETIRED 2026-09-14
 
-Runs daily on **eeshans-mac-mini.local** and sends sponsorship cold emails from the club
-inbox, researching new businesses when the queue runs low. Deployed at `~/mv-sponsor-bot`
+**This bot is off and is not coming back on a timer.** Eeshan ended cold sponsorship
+outreach on the night of 2026-09-14 and handed sponsorships to a separate lead, who has
+said they do not want it running. Everything below describes a programme that is over.
+It is kept because the mailbox holds **1,027** messages under the sponsorship subject,
+sent to **995** prospect rows, and those replies will keep arriving for weeks. Whoever
+handles them needs to know what was said. (Both numbers are counted, not estimated: a
+paged `in:sent subject:"Sponsoring a free science fair"` on 2026-09-15 returned 1,027, and
+`daily.py status` reports 995 pool rows marked emailed. The 32 message gap is not
+explained here: two of it is the killed run's unflushed checkpoint, the rest is probably
+follow-ups and hand sends under the same subject, and nobody has checked.)
+
+What was actually done, and verified:
+
+| Piece | State |
+|---|---|
+| `com.mvsciencefair.sponsorbot` LaunchAgent | booted out mid-run at 23:40 on 2026-09-14, `launchctl disable` applied, plist moved to `~/Library/LaunchAgents/disabled/com.mvsciencefair.sponsorbot.plist.retired-2026-09-15` |
+| `run_daily.sh`, both the deployed copy and this one | hard stop at the top; running it by hand logs the retirement and exits 0 without sending |
+| `~/mv-sponsor-bot` on the mini | code and logs left in place, nothing schedules it |
+| `.claude/skills/send-sponsor-emails` | rewritten to refuse; the original is beside it as `SKILL.md.retired-2026-09-15` |
+| `daily.py send` and `daily.py followups` | refuse and exit 2, on both copies. Tested live on the mini 2026-09-15. `status`, `reconcile`, `needs-lines` and `needs-research` still work |
+| Daily club inbox run | still runs at 07:00. It still drafts for families, mentors, judges, volunteers and the district, and now never drafts to a business |
+
+The **last batch** went out on 2026-09-14: 102 sent between 19:02 and 23:40, 0 failures,
+out of 454 that were queued and ready. The remaining ~352 were never mailed and must not
+be, and `daily.py status` will keep reporting them as "ready to send" forever. The run
+was killed between checkpoints, so the last two sends
+(`info@bffcu.org`, `bloombeautiful@yahoo.com`) reached their recipients without being
+written to the Email Log. That gap only matters if someone restarts outreach, which is
+exactly what is not happening. Gmail's Sent folder is the real record either way.
+
+**Inbound sponsor replies are not this bot's problem and not the inbox run's problem.**
+The daily run labels them `Sponsors/Replied` and lists them under "Sponsorship, for the
+lead" in its report. It writes nothing. Three replies were already drafted before the
+handover and are still sitting unsent in the club Drafts folder, for the lead to use or
+discard: Justin Rodriguez (Tee Rabbit), `tara@vitalitybowls.com`, and
+`henry@santacruzmuseum.org`.
+
+Do not restart any of this without Eeshan saying so explicitly and the sponsorship lead
+agreeing. A funding shortfall is not authorization.
+
+---
+
+## Historical: what it did while it ran
+
+Ran daily on **eeshans-mac-mini.local** and sent sponsorship cold emails from the club
+inbox, researching new businesses when the queue ran low. Deployed at `~/mv-sponsor-bot`
 on the mini; this directory is the version-controlled copy.
 
 ## What it does, in order
@@ -18,10 +62,11 @@ not actually mail anyone until 21:00 on a day the research stage ran long, which
 for a three day sprint is the wrong trade. Refill happens after the send, for
 tomorrow.
 
-Schedule: `com.mvsciencefair.sponsorbot` LaunchAgent, **19:00 Pacific daily**,
-`SPONSOR_CAP=300`, `SPONSOR_GAP=22`. It unloads itself after **2026-09-15**: Eeshan
-scoped this to three nights, and a cold ask in the last week before the fair is
-worse than no ask.
+Schedule, while it ran: `com.mvsciencefair.sponsorbot` LaunchAgent, **19:00 Pacific
+daily**, `SPONSOR_CAP=300`, `SPONSOR_GAP=22`. It was scoped to three nights with a
+date-based self-unload after 2026-09-15. That sunset never fired, because the programme
+was ended a night early by decision rather than by calendar. The date check has been
+replaced with an unconditional stop.
 
 ## The send budget, which is not a guess
 
@@ -85,6 +130,10 @@ wrote back. `club.HUMAN_SHEET` points at it.
 | `harvest/` | the deterministic prospect harvester. See its own README |
 
 ## Operating it
+
+**None of this should be run.** It is left here so the next reader can inspect state and
+read what was sent, not so they can send more. `run_daily.sh` refuses outright; the
+individual commands below still work and `daily.py send` still sends real mail.
 
 ```bash
 ssh eeshans-mac-mini.local
