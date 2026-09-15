@@ -230,10 +230,13 @@ const foot = ({ links = "", legal = false } = {}) => `<footer class="foot">
 
 /* A fixed 816x1056 page clips silently: anything taller is simply not printed,
    and a footer that fell off the bottom looks fine until it is on a wall. So
-   every sheet is also written with the page height released, and check-fit.mjs
-   renders THAT tall and fails if any ink lands below the 1056px fold. */
-const RELEASE_HEIGHT = `
-  .sheet { height: auto; min-height: 1056px; overflow: visible; }
+   every sheet is also written with the clipping released and nothing else.
+   The page stays exactly 1056px, so the layout is the one that gets printed
+   rather than a reflowed approximation of it, and whatever the real page
+   would have thrown away is rendered below the fold instead, where
+   check-fit.mjs can see it. */
+const RELEASE_CLIP = `
+  .sheet { overflow: visible; }
   `;
 
 const sheet = async ({ file, title, css = "", body }) => {
@@ -241,7 +244,7 @@ const sheet = async ({ file, title, css = "", body }) => {
   await writeFile(here(`./${file}`), page({ title, css: BOOTH + css, body: markup }));
   await writeFile(
     here(`./${file.replace(/\.html$/, ".check.html")}`),
-    page({ title: `${title} [fit check]`, css: BOOTH + css + RELEASE_HEIGHT, body: markup }),
+    page({ title: `${title} [fit check]`, css: BOOTH + css + RELEASE_CLIP, body: markup }),
   );
 };
 
