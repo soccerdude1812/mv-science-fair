@@ -41,6 +41,18 @@ done
 
 node check-fit.mjs "$OUT"/tall/*.png
 
+# one four page file too: a booth poster is printed in one go, and four separate
+# print dialogs is how a sheet gets left behind
+if (( $+commands[pdfunite] )); then
+  pdfunite "$OUT/MV-Science-Fair-Booth-1-What-It-Is.pdf" \
+           "$OUT/MV-Science-Fair-Booth-2-Why-Help.pdf" \
+           "$OUT/MV-Science-Fair-Booth-3-Fair-Day.pdf" \
+           "$OUT/MV-Science-Fair-Booth-4-Mentor.pdf" \
+           "$OUT/MV-Science-Fair-Booth-All-Four.pdf"
+else
+  echo "pdfunite not found (brew install poppler), skipping the combined file" >&2
+fi
+
 for f in "$OUT"/MV-Science-Fair-Booth-*.(pdf|png); do
   printf '%s  ' "$f"
   case "$f" in

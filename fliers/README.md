@@ -83,6 +83,7 @@ in that order, so a passerby gets the pitch in the order they would ask for it.
 | `MV-Science-Fair-Booth-2-Why-Help.pdf` | Why bother | Service hours, standing, the point. No code |
 | `MV-Science-Fair-Booth-3-Fair-Day.pdf` | Help on fair day | Giant code to the Event-Day Volunteering Form |
 | `MV-Science-Fair-Booth-4-Mentor.pdf` | Mentor a young scientist | Giant code to the Mentor Volunteer Interest Form |
+| `MV-Science-Fair-Booth-All-Four.pdf` | All four, in order | One print dialog instead of four |
 
 Each also ships as a 1632 x 2112 PNG (2x, ~192dpi) for anything that will not
 take a PDF.
