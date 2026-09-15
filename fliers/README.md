@@ -90,8 +90,8 @@ take a PDF.
 Sizes are blunt on purpose: `--u` is 34px, which puts headlines at 68 to 88px
 and floors body copy at 27px. Nothing on these sheets is caption sized except
 the one line of non-affiliation legal on sheet 1. The two sign-up codes are
-1.7in boxes, about 1.5mm per module, which is roughly double what the wall
-flier needs because these are read at poster distance.
+2.83in boxes, 1.47mm per module against the wall flier's 0.85mm, because these
+are read at poster distance over someone's shoulder.
 
 The audience is high schoolers, so judging is deliberately absent: `/judges`
 scopes judges to teachers, professionals and community members. The Sept 13
