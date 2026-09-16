@@ -1,8 +1,16 @@
-import { ArrowUpRight, Check, X } from "lucide-react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight, Check, X } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import FormCard from "@/components/FormCard";
 import EventDetails from "@/components/EventDetails";
-import { EVENT, APPLICATION_URL, MENTOR_REQUEST_URL } from "@/lib/event";
+import { EVENT, MENTOR_REQUEST_URL } from "@/lib/event";
+
+export const metadata: Metadata = {
+  title: "Forms",
+  description:
+    "Every MV Science Fair form, live and closed: safety approvals, mentor requests, judge and volunteer sign-ups.",
+};
 
 const CONSENT_RULES = [
   "Tell participants what your project is about and what they will be asked to do",
@@ -95,39 +103,47 @@ export default function FormsPage() {
     <div>
       <PageHero
         title="Forms"
-        subtitle="Everything in one place. Start with the Application & Registration Form."
+        subtitle="Every form the fair uses, live and closed, so you can see at a glance which ones still apply to you."
       />
 
       <div className="mx-auto max-w-4xl space-y-16 px-4 py-12 sm:px-6 sm:py-16 lg:px-8 sm:space-y-20">
-        {/* The application: the one form that enters you in the fair */}
+        {/* The application. Closed 2026-09-13, and deliberately NOT linked: the
+            URL is printed on a flier and sitting in inboxes, so the page has to
+            be able to name the form and say what happened to it without handing
+            anyone a live door into a shut window. */}
         <section className="reveal card-soft p-7 sm:p-10">
-          <span className="badge-accent">
-            Closes {EVENT.applicationDeadlineShort}, {EVENT.applicationDeadlineTime}
+          <span className="inline-flex items-center rounded-full bg-paper-warm px-[0.85rem] py-[0.3rem] text-[0.8125rem] font-semibold text-ink-faint">
+            Closed {EVENT.applicationDeadlineShort}
           </span>
           <h2 className="mt-5 text-2xl font-semibold sm:text-3xl">
             Application &amp; Registration Form
           </h2>
           <p className="mt-3 max-w-2xl text-ink-soft">
-            The one form you need to enter the 2026 MV Science Fair: project
-            details, parental consent, photo release, and liability waiver in
-            one place.
+            Applications closed {EVENT.applicationDeadlineFull}. Thirty-two
+            projects came in and thirty-one were approved, and every family has
+            had a decision by email.
           </p>
-          <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4">
+          <p className="mt-3 max-w-2xl text-ink-soft">
+            If you applied and have heard nothing, check your spam folder, then
+            write to{" "}
             <a
-              href={APPLICATION_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
+              href={`mailto:${EVENT.contactEmail}`}
+              className="font-semibold text-coral-deep hover:underline"
             >
-              Apply now
+              {EVENT.contactEmail}
             </a>
-            <p className="max-w-[38ch] text-sm leading-relaxed text-ink-faint">
-              We review as applications arrive. Apply early and start building
-              the moment you&apos;re approved.
-            </p>
-          </div>
+            .
+          </p>
+          <Link href="/fair-day" className="btn-ghost mt-7">
+            What happens on fair day
+            <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
+          </Link>
         </section>
 
+        {/* No `arrival` here on purpose. This page carries the judge and
+            event-day volunteer sign-ups further down, and they keep their own
+            check-in times: showing them the participants' 8:00 AM window would
+            be telling them to turn up an hour early. */}
         <EventDetails className="reveal" />
 
         {/* Safety forms: sent by us, only when a project needs one */}
@@ -137,9 +153,10 @@ export default function FormsPage() {
             <strong className="font-semibold text-ink">
               You don&apos;t submit these yourself.
             </strong>{" "}
-            Apply first. If your project involves human participants or
-            hazardous materials, we&apos;ll email you the right form after
-            review. They&apos;re listed here so you know what to expect.
+            If your project involves human participants or hazardous materials,
+            we emailed you the right form when we reviewed your application. If
+            one is still outstanding, finishing it is the most urgent thing on
+            your list: a project cannot be cleared for fair day without it.
           </p>
 
           <div className="mt-8 space-y-6">
@@ -281,8 +298,7 @@ export default function FormsPage() {
                   Application &amp; Registration Form
                 </p>
                 <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                  Submit first. This is the only form you need to enter. Closes{" "}
-                  {EVENT.applicationDeadlineFull}.
+                  Closed {EVENT.applicationDeadlineFull}. Nothing to do here.
                 </p>
               </div>
             </li>
@@ -292,12 +308,11 @@ export default function FormsPage() {
               </span>
               <div>
                 <p className="font-semibold text-ink">
-                  Safety forms, only if we ask
+                  Safety forms, only if we asked
                 </p>
                 <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                  After reviewing your application we&apos;ll email you the
-                  Human Participation or Hazardous Materials form if your
-                  project needs one.
+                  We emailed the Human Participation or Hazardous Materials form
+                  to the projects that need one. Due back before fair day.
                 </p>
               </div>
             </li>
@@ -318,7 +333,15 @@ export default function FormsPage() {
                   >
                     Request a high school mentor
                   </a>{" "}
-                  anytime during the process. Free and optional.
+                  any time before fair day. Free and optional, and most stuck
+                  points have a{" "}
+                  <Link
+                    href="/mentors"
+                    className="font-semibold text-coral-deep hover:underline"
+                  >
+                    fix you can try first
+                  </Link>
+                  .
                 </p>
               </div>
             </li>

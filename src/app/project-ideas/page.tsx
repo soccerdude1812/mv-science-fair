@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { Lightbulb } from "@/components/lab/cast";
-import { APPLICATION_URL } from "@/lib/event";
 import {
   CATEGORIES,
   PROJECT_IDEAS,
@@ -63,8 +62,8 @@ export default function ProjectIdeasPage() {
             <section key={category} className="reveal">
               <h2 className="display-section mb-2">{category}</h2>
               <p className="mb-8 text-ink-faint">
-                {ideas.length} ideas, and one of the four categories on the
-                application form.
+                {ideas.length} ideas, and one of the four categories projects
+                are judged in.
               </p>
 
               <ul className="grid gap-5 sm:grid-cols-2">
@@ -115,28 +114,27 @@ export default function ProjectIdeasPage() {
           );
         })}
 
-        {/* Apply */}
+        {/* Entries are closed; these pages earn their keep as worked examples.
+            Each one carries a question, variables, trials and a way to chart the
+            result, which is exactly what an approved project still has to get
+            right before the 26th. */}
         <section className="reveal dotted-band rounded-2xl border border-line p-8 text-center sm:p-10">
-          <h2 className="display-section mb-3">Found one you like?</h2>
+          <h2 className="display-section mb-3">Already have a project?</h2>
           <p className="mx-auto mb-8 max-w-xl text-lg text-ink-soft">
-            You do not need a finished project to apply. Tell us the question
-            you want to answer and we will take it from there.
+            Entries for 2026 are closed, and these are still worth reading. Every
+            one shows how to turn a question into trials you can measure and a
+            chart you can defend.
           </p>
-          <a
-            href={APPLICATION_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary"
-          >
-            Apply now
-          </a>
+          <Link href="/the-process" className="btn-ghost">
+            The get ready guide
+          </Link>
           <p className="mt-6 text-[0.95rem] text-ink-soft">
-            Not sure how the whole thing works?{" "}
+            Stuck on yours?{" "}
             <Link
-              href="/the-process"
+              href="/mentors"
               className="font-medium text-coral-deep hover:underline"
             >
-              Read the process guide
+              Here is what to do about it
             </Link>
             .
           </p>

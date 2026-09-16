@@ -1,77 +1,49 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { APPLICATION_URL } from "@/lib/event";
 
 /**
- * One-line light nav (68px). Four student-facing destinations, a Support
- * disclosure for the two "help us run this" pages, and the single Apply CTA.
+ * One-line light nav (68px). Five destinations and the single Fair day CTA.
  * Every other page is reachable from the footer sitemap; the mobile sheet
  * lists everything.
  *
- * Support is a disclosure (button + region), not an ARIA menu. Its contents
- * are plain links, so the native tab order already does the right thing and
- * menu roles would only take keyboard behaviour away from the browser.
+ * Rebuilt 2026-09-15, when applications closed:
+ * - The CTA is now "Fair day" and points at an internal route, so it is a
+ *   Link rather than the external anchor the application form needed.
+ * - The Support disclosure is gone. Judges and Volunteer were promoted out of
+ *   it into the top line because fair day is eleven days away and sign-ups sat
+ *   at 2 and 0; Sponsors dropped to the footer sitemap because cold outreach is
+ *   retired. Five short labels plus the pill measure narrower than the four
+ *   long ones they replace, so the md-breakpoint squeeze the old layout fought
+ *   does not come back.
+ * - "How it works" is now "Get ready". Same route, because it is linked from
+ *   outside; different promise, because the process is half done.
  */
 
 const primaryLinks = [
-  { href: "/the-process", label: "How it works" },
-  { href: "/forms", label: "Forms" },
+  { href: "/the-process", label: "Get ready" },
+  { href: "/mentors", label: "Mentors" },
   { href: "/rules", label: "Rules" },
-  { href: "/project-ideas", label: "Project ideas" },
-];
-
-const supportLinks = [
-  {
-    href: "/volunteer",
-    label: "Volunteer",
-    blurb: "Judge, mentor, or help on fair day",
-  },
-  {
-    href: "/sponsors",
-    label: "Sponsors",
-    blurb: "Fund supplies, snacks, and awards",
-  },
+  { href: "/judges", label: "Judges" },
+  { href: "/volunteer", label: "Volunteer" },
 ];
 
 const sheetOnlyLinks = [
   { href: "/display-and-safety", label: "Display & Safety" },
   { href: "/example-boards", label: "Example boards" },
-  { href: "/judges", label: "Judges" },
+  { href: "/project-ideas", label: "Project ideas" },
+  { href: "/forms", label: "Forms" },
   { href: "/students-families", label: "Students & Families" },
+  { href: "/sponsors", label: "Sponsors" },
   { href: "/team", label: "Our team" },
 ];
 
-function Chevron({ open }: { open: boolean }) {
-  return (
-    <svg
-      aria-hidden="true"
-      width="11"
-      height="11"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={`transition-transform duration-200 ${open ? "-rotate-180" : ""}`}
-    >
-      <polyline points="6 9 12 15 18 9" />
-    </svg>
-  );
-}
-
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [supportOpen, setSupportOpen] = useState(false);
   const pathname = usePathname();
   const close = () => setOpen(false);
-
-  const supportRef = useRef<HTMLDivElement>(null);
-  const supportButtonRef = useRef<HTMLButtonElement>(null);
-  const supportActive = supportLinks.some(({ href }) => pathname === href);
 
   // lock scroll while the sheet is open
   useEffect(() => {
@@ -81,28 +53,8 @@ export default function Navbar() {
     };
   }, [open]);
 
-  // pointerdown, not click: a press that starts outside should dismiss even if
-  // it ends on something else entirely
-  useEffect(() => {
-    if (!supportOpen) return;
-    const onPointerDown = (e: PointerEvent) => {
-      if (!supportRef.current?.contains(e.target as Node)) setSupportOpen(false);
-    };
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key !== "Escape") return;
-      setSupportOpen(false);
-      supportButtonRef.current?.focus();
-    };
-    document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [supportOpen]);
-
   const navLinkClass = (active: boolean) =>
-    `rounded-full px-2.5 py-2 text-[0.875rem] font-medium transition-colors lg:px-4 lg:text-[0.95rem] ${
+    `rounded-full px-2.5 py-2 text-[0.875rem] font-medium transition-colors lg:px-3.5 lg:text-[0.95rem] ${
       active
         ? "bg-paper-warm text-ink"
         : "text-ink-soft hover:bg-paper-warm hover:text-ink"
@@ -121,10 +73,9 @@ export default function Navbar() {
           MV Science Fair
         </Link>
 
-        {/* Four links, the Support disclosure, and the CTA is a tight fit at the
-            md breakpoint, so the chip padding and type step down between 768px
-            and 1024px and only open back up on real desktop. Measured: without
-            this the logo and the first link touch at exactly 768px. */}
+        {/* Five links plus the CTA is a tight fit at the md breakpoint, so the
+            chip padding and type step down between 768px and 1024px and only
+            open back up on real desktop. */}
         <div className="hidden items-center gap-0.5 md:flex lg:gap-1">
           {primaryLinks.map(({ href, label }) => (
             <Link
@@ -136,74 +87,12 @@ export default function Navbar() {
             </Link>
           ))}
 
-          <div
-            ref={supportRef}
-            className="relative"
-            onBlur={(e) => {
-              if (!e.currentTarget.contains(e.relatedTarget as Node)) {
-                setSupportOpen(false);
-              }
-            }}
-          >
-            <button
-              ref={supportButtonRef}
-              type="button"
-              id="support-menu-button"
-              aria-expanded={supportOpen}
-              /* Only while the panel is mounted. A permanent aria-controls
-                 would dangle in the closed state, which axe flags under
-                 aria-valid-attr-value; aria-expanded carries the state on its
-                 own regardless. */
-              aria-controls={supportOpen ? "support-menu" : undefined}
-              onClick={() => setSupportOpen((v) => !v)}
-              className={`flex items-center gap-1.5 ${navLinkClass(
-                supportActive || supportOpen,
-              )}`}
-            >
-              Support
-              <Chevron open={supportOpen} />
-            </button>
-
-            {supportOpen && (
-              <div
-                id="support-menu"
-                aria-labelledby="support-menu-button"
-                className="nav-dropdown-enter absolute right-0 top-full mt-2 w-[17rem] overflow-hidden rounded-2xl border border-line bg-paper p-1.5"
-                style={{ boxShadow: "var(--shadow-lg)" }}
-              >
-                {supportLinks.map(({ href, label, blurb }) => (
-                  <Link
-                    key={href}
-                    href={href}
-                    /* Closing here rather than on a pathname effect: clicking
-                       the link for the page you are already on is a no-op
-                       navigation, so pathname never changes and an effect
-                       would leave the panel stuck open. */
-                    onClick={() => setSupportOpen(false)}
-                    className={`block rounded-xl px-3.5 py-3 transition-colors ${
-                      pathname === href ? "bg-paper-warm" : "hover:bg-paper-warm"
-                    }`}
-                  >
-                    <span className="block text-[0.95rem] font-semibold text-ink">
-                      {label}
-                    </span>
-                    <span className="mt-0.5 block text-[0.8rem] leading-snug text-ink-faint">
-                      {blurb}
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <a
-            href={APPLICATION_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/fair-day"
             className="btn-primary ml-2 !px-3.5 !py-2.5 text-[0.875rem] lg:ml-3 lg:!px-5 lg:text-[0.95rem]"
           >
-            Apply now
-          </a>
+            Fair day
+          </Link>
         </div>
 
         <button
@@ -241,6 +130,15 @@ export default function Navbar() {
       {open && (
         <div className="mobile-menu-enter border-t border-line bg-paper md:hidden">
           <div className="mx-auto max-w-6xl space-y-1 px-4 py-4">
+            {/* The CTA leads the sheet rather than closing it: on a phone the
+                most important destination should not be below seven links. */}
+            <Link
+              href="/fair-day"
+              onClick={close}
+              className="btn-primary mb-3 w-full"
+            >
+              Fair day details
+            </Link>
             {[...primaryLinks, ...sheetOnlyLinks].map(({ href, label }) => (
               <Link
                 key={href}
@@ -255,33 +153,6 @@ export default function Navbar() {
                 {label}
               </Link>
             ))}
-
-            {/* Same grouping as the desktop disclosure, flattened: on a phone a
-                nested toggle is one more tap for no gain. */}
-            <p className="data-label px-4 pt-4 pb-1">Support</p>
-            {supportLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={close}
-                className={`block rounded-2xl px-4 py-3 text-[1.05rem] font-medium ${
-                  pathname === href
-                    ? "bg-paper-warm text-ink"
-                    : "text-ink-soft hover:bg-paper-warm"
-                }`}
-              >
-                {label}
-              </Link>
-            ))}
-
-            <a
-              href={APPLICATION_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary mt-3 w-full"
-            >
-              Apply now
-            </a>
           </div>
         </div>
       )}

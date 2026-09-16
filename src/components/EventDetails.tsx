@@ -3,11 +3,17 @@ import { EVENT } from "@/lib/event";
 /**
  * Compact date / time / venue banner. Used on subpages so families,
  * judges, and volunteers see the logistics without going back home.
+ *
+ * `arrival` adds the participant arrival window under the time. It is opt-in
+ * rather than always-on because judges and volunteers keep their own schedules,
+ * and telling them to turn up at 8:00 would simply be wrong.
  */
 export default function EventDetails({
   className = "",
+  arrival = false,
 }: {
   className?: string;
+  arrival?: boolean;
 }) {
   return (
     <section
@@ -26,6 +32,11 @@ export default function EventDetails({
           <dt className="data-label mb-1.5">Time</dt>
           <dd className="font-semibold leading-snug text-ink">
             {EVENT.timeFull}
+            {arrival && (
+              <span className="mt-1 block text-sm font-normal text-ink-soft">
+                Arrival and setup {EVENT.arrivalWindowFull}
+              </span>
+            )}
           </dd>
         </div>
 

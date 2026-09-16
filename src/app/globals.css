@@ -17,13 +17,31 @@
   --card-surface: #ffffff;
   --ink: #22211c;
   --ink-soft: #5a574c;
-  --ink-faint: #8c8779;
+  /* Was #8c8779 until 2026-09-15. Every single use of this token is TEXT:
+     data labels at 11px, captions, card hints, the footer disclaimer, the
+     timeline dates. At #8c8779 it measured 3.1 to 3.6:1 against the three page
+     grounds, so all of it failed WCAG AA, on a site whose readers are parents
+     squinting at a phone. Deepened to the same warm family at 5.2:1 on paper,
+     4.8:1 on paper-warm and 5.7:1 on white. It is still clearly lighter than
+     --ink-soft, and size and weight carry most of the hierarchy anyway.
+     A colour named "faint" that carries words still has to be legible. */
+  --ink-faint: #6b675a;
   --line: rgba(34, 33, 28, 0.12);
   --line-strong: rgba(34, 33, 28, 0.25);
 
   /* --- the crayon box --- */
+  /* Two corals, and the split is the point.
+     --coral is a FILL you look at: beaker liquid, chips, bullet dots, the
+     character pigment. It is the brand hue and it has not moved.
+     --coral-deep is a colour you READ: link text, and the primary button's
+     ground under white text. It was #c25a3e, which measured 3.3:1 under the
+     button label and 3.7:1 as a link on the footer band, both failing WCAG AA.
+     Deepened 2026-09-15 to clear 4.5:1 everywhere it carries type:
+     5.7:1 under button text, 5.2:1 as a link on paper, 4.9:1 on paper-warm,
+     4.7:1 on coral-soft. --coral-press is the pressed/hover ground. */
   --coral: #d96c4f;
-  --coral-deep: #c25a3e;
+  --coral-deep: #ae4527;
+  --coral-press: #8f3820;
   --coral-soft: #f8e6df;
   --blue: #4e7dc4;
   --blue-soft: #e4ecf7;
@@ -75,6 +93,7 @@
   --color-line-strong: var(--line-strong);
   --color-coral: var(--coral);
   --color-coral-deep: var(--coral-deep);
+  --color-coral-press: var(--coral-press);
   --color-coral-soft: var(--coral-soft);
   --color-blue: var(--blue);
   --color-blue-soft: var(--blue-soft);
@@ -197,8 +216,9 @@ h1, h2, h3, h4 {
 }
 
 /* ===== BUTTONS ===== */
-/* Radius system: interactive = pill, containers = 16px. One apply
-   label site-wide: "Apply now", always .btn-primary. */
+/* Radius system: interactive = pill, containers = 16px. The site-wide CTA is
+   "Fair day", always .btn-primary; a subpage whose whole job is one action
+   gets its own single .btn-primary. Everything else is .btn-ghost. */
 
 .btn-primary,
 .btn-ghost {
@@ -222,12 +242,14 @@ h1, h2, h3, h4 {
 }
 
 .btn-primary {
-  background: var(--coral);
+  /* --coral-deep, not --coral: white on #d96c4f measures 3.3:1, and the primary
+     CTA is the last element on the site that should be hard to read. */
+  background: var(--coral-deep);
   color: #fffdf9;
   box-shadow: var(--shadow-sm);
 }
 .btn-primary:hover {
-  background: var(--coral-deep);
+  background: var(--coral-press);
   box-shadow: var(--shadow-md);
 }
 .btn-primary:active {

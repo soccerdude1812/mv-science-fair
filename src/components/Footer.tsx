@@ -1,14 +1,16 @@
 import Link from "next/link";
-import { EVENT, APPLICATION_URL } from "@/lib/event";
+import { EVENT } from "@/lib/event";
 
 const sitemap = [
   { href: "/", label: "Home" },
-  { href: "/the-process", label: "How it works" },
-  { href: "/project-ideas", label: "Project ideas" },
-  { href: "/rules", label: "Rules" },
-  { href: "/forms", label: "Forms" },
+  { href: "/fair-day", label: "Fair day" },
+  { href: "/the-process", label: "Get ready" },
+  { href: "/mentors", label: "Stuck? Get help" },
   { href: "/display-and-safety", label: "Display & Safety" },
   { href: "/example-boards", label: "Example boards" },
+  { href: "/rules", label: "Rules" },
+  { href: "/project-ideas", label: "Project ideas" },
+  { href: "/forms", label: "Forms" },
   { href: "/judges", label: "Judges" },
   { href: "/volunteer", label: "Volunteer" },
   { href: "/students-families", label: "Students & Families" },
@@ -74,20 +76,18 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                Applications close{" "}
-                <span className="font-semibold text-coral-deep">
-                  {EVENT.applicationDeadlineFull}
+                Participants arrive and set up{" "}
+                <span className="font-semibold text-ink">
+                  {EVENT.arrivalWindowFull}
                 </span>
               </li>
               <li>
-                <a
-                  href={APPLICATION_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/fair-day"
                   className="font-semibold text-coral-deep hover:underline"
                 >
-                  Apply now
-                </a>
+                  Everything about fair day
+                </Link>
               </li>
             </ul>
           </div>

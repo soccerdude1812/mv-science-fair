@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { EVENT } from "@/lib/event";
+
+export const metadata: Metadata = {
+  title: "Display & Safety",
+  description:
+    "Board size limits, the eight display rules, and the checklist to run before you leave for the MV Science Fair.",
+};
 
 const rules = [
   {
@@ -72,6 +80,7 @@ const boardSections = [
 ];
 
 const checklist = [
+  `Route and departure time worked out for the ${EVENT.arrivalWindowFull} setup window`,
   "Display fits on a table, no floor displays",
   'Height: 66" or less from the table surface',
   'Depth: 30" or less',
@@ -160,7 +169,7 @@ export default function DisplayAndSafetyPage() {
         <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
           <h2 className="display-section reveal">Quick reference checklist</h2>
           <p className="reveal mt-3 text-ink-soft">
-            Run through this before you leave for the fair.
+            Run through this the night before you leave for the fair.
           </p>
           <div className="reveal stagger-1 card-soft mt-8 p-6 sm:p-8">
             <ul className="grid gap-x-10 gap-y-3 sm:grid-cols-2">

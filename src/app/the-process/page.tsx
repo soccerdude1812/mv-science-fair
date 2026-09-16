@@ -1,10 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import CollapsibleSection from "@/components/CollapsibleSection";
 import EventDetails from "@/components/EventDetails";
-import { EVENT, APPLICATION_URL, MENTOR_REQUEST_URL } from "@/lib/event";
+import { EVENT, MENTOR_REQUEST_URL } from "@/lib/event";
 import Timeline from "@/components/Timeline";
+
+export const metadata: Metadata = {
+  title: "Get ready",
+  description:
+    "The full guide from experiment to fair day: running trials, making sense of your data, building the board, and practising for judges.",
+};
 
 function BulletList({ items }: { items: React.ReactNode[] }) {
   return (
@@ -40,19 +47,19 @@ export default function TheProcessPage() {
   return (
     <>
       <PageHero
-        title="The Process"
-        subtitle="Your step-by-step guide from first question to fair day."
+        title="Get ready"
+        subtitle="Your project is approved and fair day is close. Here is everything between now and the morning of the 26th, start to finish."
       />
 
       {/* Timeline roadmap */}
       <section className="dotted-band py-12 sm:py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <EventDetails className="reveal mb-12" />
+          <EventDetails className="reveal mb-12" arrival />
           <div className="reveal mb-12 text-center">
             <h2 className="display-section">Science Fair Roadmap</h2>
             <p className="mx-auto mt-3 max-w-xl text-ink-soft">
-              Five milestones from application to fair day. Click any step for
-              details.
+              Five milestones from application to fair day. Two are behind you.
+              Click any step for details.
             </p>
           </div>
           <Timeline />
@@ -62,43 +69,31 @@ export default function TheProcessPage() {
       {/* ── Section 1: Before You Start ── */}
       <section className="border-t border-line py-12 sm:py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading num="01" title="Before You Start" />
+          <SectionHeading num="01" title="Your Project" />
 
           <div className="reveal stagger-1">
-            <CollapsibleSection title="Topic Selection" defaultOpen={false}>
+            <CollapsibleSection
+              title="Your category, and the ground rules"
+              defaultOpen={false}
+            >
               <p className="mb-2 font-display text-lg font-medium text-ink">
-                The best projects come from your curiosity.
+                Your topic is settled. These are the rules it has to keep.
               </p>
               <p className="mb-6">
-                What do you wonder about? What would you love to explore?
+                You picked a question when you applied and we approved it, so
+                nothing here is a decision you still have to make. It is the
+                reference: which category you are judged in, what every project
+                has to do, and the handful of rules that apply to all of them.
               </p>
-
-              <h4 className="mb-2 text-base font-semibold">
-                What excites you?
-              </h4>
-              <BulletList
-                items={[
-                  "What problems in the world do you wish you could solve?",
-                  "What cool science topics have you heard about?",
-                  "What have you loved learning about in school?",
-                  "What jobs in science or technology interest you?",
-                  "What are you passionate about outside of school?",
-                ]}
-              />
-              <p className="mt-5">
-                <strong className="text-ink">Tip:</strong> pick two or three
-                ideas at first, so you have backups if one doesn&apos;t work
-                out.
-              </p>
-              <p className="mt-4">
-                Stuck?{" "}
+              <p className="mb-6">
+                Want to see how other projects handle the same shape?{" "}
                 <Link
                   href="/project-ideas"
                   className="font-semibold text-coral-deep hover:underline"
                 >
-                  Browse twelve example projects
+                  Twelve worked examples
                 </Link>{" "}
-                with materials, steps, and ways to make each one your own.
+                lay out materials, steps and how each one measures its result.
               </p>
 
               <div className="mt-6 border-t border-line pt-5">
@@ -158,14 +153,15 @@ export default function TheProcessPage() {
                   ))}
                 </div>
                 <p className="mt-5">
-                  Be sure to{" "}
+                  Your category is the one you chose on your application, and it
+                  is the group you are judged in. The{" "}
                   <Link
                     href="/rules"
                     className="font-medium text-coral-deep hover:underline"
                   >
-                    check the rules
+                    full rules
                   </Link>{" "}
-                  before settling on a topic.
+                  cover the rest.
                 </p>
               </div>
 
@@ -249,70 +245,95 @@ export default function TheProcessPage() {
           </div>
 
           <div className="reveal stagger-3">
-            <CollapsibleSection title="Mentors">
+            <CollapsibleSection title="Mentors, and getting unstuck">
               <p>
                 Mentors are high school student volunteers from the{" "}
-                {EVENT.organizer}. They guide you through the scientific
-                method, help you stay organized, and offer encouragement along
-                the way.
+                {EVENT.organizer}. They ask the questions that move a project
+                along, help you stay organized, and tell you honestly when
+                something needs another look.
               </p>
-              <p className="mt-3 text-sm text-ink-faint">
-                Typical commitment: about 1 to 2 hours per week.
+              <p className="mt-3">
+                With the fair this close, a mentor means a session or two on the
+                one thing that is blocking you, usually over video, rather than
+                a commitment stretching over months.
               </p>
               <p className="mt-4">
-                Want one?{" "}
+                Most stuck points have a fix you can apply today.{" "}
+                <Link
+                  href="/mentors"
+                  className="font-semibold text-coral-deep hover:underline"
+                >
+                  Start with the four common ones
+                </Link>
+                , or go straight to{" "}
                 <a
                   href={MENTOR_REQUEST_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-semibold text-coral-deep hover:underline"
                 >
-                  Request a high school mentor
-                </a>{" "}
-                at any point, before or after you apply. Mentors are free, and
-                you can ask for one later if you change your mind.
+                  requesting a mentor
+                </a>
+                . Both are free, and a parent or guardian fills in the form.
               </p>
             </CollapsibleSection>
           </div>
         </div>
       </section>
 
-      {/* ── Section 2: Apply to the Fair ── */}
+      {/* ── Section 2: You are in ──
+          Was "Apply to the Fair" until 2026-09-15. Applications closed on the
+          13th, so the section that used to carry the application button now
+          answers the question an approved family actually has: what happens
+          between the approval email and fair day. */}
       <section className="border-t border-line py-12 sm:py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading num="02" title="Apply to the Fair" />
+          <SectionHeading num="02" title="You Are In" />
 
           <div className="reveal stagger-1">
             <CollapsibleSection
-              title="Step 1: The Application Form"
+              title="Applications are closed"
               defaultOpen={false}
             >
-              <p className="mb-6">
-                One form covers registration, consent, and your project. About
-                the project we ask two things: what it is, and how you plan to
-                do it, 100 to 200 words each. Applications close{" "}
-                {EVENT.applicationDeadlineFull}.
+              <p className="mb-4">
+                Applications closed {EVENT.applicationDeadlineFull}. Every
+                family who applied has had a decision by email, along with notes
+                on the project itself and the date and address for the morning.
               </p>
-              <a
-                href={APPLICATION_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                Apply now
-              </a>
+              <p className="mb-4">
+                If you applied and nothing has arrived, check your spam folder
+                first, then write to us at{" "}
+                <a
+                  href={`mailto:${EVENT.contactEmail}`}
+                  className="font-semibold text-coral-deep hover:underline"
+                >
+                  {EVENT.contactEmail}
+                </a>{" "}
+                and we will sort it out.
+              </p>
+              <p>
+                Everything from here is about the work and the morning of the
+                26th.{" "}
+                <Link
+                  href="/fair-day"
+                  className="font-semibold text-coral-deep hover:underline"
+                >
+                  See how fair day runs
+                </Link>
+                .
+              </p>
             </CollapsibleSection>
           </div>
 
           <div className="reveal stagger-2">
-            <CollapsibleSection title="Step 2: Safety Forms, Only If We Ask">
+            <CollapsibleSection title="Safety Forms, Only If We Asked">
               <p className="mb-2">
                 <strong className="text-ink">
                   Don&apos;t submit these yourself.
                 </strong>{" "}
-                We review every application, and if your project needs one we
-                email it to you during the approval round. Most projects need
-                nothing extra. The two we may send:
+                We reviewed every application, and if your project needed one we
+                emailed it to you during the approval round. Most projects need
+                nothing extra. The two we send:
               </p>
               <BulletList
                 items={[
@@ -339,24 +360,28 @@ export default function TheProcessPage() {
                 >
                   Forms page
                 </Link>
-                , but wait for our email before filling one out.
+                . If we asked you for one and it is still outstanding, that is
+                the thing to finish first: a project cannot be cleared for fair
+                day without it.
               </p>
             </CollapsibleSection>
           </div>
 
           <div className="reveal stagger-3">
-            <CollapsibleSection title="What Happens Next (Pre-Approval)">
+            <CollapsibleSection title="If Your Project Has Changed">
               <p className="mb-4">
-                After you submit, the Science Fair Committee reviews your
-                project proposal.
+                Projects move as you work on them, and that is normal. A
+                different number of trials, a new way of measuring, or a
+                question you have sharpened does not need our permission.
               </p>
               <p className="border-t border-line pt-4">
                 <strong className="text-ink">
-                  Wait for a confirmation email before starting your
-                  experiment.
+                  Tell us if the safety picture changes.
                 </strong>{" "}
-                The committee needs to verify that your project meets all
-                safety and ethical guidelines.
+                If your project has picked up chemicals, heat, electrical
+                equipment, sharp tools, or people answering questions since you
+                applied, email us before you run it. That is the one kind of
+                change we need to hear about.
               </p>
             </CollapsibleSection>
           </div>
@@ -507,9 +532,9 @@ export default function TheProcessPage() {
           </p>
 
           <div className="reveal stagger-2">
-            <h4 className="mb-4 text-base font-semibold">
+            <h3 className="mb-4 text-base font-semibold">
               Your board must include all of the following:
-            </h4>
+            </h3>
             <ul className="grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
               {[
                 "Title",
