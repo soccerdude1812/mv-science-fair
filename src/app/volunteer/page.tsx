@@ -1,9 +1,16 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import EventDetails from "@/components/EventDetails";
 import { Lightbulb } from "@/components/lab/cast";
 import { EVENT } from "@/lib/event";
 import { Check, ExternalLink } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Volunteer",
+  description:
+    "Help run the MV Science Fair on the morning of September 26: setup, check-in, guiding visitors, and cleanup.",
+};
 
 export default function VolunteerPage() {
   return (

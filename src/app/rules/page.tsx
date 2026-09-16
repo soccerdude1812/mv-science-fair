@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
+
+export const metadata: Metadata = {
+  title: "Rules & Guidelines",
+  description:
+    "The MV Science Fair rulebooks: eligibility, categories, human participants, hazardous materials, and mentors.",
+};
 
 const supplements = [
   {

@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import EventDetails from "@/components/EventDetails";
 import { Magnifier } from "@/components/lab/cast";
 import { EVENT } from "@/lib/event";
+
+export const metadata: Metadata = {
+  title: "Become a judge",
+  description:
+    "Judge student projects on the morning of the MV Science Fair. Rubrics and training provided, no judging experience needed.",
+};
 
 const JUDGE_SIGNUP_URL =
   "https://docs.google.com/forms/d/14Yo2IgS-PAsYNIFac4pzJRdTMX6xEnjtGslqGtAx6TQ/viewform";

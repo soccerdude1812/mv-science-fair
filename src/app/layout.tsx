@@ -3,7 +3,7 @@ import { Source_Serif_4, Outfit, JetBrains_Mono } from "next/font/google";
 import ConditionalChrome from "@/components/ConditionalChrome";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { EVENT, APPLICATION_URL } from "@/lib/event";
+import { EVENT } from "@/lib/event";
 
 /* Chalk Lab type stack (DESIGN.md): Source Serif 4 display,
    Outfit body/UI, JetBrains Mono for small data labels only. */
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     default: "MV Science Fair 2026",
     template: "%s | MV Science Fair 2026",
   },
-  description: `Inspiring young scientists in Mountain View! The 2026 MV Science Fair is ${EVENT.dateFull}, ${EVENT.timeFull}, at ${EVENT.venueName} (${EVENT.venueRoom}). Organized by the ${EVENT.organizer}, open to grades 3-5. Applications close ${EVENT.applicationDeadline}.`,
+  description: `The 2026 MV Science Fair is ${EVENT.dateFull}, ${EVENT.timeFull}, at ${EVENT.venueName} (${EVENT.venueRoom}). Thirty-one projects by Mountain View students in grades 3 to 5, organized by the ${EVENT.organizer}. Free, and open to families.`,
   keywords: [
     "science fair",
     "MV Science Fair",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "MV Science Fair 2026",
-    description: `${EVENT.dateFull} · ${EVENT.timeFull} · ${EVENT.venueName}, ${EVENT.venueAddress}. Open to grades 3-5. Applications close ${EVENT.applicationDeadline}.`,
+    description: `${EVENT.dateFull} · ${EVENT.timeFull} · ${EVENT.venueName}, ${EVENT.venueAddress}. Student projects from grades 3 to 5. Free, and open to families.`,
     type: "website",
     locale: "en_US",
   },
@@ -83,15 +83,20 @@ const eventJsonLd = {
     email: EVENT.contactEmail,
   },
   isAccessibleForFree: true,
-  /* Free registration, expressed as an Offer so search engines can show the
-     application window and stop surfacing the event once entries have closed. */
+  /* Free admission, expressed as an Offer so search engines keep showing the
+     event as something you can turn up to.
+     Changed 2026-09-15: this used to describe ENTERING the fair, pointing at
+     the application form and expiring at the Sept 13 deadline. Left alone it
+     would have gone stale the moment applications closed and told Google the
+     event was no longer available. It now describes ATTENDING, which is true
+     until the fair itself ends. */
   offers: {
     "@type": "Offer",
-    url: APPLICATION_URL,
+    url: `${EVENT.siteUrl}/fair-day`,
     price: 0,
     priceCurrency: "USD",
     availability: "https://schema.org/InStock",
-    validThrough: EVENT.applicationDeadlineISO,
+    validThrough: EVENT.endISO,
   },
 };
 

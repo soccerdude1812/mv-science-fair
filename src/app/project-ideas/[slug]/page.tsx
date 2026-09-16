@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { APPLICATION_URL, EVENT } from "@/lib/event";
 import { PROJECT_IDEAS, getIdea } from "@/lib/projectIdeas";
 
 interface Params {
@@ -160,21 +159,23 @@ export default async function ProjectIdeaPage({ params }: Params) {
           </section>
         )}
 
-        {/* Apply */}
+        {/* Entries closed 2026-09-13. The page keeps its value as a worked
+            example, so it points at the work rather than at a shut form. */}
         <section className="reveal dotted-band rounded-2xl border border-line p-8 text-center sm:p-10">
-          <h2 className="display-section mb-3">Want to do this one?</h2>
+          <h2 className="display-section mb-3">Borrow the method</h2>
           <p className="mx-auto mb-8 max-w-xl text-lg text-ink-soft">
-            Applications close {EVENT.applicationDeadlineFull}. You do not need
-            results yet, just the question you want to answer.
+            Entries for this year are closed. The useful part of this page is
+            the shape: one question, one thing changed, and enough trials to
+            believe the answer.
           </p>
-          <a
-            href={APPLICATION_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary"
-          >
-            Apply now
-          </a>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link href="/the-process" className="btn-ghost">
+              The get ready guide
+            </Link>
+            <Link href="/mentors" className="btn-ghost">
+              Stuck? Get help
+            </Link>
+          </div>
         </section>
 
         <div className="reveal border-t border-line pt-8 text-center">
