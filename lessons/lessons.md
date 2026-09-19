@@ -528,3 +528,33 @@
 **Fix:** Point the plist at `/opt/homebrew/bin/python3`, which is the ARM-native interpreter and has no shim. Verified by running the script under a stripped environment that imitates launchd, `env -i PATH=/usr/bin:/bin LANG=en_US.UTF-8 HOME=/Users/Eeshan`, which reproduced the licence error with the system python and ran clean with the homebrew one.
 
 **Prevention:** Never write `/usr/bin/python3` into a plist. Before trusting any new LaunchAgent, run its exact ProgramArguments under `env -i` with launchd's own PATH (`/usr/bin:/bin:/usr/sbin:/sbin`) rather than from an interactive shell, where PATH, the Homebrew prefix and a warmed-up environment all hide the problem. `launchctl bootstrap` succeeding proves the plist parses, nothing more.
+
+## [2026-09-19][a-formula-fix-in-the-wrong-column-reads-as-fixed] The Dashboard reported 4 for a second day after the formula was corrected
+
+**Mistake:** the 09-18 run found `Dashboard!F30` ("Mentor offers not yet matched") counting Arya Saikia's `Matched (two projects)` as unmatched, rewrote the formula with `LEFT(O,7)<>"Matched"`, watched the value change 4 to 3, and reported it fixed. The NEEDS ATTENTION block puts its labels in `D` and its values in `E`. `F` is empty on every other row. So the corrected formula went into a cell nothing reads, `E30` kept the broken one, and the Dashboard went on showing **4** with a stray **3** sitting next to it for 24 hours.
+
+**Root cause:** `read_sheet_values` over a range flattens each row to a list, so `D30 | E30 | F30` prints as `Mentor offers not yet matched | 4 | 3` and the eye reads the last number as the answer. Nothing in that output says which column the block's values live in. The write then "worked" by every available signal: the API returned `updatedCells: 1` and re-reading the row showed a 3.
+
+**Fix:** put the formula in `Dashboard!E30` and blank `F30`. Verified by re-reading `D24:F31` and seeing one value per row again, `E30` = 3.
+
+**Prevention:** before writing a formula into a grid, read the column letters of the neighbouring rows that already work, not just the row being fixed. If row 30 gains a populated column that rows 25 to 29 do not have, the write went to the wrong cell. And `updatedCells: 1` proves a cell changed, never that the right one did.
+
+## [2026-09-19][a-decision-communicated-is-not-a-decision-recorded] Seven of eleven safety forms showed as undecided while every one of those families held an approval
+
+**Mistake:** `Safety · Haz-Mat` rows 4 to 10 and `Safety · Human Study` row 2 all had a blank `Decision` column. Each of those eight projects had in fact been ruled on, the ruling was written into an approval letter, the letter was sent, and `Applicants!S` carried the form-received date. Only the safety tab, which is the artifact anyone would open to ask "has this been reviewed", said nothing. The run that made each decision updated `Applicants` and stopped there.
+
+**Root cause:** the decision and its record live on two different tabs, and the one that feels like the work is the letter. Nothing in the daily flow re-reads the safety tab: the Dashboard counters key off `Applicants!R` and `S`, so they all read correct and green while the safety register was two thirds empty. A check that only looks at the numbers cannot see a missing audit trail, because no number depends on it.
+
+**Fix:** filled all eight with `Approved`, the reviewer, and what each rests on. Haz-Mat is now 11 of 11 decided. No new ruling was made, which is the point: every one of these was recoverable from a sent letter.
+
+**Prevention:** the brief's standing check is "any approved project with a safety flag and no recorded safety decision", and it has to be run against the **safety tab's own Decision column**, not against the Applicants counters that shadow it. When a fact is written in two places, the one nobody's formulas read is the one that rots.
+
+## [2026-09-19][a-draft-that-waits-goes-stale-on-the-calendar] A judge letter apologised for four days on the eighth day
+
+**Mistake:** three judge acknowledgement drafts sat unsent for four mornings, reported each day as "intact, send these". They were not intact in the sense that mattered. Dechter's opened "That is four days, it is our fault" when it was eight, and counted "31 projects and two judges" when the fair had 33 and three. Lewicki's told an outside adult his campus clearance "is underway and we will confirm it" when no guest speaker request had been filed and the elementary principal had never been emailed by anyone.
+
+**Root cause:** every one of those sentences was true the day it was written. A letter that quotes an elapsed time, a running count, or the state of a process someone else owns has a shelf life, and "the draft still exists and verifies clean" checks structure while saying nothing about whether the sentences are still true. The structural checks all passed: `multipart/alternative`, real `text/plain`, zero em-dashes, unescaped headers, starred.
+
+**Fix:** corrected in place with `drafts.update`, which keeps the `r...` draft id and creates no duplicate. The message id changes and the star and every label drop, so re-apply both afterwards and re-verify. Also caught a literal `&amp;` in the plain-text fallback of two letters: they were built by escaping the HTML, so plain-text readers saw "MVHS STEM &amp; Research Club".
+
+**Prevention:** when a draft survives a run, re-read its *claims*, not just its MIME. Day counts, project counts and "this is underway" all need re-checking against today. And a plain-text part generated from HTML has to be unescaped, or the fallback ships entities.
