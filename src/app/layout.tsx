@@ -28,6 +28,11 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  /* Absolute base for every generated URL, the social card included. Without
+     it Next resolves og:image against VERCEL_URL, which is the per deployment
+     hostname, not the address on the fliers. EVENT.siteUrl is the one place
+     the public URL is written down. */
+  metadataBase: new URL(EVENT.siteUrl),
   title: {
     default: "MV Science Fair 2026",
     template: "%s | MV Science Fair 2026",
@@ -50,6 +55,21 @@ export const metadata: Metadata = {
     description: `${EVENT.dateFull} · ${EVENT.timeFull} · ${EVENT.venueName}, ${EVENT.venueAddress}. Student projects from grades 3 to 5. Free, and open to families.`,
     type: "website",
     locale: "en_US",
+    siteName: "MV Science Fair 2026",
+    url: EVENT.siteUrl,
+    /* The picture itself is src/app/opengraph-image.png, which Next turns into
+       og:image plus its type and dimensions. Added 2026-09-20: until then the
+       site declared no image at all, so iMessage, Slack and every other
+       scraper fell back to the first photo in the markup, which is the first
+       portrait in "The students behind it". A shared link to a children's
+       science fair previewed as one organizer's face. */
+  },
+  twitter: {
+    /* Without this the card renders as a thumbnail beside the text instead of
+       the full width image, which is the whole point of drawing one. */
+    card: "summary_large_image",
+    title: "MV Science Fair 2026",
+    description: `${EVENT.dateFull} · ${EVENT.timeFull} · ${EVENT.venueName}. Free, and open to families.`,
   },
 };
 
@@ -82,6 +102,9 @@ const eventJsonLd = {
     alternateName: EVENT.organizerLong,
     email: EVENT.contactEmail,
   },
+  /* Same drawn card the social scrapers get. Google's Event rich result wants
+     an image and will otherwise pick one out of the page itself. */
+  image: [`${EVENT.siteUrl}/opengraph-image.png`],
   isAccessibleForFree: true,
   /* Free admission, expressed as an Offer so search engines keep showing the
      event as something you can turn up to.
