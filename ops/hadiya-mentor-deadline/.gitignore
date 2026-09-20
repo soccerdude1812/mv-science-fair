@@ -1,0 +1,5 @@
+# Runtime artifacts. The operating code (run.py) IS tracked; what the job
+# produced when it ran is not. The logs quote whole family letters, and this
+# repository is public.
+logs/
+state/

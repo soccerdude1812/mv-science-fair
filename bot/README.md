@@ -26,7 +26,7 @@ The **last batch** went out on 2026-09-14: 102 sent between 19:02 and 23:40, 0 f
 out of 454 that were queued and ready. The remaining ~352 were never mailed and must not
 be, and `daily.py status` will keep reporting them as "ready to send" forever. The run
 was killed between checkpoints, so the last two sends
-(`info@bffcu.org`, `bloombeautiful@yahoo.com`) reached their recipients without being
+(`info@bffcu.org`, a second consumer address) reached their recipients without being
 written to the Email Log. That gap only matters if someone restarts outreach, which is
 exactly what is not happening. Gmail's Sent folder is the real record either way.
 

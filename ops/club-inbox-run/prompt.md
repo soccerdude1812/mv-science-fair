@@ -359,8 +359,9 @@ The structure below is for family decision letters. **The length rule under Rule
 address this job writes to**, mentors and judges and teachers included. Sponsors are
 absent from that list on purpose: this job writes to no business at all.
 
-Read the real thing before writing: the emails sent on 2026-09-01 to `mandakinirg@gmail.com`
-(approval) and `reemrahman@gmail.com` (changes requested) are the reference. Match them.
+Read the real thing before writing: the two letters sent on 2026-09-01, the approval to Arna
+Gaunker's family and the changes-requested letter to Rayyaan Kareem's family, are the reference.
+Find them in Sent by that date and match them.
 
 Structure: `Hi <Student> and family,` → the decision in the first two lines → **What we
 liked** as bullets, naming things only someone who read the application could name → **What

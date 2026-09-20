@@ -29,8 +29,10 @@ SHEET  = "1akKDW3UsPFy0N-bG5OGpjMKrelmxcjPJKI3A2-771ws"
 LABEL  = "com.mvsciencefair.hadiya-deadline"
 PLIST  = os.path.expanduser(f"~/Library/LaunchAgents/{LABEL}.plist")
 
-NICOLE   = "nicole.m.melia@gmail.com"
-NEEL     = "neelch101@gmail.com"
+# Mentor addresses are read from the environment, never committed: this repo is public
+# and these are students. Set MENTOR_LAPSED and MENTOR_NEXT before running.
+NICOLE   = os.environ.get("MENTOR_LAPSED", "")
+NEEL     = os.environ.get("MENTOR_NEXT", "")
 APPROVAL = "1a09c685e64f9dc8"   # Hadiya's approval letter, the thing we forward
 DRY      = "--dry-run" in sys.argv
 
