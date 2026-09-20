@@ -597,3 +597,27 @@ reads work fine this way and it is the same call shape already used for multi-ra
 
 **Prevention:** never build a Sheets path with a range in it. Always `values:batchGet` with `ranges`
 in the query string, and `values:batchUpdate` for writes. Both take the tab name as data, not as URL.
+
+## [2026-09-20][sponsor-tracker-is-not-the-record] The Sponsor Tracker's Yes column is stale in both directions
+
+**Mistake:** built the first draft of the public sponsor wall from the "Science Fair Sponsor Tracker"
+workbook's `Our Response` column. Two of the fifteen Yes rows would have been wrong on a public page,
+in opposite directions.
+
+**Root cause:** the tracker is a working note, updated when someone remembers, and the club inbox is
+the only record of what was actually agreed. AoPS Academy's row still reads "I need to say NO", but
+the thread shows Tristan accepting on Sept 16 and AoPS mailing the certificate on Sept 17. Santa Cruz
+Museum's row reads "Yes but they need a tax id", and our answer to that offer is **still an unsent
+draft**, so from the museum's side nothing has been agreed at all. Tori Atwell's `$$$` row is an
+open negotiation: her last message asks what the cost would be. A third trap: The UPS Store never
+emailed us first, it answered the sponsor Google Form, so a Gmail-only sweep finds our acceptance
+with no offer in front of it.
+
+**Fix:** verified all fifteen thread by thread through the raw Gmail API on the club account and
+published only where both halves exist in writing: the business named what it was giving, and the
+club accepted. Eleven qualified. `src/lib/sponsors.ts` carries the roster and records by name the
+four that did not, with the reason.
+
+**Prevention:** for anything that goes on a public surface or into outbound mail, the mailbox is the
+record and the tracker is a pointer to it. Also check the sponsor form responses
+(`13FPiqEVW7asuV9Z8N6HYQZ8Te2XMMtphkmbJT1z7Ehk`), which is a second inbox nobody watches.

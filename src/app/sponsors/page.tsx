@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { Beaker, Gear, Lightbulb } from "@/components/lab/cast";
 import { EVENT, SPONSOR_INTEREST_URL } from "@/lib/event";
+import { SPONSORS } from "@/lib/sponsors";
 
 export const metadata: Metadata = {
   title: "Sponsors",
@@ -10,9 +12,13 @@ export const metadata: Metadata = {
 };
 
 /**
- * Sponsor page, Chalk Lab system. Two audiences on one page: businesses
- * deciding whether to help (top), and sponsors who already said yes (the
- * wall, currently empty and honest about it).
+ * Sponsor page, Chalk Lab system. Two audiences on one page: sponsors who
+ * already said yes (the wall, now eleven names and the first thing on the
+ * page), and businesses still deciding whether to help.
+ *
+ * The wall went up 2026-09-20. It reads `src/lib/sponsors.ts`, which is the
+ * only place a sponsor is ever added, and which records why four businesses
+ * in the tracker's Yes column are deliberately not on it.
  *
  * Copy rule from DESIGN.md holds: no em-dashes, and the only two dates on
  * the site are the Sept 13 close and the Sept 26 fair.
@@ -37,7 +43,7 @@ const WAYS = [
 ];
 
 const RECOGNITION = [
-  ["On this page", "Your name and link, listed here for the whole season."],
+  ["On this page", "Your logo and name, linked, for the whole season."],
   ["At the fair", "On the event signage, and read out during the awards."],
   ["On Instagram", "Tagged in a post to @stemresearchclubmvhs."],
   ["On the shirts", "Printed on the volunteer and organizer shirts."],
@@ -52,15 +58,63 @@ export default function SponsorsPage() {
       />
 
       <div className="mx-auto max-w-4xl space-y-14 px-4 py-12 sm:space-y-20 sm:px-6 sm:py-16 md:py-20 lg:px-8">
+        {/* Sponsor wall. First on the page now that there is one. */}
+        <section>
+          <h2 className="reveal display-section mb-4">
+            This year&rsquo;s sponsors
+          </h2>
+          <p className="reveal mb-8 max-w-prose text-lg leading-relaxed text-ink-soft">
+            Every one of these is a local business that said yes to a first-year
+            fair run by high school students. Between them they cover the
+            prizes, the printing, the shirts and the snacks.
+          </p>
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {SPONSORS.map((sponsor, index) => (
+              <li
+                key={sponsor.name}
+                className={`reveal stagger-${(index % 5) + 1}`}
+              >
+                <a
+                  href={sponsor.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="card-soft flex h-full flex-col items-center p-6 text-center transition-[border-color,box-shadow] duration-200 hover:border-line-strong hover:shadow-[var(--shadow-md)] focus-visible:border-line-strong"
+                >
+                  <div className="flex h-[88px] w-full items-center justify-center">
+                    <Image
+                      src={sponsor.logo}
+                      alt={`${sponsor.name} logo`}
+                      width={sponsor.width}
+                      height={sponsor.height}
+                      className="w-auto max-w-[200px] object-contain"
+                      style={{ height: sponsor.logoHeight }}
+                    />
+                  </div>
+                  <h3 className="mt-5 text-[1.0625rem] font-semibold leading-snug text-ink">
+                    {sponsor.name}
+                  </h3>
+                  <p className="mt-1.5 text-[0.9375rem] leading-relaxed text-ink-faint">
+                    {sponsor.gives}
+                  </p>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="reveal mt-8 max-w-prose leading-relaxed text-ink-soft">
+            Prizes are announced at the fair as provided by the business that
+            gave them, and nothing here was bought with a family&rsquo;s money.
+            Entering the fair is free and always was.
+          </p>
+        </section>
+
         {/* What sponsorship pays for */}
         <section className="reveal">
           <h2 className="display-section mb-4">What your help pays for</h2>
           <p className="max-w-prose text-lg leading-relaxed text-ink-soft">
             Every organizer here is a high school student volunteer and nobody
-            is paid. Sponsorship goes to display boards, snacks for
-            participants and judges, printed certificates, prizes, and the
-            signage that makes the room feel like an event instead of a
-            cafeteria.
+            is paid. Sponsorship goes to display boards, snacks for participants
+            and judges, printed certificates, prizes, and the signage that makes
+            the room feel like an event instead of a cafeteria.
           </p>
         </section>
 
@@ -174,22 +228,10 @@ export default function SponsorsPage() {
             One thing to know up front
           </h2>
           <p className="max-w-prose leading-relaxed text-ink-soft">
-            We are a student club, not a 501(c)(3), so a donation to the fair
-            is not tax deductible. We would rather tell you now than have you
-            find out afterward.
+            We are a student club, not a 501(c)(3), so a donation to the fair is
+            not tax deductible. We would rather tell you now than have you find
+            out afterward.
           </p>
-        </section>
-
-        {/* Sponsor wall */}
-        <section className="reveal">
-          <h2 className="display-section mb-4">This year&rsquo;s sponsors</h2>
-          <div className="rounded-2xl border border-dashed border-line-strong bg-paper-warm p-10 text-center">
-            <p className="mx-auto max-w-md leading-relaxed text-ink-soft">
-              Nobody yet. We are a first-year fair and we are asking around
-              Mountain View right now. The first names on this wall will sit at
-              the top of it.
-            </p>
-          </div>
         </section>
       </div>
     </>
