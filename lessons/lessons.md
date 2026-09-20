@@ -558,3 +558,42 @@
 **Fix:** corrected in place with `drafts.update`, which keeps the `r...` draft id and creates no duplicate. The message id changes and the star and every label drop, so re-apply both afterwards and re-verify. Also caught a literal `&amp;` in the plain-text fallback of two letters: they were built by escaping the HTML, so plain-text readers saw "MVHS STEM &amp; Research Club".
 
 **Prevention:** when a draft survives a run, re-read its *claims*, not just its MIME. Day counts, project counts and "this is underway" all need re-checking against today. And a plain-text part generated from HTML has to be unescaped, or the fallback ships entities.
+
+## [2026-09-20][stale-status-columns] The short status columns lie while the Notes column next to them is current
+
+**Mistake:** `Mentor Offers!P6` and `Mentor Requests!N4` both read "introduction drafted not sent" for
+two full days after that introduction shipped (2026-09-18 10:29:36, msg `1a0b5910ada777cb`). Anyone
+reading the tracker at a glance would have concluded a letter was still sitting in Drafts waiting to
+be sent, and might have rebuilt it.
+
+**Root cause:** every run prepends its findings to the long **Notes** cell (`Mentor Offers!Q`,
+`Mentor Requests!O`, `Applicants!U`/`W`), so those are always current. The one-line status columns
+beside them (`Mentor Offers!P` "Matched with", `Mentor Requests!N` "Matched mentor") are written once
+when the match is made and then never revisited. The 09-19 run updated `Applicants!W26`,
+`Mentor Offers!Q6` and `Mentor Requests!O4` correctly and left `P6` and `N4` untouched. Grepping the
+tracker for draft ids does not catch this either, because these two cells name no `r...` id at all,
+only the words "drafted not sent".
+
+**Fix:** rewrote both to name the sent message id and the date, plus a note saying the cell had been
+stale for two days.
+
+**Prevention:** the draft-id reconciliation at the top of the run is not enough on its own. Also grep
+every tab for the *phrases* `drafted not sent`, `UNSENT`, `still unsent`, and check the **short**
+status columns specifically, not just the Notes columns. A cell that makes a claim about the mailbox
+without naming a draft id is the one most likely to be stale, because nothing points at it.
+
+## [2026-09-20][sheets-api-tab-names] Raw Sheets API `values/<range>` throws InvalidURL on the `RAW · ` tabs
+
+**Mistake:** `GET /v4/spreadsheets/<id>/values/RAW · Applications!A1:AZ1` died with
+`http.client.InvalidURL: URL can't contain control characters ... (found at least ' ')`.
+
+**Root cause:** the range is interpolated straight into the URL **path**, and this workbook's raw tabs
+are named with spaces and a middle dot (`RAW · Applications`). `urllib` refuses to send an unencoded
+path. It is not an auth or permissions problem and the error names neither the sheet nor the tab.
+
+**Fix:** use `values:batchGet` and pass the range through `params`, which urlencodes it:
+`g.sheets(SHEET, "/values:batchGet", params={"ranges": ["RAW · Applications!A1:AZ1"]})`. Single-range
+reads work fine this way and it is the same call shape already used for multi-range reads.
+
+**Prevention:** never build a Sheets path with a range in it. Always `values:batchGet` with `ranges`
+in the query string, and `values:batchUpdate` for writes. Both take the tab name as data, not as URL.
