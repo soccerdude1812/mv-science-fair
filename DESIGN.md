@@ -118,6 +118,32 @@ Style contract for every character:
 - Accent color as flat fill only where the object demands it (liquid, gear
   center), one hue per character
 
+## Sponsor logos
+
+Sponsor logos are the site's one piece of imagery it did not draw or shoot, and
+they live in exactly one place: the wall at the top of `/sponsors`. Added
+2026-09-20, when eleven businesses had agreed in writing and the page's own
+promise was "your logo and name, linked, for the whole season".
+
+- The roster is `src/lib/sponsors.ts`, never inline. A logo goes up only when
+  the club inbox holds both halves of the agreement: the business named what it
+  was giving, and the club accepted. The tracker's Yes column is not the test,
+  and that file records the four names it deliberately leaves off
+- Logos sit on white `card-soft` cards, 16px radius, hairline border, in their
+  own colors. No grayscale-until-hover, no duotone, no chalk filter: a
+  recognition wall that recolors a sponsor's mark is not recognition. The
+  crayon box does not apply to somebody else's brand
+- `logoHeight` is per logo, not shared. An 8:1 wordmark and a square seal set
+  to the same height do not read as the same size, so wide lockups get less
+  height, square marks get more, and the shared cap is the 200px box width
+- Files are self-hosted in `public/sponsors/`, vector where the business
+  publishes vector, and never hotlinked. Where a mark exists only in a version
+  built for dark backgrounds, the neutral is darkened enough to read on white
+  and the brand hue is left untouched (Tee Rabbit's grey wordmark, 2026-09-20)
+- One line per sponsor saying what they gave, in a family's words. Prizes are
+  credited to the business that gave them, which is Mr. Robell's condition on
+  accepting them at all
+
 ## Photography
 
 Photographs appear in exactly two places: the `/team` page, and the "The students
