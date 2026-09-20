@@ -232,7 +232,31 @@ face, in iMessage, in Slack, everywhere it was shared.
   The header of the script carries the exact commands
 - `metadataBase` in `src/app/layout.tsx` is `EVENT.siteUrl`. Without it Next
   resolves the image against the per deployment Vercel hostname instead of the
-  address that is on the fliers
+  address that is on the fliers. Preview deployments deliberately override it
+  with their own hostname, so a branch preview shows its own card; production
+  uses `metadataBase`
+
+## The site mark (favicon)
+
+The beaker's face, cropped to the glass, on `--paper`. Added 2026-09-20 in the
+same pass as the preview card, and for the same reason: the icon shipped until
+then was the stock Next.js triangle, so the browser tab, the iOS home screen
+tile and the small mark chat clients put beside a link all said "a Next.js app"
+rather than "the science fair".
+
+- The beaker, because it is the hero character and the only one the brand coral
+  lives in. Same geometry as the card and the hero, minus the escaping bubbles
+  and the measurement ticks: both are legible at 190px and are grit at 16
+- Three files, all generated from one 512 master: `src/app/icon.png` (512),
+  `src/app/apple-icon.png` (180, opaque, because iOS composites onto black) and
+  `src/app/favicon.ico` (16, 32, 48, for anything that asks for `/favicon.ico`
+  without reading the markup, several link scrapers included)
+- Source is `ops/og/icon.html` from the same generator, converted by
+  `ops/og/make-icons.py`. That script writes the `.ico` from an RGBA image on
+  purpose: Pillow embeds whatever mode it is handed, and Next's build decodes
+  the file and fails on an RGB one
+- Checked at 16 and 32 pixels, not just at 512. At 32 the face reads; at 16 it
+  is a beaker with a coral band, which is the most a 16px mark can carry
 
 ## Motion
 

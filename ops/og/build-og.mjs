@@ -1,10 +1,15 @@
 /**
- * Builds ops/og/og.html, the source artwork for the site's social preview card
- * (src/app/opengraph-image.png and twitter-image.png). To regenerate the PNG:
+ * Builds the source artwork for the two places the site is seen from outside
+ * itself: ops/og/og.html, the social preview card behind
+ * src/app/opengraph-image.png and twitter-image.png, and ops/og/icon.html, the
+ * site mark behind src/app/icon.png, apple-icon.png and favicon.ico.
+ * To regenerate:
  *
  *   node ops/og/build-og.mjs
  *   python3 -m http.server 8931 --directory ops/og   # file:// is blocked in Playwright
- *   # screenshot http://127.0.0.1:8931/og.html at 1200x630 -> src/app/opengraph-image.png
+ *   # screenshot og.html at 1200x630 with a 2x zoom  -> src/app/opengraph-image.png
+ *   # screenshot icon.html at 512x512                -> ops/og/icon-512.png
+ *   python3 ops/og/make-icons.py ops/og/icon-512.png # writes the three icon files
  *
  * The characters mirror src/components/lab/cast.tsx path for path, minus the
  * motion groups (pupils rest centre-low, the beaker does not pour). Eye and
@@ -278,11 +283,59 @@ const html = `<!doctype html>
 </html>
 `;
 
+/* ------------------------------------------------------------ icon -- */
+
+/* The site mark is the beaker alone, because it is the hero character and the
+   one the brand coral lives in. It is NOT the bench beaker: the escaping
+   bubbles and the measurement ticks are legible at 190px and are grit at 16,
+   so the icon drops both and crops to the glass. Everything else is the same
+   geometry, so the tab and the card are visibly the same object. */
+const iconBeaker = {
+  box: { x: 26.5, y: 22, w: 69.9, h: 79.8 },
+  body: beaker.body
+    .split("\n")
+    .filter(
+      (line) =>
+        !line.includes('circle cx="52" cy="18"') &&
+        !line.includes('circle cx="63" cy="10.5"') &&
+        !line.includes("M77.5,50 L84,50"),
+    )
+    .join("\n"),
+};
+
+const iconVb = [
+  iconBeaker.box.x - PAD,
+  iconBeaker.box.y - PAD,
+  iconBeaker.box.w + PAD * 2,
+  iconBeaker.box.h + PAD * 2,
+];
+
+const iconHtml = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MV Science Fair site mark</title>
+<style>
+  :root { --paper: #f7f5ef; --ink: #22211c; --coral: #d96c4f; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 512px; height: 512px; }
+  body { background: var(--paper); display: flex; align-items: center; justify-content: center; }
+  svg { display: block; height: 448px; }
+</style>
+</head>
+<body>
+  <svg viewBox="${iconVb.map((n) => +n.toFixed(2)).join(" ")}" fill="none" aria-hidden="true">${iconBeaker.body}</svg>
+</body>
+</html>
+`;
+
 const here = dirname(fileURLToPath(import.meta.url));
 writeFileSync(join(here, "og.html"), html);
+writeFileSync(join(here, "icon.html"), iconHtml);
 console.log(
   "wrote",
   join(here, "og.html"),
   "| bench:",
   CAST.map((c) => `${c.name} ${c.width}x${c.height}`).join(", "),
 );
+console.log("wrote", join(here, "icon.html"));
