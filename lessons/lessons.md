@@ -1,5 +1,11 @@
 # Lessons
 
+## [2026-09-16][raw-api-drafts-vanish-too] Six family drafts built through the raw Gmail API were gone six hours later
+**Mistake:** the 09-15 lesson concluded that drafts vanished because they were built through the `club-gws` MCP, and that the raw Gmail API was the fix. The 07:00 run on 09-16 built six Haz-Mat chase letters that way, to six `@gmail.com` parents, and verified each one on the first build. By 16:00 the same day all six were gone: `drafts.list` held 8 drafts and none of them was one of the six, and `messages.get` on a recorded message id (`1a0ab25b1f4c1994`, the Helen Wong chase) returned **404**, so the message was destroyed rather than merely unwrapped from its draft. `to:<address> newer_than:2d` with `includeSpamTrash=true` returned zero for all six, so nothing shipped. The three `@mvwsd.org` judge drafts rebuilt the same way on 09-15 were still sitting there, untouched.
+**Root cause:** still not established, and the two things it was previously blamed on are now both ruled out. It is not the MCP, because these six were raw-API builds. It is not the recipient domain, because the survivors are `@mvwsd.org` and the casualties are `@gmail.com`, the exact inverse of the 09-15 pattern. What is left is something acting on the mailbox between runs, and there is now a witness: two sponsor replies were sent by hand from this account at 15:53:32 and 16:01:35 while the audit was running, neither by the session doing the audit. A person working the Drafts list and clearing what looks finished would explain six family letters going while three judge letters beside them stayed. That is a lead, not a proven cause. The recurring damage is not the loss itself but that a report is written naming ids, the tracker records those ids, and by the time anyone reads either, the ids point at nothing.
+**Fix:** rebuilt all six, verified them present in `drafts.list` after creation rather than only at build time, and wrote the 404 evidence into `Applicants!U` for each row so tomorrow's run does not read "drafted" and move on. Also recorded it in `handled.json` as a rebuild rather than a first draft, so the count of how many times a letter has been lost stays honest.
+**Prevention:** a draft is not an artifact you can create and walk away from in this mailbox. Verify it exists **after** the run that created it, not during, and treat every recorded `r...` id as a claim with a shelf life of hours. Until the cause is found, anything that genuinely must reach a family should be sent rather than left in Drafts, because Drafts is demonstrably lossy here and the loss is silent.
+
 ## [2026-09-13][example-boards-contradicted-their-own-tables] A page teaching kids to match their claims to their data shipped two claims that did not
 **Mistake:** `/example-boards` was built because a parent asked for sample boards and there were none. Its whole premise is that a conclusion has to follow from the board's own numbers, and two of the three worked boards broke that. The paper towel conclusion said Brand C "came third" per gram when the table on the same board reads A 4.1, C 5.3, B 5.8, so C came second and beat A. The bean plant conclusion said the maze stems "were the longest and the thinnest" when the day 20 table on the same board reads hole box 16.4 cm, maze 14.1 cm, open light 13.0 cm, which puts maze in the middle, and stem length is not measured anywhere on that board under either reading. A third board claimed a 200 cm spread when its own five spreads are 205, 195, 186, 210 and 175, and a line chart caption said "four plants per group" while the block beside it said one seed never sprouted so the maze group is three. All four were caught by the `code-reviewer` agent recomputing the tables, not by me.
 **Root cause:** the table, the chart and the prose were written as three separate pieces of copy in one sitting, and the prose was written from what I intended the result to be rather than from the numbers I had just typed. Nothing re-derived a single figure. Prose that describes a dataset reads fluently whether or not it is true of that dataset, so there is no felt friction at the moment of writing it: 5.3 sits between 4.1 and 5.8 whichever ordinal you attach to it, and the sentence sounds equally finished either way.
@@ -493,3 +499,101 @@
 **Fix:** prefix git with the Command Line Tools directory, which has its own accepted licence: `DEVELOPER_DIR=/Library/Developer/CommandLineTools git ...`. Verified working, `git version 2.50.1 (Apple Git-155)`. The permanent repair is `sudo xcode-select -s /Library/Developer/CommandLineTools`, which needs a password and so belongs to Eeshan.
 
 **Prevention:** when git fails on every subcommand including read-only ones, suspect the toolchain and not the repository. `xcode-select -p` is the one-line diagnosis.
+
+## [2026-09-17][not-received-is-not-blank] Writing a truthful value into a status cell hid two families from the safety counters
+
+**Mistake:** the Burstein/Moran team decided to saw wood, so their Haz-Mat requirement came back. I set `Applicants!R13:S13` and `R14:S14` to `Haz-Mat` / `Not received` and left Stage on `Approved`. The Dashboard's two safety counters did not move off 6. Both read `=SUMPRODUCT(...*(Applicants!$S$2:$S$110=""))`, so `"Not received"` is invisible to them, and `Approved, safety form pending` is what the pipeline counter keys on. Two families owing a safety form existed only in a note nobody reads, nine days before the fair.
+
+**Root cause:** `"Not received"` is a more informative string than an empty cell, and that is exactly why it was wrong. The tab encodes the same fact positionally: `S` is a **date** when the form arrives, **blank** while outstanding, `n/a` when not required, with the outstanding state carried by the Stage column. Nothing on the sheet says so; it is only visible by reading the rows that already work. I wrote what was true rather than what the formulas parse.
+
+**Fix:** `Q13:S13` and `Q14:S14` set to `Approved, safety form pending` / `Haz-Mat` / blank. Counters moved 6 to 8 on both, `Approved and cleared` 26 to 24, and the pipeline re-summed to 33 against 33 applications.
+
+**Prevention:** before writing a value into a tracked column, read three rows that already hold the state you are trying to express and copy their encoding, then re-read the Dashboard cell that is supposed to react. A tracker write is not done when the cell says the right thing, it is done when the number that depends on it moves.
+
+## [2026-09-17][two-sessions-one-family] Two agents wrote the same approval to the same family 25 seconds apart
+
+**Mistake:** the 07:00 run drafted an approval for a late application at 11:36:57. Another session had drafted its own approval to the same family, on the same thread, at 11:36:32. Both were addressed identically, both verified clean, both starred. Anyone clearing Drafts would have sent one family two approval letters.
+
+**Root cause:** `handled.json` is the only interlock and it is written at the *end* of a run, so it cannot see a draft another process made during it. `run_daily.sh` takes a `mkdir` lock, but that only stops a second copy of *itself*; a human or an interactive session in the same mailbox is outside it entirely. The same morning also produced four sponsor sends at 08:30 to 08:55 from outside this run, so a second actor in the mailbox is now the normal condition, not an anomaly. This is very likely the same mechanism behind six drafts vanishing on 09-16.
+
+**Fix:** reconciled on content rather than on authorship. The other draft was the better letter (it had a control, a concrete measuring rig and a question-shaped title) so it was kept, mine marked do-not-send in `Applicants!U34` and in `handled.json`, and the one clause only mine carried, Mr. Huynh's no-drinking rocket rule, called out to be pasted in. Drafts cannot be deleted from this desk and `STARRED` cannot be removed, so both remain and the conflict lives in the record instead.
+
+**Prevention:** re-pull `drafts.list` immediately *after* creating drafts and diff it against what you created, not just before. Anything on the same thread as something you just wrote, from a message id you do not recognise, is a collision. And when two letters exist, pick on content and say why, rather than defending the one you wrote.
+
+## [2026-09-17][launchagent-usr-bin-python] A LaunchAgent pointed at /usr/bin/python3 dies on the Xcode licence
+**Mistake:** The one-shot agent `com.mvsciencefair.hadiya-deadline` was installed with `/usr/bin/python3` as its interpreter. It loaded cleanly, `launchctl print` reported `state = not running, runs = 0`, and everything looked correct. It would have produced nothing at fire time.
+
+**Root cause:** `/usr/bin/python3` on this Mac is the Xcode command line tools shim. Invoking it returns `You have not agreed to the Xcode license agreements` on stderr and exits non-zero, before a single line of the script runs. This is the same shim behaviour recorded for `git` in the `git-needs-developer-dir` memory. Nothing in `launchctl bootstrap` or `launchctl print` surfaces it, because the failure happens inside the child process at fire time, and a job that has never fired reports the same `runs = 0` as a healthy one.
+
+**Fix:** Point the plist at `/opt/homebrew/bin/python3`, which is the ARM-native interpreter and has no shim. Verified by running the script under a stripped environment that imitates launchd, `env -i PATH=/usr/bin:/bin LANG=en_US.UTF-8 HOME=/Users/Eeshan`, which reproduced the licence error with the system python and ran clean with the homebrew one.
+
+**Prevention:** Never write `/usr/bin/python3` into a plist. Before trusting any new LaunchAgent, run its exact ProgramArguments under `env -i` with launchd's own PATH (`/usr/bin:/bin:/usr/sbin:/sbin`) rather than from an interactive shell, where PATH, the Homebrew prefix and a warmed-up environment all hide the problem. `launchctl bootstrap` succeeding proves the plist parses, nothing more.
+
+## [2026-09-19][a-formula-fix-in-the-wrong-column-reads-as-fixed] The Dashboard reported 4 for a second day after the formula was corrected
+
+**Mistake:** the 09-18 run found `Dashboard!F30` ("Mentor offers not yet matched") counting Arya Saikia's `Matched (two projects)` as unmatched, rewrote the formula with `LEFT(O,7)<>"Matched"`, watched the value change 4 to 3, and reported it fixed. The NEEDS ATTENTION block puts its labels in `D` and its values in `E`. `F` is empty on every other row. So the corrected formula went into a cell nothing reads, `E30` kept the broken one, and the Dashboard went on showing **4** with a stray **3** sitting next to it for 24 hours.
+
+**Root cause:** `read_sheet_values` over a range flattens each row to a list, so `D30 | E30 | F30` prints as `Mentor offers not yet matched | 4 | 3` and the eye reads the last number as the answer. Nothing in that output says which column the block's values live in. The write then "worked" by every available signal: the API returned `updatedCells: 1` and re-reading the row showed a 3.
+
+**Fix:** put the formula in `Dashboard!E30` and blank `F30`. Verified by re-reading `D24:F31` and seeing one value per row again, `E30` = 3.
+
+**Prevention:** before writing a formula into a grid, read the column letters of the neighbouring rows that already work, not just the row being fixed. If row 30 gains a populated column that rows 25 to 29 do not have, the write went to the wrong cell. And `updatedCells: 1` proves a cell changed, never that the right one did.
+
+## [2026-09-19][a-decision-communicated-is-not-a-decision-recorded] Seven of eleven safety forms showed as undecided while every one of those families held an approval
+
+**Mistake:** `Safety · Haz-Mat` rows 4 to 10 and `Safety · Human Study` row 2 all had a blank `Decision` column. Each of those eight projects had in fact been ruled on, the ruling was written into an approval letter, the letter was sent, and `Applicants!S` carried the form-received date. Only the safety tab, which is the artifact anyone would open to ask "has this been reviewed", said nothing. The run that made each decision updated `Applicants` and stopped there.
+
+**Root cause:** the decision and its record live on two different tabs, and the one that feels like the work is the letter. Nothing in the daily flow re-reads the safety tab: the Dashboard counters key off `Applicants!R` and `S`, so they all read correct and green while the safety register was two thirds empty. A check that only looks at the numbers cannot see a missing audit trail, because no number depends on it.
+
+**Fix:** filled all eight with `Approved`, the reviewer, and what each rests on. Haz-Mat is now 11 of 11 decided. No new ruling was made, which is the point: every one of these was recoverable from a sent letter.
+
+**Prevention:** the brief's standing check is "any approved project with a safety flag and no recorded safety decision", and it has to be run against the **safety tab's own Decision column**, not against the Applicants counters that shadow it. When a fact is written in two places, the one nobody's formulas read is the one that rots.
+
+## [2026-09-19][a-draft-that-waits-goes-stale-on-the-calendar] A judge letter apologised for four days on the eighth day
+
+**Mistake:** three judge acknowledgement drafts sat unsent for four mornings, reported each day as "intact, send these". They were not intact in the sense that mattered. Dechter's opened "That is four days, it is our fault" when it was eight, and counted "31 projects and two judges" when the fair had 33 and three. Lewicki's told an outside adult his campus clearance "is underway and we will confirm it" when no guest speaker request had been filed and the elementary principal had never been emailed by anyone.
+
+**Root cause:** every one of those sentences was true the day it was written. A letter that quotes an elapsed time, a running count, or the state of a process someone else owns has a shelf life, and "the draft still exists and verifies clean" checks structure while saying nothing about whether the sentences are still true. The structural checks all passed: `multipart/alternative`, real `text/plain`, zero em-dashes, unescaped headers, starred.
+
+**Fix:** corrected in place with `drafts.update`, which keeps the `r...` draft id and creates no duplicate. The message id changes and the star and every label drop, so re-apply both afterwards and re-verify. Also caught a literal `&amp;` in the plain-text fallback of two letters: they were built by escaping the HTML, so plain-text readers saw "MVHS STEM &amp; Research Club".
+
+**Prevention:** when a draft survives a run, re-read its *claims*, not just its MIME. Day counts, project counts and "this is underway" all need re-checking against today. And a plain-text part generated from HTML has to be unescaped, or the fallback ships entities.
+
+## [2026-09-20][stale-status-columns] The short status columns lie while the Notes column next to them is current
+
+**Mistake:** `Mentor Offers!P6` and `Mentor Requests!N4` both read "introduction drafted not sent" for
+two full days after that introduction shipped (2026-09-18 10:29:36, msg `1a0b5910ada777cb`). Anyone
+reading the tracker at a glance would have concluded a letter was still sitting in Drafts waiting to
+be sent, and might have rebuilt it.
+
+**Root cause:** every run prepends its findings to the long **Notes** cell (`Mentor Offers!Q`,
+`Mentor Requests!O`, `Applicants!U`/`W`), so those are always current. The one-line status columns
+beside them (`Mentor Offers!P` "Matched with", `Mentor Requests!N` "Matched mentor") are written once
+when the match is made and then never revisited. The 09-19 run updated `Applicants!W26`,
+`Mentor Offers!Q6` and `Mentor Requests!O4` correctly and left `P6` and `N4` untouched. Grepping the
+tracker for draft ids does not catch this either, because these two cells name no `r...` id at all,
+only the words "drafted not sent".
+
+**Fix:** rewrote both to name the sent message id and the date, plus a note saying the cell had been
+stale for two days.
+
+**Prevention:** the draft-id reconciliation at the top of the run is not enough on its own. Also grep
+every tab for the *phrases* `drafted not sent`, `UNSENT`, `still unsent`, and check the **short**
+status columns specifically, not just the Notes columns. A cell that makes a claim about the mailbox
+without naming a draft id is the one most likely to be stale, because nothing points at it.
+
+## [2026-09-20][sheets-api-tab-names] Raw Sheets API `values/<range>` throws InvalidURL on the `RAW · ` tabs
+
+**Mistake:** `GET /v4/spreadsheets/<id>/values/RAW · Applications!A1:AZ1` died with
+`http.client.InvalidURL: URL can't contain control characters ... (found at least ' ')`.
+
+**Root cause:** the range is interpolated straight into the URL **path**, and this workbook's raw tabs
+are named with spaces and a middle dot (`RAW · Applications`). `urllib` refuses to send an unencoded
+path. It is not an auth or permissions problem and the error names neither the sheet nor the tab.
+
+**Fix:** use `values:batchGet` and pass the range through `params`, which urlencodes it:
+`g.sheets(SHEET, "/values:batchGet", params={"ranges": ["RAW · Applications!A1:AZ1"]})`. Single-range
+reads work fine this way and it is the same call shape already used for multi-range reads.
+
+**Prevention:** never build a Sheets path with a range in it. Always `values:batchGet` with `ranges`
+in the query string, and `values:batchUpdate` for writes. Both take the tab name as data, not as URL.

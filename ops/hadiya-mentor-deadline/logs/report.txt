@@ -1,0 +1,163 @@
+[2026-09-17 12:02:44] === Hadiya mentor deadline check (dry_run=True) ===
+[2026-09-17 12:02:45] No reply from Nicole and no mentor on the project. Drafting the ask to Neel Chhatrala.
+[2026-09-17 12:02:46] [dry-run] draft NOT created. Plain text body follows:
+[2026-09-17 12:02:46] Neel, can you take a second project? No is completely fine.
+
+Hadiya Ansari and her sister Huseina, 3rd grade at Amy Imai. Chemistry and Materials: eggs soaked in soda, coffee, orange juice and water to find which drink attacks teeth the most, each egg weighed before and after so there is a number on it.
+
+Where it stands, plainly. We offered this to another mentor on Sept 13. She never answered, so yesterday afternoon we told her we would pass the project on if we did not hear back within 24 hours. That deadline has now passed with no reply of any kind. Hadiya's approval letter promises the family an introduction, so they have been waiting since Saturday and still do not have a name.
+
+You are already with Vidyut and Adhitri, so this would be a second one, about an hour or two a week until September 26. Saying no costs nothing and I will go and recruit instead.
+
+The family's own letter is below so you can see exactly what they were promised. I have kept their email address off this forward until you say yes.
+
+Eeshan
+
+
+---------- Forwarded message ---------
+From: STEM ResearchClub <stemresearchclubmvhs@gmail.com>
+Date: Sun, 13 Sep 2026 13:14:40 -0700
+Subject: Hadiya and Huseina's MV Science Fair project is approved
+To: Hadiya's family (address held back until you say yes)
+
+
+Hi Hadiya, Huseina and family,
+
+*Your project is approved.* You wrote that this is your first time and you
+were unsure of the expectations, so we have decided the open bits for you
+rather than handing them back.
+
+Your category is *Chemistry & Materials*. Your title is your own question:
+"Which drink attacks your teeth the most?" Nothing to invent there.
+
+Three things to do as you run it:
+
+   - Weigh each egg on a kitchen scale before it goes in and again when it
+   comes out, and write both numbers down. The weight it lost is your answer.
+   Photograph the colour change too, but the scale is what lets a judge
+   compare four drinks side by side.
+   - Keep everything else the same. Same size cup, same amount of liquid,
+   same kind of egg, same number of days, all four sitting in the same place.
+   Your water cup is the control, and you already thought of that yourselves.
+   - Two eggs per drink if you can manage eight. One egg can be a fluke. If
+   eight is too many, four is fine, just say so on your board.
+
+Safety with raw eggs: nobody eats or drinks anything from the experiment,
+keep the cups covered and out of reach of younger children, wash hands
+afterwards, and throw it all away when you are done. The eggs do not travel
+to the fair. Photographs do.
+
+One short form. Soda and orange juice are acids and the eggs sit for days,
+so a parent or guardian fills in the Hazardous Materials and Safety
+Approval form. About ten minutes:
+https://docs.google.com/forms/d/e/1FAIpQLSdpa55w6175qLqt9SzYOVrjX7UeL2Ng0NislH3PVXvRzyHPWw/viewform
+
+You asked for a high school mentor. We are asking one now and will
+introduce you by email as soon as they say yes.
+
+You also asked what the board should look like. It is all on one page:
+mvsciencefair.vercel.app/display-and-safety
+
+Save the date:
+
+*Saturday, September 26, 2026, 9:00 AM to 12:00 PM (arrival and setup 8 to
+9 AM)*
+
+Amy Imai Elementary School, Multi-Use Room (MUR)
+
+253 Martens Ave, Mountain View, CA 94040
+
+Questions any time, big or small: stemresearchclubmvhs@gmail.com
+
+Keep asking good questions,
+
+The MV Science Fair Team
+
+MVHS STEM & Research Club
+
+mvsciencefair.vercel.app
+
+[2026-09-17 12:02:46] JOB CLOSED: dry run
+[2026-09-17 15:47:32] === Hadiya mentor deadline check (dry_run=True) ===
+[2026-09-17 15:47:34] No reply from Nicole and no mentor on the project. Drafting the ask to Neel Chhatrala.
+[2026-09-17 15:47:35] [dry-run] draft NOT created. Plain text body follows:
+[2026-09-17 15:47:35] Neel, can you take a second project? No is completely fine.
+
+Hadiya Ansari and her sister Huseina, 3rd grade at Amy Imai. Chemistry and Materials: eggs soaked in soda, coffee, orange juice and water to find which drink attacks teeth the most, each egg weighed before and after so there is a number on it.
+
+Where it stands, plainly. We offered this to another mentor on Sept 13. She never answered, so yesterday afternoon we told her we would pass the project on if we did not hear back within 24 hours. That deadline has now passed with no reply of any kind. Hadiya's approval letter promises the family an introduction, so they have been waiting since Saturday and still do not have a name.
+
+You are already with Vidyut and Adhitri, so this would be a second one, about an hour or two a week until September 26. Saying no costs nothing and I will go and recruit instead.
+
+The family's own letter is below so you can see exactly what they were promised. I have kept their email address off this forward until you say yes.
+
+Eeshan
+
+
+---------- Forwarded message ---------
+From: STEM ResearchClub <stemresearchclubmvhs@gmail.com>
+Date: Sun, 13 Sep 2026 13:14:40 -0700
+Subject: Hadiya and Huseina's MV Science Fair project is approved
+To: Hadiya's family (address held back until you say yes)
+
+
+Hi Hadiya, Huseina and family,
+
+*Your project is approved.* You wrote that this is your first time and you
+were unsure of the expectations, so we have decided the open bits for you
+rather than handing them back.
+
+Your category is *Chemistry & Materials*. Your title is your own question:
+"Which drink attacks your teeth the most?" Nothing to invent there.
+
+Three things to do as you run it:
+
+   - Weigh each egg on a kitchen scale before it goes in and again when it
+   comes out, and write both numbers down. The weight it lost is your answer.
+   Photograph the colour change too, but the scale is what lets a judge
+   compare four drinks side by side.
+   - Keep everything else the same. Same size cup, same amount of liquid,
+   same kind of egg, same number of days, all four sitting in the same place.
+   Your water cup is the control, and you already thought of that yourselves.
+   - Two eggs per drink if you can manage eight. One egg can be a fluke. If
+   eight is too many, four is fine, just say so on your board.
+
+Safety with raw eggs: nobody eats or drinks anything from the experiment,
+keep the cups covered and out of reach of younger children, wash hands
+afterwards, and throw it all away when you are done. The eggs do not travel
+to the fair. Photographs do.
+
+One short form. Soda and orange juice are acids and the eggs sit for days,
+so a parent or guardian fills in the Hazardous Materials and Safety
+Approval form. About ten minutes:
+https://docs.google.com/forms/d/e/1FAIpQLSdpa55w6175qLqt9SzYOVrjX7UeL2Ng0NislH3PVXvRzyHPWw/viewform
+
+You asked for a high school mentor. We are asking one now and will
+introduce you by email as soon as they say yes.
+
+You also asked what the board should look like. It is all on one page:
+mvsciencefair.vercel.app/display-and-safety
+
+Save the date:
+
+*Saturday, September 26, 2026, 9:00 AM to 12:00 PM (arrival and setup 8 to
+9 AM)*
+
+Amy Imai Elementary School, Multi-Use Room (MUR)
+
+253 Martens Ave, Mountain View, CA 94040
+
+Questions any time, big or small: stemresearchclubmvhs@gmail.com
+
+Keep asking good questions,
+
+The MV Science Fair Team
+
+MVHS STEM & Research Club
+
+mvsciencefair.vercel.app
+
+[2026-09-17 15:47:35] JOB CLOSED: dry run
+[2026-09-17 16:06:05] === Hadiya mentor deadline check (dry_run=False) ===
+[2026-09-17 16:06:07] No reply from Nicole and no mentor on the project. Drafting the ask to Neel Chhatrala.
+[2026-09-17 16:06:08] DRAFT r-9177967949555873335 (message 1a0b19ec440d9179) created, present in drafts.list: True

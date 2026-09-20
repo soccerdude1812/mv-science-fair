@@ -41,6 +41,40 @@ Other hard limits:
 
 ---
 
+## WHAT THIS RUN IS ALLOWED TO DRAFT
+
+Set by Eeshan on 2026-09-17. The Drafts page is his working surface and a cluttered one is
+worse than an empty one, so the test for every draft is "would he actually send this today".
+
+**Draft these, and essentially only these:**
+
+- **Answers to questions a parent or family has actually asked.** They wrote, they are
+  waiting, the answer is ours to give.
+- **Approvals for projects that have just come in**, including the late ones, in the house
+  voice with the real feedback folded in.
+
+**Never draft these, however reasonable they look:**
+
+- **Mentor mail of any kind.** No offers, no chases, no introductions, no hand-offs when an
+  offer lapses, no "can you take a second project". Eeshan and his team run mentor matching
+  on their own track and this job drafting into it creates two sources of truth. Record
+  mentor state in the tracker and put one line in the report. Nothing in Drafts.
+- **Safety and Haz-Mat form reminders.** A family who owes a form is tracked and reported,
+  never drafted to. The ask rides inside an approval letter when that letter is being
+  written anyway, and that is the only place it appears.
+- **Sponsorship**, per the rule immediately above.
+
+**No duplicate drafts, ever.** Before writing, check `drafts.list` on the raw API rather
+than a Gmail search, which lags. One live draft per person per topic. If a draft to that
+person on that subject already exists, leave it alone and report it under "Already drafted,
+still unsent" instead of writing a second one. If an old draft is stale and wrong, say so in
+the report and let Eeshan replace it; this job still never deletes.
+
+If something genuinely needs to go out and does not fit the two allowed shapes above, it is
+a line in the report under "For Eeshan", not a draft.
+
+---
+
 ## Accounts and tools
 
 | Mailbox | Address | Role |
