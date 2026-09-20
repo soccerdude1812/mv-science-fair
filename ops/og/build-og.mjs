@@ -25,9 +25,34 @@
  * sizing by ink height is what makes the row read as one shelf.
  */
 
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+
+const here = dirname(fileURLToPath(import.meta.url));
+const repo = join(here, "..", "..");
+
+/**
+ * Read the event facts out of src/lib/event.ts rather than retyping them.
+ * DESIGN.md: "src/lib/event.ts stays the single source of truth for
+ * date/venue/deadline/contact. Edit there, never inline." This script is plain
+ * node with no TypeScript step, so it pulls the string literals out by name; a
+ * missing or renamed key throws here instead of quietly shipping a wrong date
+ * on the one surface nobody on the project ever looks at.
+ */
+const EVENT_SRC = readFileSync(join(repo, "src", "lib", "event.ts"), "utf8");
+function ev(key) {
+  const m = EVENT_SRC.match(new RegExp(`^\\s*${key}:\\s*"([^"]*)"`, "m"));
+  if (!m) throw new Error(`event.ts has no string field "${key}"`);
+  return m[1];
+}
+const EVENT = {
+  dateMedium: ev("dateMedium"),
+  timeShort: ev("timeShort"),
+  venueName: ev("venueName"),
+  venueCity: ev("venueCity"),
+  organizer: ev("organizer"),
+};
 
 const INK = "var(--ink)";
 
@@ -59,11 +84,12 @@ function smile({ cx, cy, w = 8, depth = 3 }) {
 
 /* ------------------------------------------------------------ cast -- */
 
+const beakerInteriorId = nextId("interior");
 const beaker = {
   box: { x: 26.5, y: 6.5, w: 69.9, h: 95.3 },
   body: `
-    <clipPath id="beakerInterior"><path d="M31,26 L89.5,25.5 L89.8,86 Q89.6,96 78.5,98 L41.5,98 Q30.6,96 30.4,86 Z"/></clipPath>
-    <g clip-path="url(#beakerInterior)">
+    <clipPath id="${beakerInteriorId}"><path d="M31,26 L89.5,25.5 L89.8,86 Q89.6,96 78.5,98 L41.5,98 Q30.6,96 30.4,86 Z"/></clipPath>
+    <g clip-path="url(#${beakerInteriorId})">
       <path d="M12,72.5 Q30,68.5 48,72 T84,71.5 T112,72 L112,116 L12,116 Z" fill="var(--coral)"/>
       <path d="M12,72.5 Q30,68.5 48,72 T84,71.5 T112,72" stroke="${INK}" stroke-width="4.5" stroke-linecap="round"/>
     </g>
@@ -124,13 +150,14 @@ const testTube = {
   </g>`,
 };
 
+const lensId = nextId("lens");
 const magnifier = {
   box: { x: 21.75, y: 17.75, w: 75.75, h: 77.25 },
   body: `
     <path d="M71.5,68.5 L92,89.5" stroke="${INK}" stroke-width="11" stroke-linecap="round"/>
     <circle cx="52" cy="48" r="27" fill="#fff" stroke="${INK}" stroke-width="6.5"/>
-    <clipPath id="lens"><circle cx="52" cy="48" r="23"/></clipPath>
-    <g clip-path="url(#lens)"><circle cx="52" cy="53" r="9.5" fill="${INK}"/></g>
+    <clipPath id="${lensId}"><circle cx="52" cy="48" r="23"/></clipPath>
+    <g clip-path="url(#${lensId})"><circle cx="52" cy="53" r="9.5" fill="${INK}"/></g>
     <path d="M29.5,42 Q42,26.5 73,36.5" fill="none" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
     <path d="M38,60.5 Q45,66 54,66.5" fill="none" stroke="${INK}" stroke-width="3.4" stroke-linecap="round"/>`,
 };
@@ -268,16 +295,16 @@ const html = `<!doctype html>
 </head>
 <body>
   <div class="sheet">
-    <p class="eyebrow">Sat, Sept 26, 2026 &middot; 9AM to 12PM</p>
+    <p class="eyebrow">${EVENT.dateMedium} &middot; ${EVENT.timeShort}</p>
     <h1>MV Science Fair</h1>
-    <p class="sub">Amy Imai Elementary School, Mountain View.<br><span class="free">Free, and open to families.</span></p>
+    <p class="sub">${EVENT.venueName}, ${EVENT.venueCity}.<br><span class="free">Free, and open to families.</span></p>
     <div class="bench">
       ${CAST.map(
         (c) =>
           `<figure style="width:${c.width}px;height:${c.height}px">${c.svg}</figure>`,
       ).join("\n      ")}
     </div>
-    <p class="org">Organized by the MVHS STEM &amp; Research Club</p>
+    <p class="org">Organized by the ${EVENT.organizer.replace("&", "&amp;")}</p>
   </div>
 </body>
 </html>
@@ -329,7 +356,6 @@ const iconHtml = `<!doctype html>
 </html>
 `;
 
-const here = dirname(fileURLToPath(import.meta.url));
 writeFileSync(join(here, "og.html"), html);
 writeFileSync(join(here, "icon.html"), iconHtml);
 console.log(

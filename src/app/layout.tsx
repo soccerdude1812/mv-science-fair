@@ -51,12 +51,21 @@ export const metadata: Metadata = {
     "September 26 2026",
   ],
   openGraph: {
-    title: "MV Science Fair 2026",
-    description: `${EVENT.dateFull} · ${EVENT.timeFull} · ${EVENT.venueName}, ${EVENT.venueAddress}. Student projects from grades 3 to 5. Free, and open to families.`,
+    /* No title or description here on purpose. Anything set at the root wins
+       over the route's own, so a hard-coded pair here made every page's card
+       read "MV Science Fair 2026" with the home page's blurb, however specific
+       the page was. Left unset, Next fills them from each route's own title
+       (template applied) and description, which is the same reason DESIGN.md
+       requires a distinct title per route. */
     type: "website",
     locale: "en_US",
     siteName: "MV Science Fair 2026",
-    url: EVENT.siteUrl,
+    /* "./" resolves against the CURRENT pathname. An absolute URL here does
+       not: it would stamp every route's og:url with the home page, and og:url
+       is what Facebook and LinkedIn treat as the canonical identity of a
+       shared link, so /fair-day and /sponsors would aggregate as the home
+       page. Verified by curling three routes after a production build. */
+    url: "./",
     /* The picture itself is src/app/opengraph-image.png, which Next turns into
        og:image plus its type and dimensions. Added 2026-09-20: until then the
        site declared no image at all, so iMessage, Slack and every other
@@ -66,10 +75,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     /* Without this the card renders as a thumbnail beside the text instead of
-       the full width image, which is the whole point of drawing one. */
+       the full width image, which is the whole point of drawing one. Title and
+       description are left unset for the same reason as openGraph above. */
     card: "summary_large_image",
-    title: "MV Science Fair 2026",
-    description: `${EVENT.dateFull} · ${EVENT.timeFull} · ${EVENT.venueName}. Free, and open to families.`,
   },
 };
 
