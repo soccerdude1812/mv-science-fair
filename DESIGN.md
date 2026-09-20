@@ -197,6 +197,67 @@ A character may appear on more than one page, but only ever for the same meaning
 The rule that matters is that a reader never sees the same doodle standing for two
 different ideas, not that each doodle is used exactly once.
 
+## The social preview card
+
+The picture every messaging app shows when somebody pastes the link. Added
+2026-09-20, because until then the site declared no `og:image` at all and the
+scrapers did what scrapers do with a page that gives them nothing: they took the
+first photograph in the markup, which is the first portrait in "The students
+behind it". A link to a children's science fair previewed as one organizer's
+face, in iMessage, in Slack, everywhere it was shared.
+
+- The card is **the cast, never a photograph**. The Photography exception above
+  is for a parent deciding whether to trust us with their child, on a page they
+  chose to open. A preview thumbnail is not that page, and a face in it reads as
+  a personal link rather than an event
+- All five characters stand in one row on a hairline bench: lightbulb, gear,
+  beaker, test tube, magnifier, with the beaker in the middle because it is the
+  hero character and the only one the brand coral lives in. Here they are the
+  cast as a group, which is why the one-meaning-per-character rule does not bind
+  the row the way it binds a page
+- Ground, type and tokens are the site's: dotted band on `--paper-warm`, a
+  `--paper` sheet at 16px radius, Source Serif 4 title, Outfit sub, JetBrains
+  Mono for the date line, "Free, and open to families." in `--coral-deep`
+  because it carries words
+- It repeats only facts that already exist: Sept 26, 9 to 12, the venue, free
+  and open, and the organizer spelled the one way. No arrival window (that is a
+  participant fact), no judging times
+- Artwork source is `ops/og/build-og.mjs`, which emits `ops/og/og.html`. The
+  characters there mirror `src/components/lab/cast.tsx` path for path with the
+  motion groups dropped, and the eyes and smiles are computed from the same
+  formulas rather than retyped. Regenerate by screenshotting that page at
+  1200x630 with a 2x zoom and writing the result over `src/app/opengraph-image.png`
+  and `src/app/twitter-image.png` (2400x1260, the same file twice: X prefers
+  `twitter:image` and the fallback to `og:image` is not worth relying on).
+  The header of the script carries the exact commands
+- `metadataBase` in `src/app/layout.tsx` is `EVENT.siteUrl`. Without it Next
+  resolves the image against the per deployment Vercel hostname instead of the
+  address that is on the fliers. Preview deployments deliberately override it
+  with their own hostname, so a branch preview shows its own card; production
+  uses `metadataBase`
+
+## The site mark (favicon)
+
+The beaker's face, cropped to the glass, on `--paper`. Added 2026-09-20 in the
+same pass as the preview card, and for the same reason: the icon shipped until
+then was the stock Next.js triangle, so the browser tab, the iOS home screen
+tile and the small mark chat clients put beside a link all said "a Next.js app"
+rather than "the science fair".
+
+- The beaker, because it is the hero character and the only one the brand coral
+  lives in. Same geometry as the card and the hero, minus the escaping bubbles
+  and the measurement ticks: both are legible at 190px and are grit at 16
+- Three files, all generated from one 512 master: `src/app/icon.png` (512),
+  `src/app/apple-icon.png` (180, opaque, because iOS composites onto black) and
+  `src/app/favicon.ico` (16, 32, 48, for anything that asks for `/favicon.ico`
+  without reading the markup, several link scrapers included)
+- Source is `ops/og/icon.html` from the same generator, converted by
+  `ops/og/make-icons.py`. That script writes the `.ico` from an RGBA image on
+  purpose: Pillow embeds whatever mode it is handed, and Next's build decodes
+  the file and fails on an RGB one
+- Checked at 16 and 32 pixels, not just at 512. At 32 the face reads; at 16 it
+  is a beaker with a coral band, which is the most a 16px mark can carry
+
 ## Motion
 
 Library: `motion` (motion/react). No `window.addEventListener("scroll")` anywhere,
