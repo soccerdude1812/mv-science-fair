@@ -1,5 +1,15 @@
 # Lessons
 
+## [2026-09-21][certificates-were-promised-in-two-places-and-never-made] Nothing existed to hand a student on fair day, five days out
+
+**Mistake:** the fair had no certificates at all. Not a file, not a draft, not a design, in any of the three Drives, this repo or `~/.claude/tools`. A Drive-wide search for `certificat` across the club, personal and school accounts returned zero files, and every "certificate" hit in the club mailbox was either the sponsorship boilerplate or the venue's certificate of insurance.
+
+**Root cause:** two separate artifacts already promised them and neither owns them, so each one reads as though the other has it handled. The `Set up day checklist` in Drive `08` says "Put all the seals and certificates on the judging table". `/sponsors` tells every business their money buys "printed certificates". Vidu's `Superlative Awards` doc even says "The project with the most votes for Most Impactful gets that certificate". Three documents describing a thing is not the same as one document producing it, and the judging track built the sheets that decide the winners without ever building what the winner receives.
+
+**Fix:** `~/.claude/tools/mv-certificates/` holds `build.py` and `assets/signature-ink.png`. It reads `../mv-judging/data.json`, the same source the judge sheets use, so the names, categories, grades and table numbers cannot drift between the two stacks. 65 landscape pages in Chalk Lab: 45 participation with the student's name set in type, 12 category awards (First, Second and Third for each of the four categories) and 8 special awards carrying Vidu's definitions, the award pages ruled blank because the result is not known until the judges confer. Mr. Simon Huynh's signature is embedded on every page. Rendered with headless Chrome, merged with `pdfunite`, uploaded to Drive `10 - Certificates`. Verified by extracting all 45 printed names back out of the PDF and diffing them against `data.json` in order: exact match, 45 unique.
+
+**Prevention:** when a checklist or a public page names a physical object, that object needs a generator with a path, the same day. Search Drive for the noun before assuming an earlier session produced it, and remember the club Drive search is case sensitive enough that `certificat` beats `Certificate`.
+
 ## [2026-09-20][judge-score-sheets-live-outside-the-repo] The judge score sheets are generated paper, and the generator is not in this repo
 **Mistake:** the 32 per-project display sheets built earlier the same day were session scratch, so rebuilding them means redoing them from nothing. The judge score sheets were about to repeat that, and they carry the same participant data PR #59 deliberately removed from this repo.
 **Root cause:** fair-day paper is not a website artifact, so nothing in the repo owns it, and the only place it can live without leaking student names is outside the repo.
