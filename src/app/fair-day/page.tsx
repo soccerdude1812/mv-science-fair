@@ -15,13 +15,17 @@ export const metadata: Metadata = {
  * The fair day page. Added 2026-09-15, when applications closed and the site's
  * job became getting 31 approved projects to the morning of the 26th.
  *
- * EVERY TIME ON THIS PAGE IS SOURCED, and there are only four of them: the 8 to
- * 9 arrival window and the 9 to 12 fair, both of which sit in event.ts and in
- * every approval letter the club has sent; judging running inside that window;
- * and awards before the noon close, which is what /judges has told judges since
- * August. There is no minute-by-minute run of show because nobody has set one,
- * and inventing "10:30, judging begins" here would put a time in front of 31
- * families that no organizer has agreed to.
+ * EVERY TIME ON THIS PAGE IS SOURCED. The 8 to 9 arrival window and the 9 to 12
+ * fair sit in event.ts and in every approval letter the club has sent.
+ *
+ * The inside of the morning was set by Eeshan on 2026-09-20 and went to all 33
+ * participating families in the fair day letter that same day: judging starts at
+ * 9:15 and runs an hour and a half to two hours, the judges then break for
+ * fifteen to twenty minutes to confer while snacks are out, and awards begin
+ * around 11:30 and last about half an hour. Those families now hold these times
+ * in writing, which is the only reason they appear here. Do not add a time to
+ * this page that no organizer has agreed to, and if the letter's schedule ever
+ * changes, this page changes with it.
  */
 
 /* The morning, in the order it happens. `who` drives the chip colour: what a
@@ -31,7 +35,7 @@ const MOMENTS = [
     time: EVENT.arrivalWindowFull,
     title: "Arrive and set up",
     who: "Participants",
-    body: "Come to the Multi-Use Room and check in with us at the door. We will point you to your table. Stand your board up, lay out your data, and make sure it does not wobble. An hour sounds like plenty, and it goes quickly.",
+    body: "Come to the Multi-Use Room and check in with us at the door. We will point you to your table, and the display and safety check happens here too. Stand your board up, lay out your data, and make sure it does not wobble. An hour sounds like plenty, and it goes quickly, so come well before 9.",
   },
   {
     time: "9:00 AM",
@@ -40,16 +44,22 @@ const MOMENTS = [
     body: "Visitors come in. By this point every board should be standing and every scientist should be beside their own table, ready to talk about what they found.",
   },
   {
-    time: EVENT.timeFull,
-    title: "Judging, and a room full of people",
+    time: "9:15 AM",
+    title: "Judging begins",
     who: "Everyone",
-    body: "Judges work through the room across the morning, so stay near your board and be ready whenever one reaches you. In between, families and other students will stop and ask you about your project, which is the fun part.",
+    body: "Judging runs about an hour and a half to two hours. Judges work through the room in their own order, so stay near your board and be ready whenever one reaches you. In between, families and other students will stop and ask you about your project, which is the fun part.",
   },
   {
-    time: "Before noon",
+    time: "Around 11:00 AM",
+    title: "A break while the judges confer",
+    who: "Everyone",
+    body: "Fifteen or twenty minutes with snacks out while the judges talk it over. Walk the room and look at the projects you have not seen yet.",
+  },
+  {
+    time: "11:30 AM",
     title: "Awards",
     who: "Everyone",
-    body: "Category and special award winners are announced before the fair closes. Everybody who presents a project has done the thing that matters, which is finding something out and explaining it to a stranger.",
+    body: "About half an hour. Category and special award winners are announced. Everybody who presents a project has done the thing that matters, which is finding something out and explaining it to a stranger.",
   },
   {
     time: "12:00 PM",
@@ -90,7 +100,7 @@ export default function FairDayPage() {
         <section className="mt-14 sm:mt-20">
           <h2 className="display-section reveal">The morning, in order</h2>
           <p className="reveal mt-3 max-w-2xl text-ink-soft">
-            Five moments. The only one with a hard edge is the first.
+            Six moments. The only one with a hard edge is the first.
           </p>
 
           <ol className="mt-8 border-t border-line">
@@ -202,9 +212,9 @@ export default function FairDayPage() {
                 No appointment to keep
               </h3>
               <p className="leading-relaxed text-ink-soft">
-                Judging happens across the morning rather than at a time you are
-                given in advance, so stay near your board and be ready whenever a
-                judge reaches you.
+                Judging starts at 9:15 and runs an hour and a half to two hours,
+                but you are not given a slot inside that. Stay near your board and
+                be ready whenever a judge reaches you.
               </p>
             </div>
             <div className="border-t border-line pt-5">
