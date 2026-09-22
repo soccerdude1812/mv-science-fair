@@ -1,5 +1,25 @@
 # Lessons
 
+## [2026-09-21][three-speeches-asserted-a-fact-no-job-produced] Everybody's script agreed, and the thing they all agreed on was not happening
+
+**Mistake:** wrote a full set of fair day scripts in which three separate speeches told the room that every child was holding a participation certificate. Tristan at 9:13, "the certificate you are going to be handed at a quarter past eleven". Eeshan at 11:15, "every person presenting today already has a certificate". Eeshan at 11:52, "the certificate in your hand". The 45 named certificates were routed to the judging table in the back room by the print order, and the only person who ever carried anything out of that room was David, who was told to count exactly twenty award certificates. Nobody was assigned to hand out the other 45. Four of five independent role-play agents found it; I had not, in two passes of my own.
+
+**Root cause:** I checked each document against the facts and against the schedule, and never checked a claim in one document against the existence of a job in another. "The child is holding a certificate" is not a fact about the event, it is an assertion that some step must produce, and no step did. Writing all the documents myself is exactly what makes this invisible: the same assumption is consistent everywhere it appears.
+
+**Fix:** the 45 sort into table-number order on Friday and live on the check-in table; Neel hands each family theirs as he ticks them in, so all three speeches are true from 8:00 onward rather than false all morning. The print order now routes them to the door and only the 40 blank award certificates to the judging table.
+
+**Prevention:** for anything spoken to an audience, walk the physical object, not the sentence. Every noun a script puts in somebody's hand needs a named person, a time and a place where it got there. The check that would have caught this is one grep: every artifact in the print order, matched to the job that moves it.
+
+## [2026-09-21][an-audit-you-write-yourself-agrees-with-you] Five role-play agents found nine things two of my own passes did not
+
+**Mistake:** the audit agents went idle without delivering, so I walked all six roles myself and reported the result as the audit. My pass found six real defects and I believed it was thorough. The agents' reports arrived afterwards and carried nine more, several serious: the participation certificates nobody hands out, special awards 7 and 8 announced by the wrong people because two prose blocks contradicted the tables in their own files, a tally instruction pointing at the 32 table labels instead of the four judging sheets, a "judges keep conferring while the ceremony runs" fallback that requires all four judges to be in two places, no tie-break for special award ticks when ties are the normal case, and a judges' handout naming a back-room contact who is on the door and then behind a camera.
+
+**Root cause:** I wrote every one of those documents. Reading them back, I reconstructed what I meant rather than what they say, and my own consistency errors read as correct because I supplied the missing half from memory. A fresh reader given only the files has no memory to supply.
+
+**Fix:** folded all of it in, plus the participant and judge walks, which separately found a nine year old standing for ninety minutes with no chair and a returning student nobody was expecting.
+
+**Prevention:** when the agents go idle without reporting, message them for the report rather than substituting your own pass and calling it the audit. And never let the author be the only auditor of something that will be read under pressure by five other people.
+
 ## [2026-09-21][a-fit-search-that-only-measured-one-page] Clearing a judge conflict broke the packet build, because only page 2 was fit-searched
 
 **Mistake:** Eeshan ruled that Ms. Schaefer scores the three Engineering projects that are her own students, so I set her `conflicts` to `[]` in `~/.claude/tools/mv-judging/data.json` and reran `build.py`. It died: `Jennifer Schaefer: no row metric fits on one page (last overflow [0, 0, 34] px)`. Her sheet went from seven scored projects to ten.
