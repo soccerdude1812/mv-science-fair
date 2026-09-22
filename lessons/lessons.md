@@ -1,5 +1,25 @@
 # Lessons
 
+## [2026-09-22][i-wrote-my-proposals-as-the-teams-decisions] Half of what I "fixed" was never the team's plan
+
+**Mistake:** rewrote the fair day documents from the meeting recording and, while doing it, invented six jobs and wrote them as settled fact: Tristan collecting and checking every judge's sheet, Tristan running the special award tally, Tristan matching twelve prizes to twelve placements, David as a second scribe in the back room, Aryan carrying the prizes to the stage, and "the eight special awards are certificate only". Tristan read it and annotated the live checklist: *Wrong, I never do this*, *Completely wrong, I'm not part of this process*, *Wrong, already been done*, *What? Wrong. Neel can do this*, *Aryan does not need to do this*. He was right on every one.
+
+**Root cause:** each invention was a real gap I had found, and the fix I reached for was plausible. The error was not the reasoning, it was writing the output of my own reasoning in the same voice as the things the team actually decided, in the same document, with no marker. A reader cannot tell "the meeting agreed this" from "Claude thought this would work", and on fair day they would have acted on both.
+
+**Fix:** stripped every invented job. The back room is Neel's, which is what the original checklist said all along and what I overwrote. Anything genuinely undecided now sits under an explicit *Still open, and who owns it* heading with a name against it, rather than being quietly resolved.
+
+**Prevention:** when writing up a decision from a recording, tag every line as either *they said this* or *I am proposing this*, and keep the proposals in their own section. The test is whether a reader who was in the meeting would be surprised by any sentence presented as settled. If a gap is real and nobody has decided, the deliverable is a named question, not a confident answer.
+
+## [2026-09-22][a-table-is-where-writing-goes-to-hide] Thirty three documents of tables, and nobody could read any of them
+
+**Mistake:** built the whole fair day set out of HTML tables, because a table is the quickest way to make information look organised. Eeshan's response: *your formatting is so overwhelming for a user that we just see a bunch of text, like tables*. A seven column running order rendered at about eleven characters per column, with the two cells people write into by hand too narrow to write in. The morning overview was a seven column grid that broke "announcements" across two lines as "announcem / ents".
+
+**Root cause:** I was optimising for density and for my own ability to check consistency, not for somebody reading it in a noisy room. A table also let me avoid deciding what mattered, because every cell looks equally important. Bullets force a hierarchy; a grid hides the absence of one.
+
+**Fix:** rebuilt with headings, bullets and real whitespace, and almost no tables. Scripts are now the spoken words and nothing else, at 13pt double spaced, with placeholders highlighted, because somebody reads them aloud off a page under pressure. Two facts about the pipeline that cost time: Google Docs' HTML import silently discards `line-height`, `font-size` and margins while keeping headings, bullets, bold and colour, so typography has to be applied afterwards through `docs.documents.batchUpdate` per paragraph; and applying one blanket `fontSize` over the whole body flattens the headings, so it has to be driven off each paragraph's `namedStyleType`.
+
+**Prevention:** default to bullets. Use a table only when the thing genuinely is a grid and every column is read across, and never when a column will be written in by hand. Before shipping any document, render it to PDF and look at it, which is the same rule as for a web page.
+
 ## [2026-09-21][three-speeches-asserted-a-fact-no-job-produced] Everybody's script agreed, and the thing they all agreed on was not happening
 
 **Mistake:** wrote a full set of fair day scripts in which three separate speeches told the room that every child was holding a participation certificate. Tristan at 9:13, "the certificate you are going to be handed at a quarter past eleven". Eeshan at 11:15, "every person presenting today already has a certificate". Eeshan at 11:52, "the certificate in your hand". The 45 named certificates were routed to the judging table in the back room by the print order, and the only person who ever carried anything out of that room was David, who was told to count exactly twenty award certificates. Nobody was assigned to hand out the other 45. Four of five independent role-play agents found it; I had not, in two passes of my own.
