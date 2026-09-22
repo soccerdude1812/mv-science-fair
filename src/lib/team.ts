@@ -36,12 +36,6 @@ export const TEAM: TeamMember[] = [
     tone: "marigold",
   },
   {
-    name: "Aryan Khanna",
-    role: "Club President",
-    photo: "/team/aryan_khanna.jpg",
-    tone: "marigold",
-  },
-  {
     name: "Tristan Schaefer",
     role: "Outreach Relations",
     photo: "/team/tristan.jpg",
@@ -63,6 +57,12 @@ export const TEAM: TeamMember[] = [
     name: "Vidu Senadheera",
     role: "Student Mentor & Volunteer",
     photo: "/team/vidu.jpg",
+    tone: "green",
+  },
+  {
+    name: "Aryan Khanna",
+    role: "Student Volunteer",
+    photo: "/team/aryan_khanna.jpg",
     tone: "green",
   },
 ];
