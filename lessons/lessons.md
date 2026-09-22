@@ -1,5 +1,15 @@
 # Lessons
 
+## [2026-09-21][event-day-checklist-is-live-edited] The Event Day Checklist changed under me in the middle of building from it
+
+**Mistake:** restructured Drive around event day and generated eleven per-speaker script skeletons from the speaking roster in `Event Day Checklist`, read at the start of the session. Forty minutes later the doc said something different: the sponsor thank-you had moved from Eeshan to Tristan, the break announcement from Vidu to Eeshan, judging had moved from 9:15 to 9:20 and a display-and-safety sweep had been handed to David. Every skeleton named the wrong speaker for its part.
+
+**Root cause:** treated a Google Doc the club edits during the week as a fixed input. The checklists in Drive `00 - EVENT DAY` are the club's live planning surface, not an artifact this repo owns, and four people have edit access to them the week of the fair.
+
+**Fix:** trashed all eleven skeletons and rebuilt them against a fresh read, then replaced the link index at the top of the checklist rather than rewriting the doc, so the club's own timing lines below it survived. Prepending an index and leaving everything below untouched is the only safe way to write into a doc somebody else may have open.
+
+**Prevention:** re-read the checklist immediately before generating anything derived from it, not once at the start of the session, and never rewrite one of those docs whole. The same rule covers `Superlative Awards`, which is why `mv-judging/watch.py` reparses it on a timer instead of caching it.
+
 ## [2026-09-21][one-title-lives-in-five-printed-places] Fixing a project title in one place leaves four printed copies wrong
 
 **Mistake:** asked to correct two project titles on the certificates. Correcting them there alone would have shipped a fair where a child's certificate, their table sheet, the judge's score sheet and the door check-in sheet all name their project differently.
