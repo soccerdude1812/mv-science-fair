@@ -21,7 +21,14 @@
  *   last word in the thread is ours.
  * - Elate Link LLC was accepted as a digital media partner on Sept 12, but
  *   photographing students needs a consent process the advisor raised on
- *   Sept 19 and it is unresolved.
+ *   Sept 19 and it is unresolved. Photos may be taken on the day, since all 33
+ *   families agreed to the Photo/Video Release, but nothing goes to Elate Link
+ *   until Mr. Huynh signs off.
+ * - Tee Rabbit was removed on 2026-09-21. Their donation was printing for the
+ *   volunteer shirts, and the 2026-09-21 planning meeting dropped volunteer
+ *   shirts as too tight to run. Eeshan's call was to pull the card rather than
+ *   credit a contribution that never happened. Put it back the moment they give
+ *   something the fair actually uses.
  *
  * When any of those four closes, add it here and the wall picks it up.
  * Do not add a sponsor to the page directly.
@@ -123,15 +130,6 @@ export const SPONSORS: Sponsor[] = [
     width: 560,
     height: 318,
     logoHeight: 66,
-  },
-  {
-    name: "Tee Rabbit",
-    gives: "Printing for the volunteer shirts",
-    url: "https://www.teerabbit.com/",
-    logo: "/sponsors/tee-rabbit.svg",
-    width: 720,
-    height: 174,
-    logoHeight: 44,
   },
   {
     name: "The Pear Theatre",

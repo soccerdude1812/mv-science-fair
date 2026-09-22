@@ -1,5 +1,25 @@
 # Lessons
 
+## [2026-09-21][a-fit-search-that-only-measured-one-page] Clearing a judge conflict broke the packet build, because only page 2 was fit-searched
+
+**Mistake:** Eeshan ruled that Ms. Schaefer scores the three Engineering projects that are her own students, so I set her `conflicts` to `[]` in `~/.claude/tools/mv-judging/data.json` and reran `build.py`. It died: `Jennifer Schaefer: no row metric fits on one page (last overflow [0, 0, 34] px)`. Her sheet went from seven scored projects to ten.
+
+**Root cause:** `FITS` searched three metrics, and all three only affect the page 2 score grid: row padding, comment rule height, rules per row. Page 3 carries one superlative nomination row per project a judge actually scores, at a hard coded `padding: 4.5pt`. It fitted every judge up to eight projects and nobody had ever built a ten project sheet, so the page 3 geometry was never a variable. The generator measured all three pages but could only ever change one of them.
+
+**Fix:** made the page 3 matrix padding a fourth search dimension. `FITS` is now a comprehension over `mp in (4.5, 3.6, 3.0, 2.4, 1.8)` crossed with the existing grid metrics, `signoff()` takes `mpad` and sets `--mpad` on the page, and the CSS reads `padding: var(--mpad, 4.5pt) 2pt`. Schaefer's sheet now builds at 3.0pt with zero overflow; the three seven and eight project sheets are unchanged at 4.5pt because the search takes the most generous set that fits.
+
+**Prevention:** if a generator measures N pages, every page it measures needs at least one metric it can actually move. A fit search that can only reflow one of three pages is not a fit search, it is a fit search plus two pages of luck. The failure was loud rather than silent, which is the only reason this cost twenty minutes instead of printing a cut-off sheet.
+
+## [2026-09-21][the-letter-and-the-checklist-were-both-authoritative] Two schedules existed for the same morning and neither side knew which won
+
+**Mistake:** nearly wrote every fair day script against the internal checklist's 9:20 judging and 11:15 awards, while 44 family addresses and the live `/fair-day` page held 9:15 and 11:30 from a letter sent the day before. The checklist itself flagged it: "Nothing has been changed either way. Whichever one wins, the other has to move."
+
+**Root cause:** the run of show is written down in three places that update on different clocks. The letter is a one way broadcast that cannot be recalled, the site is a deploy, and the checklist is a Google Doc four people edit live. A meeting that changes a time only changes the third one.
+
+**Fix:** asked Eeshan rather than guessing. He chose the meeting's times, so `/fair-day` moved to 9:20, 10:35 and 11:15, the sourcing comment on that page now names the meeting as the source and the letter as superseded, and a correction to the same 44 BCC addresses is drafted in the club inbox. Every generated script was written against the chosen times.
+
+**Prevention:** when a time changes, the change is not done until all three surfaces move. Before writing anything that quotes a time, diff the checklist against the last letter in Sent and against `src/app/fair-day/page.tsx`. If they disagree, that is a question for Eeshan, not a judgement call, because one of the three has already been read by families.
+
 ## [2026-09-21][event-day-checklist-is-live-edited] The Event Day Checklist changed under me in the middle of building from it
 
 **Mistake:** restructured Drive around event day and generated eleven per-speaker script skeletons from the speaking roster in `Event Day Checklist`, read at the start of the session. Forty minutes later the doc said something different: the sponsor thank-you had moved from Eeshan to Tristan, the break announcement from Vidu to Eeshan, judging had moved from 9:15 to 9:20 and a display-and-safety sweep had been handed to David. Every skeleton named the wrong speaker for its part.
