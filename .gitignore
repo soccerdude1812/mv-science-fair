@@ -61,3 +61,15 @@ __pycache__/
 # fliers/; this root copy exists because it is where it has always been opened
 # from. Two tracked copies of the same PDF would only drift apart.
 /MV-Science-Fair-Flier.pdf
+
+# Meeting recordings and their transcripts. The 2026-09-21 planning meeting
+# transcript names participating children, quotes candid remarks about a named
+# judge, and records who on the team is afraid of public speaking. None of that
+# belongs in a public repo, and PR #59 already took participant personal data
+# out of it once. The files stay in the working directory because that is where
+# the notetaker drops them and where they get read from; they just never get
+# committed. This matters more than usual because more than one Claude Code
+# session works in this checkout at a time and they share one git index.
+/meeting_transcript.md
+/meeting_summary.md
+/meeting_*.md
