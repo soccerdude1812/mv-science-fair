@@ -725,3 +725,47 @@ four that did not, with the reason.
 **Prevention:** for anything that goes on a public surface or into outbound mail, the mailbox is the
 record and the tracker is a pointer to it. Also check the sponsor form responses
 (`13FPiqEVW7asuV9Z8N6HYQZ8Te2XMMtphkmbJT1z7Ehk`), which is a second inbox nobody watches.
+
+## [2026-09-22][draft-discards-are-not-mailbox-loss] A "vanished" draft is usually a human pressing Discard
+
+**Mistake:** three consecutive club-inbox-run reports (09-19, 09-20, 09-21) concluded that
+`stemresearchclubmvhs@gmail.com` destroys drafts on its own. The 09-21 report went furthest:
+*"The MCP was blamed, then the raw API, then the recipient domain; all three theories are dead. A
+draft in this mailbox has a shelf life of hours and the only thing that survives is a sent
+message."* Acting on that, the run rebuilt the same three judge letters five times across four days
+and started pasting their full text into the report as the only durable copy. None of it was needed
+and none of the judges were reached.
+
+**Root cause:** the run only ever asked Gmail, and Gmail cannot tell the difference. `drafts.list`
+stops listing a draft, `messages.get` on its recorded message id returns **404**, and
+`to:<address> includeSpamTrash=true` returns nothing. That is the signature of a deleted draft *and*
+of a sent one: the 44-Bcc family letter Eeshan actually sent on 09-21 produced exactly the same 404
+on its old draft message id `1a0c2d37b014b162`. From inside Gmail, "destroyed by the mailbox" and
+"the owner discarded it" are indistinguishable.
+
+The answer was already on disk. `~/.claude/tools/draft-watch/watch.py` runs every 20 minutes under
+launchd against the same `~/.config/gws-club-api` credentials and writes an explicit outcome per
+draft to `outcomes.jsonl`. For all three judge letters it says `discarded`:
+
+```
+2026-09-20T23:57:15-07:00  club  discarded  alexander@deleonrealty.com  days_pending 3.5
+2026-09-21T22:59:22-07:00  club  discarded  sdechter@mvwsd.org          days_pending 0.6
+```
+
+The 09-21 discards are four minutes after his own replacement drafts were created (22:55:44 to
+22:55:47), which is someone writing a better letter and binning the old one in one sitting.
+`~/obsidian-vault/brain/email-edits.md` had written the conclusion down on 09-20 in plain words,
+*"so he binned it rather than sending. Treat the whole approach as rejected"*, and two runs read
+past it.
+
+**Fix:** the 09-22 run created no fourth copy. It reported the discard evidence at the top, left
+Eeshan's own 22:55 rebuilds untouched in wording, repaired only their broken `text/plain` fallback,
+and asked him to choose between sending judge mail and taking it off this desk the way mentor mail
+was taken off on 09-17.
+
+**Prevention:** before writing "the draft vanished" anywhere, read `outcomes.jsonl`. It is the only
+source that separates `discarded` from `unchanged` (sent as-is) from `edited` (with the diff), and
+it is an independent watcher rather than the same API agreeing with itself. More generally: when a
+mailbox observation has two explanations and one of them is "a person did a normal thing", check the
+person before declaring the platform broken. A letter that keeps getting discarded is feedback about
+the letter, not a bug to route around.
