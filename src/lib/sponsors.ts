@@ -21,9 +21,14 @@
  *   last word in the thread is ours.
  * - Elate Link LLC was accepted as a digital media partner on Sept 12, but
  *   photographing students needs a consent process the advisor raised on
- *   Sept 19 and it is unresolved. Photos may be taken on the day, since all 33
- *   families agreed to the Photo/Video Release, but nothing goes to Elate Link
- *   until Mr. Huynh signs off.
+ *   Sept 19 and it is unresolved. The Photo/Video Release on the application
+ *   form is NOT that consent: it covers "educational, promotional, or
+ *   informational purposes" and all 33 families accepted it, but on Sept 19
+ *   Mr. Huynh said we need a form for photographing students specifically,
+ *   thought it could be an opt-out, and cc'd Mr. Robell because he was unsure.
+ *   No such form exists. So on the day: photograph freely, honour any parent's
+ *   request not to photograph their child on the spot, and send nothing to
+ *   Elate Link or anyone else until Mr. Huynh signs it off.
  * - Tee Rabbit was removed on 2026-09-21. Their donation was printing for the
  *   volunteer shirts, and the 2026-09-21 planning meeting dropped volunteer
  *   shirts as too tight to run. Eeshan's call was to pull the card rather than
