@@ -7,11 +7,10 @@
  *
  * One role string, used verbatim on both surfaces. There was briefly a second,
  * abbreviated `shortRole` for the home row; Eeshan removed it on 2026-09-03.
- * A title is what a person is called, and a home page that calls someone
- * "Project Organizer" while `/team` calls them "Project Organizer & Club
- * Vice-President" is quietly demoting them to save two lines of layout. The
- * layout gives way instead: the home band drops to two columns on a phone so
- * the real titles fit.
+ * A title is what a person is called, and a home page that shortens someone's
+ * title while `/team` prints it in full is quietly demoting them to save two
+ * lines of layout. The layout gives way instead: the home band drops to two
+ * columns on a phone so the real titles fit.
  *
  * Portraits are re-cropped from the club's other site, mvhsastro.org. The
  * crop rules (4:5, eye line at 40%, head at ~46% of frame height) live in
@@ -31,7 +30,7 @@ export type TeamMember = {
 export const TEAM: TeamMember[] = [
   {
     name: "Eeshan Khandelwal",
-    role: "Project Organizer & Club Vice-President",
+    role: "Project Organizer",
     photo: "/team/eeshan.jpg",
     tone: "marigold",
   },
