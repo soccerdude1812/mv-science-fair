@@ -18,14 +18,14 @@ export const metadata: Metadata = {
  * EVERY TIME ON THIS PAGE IS SOURCED. The 8 to 9 arrival window and the 9 to 12
  * fair sit in event.ts and in every approval letter the club has sent.
  *
- * The inside of the morning was set by Eeshan on 2026-09-20 and went to all 33
- * participating families in the fair day letter that same day: judging starts at
- * 9:15 and runs an hour and a half to two hours, the judges then break for
- * fifteen to twenty minutes to confer while snacks are out, and awards begin
- * around 11:30 and last about half an hour. Those families now hold these times
- * in writing, which is the only reason they appear here. Do not add a time to
- * this page that no organizer has agreed to, and if the letter's schedule ever
- * changes, this page changes with it.
+ * The inside of the morning was settled in the 2026-09-21 planning meeting and
+ * supersedes the 2026-09-20 fair day letter: judging runs 9:20 to 10:35, the
+ * judges then break to confer while snacks are out, and awards run 11:15 to
+ * 11:50. The 9:15 and 11:30 in the earlier letter were the open decision the
+ * event day checklist flagged; Eeshan chose the meeting's times on 2026-09-21
+ * and a correction went to the 44 family addresses. Do not add a time to this
+ * page that no organizer has agreed to, and if the schedule changes again, this
+ * page and a note to the families change with it.
  */
 
 /* The morning, in the order it happens. `who` drives the chip colour: what a
@@ -44,22 +44,22 @@ const MOMENTS = [
     body: "Visitors come in. By this point every board should be standing and every scientist should be beside their own table, ready to talk about what they found.",
   },
   {
-    time: "9:15 AM",
+    time: "9:20 AM",
     title: "Judging begins",
     who: "Everyone",
-    body: "Judging runs about an hour and a half to two hours. Judges work through the room in their own order, so stay near your board and be ready whenever one reaches you. In between, families and other students will stop and ask you about your project, which is the fun part.",
+    body: "Judging runs until about 10:35. Judges work through the room in their own order, so stay near your board and be ready whenever one reaches you. In between, families and other students will stop and ask you about your project, which is the fun part.",
   },
   {
-    time: "Around 11:00 AM",
+    time: "10:35 AM",
     title: "A break while the judges confer",
     who: "Everyone",
-    body: "Fifteen or twenty minutes with snacks out while the judges talk it over. Walk the room and look at the projects you have not seen yet.",
+    body: "About forty minutes with snacks out while the judges talk it over and write the certificates. Walk the room and look at the projects you have not seen yet. Please be back in a seat by 11:10.",
   },
   {
-    time: "11:30 AM",
+    time: "11:15 AM",
     title: "Awards",
     who: "Everyone",
-    body: "About half an hour. Category and special award winners are announced. Everybody who presents a project has done the thing that matters, which is finding something out and explaining it to a stranger.",
+    body: "About thirty five minutes. Category and special award winners are announced. Everybody who presents a project has done the thing that matters, which is finding something out and explaining it to a stranger.",
   },
   {
     time: "12:00 PM",
@@ -212,8 +212,8 @@ export default function FairDayPage() {
                 No appointment to keep
               </h3>
               <p className="leading-relaxed text-ink-soft">
-                Judging starts at 9:15 and runs an hour and a half to two hours,
-                but you are not given a slot inside that. Stay near your board and
+                Judging starts at 9:20 and runs until about 10:35, but you are
+                not given a slot inside that. Stay near your board and
                 be ready whenever a judge reaches you.
               </p>
             </div>
