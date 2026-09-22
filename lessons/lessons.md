@@ -1,5 +1,17 @@
 # Lessons
 
+## [2026-09-21][one-title-lives-in-five-printed-places] Fixing a project title in one place leaves four printed copies wrong
+
+**Mistake:** asked to correct two project titles on the certificates. Correcting them there alone would have shipped a fair where a child's certificate, their table sheet, the judge's score sheet and the door check-in sheet all name their project differently.
+
+**Root cause:** a project title is rendered into five artifacts from three different sources. `~/.claude/tools/mv-judging/data.json` feeds both the judge sheets and the certificates. The 32 per-project docs in Drive `09 - Projects` each hold their own copy in the heading *and* in the file name, and are merged into a 32 page print PDF. The `Door check-in sheet - fair day` in Drive `08` holds a fifth, abbreviated copy, and it too has a PDF built from it. Nothing links any of them, so each one silently keeps whatever it was born with.
+
+**Fix:** edited `data.json` once, rebuilt the certificates and all four judge packets from it, then `replaceAllText` across the seven affected project docs plus their file names, re-exported and merged the 32 sheet PDF, patched the check-in doc and re-exported its PDF. Nine Drive files replaced for seven title changes. Verified by pulling all 45 printed names and all 45 printed titles back out of the certificates PDF and diffing them against `data.json` in order, and by grepping the merged judge packet for every stale string (zero hits).
+
+**Prevention:** the seven places, in order, are `data.json`, the certificates, the four judge packets, the 32 project docs and their file names, the merged 32 sheet PDF, the check-in doc and the check-in PDF. Change `data.json` first and walk the list. `~/.claude/tools/mv-judging/watch.py` now rebuilds the certificates alongside the judge sheets for the same reason.
+
+**The line that does not move:** the Master Tracker, the application form responses and the `Project categories` doc hold what the family typed and are left alone. They are the record of the submission. Everything the club prints is the club's own copy, and that is what gets the grammar fix.
+
 ## [2026-09-21][certificates-were-promised-in-two-places-and-never-made] Nothing existed to hand a student on fair day, five days out
 
 **Mistake:** the fair had no certificates at all. Not a file, not a draft, not a design, in any of the three Drives, this repo or `~/.claude/tools`. A Drive-wide search for `certificat` across the club, personal and school accounts returned zero files, and every "certificate" hit in the club mailbox was either the sponsorship boilerplate or the venue's certificate of insurance.
