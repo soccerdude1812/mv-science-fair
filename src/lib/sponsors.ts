@@ -8,35 +8,34 @@
  * acceptance the business never saw does not put a logo on a public page.
  *
  * Verified against the "Science Fair Sponsor Tracker" workbook and the club
- * Gmail thread by thread on 2026-09-20. Four names in that tracker's Yes
- * column are deliberately NOT here:
+ * Gmail thread by thread on 2026-09-20, then changed on Eeshan's call on
+ * 2026-09-24:
+ *
+ * - Elate Link LLC added. Accepted as a digital media partner on Sept 12; the
+ *   photo question Mr. Huynh raised on Sept 19 was settled on Sept 23, when
+ *   Mr. Robell confirmed the application form's photo release is what we go
+ *   by and there is no separate opt-out form. Mr. Huynh replied "Sounds good".
+ * - Tori Atwell (The Agency) added. She agreed on Sept 22 to cover about $70
+ *   of snacks, water, name tags and a prize, paid to the club personally
+ *   rather than through the school account. Her URL is the agent page in her
+ *   own email signature.
+ * - Heyday and On Waverly removed on Eeshan's call.
+ *
+ * Still deliberately NOT here:
  *
  * - Santa Cruz Museum of Natural History offered a family membership on
  *   Aug 13 conditional on a Tax ID we do not have. Our answer is still an
  *   unsent draft, so there is no agreement yet, only an offer.
- * - Tori Atwell (The Agency) is still working out what the contribution is.
- *   Her last message asks what the cost would be. Nothing is settled.
- * - Atlas Skateboarding agreed to tees and a hat, then shipping stalled:
- *   they ask the recipient to cover postage or collect in San Mateo, and the
- *   last word in the thread is ours.
- * - Elate Link LLC was accepted as a digital media partner on Sept 12, but
- *   photographing students needs a consent process the advisor raised on
- *   Sept 19 and it is unresolved. The Photo/Video Release on the application
- *   form is NOT that consent: it covers "educational, promotional, or
- *   informational purposes" and all 33 families accepted it, but on Sept 19
- *   Mr. Huynh said we need a form for photographing students specifically,
- *   thought it could be an opt-out, and cc'd Mr. Robell because he was unsure.
- *   No such form exists. So on the day: photograph freely, honour any parent's
- *   request not to photograph their child on the spot, and send nothing to
- *   Elate Link or anyone else until Mr. Huynh signs it off.
+ * - Atlas Skateboarding is on the printed snack table sheet (closed the
+ *   evening of Sept 21, 3 shirts and 3 hats) but was never added here.
  * - Tee Rabbit was removed on 2026-09-21. Their donation was printing for the
  *   volunteer shirts, and the 2026-09-21 planning meeting dropped volunteer
  *   shirts as too tight to run. Eeshan's call was to pull the card rather than
  *   credit a contribution that never happened. Put it back the moment they give
  *   something the fair actually uses.
  *
- * When any of those four closes, add it here and the wall picks it up.
- * Do not add a sponsor to the page directly.
+ * Add a sponsor here, never to the page directly, and mirror the change in
+ * ~/.claude/tools/mv-signs/build.py, which prints the snack table sheet.
  *
  * `logoHeight` is the rendered height in px, chosen per logo rather than
  * shared, because a 9:1 wordmark and a square seal set to the same height do
@@ -110,22 +109,13 @@ export const SPONSORS: Sponsor[] = [
     logoHeight: 30,
   },
   {
-    name: "Heyday",
-    gives: "California nature books",
-    url: "https://www.heydaybooks.com/",
-    logo: "/sponsors/heyday.png",
+    name: "Elate Link LLC",
+    gives: "A social media recap of the fair",
+    url: "https://elatelink.com/",
+    logo: "/sponsors/elate-link.png",
     width: 640,
-    height: 234,
-    logoHeight: 56,
-  },
-  {
-    name: "On Waverly",
-    gives: "A gift bag of books and swag",
-    url: "https://www.onwaverly.com/",
-    logo: "/sponsors/on-waverly.png",
-    width: 700,
-    height: 81,
-    logoHeight: 23,
+    height: 489,
+    logoHeight: 72,
   },
   {
     name: "SAM Singapore Math Los Altos",
@@ -153,5 +143,14 @@ export const SPONSORS: Sponsor[] = [
     width: 371,
     height: 62,
     logoHeight: 32,
+  },
+  {
+    name: "Tori Atwell, The Agency",
+    gives: "Snacks, water and name tags",
+    url: "https://www.theagencyre.com/agent/tori-atwell/",
+    logo: "/sponsors/the-agency.svg",
+    width: 120,
+    height: 120,
+    logoHeight: 64,
   },
 ];
