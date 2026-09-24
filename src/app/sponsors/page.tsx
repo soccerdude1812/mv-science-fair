@@ -46,7 +46,6 @@ const RECOGNITION = [
   ["On this page", "Your logo and name, linked, for the whole season."],
   ["At the fair", "On the event signage, and read out during the awards."],
   ["On Instagram", "Tagged in a post to @stemresearchclubmvhs."],
-  ["On the shirts", "Printed on the volunteer and organizer shirts."],
 ];
 
 export default function SponsorsPage() {
@@ -54,7 +53,7 @@ export default function SponsorsPage() {
     <>
       <PageHero
         title="Sponsor the fair"
-        subtitle="A free science fair for Mountain View kids in grades 3 to 5, run by high school student volunteers. Local businesses are how it stays free."
+        subtitle="A free science fair for Mountain View kids in grades 3 to 5, run by high school student volunteers. Sponsors are how it stays free."
       />
 
       <div className="mx-auto max-w-4xl space-y-14 px-4 py-12 sm:space-y-20 sm:px-6 sm:py-16 md:py-20 lg:px-8">
@@ -64,9 +63,9 @@ export default function SponsorsPage() {
             This year&rsquo;s sponsors
           </h2>
           <p className="reveal mb-8 max-w-prose text-lg leading-relaxed text-ink-soft">
-            Every one of these is a local business that said yes to a first-year
-            fair run by high school students. Between them they cover the
-            prizes, the printing, the shirts and the snacks.
+            Every one of these said yes to a first-year fair run by high school
+            students. Between them they cover the prizes, the printing and the
+            snacks.
           </p>
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {SPONSORS.map((sponsor, index) => (
