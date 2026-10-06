@@ -35,7 +35,7 @@ const descriptions = [
   "Two students talk beside a project board near the windows.",
   "A student answers a visitor's question beside a project display.",
   "A student and visitor talk in front of a science fair board.",
-  "A student smiles beside the My Allergies project display.",
+  "A student smiles beside a project board titled My Allergy Menu.",
   "A student speaks at the lectern in front of the blue curtain.",
   "A student continues a presentation at the lectern.",
   "A tri-fold board asks which drink attacks your teeth most.",
@@ -62,7 +62,7 @@ const descriptions = [
   "A student waves to the room while an organizer stands beside him.",
 ];
 
-export const PHOTOS = descriptions.map((description, index) => {
+const eventPhotos = descriptions.map((description, index) => {
   const number = index + 1;
   const id = String(number).padStart(2, "0");
   return {
@@ -72,7 +72,15 @@ export const PHOTOS = descriptions.map((description, index) => {
   };
 });
 
-const openingPhotoIds = ["09", "12", "26", "33", "42", "51", "57", "61"];
+export const OPENING_PHOTO = {
+  id: "62",
+  src: "/fair-2026/opening-remarks.jpg",
+  alt: "A student organizer speaks at the podium to open the science fair.",
+};
+
+export const PHOTOS = [...eventPhotos, OPENING_PHOTO];
+
+const openingPhotoIds = ["62", "09", "12", "26", "33", "42", "51", "57", "61"];
 const openingPhotoIdSet = new Set(openingPhotoIds);
 export const DISPLAY_PHOTOS = [
   ...openingPhotoIds.flatMap((id) => PHOTOS.filter((photo) => photo.id === id)),

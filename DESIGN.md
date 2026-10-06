@@ -5,19 +5,23 @@
 The 2026 fair has ended. This update supersedes the older event-preparation
 brief below for the current website. Keep the Chalk Lab visual system, sponsor
 roster rules, and accessibility requirements. The current public job is to
-share the 2026 photo recap, thank sponsors, and point families toward the next
-fair planned for spring without inventing a date. Navigation is Home, Gallery,
-Sponsors, and 2026 archive. Existing preparation routes, project pages, and
+share the 2026 photo recap, show projects documented in the fair photos, thank
+sponsors, and point families toward the next fair planned for spring without
+inventing a date. Navigation is Home, Projects, Gallery, Sponsors, and 2026
+archive. Existing preparation routes, project pages, and
 the previous home page stay available with an archive notice; do not delete
 them when preparing the next event. Event-day information and application
 status are historical. Do not publish the finished fair as an upcoming event
 in structured data.
 
-The photo gallery is the approved new photography surface. Photos are the
-organizers' supplied 2026 event images, stored locally in `public/fair-2026/`
-and rendered with `next/image`. The home page uses a small selection and links
-to the complete gallery. Keep sponsor marks unchanged and retain
-`src/lib/sponsors.ts` as their single source of truth.
+The project directory documents readable project titles from the 2026 fair
+photos, and each entry links to its supporting image. It complements the
+separate sample `Project ideas` catalog preserved in the archive. The photo
+gallery is the approved event photography surface. Photos are the organizers'
+supplied 2026 event images, stored locally in `public/fair-2026/` and rendered
+with `next/image`. The home page leads with the podium photo supplied for the
+post-fair update and links to the complete gallery. Keep sponsor marks unchanged
+and retain `src/lib/sponsors.ts` as their single source of truth.
 
 The social card should describe a completed 2026 fair and spring planning, not
 repeat the old date, venue, or admission callout.
@@ -128,8 +132,10 @@ full pill. Character cards 20px. Nothing else. Borders are hairline `--line`,
 ## The cast (hand-drawn characters)
 
 Original SVG characters, explicitly briefed by the owner (reference: Anthropic-style
-doodles, thick ink outlines, heavy-lidded oval eyes, cream ground). These are the
-site's imagery; there is no photography.
+doodles, thick ink outlines, heavy-lidded oval eyes, cream ground). They remain
+the illustration style on the preserved preparation pages. The post-fair home,
+project directory, and gallery use supplied event photos; the archived team
+page keeps its separate portrait system.
 
 Style contract for every character:
 - Stroke: `--ink`, width 6-7 on a 120 viewBox, round caps and joins
@@ -142,7 +148,7 @@ Style contract for every character:
 
 ## Sponsor logos
 
-Sponsor logos are the site's one piece of imagery it did not draw or shoot, and
+Sponsor logos are a separate brand asset from the illustrations and photos, and
 they live in exactly one place: the wall at the top of `/sponsors`. Added
 2026-09-20, when eleven businesses had agreed in writing and the page's own
 promise was "your logo and name, linked, for the whole season".
@@ -168,14 +174,14 @@ promise was "your logo and name, linked, for the whole season".
 
 ## Photography
 
-Photographs appear in exactly two places: the `/team` page, and the "The students
-behind it" band on the home page. Everywhere else the hand-drawn cast above is
-the imagery, and that rule is unchanged.
+Event photographs appear on the post-fair home page, `/projects`, and `/gallery`.
+The existing `/team` page retains its distinct portraits, and its old home-page
+portrait band remains in the archived pre-fair home page.
 
-The exception exists because a parent deciding whether to hand their 9 year old
-to a group of teenagers is owed real faces, and a doodle cannot do that job.
-Added 2026-09-03 on the owner's instruction; recorded here rather than left as
-silent drift.
+The portrait surface exists because a parent deciding whether to hand their 9
+year old to a group of teenagers is owed real faces, and a doodle cannot do that
+job. Added 2026-09-03 on the owner's instruction; recorded here rather than left
+as silent drift.
 
 Rules for the portraits:
 - Source is the MV Physics & Astronomy Club site, `mvhsastro.org/team/`, so the
@@ -192,7 +198,8 @@ Rules for the portraits:
   hotlinked from the other site
 - Cards: 20px radius on `card-soft`, role as a chip. Chips use blue / green /
   marigold only. Coral stays the CTA colour, here as everywhere
-- The home band is the lighter cut of the same roster: no card, no chip, a
+- The archived home's portrait band is the lighter cut of the same roster: no
+  card, no chip, a
   hairline-bordered portrait and one role line. Lighter means less chrome, never
   a shorter title: both surfaces print `role` verbatim, and the home grid drops
   to two columns on a phone so the real titles fit (ruled 2026-09-03, after an
@@ -228,10 +235,10 @@ first photograph in the markup, which is the first portrait in "The students
 behind it". A link to a children's science fair previewed as one organizer's
 face, in iMessage, in Slack, everywhere it was shared.
 
-- The card is **the cast, never a photograph**. The Photography exception above
-  is for a parent deciding whether to trust us with their child, on a page they
-  chose to open. A preview thumbnail is not that page, and a face in it reads as
-  a personal link rather than an event
+- The card is **the cast, never a photograph**. The team portrait surface is for
+  a parent deciding whether to trust us with their child, on a page they chose
+  to open. A preview thumbnail is not that page, and a face in it reads as a
+  personal link rather than an event
 - All five characters stand in one row on a hairline bench: lightbulb, gear,
   beaker, test tube, magnifier, with the beaker in the middle because it is the
   hero character and the only one the brand coral lives in. Here they are the
