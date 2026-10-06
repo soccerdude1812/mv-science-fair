@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
-import { SHOWCASE_PROJECTS } from "@/lib/showcaseProjects";
+import { FAIR_PROJECT_TITLES, SHOWCASE_PROJECTS } from "@/lib/showcaseProjects";
 
 export const metadata: Metadata = {
   title: "Projects from the fair",
   description:
-    "A selection of student projects documented in photos from the 2026 MV Science Fair.",
+    "The 2026 MV Science Fair project list, with photos of student displays.",
 };
 
 export default function ProjectsPage() {
@@ -14,12 +14,33 @@ export default function ProjectsPage() {
     <>
       <PageHero
         title="Questions that became projects"
-        subtitle="Explore a selection of the experiments and designs shown at the 2026 MV Science Fair."
+        subtitle="Read the full project list, then explore photos of student displays from the 2026 MV Science Fair."
       />
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 md:py-16">
+      <section className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 md:pt-16">
+        <h2 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+          All projects from the fair
+        </h2>
         <p className="mb-8 max-w-[62ch] text-ink-soft">
-          These project titles come from boards visible in the photo archive.
-          Select a project to open its full-size photo.
+          Titles follow the 2026 judging roster. Student names are not included.
+        </p>
+        <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+          {FAIR_PROJECT_TITLES.map((title) => (
+            <li
+              key={title}
+              className="border-t border-line py-3 leading-relaxed text-ink"
+            >
+              {title}
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 md:py-16">
+        <h2 className="mb-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+          Project boards in photos
+        </h2>
+        <p className="mb-8 max-w-[62ch] text-ink-soft">
+          These displays are visible in the photo archive. Select one to open
+          its full-size photo.
         </p>
         <ul className="grid gap-x-7 gap-y-11 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-9 lg:gap-y-14">
           {SHOWCASE_PROJECTS.map((project) => (

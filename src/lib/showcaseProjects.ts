@@ -1,5 +1,42 @@
 import { PHOTOS } from "@/lib/gallery";
 
+// Complete title roster from the 2026 fair's judge packets. Keep student names
+// out of the public list; the project titles are enough to identify each entry.
+export const FAIR_PROJECT_TITLES = [
+  "Berry Power",
+  "Can I build a popsicle stick bridge that holds the most weight?",
+  "Does any amount of salt dissolve in any amount of water?",
+  "Does classical violin music make plants grow better?",
+  "Eggs-periment Time: Does Fluoride Give Eggshell Teeth More Protection?",
+  "Elastic Energy: Power the Fan!",
+  "Energy wheel",
+  "Exploding volcano",
+  "Floating on Force",
+  "Forces on a slope",
+  "Heat at the Summit",
+  "How Does Global Warming Affect Clouds in the Sky?",
+  "How to make a paper airplane fly far",
+  "How Volcanoes Work",
+  "How does sunlight exposure affect the amount of water vapor released by plant leaves?",
+  "Humanity's Next Challenge",
+  "Is slime a liquid or a solid?",
+  "Modern House",
+  "My Allergy Menu",
+  "Non-Newtonian Fluid",
+  "Plant/Experiment Combinations",
+  "Project Three Wheel",
+  "Rainbow pennies",
+  "Rocket powered by a chemical reaction",
+  "Sensory-Activated Fall Protection",
+  "Surface Tension with Paper Clips",
+  "The Great Number Draw",
+  "The Pythagorean Cup",
+  "Understanding pressure",
+  "What makes a paper airplane fly farther?",
+  "Which drink attacks your teeth the most?",
+  "Which kitchen liquid cleans a penny best?",
+] as const;
+
 function photoFor(id: string) {
   const photo = PHOTOS.find((item) => item.id === id);
   if (!photo) throw new Error(`Project photo ${id} is missing from the gallery.`);

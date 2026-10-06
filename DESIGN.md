@@ -14,14 +14,15 @@ them when preparing the next event. Event-day information and application
 status are historical. Do not publish the finished fair as an upcoming event
 in structured data.
 
-The project directory documents readable project titles from the 2026 fair
-photos, and each entry links to its supporting image. It complements the
-separate sample `Project ideas` catalog preserved in the archive. The photo
-gallery is the approved event photography surface. Photos are the organizers'
-supplied 2026 event images, stored locally in `public/fair-2026/` and rendered
-with `next/image`. The home page leads with the podium photo supplied for the
-post-fair update and links to the complete gallery. Keep sponsor marks unchanged
-and retain `src/lib/sponsors.ts` as their single source of truth.
+The project directory lists every title in the 2026 judging roster, omits
+student names, and shows a separate selection of displays that can be identified
+in the photos. It complements the sample `Project ideas` catalog preserved in
+the archive. The photo gallery is the approved event photography surface. Photos
+are the organizers' supplied 2026 event images, stored locally in
+`public/fair-2026/` and rendered with `next/image`. The home page leads with the
+podium photo supplied for the post-fair update and links to the complete gallery.
+Keep sponsor marks unchanged and retain `src/lib/sponsors.ts` as their single
+source of truth.
 
 The social card should describe a completed 2026 fair and spring planning, not
 repeat the old date, venue, or admission callout.
