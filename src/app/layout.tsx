@@ -34,10 +34,11 @@ export const metadata: Metadata = {
      the public URL is written down. */
   metadataBase: new URL(EVENT.siteUrl),
   title: {
-    default: "MV Science Fair 2026",
-    template: "%s | MV Science Fair 2026",
+    default: "MV Science Fair",
+    template: "%s | MV Science Fair",
   },
-  description: `The 2026 MV Science Fair is ${EVENT.dateFull}, ${EVENT.timeFull}, at ${EVENT.venueName} (${EVENT.venueRoom}). Thirty-one projects by Mountain View students in grades 3 to 5, organized by the ${EVENT.organizer}. Free, and open to families.`,
+  description:
+    "Photos and highlights from the 2026 MV Science Fair, plus news about the next fair planned for spring.",
   keywords: [
     "science fair",
     "MV Science Fair",
@@ -48,7 +49,8 @@ export const metadata: Metadata = {
     "STEM",
     "science project",
     "Amy Imai Elementary",
-    "September 26 2026",
+    "2026 science fair photos",
+    "spring science fair",
   ],
   openGraph: {
     /* No title or description here on purpose. Anything set at the root wins
@@ -59,7 +61,7 @@ export const metadata: Metadata = {
        requires a distinct title per route. */
     type: "website",
     locale: "en_US",
-    siteName: "MV Science Fair 2026",
+    siteName: "MV Science Fair",
     /* "./" resolves against the CURRENT pathname. An absolute URL here does
        not: it would stamp every route's og:url with the home page, and og:url
        is what Facebook and LinkedIn treat as the canonical identity of a
@@ -78,56 +80,6 @@ export const metadata: Metadata = {
        the full width image, which is the whole point of drawing one. Title and
        description are left unset for the same reason as openGraph above. */
     card: "summary_large_image",
-  },
-};
-
-/** Schema.org Event markup so search engines surface the date and venue directly. */
-const eventJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Event",
-  name: "MV Science Fair 2026",
-  description:
-    `A student-led science fair for grades 3-5 in Mountain View, organized by the ${EVENT.organizer}.`,
-  startDate: EVENT.startISO,
-  endDate: EVENT.endISO,
-  eventStatus: "https://schema.org/EventScheduled",
-  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-  location: {
-    "@type": "Place",
-    name: `${EVENT.venueName}, ${EVENT.venueRoom}`,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: EVENT.venueStreet,
-      addressLocality: EVENT.venueCity,
-      addressRegion: EVENT.venueState,
-      postalCode: EVENT.venueZip,
-      addressCountry: "US",
-    },
-  },
-  organizer: {
-    "@type": "Organization",
-    name: EVENT.organizer,
-    alternateName: EVENT.organizerLong,
-    email: EVENT.contactEmail,
-  },
-  /* Same drawn card the social scrapers get. Google's Event rich result wants
-     an image and will otherwise pick one out of the page itself. */
-  image: [`${EVENT.siteUrl}/opengraph-image.png`],
-  isAccessibleForFree: true,
-  /* Free admission, expressed as an Offer so search engines keep showing the
-     event as something you can turn up to.
-     Changed 2026-09-15: this used to describe ENTERING the fair, pointing at
-     the application form and expiring at the Sept 13 deadline. Left alone it
-     would have gone stale the moment applications closed and told Google the
-     event was no longer available. It now describes ATTENDING, which is true
-     until the fair itself ends. */
-  offers: {
-    "@type": "Offer",
-    url: `${EVENT.siteUrl}/fair-day`,
-    price: 0,
-    priceCurrency: "USD",
-    availability: "https://schema.org/InStock",
-    validThrough: EVENT.endISO,
   },
 };
 
@@ -150,10 +102,6 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }}
-        />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-coral focus:text-white focus:top-0 focus:left-0 focus:font-bold"

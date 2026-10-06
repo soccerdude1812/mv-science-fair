@@ -4,40 +4,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-/**
- * One-line light nav (68px). Five destinations and the single Fair day CTA.
- * Every other page is reachable from the footer sitemap; the mobile sheet
- * lists everything.
- *
- * Rebuilt 2026-09-15, when applications closed:
- * - The CTA is now "Fair day" and points at an internal route, so it is a
- *   Link rather than the external anchor the application form needed.
- * - The Support disclosure is gone. Judges and Volunteer were promoted out of
- *   it into the top line because fair day is eleven days away and sign-ups sat
- *   at 2 and 0; Sponsors dropped to the footer sitemap because cold outreach is
- *   retired. Five short labels plus the pill measure narrower than the four
- *   long ones they replace, so the md-breakpoint squeeze the old layout fought
- *   does not come back.
- * - "How it works" is now "Get ready". Same route, because it is linked from
- *   outside; different promise, because the process is half done.
- */
-
 const primaryLinks = [
-  { href: "/the-process", label: "Get ready" },
-  { href: "/mentors", label: "Mentors" },
-  { href: "/rules", label: "Rules" },
-  { href: "/judges", label: "Judges" },
-  { href: "/volunteer", label: "Volunteer" },
-];
-
-const sheetOnlyLinks = [
-  { href: "/display-and-safety", label: "Display & Safety" },
-  { href: "/example-boards", label: "Example boards" },
-  { href: "/project-ideas", label: "Project ideas" },
-  { href: "/forms", label: "Forms" },
-  { href: "/students-families", label: "Students & Families" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/sponsors", label: "Sponsors" },
-  { href: "/team", label: "Our team" },
+  { href: "/archive", label: "2026 archive" },
 ];
 
 export default function Navbar() {
@@ -73,26 +43,19 @@ export default function Navbar() {
           MV Science Fair
         </Link>
 
-        {/* Five links plus the CTA is a tight fit at the md breakpoint, so the
-            chip padding and type step down between 768px and 1024px and only
-            open back up on real desktop. */}
         <div className="hidden items-center gap-0.5 md:flex lg:gap-1">
           {primaryLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
-              className={navLinkClass(pathname === href)}
+              className={navLinkClass(
+                pathname === href ||
+                  (href === "/archive" && pathname.startsWith("/archive/")),
+              )}
             >
               {label}
             </Link>
           ))}
-
-          <Link
-            href="/fair-day"
-            className="btn-primary ml-2 !px-3.5 !py-2.5 text-[0.875rem] lg:ml-3 lg:!px-5 lg:text-[0.95rem]"
-          >
-            Fair day
-          </Link>
         </div>
 
         <button
@@ -130,16 +93,7 @@ export default function Navbar() {
       {open && (
         <div className="mobile-menu-enter border-t border-line bg-paper md:hidden">
           <div className="mx-auto max-w-6xl space-y-1 px-4 py-4">
-            {/* The CTA leads the sheet rather than closing it: on a phone the
-                most important destination should not be below seven links. */}
-            <Link
-              href="/fair-day"
-              onClick={close}
-              className="btn-primary mb-3 w-full"
-            >
-              Fair day details
-            </Link>
-            {[...primaryLinks, ...sheetOnlyLinks].map(({ href, label }) => (
+            {primaryLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}

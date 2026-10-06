@@ -3,19 +3,9 @@ import { EVENT } from "@/lib/event";
 
 const sitemap = [
   { href: "/", label: "Home" },
-  { href: "/fair-day", label: "Fair day" },
-  { href: "/the-process", label: "Get ready" },
-  { href: "/mentors", label: "Stuck? Get help" },
-  { href: "/display-and-safety", label: "Display & Safety" },
-  { href: "/example-boards", label: "Example boards" },
-  { href: "/rules", label: "Rules" },
-  { href: "/project-ideas", label: "Project ideas" },
-  { href: "/forms", label: "Forms" },
-  { href: "/judges", label: "Judges" },
-  { href: "/volunteer", label: "Volunteer" },
-  { href: "/students-families", label: "Students & Families" },
+  { href: "/gallery", label: "Photo gallery" },
   { href: "/sponsors", label: "Sponsors" },
-  { href: "/team", label: "Our team" },
+  { href: "/archive", label: "2026 archive" },
 ];
 
 export default function Footer() {
@@ -28,8 +18,8 @@ export default function Footer() {
               MV Science Fair
             </p>
             <p className="mt-3 max-w-[36ch] text-[0.95rem] text-ink-soft">
-              A free science fair for Mountain View kids in grades 3 to 5,
-              run by high school student volunteers.
+              A student-led science fair for Mountain View families. We’re
+              planning the next fair for spring.
             </p>
             <a
               href={`mailto:${EVENT.contactEmail}`}
@@ -56,38 +46,15 @@ export default function Footer() {
           </nav>
 
           <div>
-            <p className="data-label mb-4">The event</p>
+            <p className="data-label mb-4">Get in touch</p>
             <ul className="space-y-2.5 text-[0.95rem] text-ink-soft">
               <li>
-                {EVENT.dateFull}
-                <br />
-                {EVENT.timeFull}
+                Questions about the next fair?
               </li>
               <li>
-                <a
-                  href={EVENT.venueMapUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-ink hover:underline"
-                >
-                  {EVENT.venueName}, {EVENT.venueRoom}
-                  <br />
-                  {EVENT.venueAddress}
+                <a href={`mailto:${EVENT.contactEmail}`} className="font-semibold text-coral-deep hover:underline">
+                  Email the organizers
                 </a>
-              </li>
-              <li>
-                Participants arrive and set up{" "}
-                <span className="font-semibold text-ink">
-                  {EVENT.arrivalWindowFull}
-                </span>
-              </li>
-              <li>
-                <Link
-                  href="/fair-day"
-                  className="font-semibold text-coral-deep hover:underline"
-                >
-                  Everything about fair day
-                </Link>
               </li>
             </ul>
           </div>

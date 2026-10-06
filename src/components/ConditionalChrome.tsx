@@ -3,6 +3,16 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const archivedPaths = [
+  "/students-families", "/example-boards", "/rules", "/volunteer",
+  "/team", "/mentors", "/the-process", "/judges",
+  "/fair-day", "/display-and-safety", "/forms", "/project-ideas",
+  "/archive/pre-fair-home",
+  "/archive/2026-sponsorship-plan",
+];
 
 /**
  * One chrome for every page. The home page used to carry its own private
@@ -15,10 +25,20 @@ export default function ConditionalChrome({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  const archived = archivedPaths.some((path) => pathname.startsWith(path));
   return (
     <>
       <ScrollReveal />
       <Navbar />
+      {archived && (
+        <div className="border-b border-line bg-paper-warm px-4 py-3 text-center text-sm text-ink-soft">
+          This page is in the 2026 fair archive. Dates and sign-up links are historical. {" "}
+          <Link href="/archive" className="font-semibold text-coral-deep underline underline-offset-2">
+            Browse the archive
+          </Link>
+        </div>
+      )}
       {children}
       <Footer />
     </>
