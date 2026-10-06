@@ -33,9 +33,9 @@ const here = dirname(fileURLToPath(import.meta.url));
 const repo = join(here, "..", "..");
 
 /**
- * Read the event facts out of src/lib/event.ts rather than retyping them.
+ * Read the organizer name out of src/lib/event.ts rather than retyping it.
  * DESIGN.md: "src/lib/event.ts stays the single source of truth for
- * date/venue/deadline/contact. Edit there, never inline." This script is plain
+ * event/contact facts. Edit there, never inline." This script is plain
  * node with no TypeScript step, so it pulls the string literals out by name; a
  * missing or renamed key throws here instead of quietly shipping a wrong date
  * on the one surface nobody on the project ever looks at.
@@ -47,10 +47,6 @@ function ev(key) {
   return m[1];
 }
 const EVENT = {
-  dateMedium: ev("dateMedium"),
-  timeShort: ev("timeShort"),
-  venueName: ev("venueName"),
-  venueCity: ev("venueCity"),
   organizer: ev("organizer"),
 };
 
@@ -295,9 +291,9 @@ const html = `<!doctype html>
 </head>
 <body>
   <div class="sheet">
-    <p class="eyebrow">${EVENT.dateMedium} &middot; ${EVENT.timeShort}</p>
+    <p class="eyebrow">2026 fair recap &middot; Mountain View</p>
     <h1>MV Science Fair</h1>
-    <p class="sub">${EVENT.venueName}, ${EVENT.venueCity}.<br><span class="free">Free, and open to families.</span></p>
+    <p class="sub">Questions, experiments, and a room full of ideas.<br><span class="free">Planning the next fair for spring.</span></p>
     <div class="bench">
       ${CAST.map(
         (c) =>

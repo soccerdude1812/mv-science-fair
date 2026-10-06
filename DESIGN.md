@@ -1,5 +1,27 @@
 # MV Science Fair — Design System: "Chalk Lab"
 
+## Post-fair update (2026-10-06)
+
+The 2026 fair has ended. This update supersedes the older event-preparation
+brief below for the current website. Keep the Chalk Lab visual system, sponsor
+roster rules, and accessibility requirements. The current public job is to
+share the 2026 photo recap, thank sponsors, and point families toward the next
+fair planned for spring without inventing a date. Navigation is Home, Gallery,
+Sponsors, and 2026 archive. Existing preparation routes, project pages, and
+the previous home page stay available with an archive notice; do not delete
+them when preparing the next event. Event-day information and application
+status are historical. Do not publish the finished fair as an upcoming event
+in structured data.
+
+The photo gallery is the approved new photography surface. Photos are the
+organizers' supplied 2026 event images, stored locally in `public/fair-2026/`
+and rendered with `next/image`. The home page uses a small selection and links
+to the complete gallery. Keep sponsor marks unchanged and retain
+`src/lib/sponsors.ts` as their single source of truth.
+
+The social card should describe a completed 2026 fair and spring planning, not
+repeat the old date, venue, or admission callout.
+
 Redesign direction approved 2026-08-05. This file is the constitution: every visual
 decision on the site traces back to here. If a change contradicts this file, either
 the change is wrong or this file gets updated first, never silent drift.
