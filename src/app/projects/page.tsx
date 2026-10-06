@@ -63,9 +63,9 @@ export default function ProjectsPage() {
                   />
                 </span>
                 <div className="pt-4">
-                  <h2 className="font-display text-[1.35rem] font-semibold leading-snug text-ink">
+                  <h3 className="font-display text-[1.35rem] font-semibold leading-snug text-ink">
                     {project.title}
-                  </h2>
+                  </h3>
                   <p className="mt-2 leading-relaxed text-ink-soft">
                     {project.summary}
                   </p>
