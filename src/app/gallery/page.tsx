@@ -17,7 +17,7 @@ export default function GalleryPage() {
       />
       <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 md:py-16">
         <p className="mb-7 text-sm text-ink-faint">
-          61 moments from the 2026 MV Science Fair. Select a photo to open it at full size.
+          62 moments from the 2026 MV Science Fair. Select a photo to open it at full size.
         </p>
         <div className="photo-gallery">
           {DISPLAY_PHOTOS.map((photo) => (

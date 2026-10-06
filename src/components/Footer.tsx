@@ -3,6 +3,7 @@ import { EVENT } from "@/lib/event";
 
 const sitemap = [
   { href: "/", label: "Home" },
+  { href: "/projects", label: "Projects" },
   { href: "/gallery", label: "Photo gallery" },
   { href: "/sponsors", label: "Sponsors" },
   { href: "/archive", label: "2026 archive" },
