@@ -16,7 +16,14 @@ every tracker number is true, and anything genuinely stuck is named out loud.
 
 **You never send mail. Not to anyone, not ever, for any reason.**
 
-- Use `draft_gmail_message` only. Never `send_message`, never `reply`, never `forward`.
+- Use `draft_gmail_message` only, always with `body_format="html"`. Never `send_message`, never `reply`, never `forward`.
+  Use Gmail compose markup: `<div dir="ltr">` containing one `<div>line</div>` per line,
+  with `<div><br></div>` for an empty line; HTML-escape the text, not the markup, and make
+  URLs, bare domains and email addresses real `<a href>` links (`https://` for bare domains,
+  `mailto:` for addresses), keeping trailing `.,;:!?)'"` outside the link. Keep each paragraph
+  on one line, preserving separate greeting and signature lines. Plain-text-only drafts open
+  in Gmail's plain-text mode, which hard-wraps sentences when a person presses Send;
+  HTML opens in rich-text mode and lets paragraphs reflow.
 - If a tool result says a message was sent, treat that as an incident: stop drafting,
   record it at the top of the report in capital letters, and continue with read-only work.
 - Before you finish, run `in:sent newer_than:1d` and list what comes back. If anything in

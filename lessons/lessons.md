@@ -769,3 +769,13 @@ it is an independent watcher rather than the same API agreeing with itself. More
 mailbox observation has two explanations and one of them is "a person did a normal thing", check the
 person before declaring the platform broken. A letter that keeps getting discarded is feedback about
 the letter, not a bug to route around.
+
+## [2026-10-23][plain-text-drafts-hard-wrap-on-manual-send] Human-sent Gmail drafts need HTML
+
+**Mistake:** follow-up drafts used only `EmailMessage.set_content(rendered)`, so sentences arrived hard-wrapped after a person opened the draft in Gmail and pressed Send.
+
+**Root cause:** text/plain-only drafts open in Gmail's plain-text compose mode, which wraps lines at about 70 characters on manual Send. Direct API sends do not have this problem; checking only DRAFT labels cannot catch it.
+
+**Fix:** add a Gmail compose HTML alternative while preserving the original plain-text part. Reflow template paragraphs whose non-final lines are all 40–80 characters, preserve greeting and signature lines, escape text and link URLs, domains and email addresses. Fetch stored follow-ups with `format="full"` and stop with ALARM unless their labels are DRAFT without SENT and their MIME is multipart/alternative with text/html. Require HTML when the inbox-run prompt calls the draft MCP tool.
+
+**Prevention:** every draft a person sends needs an HTML body and a stored-MIME read-back check. Keep paragraphs unwrapped in templates and test the outgoing MIME, plain-text bytes, reflow, links and read-back failure paths offline. Leave API send paths and retirement gates unchanged.
