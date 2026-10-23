@@ -789,3 +789,13 @@ the letter, not a bug to route around.
 **Fix:** preserve short final lines without sentence-ending punctuation when the preceding line ends in sentence-ending punctuation or a comma. Trim edge blank lines only from HTML. Keep reflow for short final sentences and unpunctuated continuations after a line ending mid-sentence.
 
 **Prevention:** test ambiguous signatures alongside genuine wrapped paragraphs, and compare the original plain-text bytes after HTML normalization. A heuristic safe for validation is not automatically safe for transformation.
+
+## [2026-10-23][signature-guard-blocked-body-reflow] Separate the signature before reflowing the body
+
+**Mistake:** detecting a signature disabled reflow for the entire paragraph, leaving a genuinely pre-wrapped body hard-wrapped in HTML.
+
+**Root cause:** the signature guard protected every line instead of only the final name line.
+
+**Fix:** peel off the signature, apply the existing reflow heuristic to the remaining lines, and append the signature as its own div.
+
+**Prevention:** cover a wrapped body followed immediately by a signature as well as a single sign-off sentence followed by a name.

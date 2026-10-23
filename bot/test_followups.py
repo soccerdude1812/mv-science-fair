@@ -118,6 +118,12 @@ class FollowupTests(unittest.TestCase):
                 self.assertIn(f"<div>{sentence}{punctuation}</div>"
                               "<div>Tristan Schaefer</div>", body)
 
+    def test_prewrapped_body_reflows_before_signature(self):
+        first = "This first wrapped line of the paragraph runs to about sixty chars"
+        second = "and this second wrapped line finishes the sentence with a period."
+        body = self.html_for(first + "\n" + second + "\nTristan Schaefer")
+        self.assertIn(f"<div>{first} {second}</div><div>Tristan Schaefer</div>", body)
+
     def test_prewrapped_short_final_sentence_reflows(self):
         first = "This paragraph has been wrapped before its final short sentence."
         last = "Thank you."

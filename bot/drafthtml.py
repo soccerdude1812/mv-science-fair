@@ -60,8 +60,10 @@ def to_html(text):
         signature = (len(lines) > 1 and len(lines[-1].strip()) < 40
                      and not lines[-1].rstrip().endswith((".", "!", "?"))
                      and lines[-2].rstrip().endswith((".", "!", "?", ",")))
-        if (len(lines) > 1 and not signature
-                and all(40 <= len(line) <= 80 for line in lines[:-1])):
+        signature_line = lines.pop() if signature else None
+        if len(lines) > 1 and all(40 <= len(line) <= 80 for line in lines[:-1]):
             lines = [" ".join(line.strip() for line in lines)]
         blocks.extend(f"<div>{linkify(line) if line.strip() else '<br>'}</div>" for line in lines)
+        if signature_line is not None:
+            blocks.append(f"<div>{linkify(signature_line)}</div>")
     return '<div dir="ltr">' + "".join(blocks) + "</div>"
