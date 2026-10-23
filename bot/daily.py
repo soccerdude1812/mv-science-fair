@@ -24,6 +24,7 @@ from email.message import EmailMessage
 from zoneinfo import ZoneInfo
 
 import club
+import drafthtml
 import mailcopy as cp
 
 PT = ZoneInfo("America/Los_Angeles")
@@ -454,14 +455,20 @@ def cmd_followups(args):
         msg["From"] = club.SENDER
         msg["Subject"] = f"Re: {SUBJECT}"
         msg.set_content(rendered)
+        msg.add_alternative(drafthtml.to_html(rendered), subtype="html")
         raw = base64.urlsafe_b64encode(msg.as_bytes()).decode()
         try:
             res = svc.users().drafts().create(userId="me", body={"message": {"raw": raw}}).execute()
             # Never trust the tool's word for it. Read the draft back.
-            got = svc.users().drafts().get(userId="me", id=res["id"], format="metadata").execute()
+            got = svc.users().drafts().get(userId="me", id=res["id"], format="full").execute()
             labels = got["message"].get("labelIds", [])
             if "DRAFT" not in labels or "SENT" in labels:
                 log(f"  ALARM {d['email']}: labels {labels}, expected DRAFT. Stopping.")
+                return 2
+            payload = got["message"].get("payload", {})
+            if (payload.get("mimeType") != "multipart/alternative"
+                    or not any(p.get("mimeType") == "text/html" for p in payload.get("parts", []))):
+                log(f"  ALARM {d['email']}: expected multipart/alternative with text/html. Stopping.")
                 return 2
             made.append({**d, "id": res["id"]})
             log(f"  DRAFT {d['email']:<44} {res['id']}")

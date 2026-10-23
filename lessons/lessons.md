@@ -769,3 +769,13 @@ it is an independent watcher rather than the same API agreeing with itself. More
 mailbox observation has two explanations and one of them is "a person did a normal thing", check the
 person before declaring the platform broken. A letter that keeps getting discarded is feedback about
 the letter, not a bug to route around.
+
+## [2026-10-23][plain-text-drafts-hard-wrap-on-manual-send] Human-sent Gmail drafts need an HTML part
+
+**Mistake:** follow-up drafts used only `EmailMessage.set_content(rendered)`, so sentences arrived hard-wrapped after a person opened the draft in Gmail and pressed Send.
+
+**Root cause:** text/plain-only drafts open in Gmail's plain-text compose mode, which wraps lines at about 70 characters on manual Send. Direct API sends do not have this problem; checking only DRAFT labels cannot catch it.
+
+**Fix:** `bot/drafthtml.py` adds a Gmail compose HTML alternative (one `<div>` per line, escaped, links as `<a href>`) while the plain-text part stays byte-for-byte the same. Pre-wrapped paragraphs (non-final lines all 40 to 80 characters) are joined in the HTML, but a short unpunctuated last line after a line ending in `.`, `!`, `?` or `,` is a name and is peeled off first, so a sign-off and the signature never merge. Blank edge lines are trimmed from the HTML only. The read-back fetches `format="full"` and stops with ALARM unless the stored draft is DRAFT, not SENT, and multipart/alternative with text/html. The inbox-run prompt now requires `body_format="html"` from the draft MCP tool.
+
+**Prevention:** every draft a person sends needs an HTML body and a stored-MIME read-back check. A heuristic that is safe for refusing input (gmail-draft uses the 40 to 80 rule only to refuse) is not automatically safe for transforming it: the first version joined "have a great week ahead!" to "Tristan Schaefer". Test signatures next to genuinely wrapped paragraphs. Keep template paragraphs on one line.

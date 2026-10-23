@@ -104,8 +104,9 @@ So nothing the research stage produces is trusted:
 - The send path is plain Python. An LLM never calls `messages().send`.
 
 `daily.py cmd_followups` creates drafts and then **reads each one back**, aborting if the
-message is not labelled `DRAFT`. This is deliberate: on 2026-08-11 a draft tool reported
-`Draft created!` and had in fact sent the message to a real sponsor.
+message is not labelled `DRAFT`, is labelled `SENT`, or is not stored as
+`multipart/alternative` with a `text/html` part. This is deliberate: on 2026-08-11 a draft
+tool reported `Draft created!` and had in fact sent the message to a real sponsor.
 
 ## Which workbook
 
