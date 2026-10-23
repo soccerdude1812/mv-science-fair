@@ -110,6 +110,39 @@ class FollowupTests(unittest.TestCase):
         body = self.html_for(first + "\n" + second)
         self.assertIn(f"<div>{first} {second}</div>", body)
 
+    def test_signoff_sentence_and_name_stay_separate(self):
+        sentence = "Thanks so much for reading this, and have a great week ahead"
+        for punctuation in ("!", ".", "?", ","):
+            with self.subTest(punctuation=punctuation):
+                body = self.html_for(sentence + punctuation + "\nTristan Schaefer")
+                self.assertIn(f"<div>{sentence}{punctuation}</div>"
+                              "<div>Tristan Schaefer</div>", body)
+
+    def test_prewrapped_short_final_sentence_reflows(self):
+        first = "This paragraph has been wrapped before its final short sentence."
+        last = "Thank you."
+        self.assertIn(f"<div>{first} {last}</div>", self.html_for(first + "\n" + last))
+
+    def test_prewrapped_unpunctuated_continuation_reflows(self):
+        first = "This paragraph has been wrapped in the middle of a sentence about"
+        last = "our science fair"
+        self.assertIn(f"<div>{first} {last}</div>", self.html_for(first + "\n" + last))
+
+    def test_html_trims_edge_blank_lines_only(self):
+        expected = '<div dir="ltr"><div>Dear Org,</div><div><br></div><div>Body.</div></div>'
+        for text in ("Dear Org,\n\nBody.\n", "\n\nDear Org,\n\nBody.",
+                     " \n\nDear Org,\n\nBody.\n \n", "\r\nDear Org,\r\n\r\nBody.\r\n"):
+            with self.subTest(text=text):
+                self.assertEqual(daily.drafthtml.to_html(text), expected)
+        self.assertEqual(self.run_followups(), 0)
+        message = self.built_message()
+        self.assertTrue(message.get_body(preferencelist=("html",)).get_content().rstrip("\n")
+                        .endswith("<div>253 Martens Ave</div></div>"))
+        original = EmailMessage()
+        original.set_content(daily.cp.render_followup(self.template, "Example Club"))
+        self.assertEqual(message.get_body(preferencelist=("plain",)).get_payload(decode=True),
+                         original.get_payload(decode=True))
+
     def test_signature_and_short_lines_stay_separate(self):
         body = self.html_for("Tristan Schaefer\nMVHS STEM & Research Club\n253 Martens Ave")
         self.assertIn("<div>Tristan Schaefer</div><div>MVHS STEM &amp; Research Club</div>"

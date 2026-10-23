@@ -38,17 +38,30 @@ def linkify(text):
 def to_html(text):
     """Reflow pre-wrapped paragraphs, preserving short lines and blank lines."""
     blocks = []
-    # Keep each blank line: it is a visible empty div in Gmail's compose markup.
-    for paragraph in re.split(r"(\n[ \t]*\n)", text.replace("\r\n", "\n")):
+    source_lines = text.replace("\r\n", "\n").split("\n")
+    # Trim blank edge lines only in HTML; set_content still gets the original.
+    while source_lines and not source_lines[0].strip():
+        source_lines.pop(0)
+    while source_lines and not source_lines[-1].strip():
+        source_lines.pop()
+    if not source_lines:
+        return '<div dir="ltr"></div>'
+    # Keep each internal blank line as a visible empty div in Gmail's compose markup.
+    for paragraph in re.split(r"(\n[ \t]*\n)", "\n".join(source_lines)):
         if paragraph.startswith("\n") and not paragraph.strip():
             blocks.append("<div><br></div>")
             continue
         lines = paragraph.split("\n")
         if lines and GREETING.match(lines[0]):
             blocks.append(f"<div>{linkify(lines.pop(0))}</div>")
-        # The production gmail-draft heuristic: all but the last line are 40–80
-        # characters. Short signature lines and greetings must stay separate.
-        if len(lines) > 1 and all(40 <= len(line) <= 80 for line in lines[:-1]):
+        # A short unpunctuated line after a completed sentence or sign-off can
+        # be a name. Refusing a pre-wrapped draft is safer than silently joining
+        # its lines, so gmail-draft's length heuristic needs this extra guard.
+        signature = (len(lines) > 1 and len(lines[-1].strip()) < 40
+                     and not lines[-1].rstrip().endswith((".", "!", "?"))
+                     and lines[-2].rstrip().endswith((".", "!", "?", ",")))
+        if (len(lines) > 1 and not signature
+                and all(40 <= len(line) <= 80 for line in lines[:-1])):
             lines = [" ".join(line.strip() for line in lines)]
         blocks.extend(f"<div>{linkify(line) if line.strip() else '<br>'}</div>" for line in lines)
     return '<div dir="ltr">' + "".join(blocks) + "</div>"

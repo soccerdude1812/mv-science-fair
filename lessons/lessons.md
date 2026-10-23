@@ -779,3 +779,13 @@ the letter, not a bug to route around.
 **Fix:** add a Gmail compose HTML alternative while preserving the original plain-text part. Reflow template paragraphs whose non-final lines are all 40–80 characters, preserve greeting and signature lines, escape text and link URLs, domains and email addresses. Fetch stored follow-ups with `format="full"` and stop with ALARM unless their labels are DRAFT without SENT and their MIME is multipart/alternative with text/html. Require HTML when the inbox-run prompt calls the draft MCP tool.
 
 **Prevention:** every draft a person sends needs an HTML body and a stored-MIME read-back check. Keep paragraphs unwrapped in templates and test the outgoing MIME, plain-text bytes, reflow, links and read-back failure paths offline. Leave API send paths and retirement gates unchanged.
+
+## [2026-10-23][reflow-rejection-is-not-reflow-repair] Preserve a sign-off before a name
+
+**Mistake:** the HTML reflow heuristic joined a long sign-off sentence to `Tristan Schaefer` on the next line, and rendered leading or trailing blank lines as visible empty blocks.
+
+**Root cause:** gmail-draft uses its 40–80 character heuristic to refuse ambiguous input. Reusing that heuristic to join lines silently changes content when a short final line is a signature. Edge blank lines also need trimming before testing paragraph lengths.
+
+**Fix:** preserve short final lines without sentence-ending punctuation when the preceding line ends in sentence-ending punctuation or a comma. Trim edge blank lines only from HTML. Keep reflow for short final sentences and unpunctuated continuations after a line ending mid-sentence.
+
+**Prevention:** test ambiguous signatures alongside genuine wrapped paragraphs, and compare the original plain-text bytes after HTML normalization. A heuristic safe for validation is not automatically safe for transformation.
