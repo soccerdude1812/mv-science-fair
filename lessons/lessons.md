@@ -770,32 +770,12 @@ mailbox observation has two explanations and one of them is "a person did a norm
 person before declaring the platform broken. A letter that keeps getting discarded is feedback about
 the letter, not a bug to route around.
 
-## [2026-10-23][plain-text-drafts-hard-wrap-on-manual-send] Human-sent Gmail drafts need HTML
+## [2026-10-23][plain-text-drafts-hard-wrap-on-manual-send] Human-sent Gmail drafts need an HTML part
 
 **Mistake:** follow-up drafts used only `EmailMessage.set_content(rendered)`, so sentences arrived hard-wrapped after a person opened the draft in Gmail and pressed Send.
 
 **Root cause:** text/plain-only drafts open in Gmail's plain-text compose mode, which wraps lines at about 70 characters on manual Send. Direct API sends do not have this problem; checking only DRAFT labels cannot catch it.
 
-**Fix:** add a Gmail compose HTML alternative while preserving the original plain-text part. Reflow template paragraphs whose non-final lines are all 40–80 characters, preserve greeting and signature lines, escape text and link URLs, domains and email addresses. Fetch stored follow-ups with `format="full"` and stop with ALARM unless their labels are DRAFT without SENT and their MIME is multipart/alternative with text/html. Require HTML when the inbox-run prompt calls the draft MCP tool.
+**Fix:** `bot/drafthtml.py` adds a Gmail compose HTML alternative (one `<div>` per line, escaped, links as `<a href>`) while the plain-text part stays byte-for-byte the same. Pre-wrapped paragraphs (non-final lines all 40 to 80 characters) are joined in the HTML, but a short unpunctuated last line after a line ending in `.`, `!`, `?` or `,` is a name and is peeled off first, so a sign-off and the signature never merge. Blank edge lines are trimmed from the HTML only. The read-back fetches `format="full"` and stops with ALARM unless the stored draft is DRAFT, not SENT, and multipart/alternative with text/html. The inbox-run prompt now requires `body_format="html"` from the draft MCP tool.
 
-**Prevention:** every draft a person sends needs an HTML body and a stored-MIME read-back check. Keep paragraphs unwrapped in templates and test the outgoing MIME, plain-text bytes, reflow, links and read-back failure paths offline. Leave API send paths and retirement gates unchanged.
-
-## [2026-10-23][reflow-rejection-is-not-reflow-repair] Preserve a sign-off before a name
-
-**Mistake:** the HTML reflow heuristic joined a long sign-off sentence to `Tristan Schaefer` on the next line, and rendered leading or trailing blank lines as visible empty blocks.
-
-**Root cause:** gmail-draft uses its 40–80 character heuristic to refuse ambiguous input. Reusing that heuristic to join lines silently changes content when a short final line is a signature. Edge blank lines also need trimming before testing paragraph lengths.
-
-**Fix:** preserve short final lines without sentence-ending punctuation when the preceding line ends in sentence-ending punctuation or a comma. Trim edge blank lines only from HTML. Keep reflow for short final sentences and unpunctuated continuations after a line ending mid-sentence.
-
-**Prevention:** test ambiguous signatures alongside genuine wrapped paragraphs, and compare the original plain-text bytes after HTML normalization. A heuristic safe for validation is not automatically safe for transformation.
-
-## [2026-10-23][signature-guard-blocked-body-reflow] Separate the signature before reflowing the body
-
-**Mistake:** detecting a signature disabled reflow for the entire paragraph, leaving a genuinely pre-wrapped body hard-wrapped in HTML.
-
-**Root cause:** the signature guard protected every line instead of only the final name line.
-
-**Fix:** peel off the signature, apply the existing reflow heuristic to the remaining lines, and append the signature as its own div.
-
-**Prevention:** cover a wrapped body followed immediately by a signature as well as a single sign-off sentence followed by a name.
+**Prevention:** every draft a person sends needs an HTML body and a stored-MIME read-back check. A heuristic that is safe for refusing input (gmail-draft uses the 40 to 80 rule only to refuse) is not automatically safe for transforming it: the first version joined "have a great week ahead!" to "Tristan Schaefer". Test signatures next to genuinely wrapped paragraphs. Keep template paragraphs on one line.
