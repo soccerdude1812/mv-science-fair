@@ -187,3 +187,15 @@ The dotted ground is drawn as explicit SVG circles rather than the tiled
 tile erratically: it dropped the dots across most of the page and scattered
 blobs elsewhere. Verified by cropping the same patch of paper out of the PDF and
 the PNG side by side.
+
+## Club activity post: elephant toothpaste
+
+`MV-STEM-Club-IG-Elephant-Toothpaste.png`, 1080 x 1350, for the club's own
+lunch activity on Thursday, Oct 29, 2026 (room 120). Not a fair piece: same
+Chalk Lab skin so the feed reads as one account, but one hero (the cast's flask
+erupting striped foam) instead of a ring of characters. `node
+src/build-elephant.mjs` writes the HTML and shoots the PNG in one step; change
+the copy or the date at the bottom of that file.
+
+Caption: "Elephant toothpaste tomorrow! 🧪 Come to room 120 at lunch to make
+elephant toothpaste. One small flask, a whole lot of foam. See you there!"
