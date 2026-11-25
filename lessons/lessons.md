@@ -779,3 +779,13 @@ the letter, not a bug to route around.
 **Fix:** `bot/drafthtml.py` adds a Gmail compose HTML alternative (one `<div>` per line, escaped, links as `<a href>`) while the plain-text part stays byte-for-byte the same. Pre-wrapped paragraphs (non-final lines all 40 to 80 characters) are joined in the HTML, but a short unpunctuated last line after a line ending in `.`, `!`, `?` or `,` is a name and is peeled off first, so a sign-off and the signature never merge. Blank edge lines are trimmed from the HTML only. The read-back fetches `format="full"` and stops with ALARM unless the stored draft is DRAFT, not SENT, and multipart/alternative with text/html. The inbox-run prompt now requires `body_format="html"` from the draft MCP tool.
 
 **Prevention:** every draft a person sends needs an HTML body and a stored-MIME read-back check. A heuristic that is safe for refusing input (gmail-draft uses the 40 to 80 rule only to refuse) is not automatically safe for transforming it: the first version joined "have a great week ahead!" to "Tristan Schaefer". Test signatures next to genuinely wrapped paragraphs. Keep template paragraphs on one line.
+
+## [2026-11-24][record-winners-same-day] Write the winners down digitally on fair day
+
+**Mistake:** the Sept 26 winners were written only by hand on the paper podium copy ("00 - AWARD RUNNING ORDER"); the Drive copy stayed blank and no winners list was ever emailed, posted or typed up.
+
+**Root cause:** the run-of-show treated the announcement as the end of the award. Nobody owned turning the podium sheet into a record, and the judges kept their paper score sheets.
+
+**Fix:** none possible after the fact. On Oct 13 SAM Singapore Math Los Altos asked for the name and contact of the family who got its class voucher (Engineering 2nd place, shared with the AoPS Beast Academy certificate). Club inbox, club Drive, Master Tracker, Sponsor Tracker, school and personal Gmail, Slack and the photographer's Lightroom album hold no name. Only the Engineering judge's score sheet or the people on stage can answer.
+
+**Prevention:** before everyone leaves, photograph the filled podium sheet and every judge's score sheet into Drive, and add a Winners tab to the Master Tracker (category, place, prize, sponsor, project #, student, parent email). Sponsors that give vouchers will ask who redeemed them.
